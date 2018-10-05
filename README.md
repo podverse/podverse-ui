@@ -1,2 +1,2 @@
 # podverse-ui
-React component library for Podverse web applications
+React / Typescript component library for Podverse web applications
