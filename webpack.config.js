@@ -39,14 +39,14 @@ module.exports = {
           'css-loader'
         ]
       },
-      // {
-      //   test: /\.scss$/,
-      //   loader: ExtractTextPlugin.extract(
-      //     'style-loader',
-      //     { loader: 'css-loader', options: { importLoaders: 1 } },
-      //     'sass-loader'
-      //   )
-      // }
+      {
+        test: /\.scss$/,
+        loader: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
+      }
     ]
   },
   plugins: [
