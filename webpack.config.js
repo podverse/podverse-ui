@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: './index.tsx',
@@ -53,6 +54,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
-    })
+    }),
+    new CopyWebpackPlugin([
+      { from: 'scss/**/*', to: '.' }
+    ])
   ]
 }

@@ -1,7 +1,7 @@
 .Button {
   height: 49px;
   display: inline-flex;
-  background-color: #3d5567;
+  background-color: $button-color;
   padding: 0px 20px;
   border-radius: 2px;
 }
