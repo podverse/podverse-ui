@@ -2,11 +2,43 @@
   "name": "podverse-ui",
   "version": "1.0.0",
   "description": "React / Typescript component library for Podverse web applications",
-  "main": "index.js",
+  "license": "MIT",
+  "author": "Mitch Downey <mitch@podverse.fm>",
   "repository": {
     "url": "https://github.com/podverse/podverse-ui.git",
     "type": "git"
   },
-  "author": "Mitch Downey <mitch@podverse.fm>",
-  "license": "MIT"
+  "main": "build/lib/index.js",
+  "types": "build/lib/index.d.ts",
+  "files": [
+    "build/lib"
+  ],
+  "scripts": {
+    "storybook": "start-storybook -p 6006 -c .storybook",
+    "build": "npm run build-lib && build-storybook",
+    "build-lib": "tsc && npm run copy-css-to-lib",
+    "build-storybook": "build-storybook",
+    "copy-css-to-lib": "cpx \"./src/**/*.css\" ./build/lib"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@storybook/addon-info": "^3.4.11",
+    "@storybook/addon-knobs": "^3.4.11",
+    "@storybook/react": "^4.0.0-alpha.24",
+    "@types/jest": "^23.3.3",
+    "@types/react": "^16.4.15",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "cpx": "^1.5.0",
+    "jest": "^23.6.0",
+    "react-docgen-typescript-loader": "^3.0.0",
+    "storybook-addon-jsx": "^5.4.0",
+    "ts-jest": "^23.10.3",
+    "ts-loader": "^5.2.1",
+    "typescript": "^3.1.1"
+  },
+  "dependencies": {
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  }
 }
