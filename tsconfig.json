@@ -1,7 +1,6 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "outDir": "build/lib",
         "module": "commonjs",
         "target": "es5",
         "lib": [

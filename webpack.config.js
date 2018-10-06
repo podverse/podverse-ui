@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: './index.tsx',
@@ -31,16 +32,25 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', { loader: 'css-loader', options: { importLoaders: 1 }}]
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'sass-loader'
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
         ]
-      }
+      },
+      // {
+      //   test: /\.scss$/,
+      //   loader: ExtractTextPlugin.extract(
+      //     'style-loader',
+      //     { loader: 'css-loader', options: { importLoaders: 1 } },
+      //     'sass-loader'
+      //   )
+      // }
     ]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
+  ]
 }
