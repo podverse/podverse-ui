@@ -2,12 +2,14 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
   entry: './index.tsx',
   mode: 'production',
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    plugins: [new TsconfigPathsPlugin()]
   },
   target: 'node',
   devtool: 'source-map',

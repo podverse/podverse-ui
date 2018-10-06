@@ -1,5 +1,5 @@
 import * as React from 'react'
-import './Button.css'
+import 'scss/styles.css'
 
 export interface Props {
   /** this dictates what the button will say */
