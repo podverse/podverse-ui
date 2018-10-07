@@ -22,9 +22,7 @@ export const MediaListItemA = (props: Props) => {
 
   return (
     <div className='media-list-item__a'>
-      <div className='media-list-item-a__image'>
-        {imageUrl}
-      </div>
+      <img className='media-list-item-a__image' src={imageUrl} />
       <div className='media-list-item-a__title'>
         {title}
       </div>

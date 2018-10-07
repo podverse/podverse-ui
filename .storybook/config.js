@@ -4,6 +4,8 @@ import { setOptions } from '@storybook/addon-options'
 import { withKnobs, select } from '@storybook/addon-knobs/react'
 import JSXAddon from 'storybook-addon-jsx'
 
+import '../src/scss/styles.scss'
+
 setOptions({
   name: 'Podverse UI Storybook',
   url: '#',

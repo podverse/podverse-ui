@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { storiesOf } from '@storybook/react'
 import { MediaListItem } from './MediaListItem'
 import { select } from '@storybook/addon-knobs'
