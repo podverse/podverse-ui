@@ -7,15 +7,13 @@ export interface Props {
   dataClip: any
   dataEpisode: any
   dataPodcast: any
-  /** this dictates what the button will do */
   handleOnClick?: () => void
-  /** this dictates what the button will say */
   itemType: string
 }
 
 export const MediaListItem = (props: Props) => {
   const { dataClip, dataEpisode, dataPodcast, handleOnClick,
-    itemType } = props
+    itemType } = props 
   
   return (
     <div className='media-list__item'>

@@ -16,5 +16,8 @@ export const sampleEpisode = {
   authors: [],
   categories: [],
   mediaRefs: [],
-  podcast: null
+  podcast: {
+    imageUrl: 'http://static.libsyn.com/p/assets/b/4/6/3/b463232a6b0b641c/James-Altucher-iTunes.jpg',
+    title: 'The James Altucher Show'
+  }
 }
