@@ -16,7 +16,9 @@ export const MediaListItem = (props: Props) => {
     itemType } = props 
   
   return (
-    <div className='media-list__item'>
+    <a 
+      className='media-list__item'
+      href='asdf'>
       {
         (itemType === 'clip' && dataClip) &&
           <MediaListItemA
@@ -74,6 +76,6 @@ export const MediaListItem = (props: Props) => {
             imageUrl={dataEpisode.imageUrl}
             title={dataClip.episodeTitle} />
       }
-    </div>
+    </a>
   )
 }

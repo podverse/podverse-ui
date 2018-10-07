@@ -6,6 +6,8 @@ import JSXAddon from 'storybook-addon-jsx'
 
 import '../src/scss/styles.scss'
 
+document.documentElement.setAttribute('theme', 'light')
+
 setOptions({
   name: 'Podverse UI Storybook',
   url: '#',
