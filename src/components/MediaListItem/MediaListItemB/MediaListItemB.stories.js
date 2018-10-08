@@ -13,7 +13,7 @@ storiesOf('Media/MediaListItem', module)
       <MediaListItemB 
         imageUrl={text('imageUrl', imageUrl)}
         subTitle={text('subTitle', lastEpisodeTitle)}
-        subTitleSide={text('subTitleSide', lastEpisodePubDate)}
+        subTitleSide={text('subTitleSide', '01/01/00')}
         title={text('title', title)}
       />
     )

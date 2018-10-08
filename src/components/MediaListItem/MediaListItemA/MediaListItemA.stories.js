@@ -15,7 +15,7 @@ storiesOf('Media/MediaListItem', module)
       <MediaListItemA 
         imageUrl={text('imageUrl', podcastImageUrl)}
         subTitleBottom={text('subTitleBottom', episodeTitle)}
-        subTitleBottomSide={text('subTitleBottomSide', episodePubDate)}
+        subTitleBottomSide={text('subTitleBottomSide', '01/01/00')}
         subTitleTop={text('subTitleTop', podcastTitle)}
         subTitleTopSide={text('subTitleTopSide', '')}
         title={text('title', title)} />

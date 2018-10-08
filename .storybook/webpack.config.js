@@ -19,6 +19,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
   })
   defaultConfig.resolve.extensions.push('.ts', '.tsx')
   defaultConfig.resolve.alias = {
+    lib: path.resolve(__dirname, '../src/lib'),
     scss: path.resolve(__dirname, '../src/scss'),
     storybook: path.resolve(__dirname, '../src/storybook')
   }

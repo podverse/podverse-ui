@@ -2,6 +2,7 @@ import * as React from 'react'
 import { MediaListItemA } from './MediaListItemA/MediaListItemA'
 import { MediaListItemB } from './MediaListItemB/MediaListItemB'
 import { MediaListItemC } from './MediaListItemC/MediaListItemC'
+import { readableDate } from 'lib/util'
 
 export interface Props {
   dataClip: any
@@ -18,14 +19,14 @@ export const MediaListItem = (props: Props) => {
   return (
     <a 
       className='media-list__item'
-      href='asdf'>
+      href='#'>
       {
         (itemType === 'clip' && dataClip) &&
           <MediaListItemA
             handleOnClick={handleOnClick}
             imageUrl={dataClip.podcastImageUrl}
             subTitleBottom={dataClip.episodeTitle}
-            subTitleBottomSide={dataClip.episodePubDate}
+            subTitleBottomSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
             subTitleTop={dataClip.podcastTitle}
             title={dataClip.title} />
       }
@@ -35,7 +36,7 @@ export const MediaListItem = (props: Props) => {
             handleOnClick={handleOnClick}
             imageUrl={dataEpisode.podcast.imageUrl}
             subTitleBottom='Full Episode'
-            subTitleBottomSide={dataEpisode.pubDate}
+            subTitleBottomSide={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
             subTitleTop={dataEpisode.podcast.title}
             title={dataEpisode.title} />
       }
@@ -53,24 +54,24 @@ export const MediaListItem = (props: Props) => {
             handleOnClick={handleOnClick}
             imageUrl={dataPodcast.imageUrl}
             subTitle={dataPodcast.lastEpisodeTitle}
-            subTitleSide={dataPodcast.lastEpisodePubDate}
+            subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
             title={dataPodcast.title} />
       }
       {
         (itemType === 'podcast-clip' && dataClip) &&
           <MediaListItemA
             handleOnClick={handleOnClick}
-            imageUrl={dataClip.episodeImageUrl}
+            imageUrl={dataClip.podcastImageUrl}
             subTitleBottom={dataClip.startTime}
             subTitleBottomSide={dataClip.endTime}
             subTitleTop={dataClip.episodeTitle}
-            subTitleTopSide={dataClip.episodePubDate}
+            subTitleTopSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
             title={dataClip.title} />
       }
       {
         (itemType === 'podcast-episode' && dataEpisode) &&
           <MediaListItemC
-            date={dataEpisode.pubDate}
+            date={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
             description={dataEpisode.description}
             handleOnClick={handleOnClick}
             title={dataClip.episodeTitle} />
