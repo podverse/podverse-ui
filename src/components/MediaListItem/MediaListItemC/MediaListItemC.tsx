@@ -4,19 +4,14 @@ export interface Props {
   date?: string
   description?: string
   handleOnClick?: () => void
-  imageUrl?: string
   title: string
 }
 
 export const MediaListItemC = (props: Props) => {
-  const { date, description, imageUrl, title } = props
+  const { date, description, title } = props
 
   return (
     <div className='media-list-item__c'>
-      {
-        imageUrl &&
-          <img className='media-list-item-c__image' src={imageUrl} />
-      }
       <div className='text-wrapper'>
         {
           date &&

@@ -21,7 +21,7 @@ export const MediaListItemA = (props: Props) => {
     subTitleTop, subTitleTopSide, title } = props
 
   return (
-    <a className='media-list-item__a'>
+    <div className='media-list-item__a'>
       <img className='media-list-item-a__image' src={imageUrl} />
       <div className='text-wrapper'>
         <div className='media-list-item-a__title'>
@@ -40,6 +40,6 @@ export const MediaListItemA = (props: Props) => {
           {subTitleBottom}
         </div>
       </div>
-    </a>
+    </div>
   )
 }

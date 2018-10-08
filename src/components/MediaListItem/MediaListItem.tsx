@@ -73,7 +73,6 @@ export const MediaListItem = (props: Props) => {
             date={dataEpisode.pubDate}
             description={dataEpisode.description}
             handleOnClick={handleOnClick}
-            imageUrl={dataEpisode.imageUrl}
             title={dataClip.episodeTitle} />
       }
     </a>

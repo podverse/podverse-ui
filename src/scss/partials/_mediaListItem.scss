@@ -1,6 +1,10 @@
 .media-list__item {
-  padding: 1.25em 0;
   text-decoration: none;
+}
+
+.media-list-item__a, .media-list-item__b, .media-list-item__c {
+  display: block;
+  padding: 1.25em 0;
 }
 
 .media-list-item-a__image, .media-list-item-b__image, .media-list-item-c__image {
@@ -78,12 +82,17 @@
   }
   
   .media-list-item-c__description {
+    @include ellipsis;
     font-size: 0.875em;
   }
 
-  .media-list-item-c__image {
-    float: right;
-    margin-left: 1em;
+  @supports (-webkit-line-clamp: 2) {
+    .media-list-item-c__description {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    }
   }
 
   .media-list-item-c__title {
@@ -93,10 +102,10 @@
 
 html[theme=light] {
   [class^=media-list-item__] {
-    [class*=__sub] {
+    [class*=__sub], [class$=__date] {
       color: $gray;
     }
-    [class*=__title] {
+    [class*=__title], [class$=__description] {
       color: $black;
     }
   }
@@ -104,10 +113,10 @@ html[theme=light] {
 
 html[theme=dark] {
   [class^=media-list-item__] {
-    [class*=__sub] {
+    [class*=__sub], [class$=__date] {
       color: $gray-light;
     }
-    [class*=__title] {
+    [class*=__title], [class$=__description] {
       color: $white;
     }
   }

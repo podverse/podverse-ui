@@ -13,7 +13,6 @@ storiesOf('Media/MediaListItem', module)
       <MediaListItemC 
         date={text('date', pubDate)}
         description={text('description', description)}
-        imageUrl={text('imageUrl', imageUrl)}
         title={text('title', title)}
       />
     )
