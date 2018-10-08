@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = { items: any }
 
@@ -27,7 +28,7 @@ export class MediaListSelect extends React.Component<Props, State> {
         <button 
           className='media-list-select__button'
           onClick={this.handleToggle}>
-          Toggle Menu
+          Toggle Menu <FontAwesomeIcon icon='coffee' />
         </button>
         {
           isOpen &&
