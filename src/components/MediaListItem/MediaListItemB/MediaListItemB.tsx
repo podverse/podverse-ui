@@ -12,7 +12,7 @@ export interface Props {
   title: string
 }
 
-export const MediaListItemB = (props: Props) => {
+export const MediaListItemB: React.StatelessComponent<Props> = props => {
   const { imageUrl, subTitle, subTitleSide, title } = props
 
   return (

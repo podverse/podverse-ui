@@ -14,7 +14,7 @@ export interface Props {
   itemType: string
 }
 
-export const MediaListItem = (props: Props) => {
+export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataPodcast, handleOnClick,
     itemType } = props 
   
