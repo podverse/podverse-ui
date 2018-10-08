@@ -4,6 +4,7 @@ export interface Props {
   handleOnClick?: () => void
   /** the url of the left positioned image */
   imageUrl?: string
+  showImage?: boolean
   /** the subtitle positioned bottom-left  */
   subTitleBottom?: string
   /** the subtitle positioned bottom-right  */
@@ -16,14 +17,15 @@ export interface Props {
   title: string
 }
 
-export const MediaListItemA = (props: Props) => {
-  const { imageUrl, subTitleBottom, subTitleBottomSide, 
+export const MediaListItemA: React.StatelessComponent<Props> = props => {
+  const { imageUrl, showImage, subTitleBottom, subTitleBottomSide, 
     subTitleTop, subTitleTopSide, title } = props
 
   return (
     <div className='media-list-item__a'>
       {
-        <img className='media-list-item-a__image' src={imageUrl} />
+        showImage &&
+          <img className='media-list-item-a__image' src={imageUrl} />
       }
       <div className='text-wrapper'>
         <div className='media-list-item-a__title'>
@@ -44,4 +46,8 @@ export const MediaListItemA = (props: Props) => {
       </div>
     </div>
   )
+}
+
+MediaListItemA.defaultProps = {
+  showImage: true
 }

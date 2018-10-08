@@ -47,6 +47,7 @@ export const MediaListItem = (props: Props) => {
         (itemType === 'episode-clip' && dataClip) &&
           <MediaListItemA
             handleOnClick={handleOnClick}
+            showImage={false}
             subTitleTop={dataClip.startTime}
             subTitleTopSide='duration'
             title={dataClip.title} />
