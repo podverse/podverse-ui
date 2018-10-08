@@ -1,37 +1,37 @@
 :root {
-  font-size: 16px;
+  font-size: $root-text-size;
 }
 
 body {
-  line-height: 20px;
+  line-height: $root-text-line-height;
 }
 
 h1 {
-  font-size: $text-3x;
+  font-size: $text-3x-rem;
 }
 
 h2 {
-  font-size: $text-2x;
+  font-size: $text-2x-rem;
 }
 
 h3 {
-  font-size: $text-xl;
+  font-size: $text-xl-rem;
 }
 
 h4 {
-  font-size: $text-lg;
+  font-size: $text-lg-rem;
 }
 
 h5 {
-  font-size: $text-sm;
+  font-size: $text-sm-rem;
 }
 
 h6 {
-  font-size: $text-xs;
+  font-size: $text-xs-rem;
 }
 
 p {
-  font-size: $text-md;
+  font-size: $text-md-rem;
 }
 
 .text-wrapper {

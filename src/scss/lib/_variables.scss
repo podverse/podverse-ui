@@ -1,3 +1,26 @@
+// Text Sizes
+$root-text-size: 16px;
+$root-text-line-height: 20px;
+
+$text-3x-em: 3em;
+$text-2x-em: 2em;
+$text-xl-em: 1.5em;
+$text-lg-em: 1.25em;
+$text-md-em: 1em;
+$text-sm-em: .875em;
+$text-xs-em: .75em;
+$text-tiny-em: .5em;
+
+$text-3x-rem: 3rem;
+$text-2x-rem: 2rem;
+$text-xl-rem: 1.5rem;
+$text-lg-rem: 1.25rem;
+$text-md-rem: 1rem;
+$text-sm-rem: .875rem;
+$text-xs-rem: .75rem;
+$text-tiny-rem: .5rem;
+
+// Colors
 $white: #FFF;
 $gray-light: #999;
 $gray: #666;
@@ -5,20 +28,12 @@ $gray-dark: #333;
 $black: #000;
 $link-blue: #0275d8;
 
+// Light Theme Colors
 $light-text-primary-color: $black;
 $light-text-secondary-color: $gray;
 $light-text-link-color: $link-blue;
 
+// Dark Theme Colors
 $dark-text-primary-color: $white;
 $dark-text-secondary-color: $gray-light;
 $dark-text-link-color: $link-blue;
-
-$text-4x: 4rem;
-$text-3x: 3rem;
-$text-2x: 2rem;
-$text-xl: 1.5rem;
-$text-lg: 1.25rem;
-$text-md: 1rem;
-$text-sm: .83rem;
-$text-xs: .75rem;
-$text-tiny: .5rem;

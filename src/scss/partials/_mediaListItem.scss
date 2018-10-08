@@ -20,7 +20,7 @@
   }
 
   [class^=media-list-item-a__sub] {
-    font-size: 0.875em;
+    font-size: $text-sm-em;
   }
 
   .media-list-item-a__sub-bottom {
@@ -55,7 +55,7 @@
   }
 
   [class^=media-list-item-b__sub] {
-    font-size: 0.875em;
+    font-size: $text-sm-em;
   }
 
   .media-list-item-b__sub {
@@ -69,7 +69,7 @@
   }
 
   .media-list-item-b__title {
-    margin: .5625em 0;
+    margin: .5em 0;
   }
 }
 
@@ -78,12 +78,12 @@
     float: right;
     margin-left: 1em;
     text-align: right;
-    font-size: 0.875em;
+    font-size: $text-sm-em;
   }
   
   .media-list-item-c__description {
     @include ellipsis;
-    font-size: 0.875em;
+    font-size: $text-sm-em;
   }
 
   @supports (-webkit-line-clamp: 2) {
