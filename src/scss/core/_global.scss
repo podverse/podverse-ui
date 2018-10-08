@@ -7,31 +7,31 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: $text-3x;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: $text-2x;
 }
 
 h3 {
-  font-size: 1.17rem;
+  font-size: $text-xl;
 }
 
 h4 {
-  font-size: 1.12rem;
+  font-size: $text-lg;
 }
 
 h5 {
-  font-size: .83rem;
+  font-size: $text-sm;
 }
 
 h6 {
-  font-size: .75rem;
+  font-size: $text-xs;
 }
 
 p {
-  font-size: 1rem;
+  font-size: $text-md;
 }
 
 .text-wrapper {
