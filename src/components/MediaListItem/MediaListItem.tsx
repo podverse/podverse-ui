@@ -18,10 +18,19 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataPodcast, handleOnClick,
     itemType } = props 
   
+  let href = ''
+  if (itemType === 'clip' || itemType === 'episode-clip' || itemType === 'podcast-clip') {
+    href = `/clip/${dataClip.id}`
+  } else if (itemType === 'episode' || itemType === 'podcast-episode') {
+    href = `/episode/${dataEpisode.id}`
+  } else if (itemType === 'podcast') {
+    href = `/podcast/${dataPodcast.id}`
+  }
+
   return (
     <a 
       className='media-list__item'
-      href='#'
+      href={href}
       onClick={handleOnClick}>
       {
         (itemType === 'clip' && dataClip) &&
