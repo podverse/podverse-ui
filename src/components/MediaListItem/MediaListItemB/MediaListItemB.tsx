@@ -17,17 +17,17 @@ export const MediaListItemB = (props: Props) => {
 
   return (
     <div className='media-list-item__b'>
-      <div className='media-list-item-b__image'>
-        {imageUrl}
-      </div>
-      <div className='media-list-item-b__title'>
-        {title}
-      </div>
-      <div className='media-list-item-b__sub'>
-        {subTitle}
-      </div>
-      <div className='media-list-item-b__sub-side'>
-        {subTitleSide}
+      <img className='media-list-item-b__image' src={imageUrl} />
+      <div className='text-wrapper'>
+        <div className='media-list-item-b__title'>
+          {title}
+        </div>
+        <div className='media-list-item-b__sub-side'>
+          {subTitleSide}
+        </div>
+        <div className='media-list-item-b__sub'>
+          {subTitle}
+        </div>
       </div>
     </div>
   )

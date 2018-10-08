@@ -5,8 +5,8 @@ import { MediaListItemA } from './MediaListItemA'
 import { text } from '@storybook/addon-knobs'
 import { sampleClip } from 'storybook/constants'
 
-const {episodeDescription, episodePubDate, episodeTitle, podcastImageUrl,
-  podcastTitle} = sampleClip
+const {episodePubDate, episodeTitle, podcastImageUrl,
+  podcastTitle, title} = sampleClip
 
 storiesOf('Media/MediaListItem', module)
   .addWithJSX(
@@ -18,6 +18,6 @@ storiesOf('Media/MediaListItem', module)
         subTitleBottomSide={text('subTitleBottomSide', episodePubDate)}
         subTitleTop={text('subTitleTop', podcastTitle)}
         subTitleTopSide={text('subTitleTopSide', '')}
-        title={text('title', episodeDescription)} />
+        title={text('title', title)} />
     )
   )

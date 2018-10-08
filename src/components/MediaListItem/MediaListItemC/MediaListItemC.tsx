@@ -15,24 +15,24 @@ export const MediaListItemC = (props: Props) => {
     <div className='media-list-item__c'>
       {
         imageUrl &&
-          <div className='media-list-item-c__image'>
-            {imageUrl}
-          </div>
+          <img className='media-list-item-c__image' src={imageUrl} />
       }
-      <div className='media-list-item-c__title'>
-        {title}
+      <div className='text-wrapper'>
+        {
+          date &&
+            <div className='media-list-item-c__date'>
+              {date}
+            </div>
+        }
+        <div className='media-list-item-c__title'>
+          {title}
+        </div>
       </div>
       {
-        date &&
-          <div className='media-list-item-c__date'>
-            {date}
-          </div>
-      }
-      {
         description &&
-          <div className='media-list-item-c__description'>
-            {description}
-          </div>
+        <div className='media-list-item-c__description'>
+          {description}
+        </div>
       }
     </div>
   )

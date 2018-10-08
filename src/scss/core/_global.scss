@@ -2,6 +2,10 @@
   font-size: 16px;
 }
 
+body {
+  line-height: 20px;
+}
+
 h1 {
   font-size: 2rem;
 }
@@ -28,4 +32,8 @@ h6 {
 
 p {
   font-size: 1rem;
+}
+
+.text-wrapper {
+  overflow: hidden;
 }

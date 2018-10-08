@@ -21,23 +21,25 @@ export const MediaListItemA = (props: Props) => {
     subTitleTop, subTitleTopSide, title } = props
 
   return (
-    <div className='media-list-item__a'>
+    <a className='media-list-item__a'>
       <img className='media-list-item-a__image' src={imageUrl} />
-      <div className='media-list-item-a__title'>
-        {title}
+      <div className='text-wrapper'>
+        <div className='media-list-item-a__title'>
+          {title}
+        </div>
+        <div className='media-list-item-a__sub-top-side'>
+          {subTitleTopSide}
+        </div>
+        <div className='media-list-item-a__sub-top'>
+          {subTitleTop}
+        </div>
+        <div className='media-list-item-a__sub-bottom-side'>
+          {subTitleBottomSide}
+        </div>
+        <div className='media-list-item-a__sub-bottom'>
+          {subTitleBottom}
+        </div>
       </div>
-      <div className='media-list-item-a__sub-top'>
-        {subTitleTop}
-      </div>
-      <div className='media-list-item-a__sub-top-side'>
-        {subTitleTopSide}
-      </div>
-      <div className='media-list-item-a__sub-bottom'>
-        {subTitleBottom}
-      </div>
-      <div className='media-list-item-a__sub-bottom-side'>
-        {subTitleBottomSide}
-      </div>
-    </div>
+    </a>
   )
 }
