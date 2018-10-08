@@ -6,7 +6,7 @@ import { readableDate } from 'lib/util'
 
 const striptags = require('striptags')
 
-export interface Props {
+type Props = {
   dataClip: any
   dataEpisode: any
   dataPodcast: any

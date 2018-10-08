@@ -9,7 +9,7 @@ const themeMode = 'light' // light or dark
 document.documentElement.setAttribute('theme', themeMode)
 
 setOptions({
-  name: 'Podverse UI Storybook',
+  name: 'Podverse UI',
   url: '#',
   goFullScreen: false,
   showStoriesPanel: true,
