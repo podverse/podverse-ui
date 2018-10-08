@@ -4,6 +4,8 @@ import { MediaListItemB } from './MediaListItemB/MediaListItemB'
 import { MediaListItemC } from './MediaListItemC/MediaListItemC'
 import { readableDate } from 'lib/util'
 
+const striptags = require('striptags')
+
 export interface Props {
   dataClip: any
   dataEpisode: any
@@ -19,7 +21,8 @@ export const MediaListItem = (props: Props) => {
   return (
     <a 
       className='media-list__item'
-      href='#'>
+      href='#'
+      onClick={handleOnClick}>
       {
         (itemType === 'clip' && dataClip) &&
           <MediaListItemA
@@ -72,7 +75,7 @@ export const MediaListItem = (props: Props) => {
         (itemType === 'podcast-episode' && dataEpisode) &&
           <MediaListItemC
             date={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
-            description={dataEpisode.description}
+            description={striptags(dataEpisode.description)}
             handleOnClick={handleOnClick}
             title={dataClip.episodeTitle} />
       }
