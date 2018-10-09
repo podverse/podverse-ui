@@ -5,7 +5,6 @@ import 'scss/styles.scss'
 library.add(faCheckSquare, faCoffee)
 
 export { Button } from 'components/Button/Button'
-export { MediaList } from 'components/Media/MediaList/MediaList'
 export { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 export { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/MediaListItemA'
 export { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'

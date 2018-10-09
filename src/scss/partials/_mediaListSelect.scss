@@ -1,4 +1,8 @@
 .media-list__select {
   font-size: $text-lg-rem;
   width: 9rem;
+
+  > div {
+    border-color: transparent;
+  }
 }
