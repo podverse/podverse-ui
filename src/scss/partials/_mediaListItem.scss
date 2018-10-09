@@ -102,22 +102,22 @@
 
 html[theme=light] {
   [class^=media-list-item__] {
-    [class*=__sub], [class$=__date] {
-      color: $gray;
-    }
     [class*=__title], [class$=__description] {
       color: $black;
+    }
+    [class*=__sub], [class$=__date] {
+      color: $gray;
     }
   }
 }
 
 html[theme=dark] {
   [class^=media-list-item__] {
-    [class*=__sub], [class$=__date] {
-      color: $gray-light;
-    }
     [class*=__title], [class$=__description] {
       color: $white;
+    }
+    [class*=__sub], [class$=__date] {
+      color: $gray-light;
     }
   }
 }

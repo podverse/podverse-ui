@@ -2,6 +2,14 @@
   font-size: $root-text-size;
 }
 
+[theme=light] {
+  background-color: $white;
+}
+
+[theme=dark] {
+  background-color: $black;
+}
+
 body {
   line-height: $root-text-line-height;
 }

@@ -1,3 +1,8 @@
+import { sampleAuthor, sampleCategory } from 'storybook/constants'
+
+const authors = Array(5).fill(sampleAuthor)
+const categories = Array(5).fill(sampleCategory)
+
 export const samplePodcast = {
   id: 'BybuUmEdof',
   description: 'This is not your average business podcast. James Altucher interviews the world’s leading peak performers in every area of life. But instead of giving you the typical success story, James digs deeper to find the “Choose Yourself” story—these are the moments we relate to…. when someone rises up from personal struggle to reinvent themselves. The James Altucher Show brings you into the lives of peak-performers, billionaires, best-selling authors, writers, rappers, astronauts and more, all who forged their own paths, found financial freedom, and harnessed the power to create more meaningful and fulfilling lives.',
@@ -11,8 +16,8 @@ export const samplePodcast = {
   linkUrl: 'https://jamesaltucher.com/',
   title: 'The James Altucher Show',
   type: 'episodic',
-  authors: [],
-  categories: [],
+  authors: authors,
+  categories: categories,
   episodes: [],
   feedUrls: []
 }
