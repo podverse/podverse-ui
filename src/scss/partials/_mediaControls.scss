@@ -1,0 +1,33 @@
+.media-controls {
+
+  [class^=media-controls__] {
+    display: inline-block;
+  }
+
+  .media-controls__jump-back {
+    margin-left: -0.5rem;
+    padding: 0.5rem;
+  }
+  
+  .media-controls__jump-forward {
+    padding: 0.5rem;
+  }
+
+  .media-controls__make-clip {
+    padding: 0.5rem;
+  }
+  
+  .media-controls__make-clip, .media-controls__add-to-playlist,
+  .media-controls__share {
+    height: 2.5rem;
+    padding: 0.5rem;
+    width: 2.5rem;
+  }
+  
+  .media-controls__autoplay {
+    float: right;
+    margin-right: -0.5rem;
+    padding: 0.5rem;
+  }
+
+}

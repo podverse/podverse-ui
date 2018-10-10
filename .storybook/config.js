@@ -1,14 +1,12 @@
 import * as React from 'react'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { addDecorator, configure, setAddon } from '@storybook/react'
 import { setOptions } from '@storybook/addon-options'
 import { withKnobs, select } from '@storybook/addon-knobs/react'
 import JSXAddon from 'storybook-addon-jsx'
-
+import { addFontAwesomeIcons } from 'lib/fontAwesomeIcons'
 import 'scss/styles.scss'
 
-library.add(faCheckSquare, faCoffee)
+addFontAwesomeIcons()
 
 const themeMode = 'light' // light or dark
 document.documentElement.setAttribute('theme', themeMode)

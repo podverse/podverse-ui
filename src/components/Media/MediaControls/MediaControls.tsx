@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = {
   isAutoplayOn: boolean
@@ -60,7 +61,7 @@ export class MediaControls extends React.Component<Props, State> {
             <div 
               className='media-controls__make-clip'
               onClick={onClickMakeClip}>
-              Make Clip
+              <FontAwesomeIcon icon='cut' />
             </div>
         }
         {
@@ -68,7 +69,7 @@ export class MediaControls extends React.Component<Props, State> {
             <div
               className='media-controls__add-to-playlist'
               onClick={onClickAddToPlaylist}>
-              Add to Playlist
+              <FontAwesomeIcon icon='list-ul' />
             </div>
         }
         {
@@ -76,7 +77,7 @@ export class MediaControls extends React.Component<Props, State> {
             <div 
               className='media-controls__share'
               onClick={onClickShare}>
-              Share
+            <FontAwesomeIcon icon='share' />
             </div>
         }
         {
