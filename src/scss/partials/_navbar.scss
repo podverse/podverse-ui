@@ -1,0 +1,8 @@
+// Navigation
+$nav-height: '3.125rem';
+$nav-bg-color: $brand-color;
+
+.navbar {
+  background-color: $nav-bg-color;
+  height: $nav-height;
+}

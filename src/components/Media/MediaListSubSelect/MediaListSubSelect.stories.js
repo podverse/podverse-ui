@@ -10,6 +10,6 @@ storiesOf('Media/MediaListSubSelect', module)
     () => (
       <MediaListSubSelect
         options={object('options', mediaListSubSelectOptionsSort)}
-        value={mediaListSubSelectOptionsSort[0]} />
+        placeholder='hello world' />
     )
   )

@@ -1,3 +1,5 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 @import 'lib/_mixins';
 @import 'lib/_variables';
 
@@ -9,3 +11,4 @@
 @import 'partials/_mediaListItem';
 @import 'partials/_MediaListSelect';
 @import 'partials/_mediaListSubSelect';
+@import 'partials/_navbar';

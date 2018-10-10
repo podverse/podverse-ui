@@ -4,11 +4,12 @@ import Select from 'react-select'
 type Props = {
   handleOnChange: Function
   options: any
+  placeholder: string
   value: string
 }
 
 export const MediaListSubSelect: React.StatelessComponent<Props> = props => {
-  const { handleOnChange, options, value } = props
+  const { handleOnChange, options, placeholder, value } = props
 
   return (
     <Select
@@ -16,6 +17,7 @@ export const MediaListSubSelect: React.StatelessComponent<Props> = props => {
       defaultValue={value}
       isSearchable={false}
       onChange={handleOnChange}
-      options={options} />
+      options={options}
+      placeholder={placeholder} />
   )
 }
