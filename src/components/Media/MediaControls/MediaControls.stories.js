@@ -2,7 +2,7 @@ import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import { MediaControls } from './MediaControls'
 
-storiesOf('Media/MediaControls', module)
+storiesOf('Media', module)
   .addWithJSX(
     'MediaControls',
     () => (

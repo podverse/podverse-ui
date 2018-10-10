@@ -6,7 +6,7 @@ import { MediaInfo } from './MediaInfo'
 import { sampleClip } from 'storybook/constants'
 const { episodeDescription, title } = sampleClip
 
-storiesOf('Media/MediaInfo', module)
+storiesOf('Media', module)
   .addWithJSX(
     'MediaInfo',
     () => (

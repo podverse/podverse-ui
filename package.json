@@ -23,7 +23,9 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "reactstrap": "^6.5.0",
-    "striptags": "^3.1.1"
+    "striptags": "^3.1.1",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

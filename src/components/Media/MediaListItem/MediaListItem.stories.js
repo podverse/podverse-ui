@@ -13,7 +13,7 @@ const itemTypes = [
   'podcast-episode'
 ]
 
-storiesOf('Media/MediaListItem', module)
+storiesOf('Media', module)
   .addWithJSX(
     'MediaListItem',
     () => (

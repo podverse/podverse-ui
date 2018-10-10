@@ -8,7 +8,7 @@ import { sampleClip } from 'storybook/constants'
 const {episodePubDate, episodeTitle, podcastImageUrl,
   podcastTitle, title} = sampleClip
 
-storiesOf('Media/MediaListItem', module)
+storiesOf('Media', module)
   .addWithJSX(
     'MediaListItemA',
     () => (

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { MediaListSelect } from './MediaListSelect'
 import { mediaListSubSelectItemsPlayer } from 'storybook/constants'
 
-storiesOf('Media/MediaListSelect', module)
+storiesOf('Media', module)
   .addWithJSX(
     'MediaListSelect',
     () => (

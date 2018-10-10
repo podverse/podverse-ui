@@ -21,35 +21,35 @@ type State = {
 }
 
 export class MediaControls extends React.Component<Props, State> {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       selectedIcon: 'make-clip'
     }
-    this.selectIcon = this.selectIcon.bind(this);
+    this.selectIcon = this.selectIcon.bind(this)
   }
 
-  selectIcon(a, b) {
-    console.log(a);
-    console.log(b);
+  selectIcon (a, b) {
+    console.log(a)
+    console.log(b)
   }
 
-  render() {
-    const { isAutoplayOn, onClickAddToPlaylist, onClickAutoplay, onClickMakeClip, 
-      onClickShare, onClickTimeJumpBack, onClickTimeJumpForward, showAddToPlaylist, 
+  render () {
+    const { isAutoplayOn, onClickAddToPlaylist, onClickAutoplay, onClickMakeClip,
+      onClickShare, onClickTimeJumpBack, onClickTimeJumpForward, showAddToPlaylist,
       showAutoplay, showMakeClip, showShare, showTimeSkips } = this.props
-    
+
     return (
       <div className='media-controls'>
         {
           showTimeSkips &&
             <React.Fragment>
-              <div 
+              <div
                 className='media-controls__jump-back'
                 onClick={onClickTimeJumpBack}>
                 {'< 15'}
               </div>
-              <div 
+              <div
                 className='media-controls__jump-forward'
                 onClick={onClickTimeJumpForward}>
                 {'15 >'}
@@ -58,7 +58,7 @@ export class MediaControls extends React.Component<Props, State> {
         }
         {
           showMakeClip &&
-            <div 
+            <div
               className='media-controls__make-clip'
               onClick={onClickMakeClip}>
               <FontAwesomeIcon icon='cut' />
@@ -74,7 +74,7 @@ export class MediaControls extends React.Component<Props, State> {
         }
         {
           showShare &&
-            <div 
+            <div
               className='media-controls__share'
               onClick={onClickShare}>
             <FontAwesomeIcon icon='share' />
@@ -82,7 +82,7 @@ export class MediaControls extends React.Component<Props, State> {
         }
         {
           showAutoplay &&
-            <div 
+            <div
               className='media-controls__autoplay'
               onClick={onClickAutoplay}>
               Autoplay {isAutoplayOn ? 'On' : 'Off'}
@@ -90,6 +90,5 @@ export class MediaControls extends React.Component<Props, State> {
         }
       </div>
     )
-    
   }
 }

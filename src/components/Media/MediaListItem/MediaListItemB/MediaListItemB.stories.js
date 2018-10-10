@@ -6,7 +6,7 @@ import { samplePodcast } from 'storybook/constants'
 
 const { imageUrl, lastEpisodePubDate, lastEpisodeTitle, title } = samplePodcast
 
-storiesOf('Media/MediaListItem', module)
+storiesOf('Media', module)
   .addWithJSX(
     'MediaListItemB',
     () => (

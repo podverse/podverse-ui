@@ -8,7 +8,7 @@ const {authors, categories, imageUrl, title} = samplePodcast
 const authLabels = authors.map(a => a.name)
 const categoryLabels = categories.map(c => c.title)
 
-storiesOf('Media/MediaHeader', module)
+storiesOf('Media', module)
   .addWithJSX(
     'MediaHeader',
     () => (
