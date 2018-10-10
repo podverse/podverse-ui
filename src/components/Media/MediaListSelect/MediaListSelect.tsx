@@ -36,7 +36,13 @@ export class MediaListSelect extends React.Component<Props, State> {
         return
       }
       
-      return <DropdownItem href={x.href}>{x.label}</DropdownItem>
+      return (
+        <DropdownItem
+          href={x.href}
+          onClick={x.onClick}>
+          {x.label}
+        </DropdownItem>
+      )
     })
 
     const selectClass = isSubSelect ? 'media-list__select' : 'media-list__sub-select'
