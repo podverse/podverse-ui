@@ -1,23 +1,58 @@
 import * as React from 'react'
-import Select from 'react-select'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 type Props = {
-  handleOnChange: Function
-  options: any
-  placeholder: string
-  value: string
+  isSubSelect: boolean
+  items: Array<any>
+  selected: string
 }
 
-export const MediaListSelect: React.StatelessComponent<Props> = props => {
-  const { handleOnChange, options, placeholder, value } = props
+type State = {
+  dropdownOpen: boolean
+}
 
-  return (
-    <Select
-      className='media-list__select'
-      defaultValue={value}
-      isSearchable={false}
-      onChange={handleOnChange}
-      options={options}
-      placeholder={placeholder} />
-  )
+export class MediaListSelect extends React.Component<Props, State> {
+  constructor(props) {
+    super(props)
+    this.state = {
+      dropdownOpen: false
+    }
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }))
+  }
+
+  render() {
+    const { isSubSelect, items, selected } = this.props
+
+    let selectedText
+    const itemNodes = items.map(x => {
+      if (selected === x.value) {
+        selectedText = x.label
+        return
+      }
+      
+      return <DropdownItem href={x.href}>{x.label}</DropdownItem>
+    })
+
+    const selectClass = isSubSelect ? 'media-list__select' : 'media-list__sub-select'
+
+    return (
+      <Dropdown 
+        className={selectClass}
+        isOpen={this.state.dropdownOpen} 
+        toggle={this.toggle}>
+        <DropdownToggle caret>
+          {selectedText}
+        </DropdownToggle>
+        <DropdownMenu>
+          {itemNodes}
+        </DropdownMenu>
+      </Dropdown>
+    )
+  }
 }

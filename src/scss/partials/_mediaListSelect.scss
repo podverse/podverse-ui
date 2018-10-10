@@ -1,8 +1,7 @@
-.media-list__select {
+.media-list__select button {
   font-size: $text-lg-rem;
-  width: 9rem;
+}
 
-  > div {
-    border-color: transparent;
-  }
+.media-list__sub-select button {
+  font-size: $text-md-rem;
 }
