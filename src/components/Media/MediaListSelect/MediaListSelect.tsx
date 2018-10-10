@@ -14,10 +14,12 @@ type State = {
 export class MediaListSelect extends React.Component<Props, State> {
   constructor(props) {
     super(props)
+
     this.state = {
       dropdownOpen: false
     }
-    this.toggle = this.toggle.bind(this);
+
+    this.toggle = this.toggle.bind(this)
   }
 
   toggle() {

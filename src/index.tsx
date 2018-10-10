@@ -1,4 +1,3 @@
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { addFontAwesomeIcons } from 'lib/fontAwesomeIcons'
 import 'scss/styles.scss'
 
