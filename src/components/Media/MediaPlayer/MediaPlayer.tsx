@@ -9,6 +9,8 @@ type Props = {
   clipStartTime: number
   height: string
   muted: boolean
+  onPrevious: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onSkip: (event: React.MouseEvent<HTMLButtonElement>) => void
   playbackRate: number
   playing: boolean
   url: string
@@ -95,7 +97,8 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   setVolume = e => {
-    this.setState({ volume: parseFloat(e.target.value) })
+    const offsetX = e.nativeEvent.offsetX
+    this.setState({ volume: offsetX * 2 / 100 })
   }
 
   toggleMuted = () => {
@@ -137,7 +140,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { url } = this.props
+    const { onPrevious, onSkip, url } = this.props
     const { muted, playbackRate, playing, volume } = this.state
 
     return (
@@ -180,7 +183,7 @@ export class MediaPlayer extends React.Component<Props, State> {
           <Progress
             className='media-player__volume'
             onClick={this.setVolume}
-            value={25} />
+            value={volume * 100} />
           <button
             className='media-player__playback-rate'
             onClick={this.setPlaybackRate}>
@@ -188,12 +191,12 @@ export class MediaPlayer extends React.Component<Props, State> {
           </button>
           <button
             className='media-player__previous'
-            onClick={() => console.log('previous')}>
+            onClick={onPrevious}>
             <FontAwesomeIcon icon='step-backward' />
           </button>
           <button
             className='media-player__skip'
-            onClick={() => console.log('skip')}>
+            onClick={onSkip}>
             <FontAwesomeIcon icon='step-forward' />
           </button>
         </div>

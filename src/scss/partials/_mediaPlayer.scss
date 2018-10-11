@@ -1,41 +1,79 @@
 .media-player {
   display: flex;
   padding: 1rem;
-  background-color: #eee;
 
   .media-player__play-pause {
     flex: 0 0 36px;
+    margin-right: 4px;
   }
 
   .media-player__current-time {
     flex: 0 0 60px;
+    margin: 0 4px;
   }
 
   .media-player__progress-bar {
+    cursor: pointer;
     flex: 1 1 auto;
+    margin: 1px 4px 0 4px;
   }
 
   .media-player__duration {
     flex: 0 0 60px;
+    margin: 0 4px;
   }
 
   .media-player__mute {
     flex: 0 0 36px;
+    margin: 0 4px;
   }
 
   .media-player__volume {
-    flex: 0 0 60px;
+    cursor: pointer;
+    flex: 0 0 50px;
+    margin: 1px 4px 0 4px;
   }
 
   .media-player__playback-rate {
     flex: 0 0 36px;
+    margin: 0 4px;
   }
 
   .media-player__previous {
-    flex: 0 0 36px;
+    flex: 0 0 32px;
   }
 
   .media-player__skip {
-    flex: 0 0 36px;
+    flex: 0 0 32px;
+  }
+}
+
+[theme=light] {
+  .media-player {
+    background-color: $gray-light;
+    color: $black;
+
+    .progress {
+      background-color: $gray;
+    }
+
+    .progress .progress-bar {
+      background-color: $blue;
+    }
+  }
+}
+
+[theme=dark] {
+  .media-player {
+    background-color: $gray-dark;
+    color: $white;
+
+    .progress {
+      background-color: $gray;
+    }
+  }
+
+  .progress .progress-bar {
+    background-color: $blue;
   }
 }
