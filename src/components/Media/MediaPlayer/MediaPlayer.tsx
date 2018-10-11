@@ -159,12 +159,15 @@ export class MediaPlayer extends React.Component<Props, State> {
                 <FontAwesomeIcon icon='play' />
             }
           </button>
-          <span className='media-player__play-pause'>
+          <span className='media-player__current-time'>
             12:34:56
           </span>
           <Progress
             className='media-player__progress-bar'
             value={25} />
+          <span className='media-player__duration'>
+            12:34:56
+          </span>
           <button
             className='media-player__mute'
             onClick={this.toggleMuted}>
@@ -185,10 +188,14 @@ export class MediaPlayer extends React.Component<Props, State> {
           </button>
           <button
             className='media-player__previous'
-            onClick={() => console.log('previous')} />
+            onClick={() => console.log('previous')}>
+            <FontAwesomeIcon icon='step-backward' />
+          </button>
           <button
             className='media-player__skip'
-            onClick={() => console.log('skip')} />
+            onClick={() => console.log('skip')}>
+            <FontAwesomeIcon icon='step-forward' />
+          </button>
         </div>
       </React.Fragment>
     )

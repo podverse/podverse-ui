@@ -1,8 +1,10 @@
 .media-player {
   display: flex;
+  padding: 1rem;
+  background-color: #eee;
 
   .media-player__play-pause {
-    flex: 0 0 40px;
+    flex: 0 0 36px;
   }
 
   .media-player__current-time {
@@ -13,23 +15,27 @@
     flex: 1 1 auto;
   }
 
+  .media-player__duration {
+    flex: 0 0 60px;
+  }
+
   .media-player__mute {
-    flex: 0 0 40px;
+    flex: 0 0 36px;
   }
 
   .media-player__volume {
-    flex: 0 0 80px;
+    flex: 0 0 60px;
   }
 
   .media-player__playback-rate {
-    flex: 0 0 40px;
+    flex: 0 0 36px;
   }
 
   .media-player__previous {
-    flex: 0 0 40px;
+    flex: 0 0 36px;
   }
 
   .media-player__skip {
-    flex: 0 0 40px;
+    flex: 0 0 36px;
   }
 }
