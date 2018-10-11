@@ -167,6 +167,7 @@ export class MediaPlayer extends React.Component<Props, State> {
           playbackRate={playbackRate}
           playing={playing}
           ref={this.ref}
+          style={{ display: 'none' }}
           url={url}
           volume={volume} />
         <div className='media-player'>
