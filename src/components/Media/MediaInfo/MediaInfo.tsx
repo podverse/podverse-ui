@@ -14,8 +14,8 @@ type State = {
 }
 
 export class MediaInfo extends React.Component<Props, State> {
-  
-  constructor(props) {
+
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -46,7 +46,7 @@ export class MediaInfo extends React.Component<Props, State> {
         }
         {
           clipReadableTime &&
-            <div 
+            <div
               className='media-info__clip-readable-time'
               onClick={handleClipReadableTimeOnClick}>
               {clipReadableTime}
@@ -54,7 +54,7 @@ export class MediaInfo extends React.Component<Props, State> {
         }
         {
           !isEpisode &&
-            <div 
+            <div
               className='media-info__show-more'
               onClick={this.toggleDescription}>
               {this.state.showDescription ? 'Hide Notes' : 'Show Notes'}

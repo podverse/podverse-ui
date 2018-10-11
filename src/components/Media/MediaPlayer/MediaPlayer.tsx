@@ -2,6 +2,7 @@ import * as React from 'react'
 import FilePlayer from 'react-player/lib/players/FilePlayer'
 import { Progress } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { convertSecToHHMMSS } from 'lib/util'
 
 type Props = {
   autoplay: boolean
@@ -19,8 +20,11 @@ type Props = {
 }
 
 type State = {
+  duration: number | null
   muted: boolean
   playbackRate: number
+  played: number
+  playedSeconds: number
   playing: boolean
   seeking: boolean
   volume: number
@@ -74,8 +78,11 @@ export class MediaPlayer extends React.Component<Props, State> {
     super(props)
 
     this.state = {
+      duration: null,
       muted: props.muted || false,
       playbackRate: props.playbackRate || 1,
+      played: 0,
+      playedSeconds: 0,
       playing: props.playing || props.autoplay || false,
       seeking: false,
       volume: props.volume || 1
@@ -90,6 +97,12 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.setState({ playing: !this.state.playing })
   }
 
+  setCurrentTime = e => {
+    const offsetX = e.nativeEvent.offsetX
+    const width = e.currentTarget.offsetWidth
+    this.player.seekTo(offsetX / width)
+  }
+
   setPlaybackRate = e => {
     this.setState({
       playbackRate: changePlaybackRate(this.state.playbackRate)
@@ -98,7 +111,8 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   setVolume = e => {
     const offsetX = e.nativeEvent.offsetX
-    this.setState({ volume: offsetX * 2 / 100 })
+    const width = e.currentTarget.offsetWidth
+    this.setState({ volume: offsetX / width })
   }
 
   toggleMuted = () => {
@@ -109,8 +123,8 @@ export class MediaPlayer extends React.Component<Props, State> {
     console.log('onReady')
   }
 
-  onDuration = () => {
-    console.log('onDuration')
+  onDuration = (duration) => {
+    this.setState({ duration })
   }
 
   onPlay = () => {
@@ -141,12 +155,15 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   render () {
     const { onPrevious, onSkip, url } = this.props
-    const { muted, playbackRate, playing, volume } = this.state
+    const { duration, muted, playbackRate, played, playedSeconds, playing,
+      volume } = this.state
 
     return (
       <React.Fragment>
         <FilePlayer
           muted={muted}
+          onDuration={this.onDuration}
+          onProgress={this.onProgress}
           playbackRate={playbackRate}
           playing={playing}
           ref={this.ref}
@@ -163,13 +180,16 @@ export class MediaPlayer extends React.Component<Props, State> {
             }
           </button>
           <span className='media-player__current-time'>
-            12:34:56
+            {convertSecToHHMMSS(playedSeconds)}
           </span>
           <Progress
             className='media-player__progress-bar'
-            value={25} />
+            onClick={this.setCurrentTime}
+            value={played * 100} />
           <span className='media-player__duration'>
-            12:34:56
+            {
+              duration ? convertSecToHHMMSS(duration) : '--:--:--'
+            }
           </span>
           <button
             className='media-player__mute'
