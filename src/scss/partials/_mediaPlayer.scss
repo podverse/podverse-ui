@@ -1,0 +1,35 @@
+.media-player {
+  display: flex;
+
+  .media-player__play-pause {
+    flex: 0 0 40px;
+  }
+
+  .media-player__current-time {
+    flex: 0 0 60px;
+  }
+
+  .media-player__progress-bar {
+    flex: 1 1 auto;
+  }
+
+  .media-player__mute {
+    flex: 0 0 40px;
+  }
+
+  .media-player__volume {
+    flex: 0 0 80px;
+  }
+
+  .media-player__playback-rate {
+    flex: 0 0 40px;
+  }
+
+  .media-player__previous {
+    flex: 0 0 40px;
+  }
+
+  .media-player__skip {
+    flex: 0 0 40px;
+  }
+}
