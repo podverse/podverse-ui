@@ -11,11 +11,10 @@ type Props = {
   clipStartTime: number
   handleOnEpisodeEnd: Function
   handleOnPastClipTime: Function
+  handleOnPrevious: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleOnSkip: (event: React.MouseEvent<HTMLButtonElement>) => void
   height: string
   muted: boolean
-  onPlay: Function
-  onPrevious: (event: React.MouseEvent<HTMLButtonElement>) => void
-  onSkip: (event: React.MouseEvent<HTMLButtonElement>) => void
   playbackRate: number
   playing: boolean
   url: string
@@ -227,7 +226,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   MediaPlayerComponent = (visibilityObj) => {
     const { isVisible } = visibilityObj
-    const { onPrevious, onSkip, url } = this.props
+    const { handleOnPrevious, handleOnSkip, url } = this.props
     const { duration, muted, playbackRate, played,
       playedSeconds, playing, progressPreviewTime, volume } = this.state
 
@@ -319,12 +318,12 @@ export class MediaPlayer extends React.Component<Props, State> {
           </button>
           <button
             className='media-player__previous'
-            onClick={onPrevious}>
+            onClick={handleOnPrevious}>
             <FontAwesomeIcon icon='step-backward' />
           </button>
           <button
             className='media-player__skip'
-            onClick={onSkip}>
+            onClick={handleOnSkip}>
             <FontAwesomeIcon icon='step-forward' />
           </button>
         </div>
