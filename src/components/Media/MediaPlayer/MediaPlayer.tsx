@@ -21,18 +21,28 @@ type Props = {
 }
 
 type State = {
+  clipEndFlagPositionX?: number
+  clipStartFlagPositionX?: number
   duration: number | null
   muted: boolean
   playbackRate: number
   played: number
   playedSeconds: number
   playing: boolean
+  progressPreviewTime: number
   seeking: boolean
   volume: number
 }
 
+type ClipFlagPositions = {
+  clipEndFlagPositionX?: number
+  clipStartFlagPositionX?: number
+}
+
 export interface MediaPlayer {
+  durationNode: any
   player: any
+  progressBarWidth: any
 }
 
 const getPlaybackRateText = num => {
@@ -73,6 +83,10 @@ const changePlaybackRate = num => {
   }
 }
 
+const timePlaceholder = '--:--:--'
+
+// TrackVisibility always sets isVisible to false on
+// the initial view render, so ignore for one render cycle.
 let hasLoaded = false
 
 export class MediaPlayer extends React.Component<Props, State> {
@@ -81,18 +95,24 @@ export class MediaPlayer extends React.Component<Props, State> {
     super(props)
 
     this.state = {
+      clipEndFlagPositionX: -1,
+      clipStartFlagPositionX: -1,
       duration: null,
       muted: props.muted || false,
       playbackRate: props.playbackRate || 1,
       played: 0,
       playedSeconds: 0,
       playing: props.playing || props.autoplay || false,
+      progressPreviewTime: -1,
       seeking: false,
       volume: props.volume || 1
     }
+
+    this.durationNode = React.createRef()
+    this.progressBarWidth = React.createRef()
   }
 
-  ref = player => {
+  playerRef = player => {
     this.player = player
   }
 
@@ -116,6 +136,34 @@ export class MediaPlayer extends React.Component<Props, State> {
     const offsetX = e.nativeEvent.offsetX
     const width = e.currentTarget.offsetWidth
     this.setState({ volume: offsetX / width })
+  }
+
+  getClipFlagPositions = (): ClipFlagPositions => {
+    const { clipEndTime, clipStartTime } = this.props
+    const { duration } = this.state
+    let clipEndFlagPositionX = -1
+    let clipStartFlagPositionX = -1
+
+    if (this.progressBarWidth.current) {
+      const width = this.progressBarWidth.current.offsetWidth
+
+      if (duration && this.durationNode.current.innerText !== timePlaceholder) {
+        const positionOffset = width / duration
+
+        if (clipStartTime) {
+          clipStartFlagPositionX = (clipStartTime * positionOffset) - 1
+        }
+
+        if (clipStartTime && clipEndTime) {
+          clipEndFlagPositionX = (clipEndTime * positionOffset) - 1
+        }
+      }
+    }
+
+    return {
+      clipEndFlagPositionX,
+      clipStartFlagPositionX
+    }
   }
 
   toggleMuted = () => {
@@ -160,9 +208,14 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { isVisible } = visibilityObj
     const { onPrevious, onSkip, url } = this.props
     const { duration, muted, playbackRate, played, playedSeconds, playing,
-      volume } = this.state
+      progressPreviewTime, volume } = this.state
 
-    const component = (
+    const { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
+
+    const mediaPlayerClass = `media-player ${isVisible || !hasLoaded ? '' : 'fixed'}`
+    hasLoaded = true
+
+    return (
       <React.Fragment>
         <FilePlayer
           muted={muted}
@@ -170,11 +223,11 @@ export class MediaPlayer extends React.Component<Props, State> {
           onProgress={this.onProgress}
           playbackRate={playbackRate}
           playing={playing}
-          ref={this.ref}
+          ref={this.playerRef}
           style={{ display: 'none' }}
           url={url}
           volume={volume} />
-        <div className={`media-player ${isVisible || !hasLoaded ? '' : 'fixed'}`}>
+        <div className={mediaPlayerClass}>
           <button
             className='media-player__play-pause'
             onClick={this.playPause}>
@@ -187,13 +240,39 @@ export class MediaPlayer extends React.Component<Props, State> {
           <span className='media-player__current-time'>
             {convertSecToHHMMSS(playedSeconds)}
           </span>
-          <Progress
-            className='media-player__progress-bar'
-            onClick={this.setCurrentTime}
-            value={played * 100} />
-          <span className='media-player__duration'>
+          <div
+            className='media-player__progress-bar-wrapper'
+            ref={this.progressBarWidth}>
+            <div
+              className='media-player-progress-bar__preview'
+              style={{
+                display: 'block',
+                left: '125px'
+              }}>
+              {progressPreviewTime}
+            </div>
+            <div
+              className='media-player-progress-bar__clip-start'
+              style={{
+                display: `${clipStartFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                left: `${clipStartFlagPositionX}px`
+              }} />
+            <div
+              className='media-player-progress-bar__clip-end'
+              style={{
+                display: `${clipEndFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                left: `${clipEndFlagPositionX}px`
+              }} />
+            <Progress
+              className='media-player__progress-bar'
+              onClick={this.setCurrentTime}
+              value={played * 100} />
+          </div>
+          <span
+            className='media-player__duration'
+            ref={this.durationNode}>
             {
-              duration ? convertSecToHHMMSS(duration) : '--:--:--'
+              duration ? convertSecToHHMMSS(duration) : timePlaceholder
             }
           </span>
           <button
@@ -227,10 +306,6 @@ export class MediaPlayer extends React.Component<Props, State> {
         </div>
       </React.Fragment>
     )
-
-    hasLoaded = true
-
-    return component
   }
 
   render () {

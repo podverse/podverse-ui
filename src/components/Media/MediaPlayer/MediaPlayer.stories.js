@@ -11,6 +11,8 @@ storiesOf('Media', module)
     () => (
       <React.Fragment>
         <MediaPlayer
+          clipEndTime={900}
+          clipStartTime={600}
           url={episodeMediaUrl} />
         { sampleText }
       </React.Fragment>

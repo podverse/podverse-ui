@@ -45,3 +45,12 @@ p {
 .text-wrapper {
   overflow: hidden;
 }
+
+.progress-bar {
+  position: relative;
+  transition: none;
+}
+
+.hide {
+  display: none;
+}

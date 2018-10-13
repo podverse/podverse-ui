@@ -19,6 +19,28 @@
     margin: 0 4px;
   }
 
+  .media-player__progress-bar-wrapper {
+    flex: 1 1 auto;
+    position: relative;
+    width: 100%;
+
+    .media-player-progress-bar__preview {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .media-player-progress-bar__clip-start,
+    .media-player-progress-bar__clip-end {
+      background-color: yellow;
+      height: 24px;
+      pointer-events: none;
+      position: absolute;
+      top: -3px;
+      width: 2px;
+      z-index: 1;
+    }
+  }
+
   .media-player__progress-bar {
     cursor: pointer;
     flex: 1 1 auto;
