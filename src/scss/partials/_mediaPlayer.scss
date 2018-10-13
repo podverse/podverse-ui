@@ -1,6 +1,13 @@
 .media-player {
   display: flex;
   padding: 1rem;
+  
+  &.fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 
   .media-player__play-pause {
     flex: 0 0 36px;
@@ -30,7 +37,7 @@
 
   .media-player__volume {
     cursor: pointer;
-    flex: 0 0 50px;
+    flex: 0 0 60px;
     margin: 1px 4px 0 4px;
   }
 
@@ -75,5 +82,29 @@
 
   .progress .progress-bar {
     background-color: $blue;
+  }
+}
+
+@media(max-width: 575px) {
+  .media-player__volume {
+    display: none;
+  }
+}
+
+@media(max-width: 500px) {
+  .media-player__mute {
+    display: none;
+  }
+}
+
+@media(max-width: 450px) {
+  .media-player__previous {
+    display: none;
+  }
+}
+
+@media(max-width: 400px) {
+  .media-player__skip {
+    display: none;
   }
 }

@@ -3,6 +3,7 @@ import FilePlayer from 'react-player/lib/players/FilePlayer'
 import { Progress } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { convertSecToHHMMSS } from 'lib/util'
+import TrackVisibility from 'react-on-screen'
 
 type Props = {
   autoplay: boolean
@@ -71,6 +72,8 @@ const changePlaybackRate = num => {
       return 1
   }
 }
+
+let hasLoaded = false
 
 export class MediaPlayer extends React.Component<Props, State> {
 
@@ -153,12 +156,13 @@ export class MediaPlayer extends React.Component<Props, State> {
     console.log('onEnded')
   }
 
-  render () {
+  MediaPlayerComponent = (visibilityObj) => {
+    const { isVisible } = visibilityObj
     const { onPrevious, onSkip, url } = this.props
     const { duration, muted, playbackRate, played, playedSeconds, playing,
       volume } = this.state
 
-    return (
+    const component = (
       <React.Fragment>
         <FilePlayer
           muted={muted}
@@ -170,7 +174,7 @@ export class MediaPlayer extends React.Component<Props, State> {
           style={{ display: 'none' }}
           url={url}
           volume={volume} />
-        <div className='media-player'>
+        <div className={`media-player ${isVisible || !hasLoaded ? '' : 'fixed'}`}>
           <button
             className='media-player__play-pause'
             onClick={this.playPause}>
@@ -222,6 +226,19 @@ export class MediaPlayer extends React.Component<Props, State> {
           </button>
         </div>
       </React.Fragment>
+    )
+
+    hasLoaded = true
+
+    return component
+  }
+
+  render () {
+
+    return (
+      <TrackVisibility>
+        <this.MediaPlayerComponent />
+      </TrackVisibility>
     )
   }
 
