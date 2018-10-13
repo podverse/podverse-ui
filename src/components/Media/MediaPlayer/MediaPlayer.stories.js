@@ -6,9 +6,6 @@ import { select } from '@storybook/addon-knobs'
 
 const { episodeMediaUrl } = sampleClip
 
-let startTime = 600
-let endTime = 900
-
 const handleOnEpisodeEnd = () => {
   console.log('handleOnEpisodeEnd')
 }
@@ -23,15 +20,17 @@ storiesOf('Media', module)
     () => (
       <React.Fragment>
         <MediaPlayer
-          clipEndTime={endTime}
-          clipStartTime={startTime}
+          clipEndTime={900}
+          clipStartTime={600}
           handleOnEpisodeEnd={handleOnEpisodeEnd}
           handleOnPastClipTime={handleOnPastClipTime}
-          url={select('url', [
-            'http://traffic.libsyn.com/altucher/JAS-400-ImCelebrating400Episodes-Pt1-v01-FREE.mp3',
-            'http://traffic.libsyn.com/altucher/JAS-390-DanRoth-v01-FREE.mp3?dest-id=172343'
-          ])}
-          url={episodeMediaUrl} />
+          // url={select('url', [
+          //   episodeMediaUrl,
+          //   'http://traffic.libsyn.com/altucher/JAS-400-ImCelebrating400Episodes-Pt1-v01-FREE.mp3',
+          //   'http://traffic.libsyn.com/altucher/JAS-390-DanRoth-v01-FREE.mp3?dest-id=172343'
+          // ])} 
+          url={episodeMediaUrl}
+          />
         { sampleText }
       </React.Fragment>
     )
