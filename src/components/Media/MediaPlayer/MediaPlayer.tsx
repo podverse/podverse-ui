@@ -83,7 +83,7 @@ const changePlaybackRate = num => {
   }
 }
 
-const timePlaceholder = '--:--:--'
+const timePlaceholder = '-:--:--'
 
 // TrackVisibility always sets isVisible to false on
 // the initial view render, so ignore for one render cycle.
@@ -227,6 +227,7 @@ export class MediaPlayer extends React.Component<Props, State> {
           style={{ display: 'none' }}
           url={url}
           volume={volume} />
+        <div className={`media-player__fixed-spacer ${isVisible ? 'hide' : ''}`}></div>
         <div className={mediaPlayerClass}>
           <button
             className='media-player__play-pause'
