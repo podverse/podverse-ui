@@ -9,8 +9,11 @@ type Props = {
   autoplay: boolean
   clipEndTime: number
   clipStartTime: number
+  handleOnEpisodeEnd: Function
+  handleOnPastClipTime: Function
   height: string
   muted: boolean
+  onPlay: Function
   onPrevious: (event: React.MouseEvent<HTMLButtonElement>) => void
   onSkip: (event: React.MouseEvent<HTMLButtonElement>) => void
   playbackRate: number
@@ -22,6 +25,7 @@ type Props = {
 
 type State = {
   clipEndFlagPositionX?: number
+  clipFinished: boolean
   clipStartFlagPositionX?: number
   duration: number | null
   muted: boolean
@@ -96,6 +100,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     this.state = {
       clipEndFlagPositionX: -1,
+      clipFinished: false,
       clipStartFlagPositionX: -1,
       duration: null,
       muted: props.muted || false,
@@ -155,7 +160,7 @@ export class MediaPlayer extends React.Component<Props, State> {
         }
 
         if (clipStartTime && clipEndTime) {
-          clipEndFlagPositionX = (clipEndTime * positionOffset) - 1
+          clipEndFlagPositionX = (clipEndTime * positionOffset) + 1
         }
       }
     }
@@ -170,16 +175,22 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.setState({ muted: !this.state.muted })
   }
 
-  onReady = () => {
-    console.log('onReady')
-  }
-
   onDuration = (duration) => {
+    const { clipStartTime } = this.props
+    if (clipStartTime && clipStartTime > 0) {
+      this.player.seekTo(clipStartTime)
+    }
     this.setState({ duration })
   }
 
   onPlay = () => {
-    this.setState({ playing: true })
+    const { handleOnPastClipTime } = this.props
+    const { clipFinished } = this.state
+
+    if (clipFinished && this.player.getCurrentTime() > this.props.clipEndTime) {
+      handleOnPastClipTime()
+      return
+    }
   }
 
   onPause = () => {
@@ -195,20 +206,30 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   onProgress = state => {
-    if (!this.state.seeking) {
+    const { clipFinished, seeking } = this.state
+
+    if (!clipFinished && this.player.getCurrentTime() > this.props.clipEndTime) {
+      this.setState({
+        clipFinished: true,
+        playing: false
+      })
+      return
+    }
+
+    if (!seeking) {
       this.setState(state)
     }
   }
 
   onEnded = () => {
-    console.log('onEnded')
+    this.props.handleOnEpisodeEnd()
   }
 
   MediaPlayerComponent = (visibilityObj) => {
     const { isVisible } = visibilityObj
     const { onPrevious, onSkip, url } = this.props
-    const { duration, muted, playbackRate, played, playedSeconds, playing,
-      progressPreviewTime, volume } = this.state
+    const { duration, muted, playbackRate, played,
+      playedSeconds, playing, progressPreviewTime, volume } = this.state
 
     const { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
 
@@ -220,6 +241,8 @@ export class MediaPlayer extends React.Component<Props, State> {
         <FilePlayer
           muted={muted}
           onDuration={this.onDuration}
+          onEnded={this.onEnded}
+          onPlay={this.onPlay}
           onProgress={this.onProgress}
           playbackRate={playbackRate}
           playing={playing}

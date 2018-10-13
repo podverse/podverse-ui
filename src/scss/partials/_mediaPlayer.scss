@@ -1,5 +1,5 @@
 .media-player__fixed-spacer {
-  height: 52px
+  height: 52px;
 }
 
 .media-player {
@@ -15,12 +15,14 @@
 
   .media-player__play-pause {
     flex: 0 0 36px;
-    margin-right: 4px;
+    margin-right: 2px;
   }
 
   .media-player__current-time {
     flex: 0 0 auto;
-    margin: 0 4px;
+    margin: 0 2px;
+    min-width: 38px;
+    text-align: right;
   }
 
   .media-player__progress-bar-wrapper {
@@ -48,28 +50,30 @@
   .media-player__progress-bar {
     cursor: pointer;
     flex: 1 1 auto;
-    margin: 1px 4px 0 4px;
+    margin: 1px 2px 0 2px;
   }
 
   .media-player__duration {
     flex: 0 0 auto;
-    margin: 0 4px;
+    margin: 0 2px;
+    min-width: 38px;
+    text-align: left;
   }
 
   .media-player__mute {
     flex: 0 0 36px;
-    margin: 0 4px;
+    margin: 0 2px;
   }
 
   .media-player__volume {
     cursor: pointer;
     flex: 0 0 60px;
-    margin: 1px 4px 0 4px;
+    margin: 1px 2px 0 2px;
   }
 
   .media-player__playback-rate {
     flex: 0 0 36px;
-    margin: 0 4px;
+    margin: 0 2px;
   }
 
   .media-player__previous {
