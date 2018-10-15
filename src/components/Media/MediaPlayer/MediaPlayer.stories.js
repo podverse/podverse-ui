@@ -2,7 +2,6 @@ import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import { MediaPlayer } from './MediaPlayer'
 import { sampleClip, sampleText } from 'storybook/constants'
-import { select } from '@storybook/addon-knobs'
 
 const { episodeMediaUrl } = sampleClip
 

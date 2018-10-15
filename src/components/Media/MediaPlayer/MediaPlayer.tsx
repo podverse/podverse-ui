@@ -2,6 +2,7 @@ import * as React from 'react'
 import FilePlayer from 'react-player/lib/players/FilePlayer'
 import { Progress } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { convertSecToHHMMSS } from 'lib/util'
 import TrackVisibility from 'react-on-screen'
 
@@ -114,6 +115,16 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     this.durationNode = React.createRef()
     this.progressBarWidth = React.createRef()
+  }
+
+  componentDidMount () {
+    document.body.addEventListener('keydown', (event) => {
+      if (event.keyCode === keyLeftArrow) {
+        this.player.seekTo(this.player.getCurrentTime() - 5)
+      } else if (event.keyCode === keyRightArrow) {
+        this.player.seekTo(this.player.getCurrentTime() + 5)
+      }
+    })
   }
 
   playerRef = player => {
