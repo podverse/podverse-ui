@@ -14,26 +14,26 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   const { bottomText, bottomTextSide, imageUrl, subTitle, subTitleLink,
     title, titleLink } = props
 
-  var parsedSubTitle = ''
+  let parsedSubTitle = ''
   if (subTitle instanceof Array) {
     for (const item of subTitle) {
       parsedSubTitle += `${item}, `
     }
-    parsedSubTitle.replace(/,\s*$/, "")
+    parsedSubTitle.replace(/,\s*$/, '')
   } else if (subTitle) {
     parsedSubTitle = subTitle
   }
 
-  var parsedBottomText = ''
+  let parsedBottomText = ''
   if (bottomText instanceof Array) {
     for (const item of bottomText) {
       parsedBottomText += `${item}, `
     }
-    parsedBottomText.replace(/,\s*$/, "")
+    parsedBottomText.replace(/,\s*$/, '')
   } else if (bottomText) {
     parsedBottomText = bottomText
   }
-  
+
   return (
     <div className='media-header'>
       <img className='media-header__image' src={imageUrl} />

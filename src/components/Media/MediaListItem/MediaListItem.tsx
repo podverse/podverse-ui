@@ -16,8 +16,8 @@ type Props = {
 
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataPodcast, handleOnClick,
-    itemType } = props 
-  
+    itemType } = props
+
   let href = ''
   if (itemType === 'clip' || itemType === 'episode-clip' || itemType === 'podcast-clip') {
     href = `/clip/${dataClip.id}`

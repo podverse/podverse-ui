@@ -4,7 +4,6 @@ export const readableDate = (date) => {
     month = dateObj.getMonth() + 1,
     day = dateObj.getDate();
 
-
   // If date is within the past 6 days, then display name of day instead of date
   var date6DaysAgo = new Date().getTime() - (6 * 24 * 60 * 60 * 1000);
   var today = new Date();
@@ -68,4 +67,14 @@ export const convertSecToHHMMSS = (sec: number) => {
   }
 
   return result
+}
+
+export const readableClipTime = (startTime, endTime) => {
+  let s = convertSecToHHMMSS(startTime)
+  if (startTime && endTime) {
+    let e = convertSecToHHMMSS(endTime)
+    return `${s} - ${e}`
+  } else {
+    return `Start: ${s}`
+  }
 }

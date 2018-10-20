@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = {
-  isAutoplayOn: boolean
+  autoplay: boolean
   onClickAddToPlaylist: (event: React.MouseEvent<HTMLDivElement>) => void
   onClickAutoplay: (event: React.MouseEvent<HTMLDivElement>) => void
   onClickMakeClip: (event: React.MouseEvent<HTMLDivElement>) => void
@@ -35,7 +35,7 @@ export class MediaControls extends React.Component<Props, State> {
   }
 
   render () {
-    const { isAutoplayOn, onClickAddToPlaylist, onClickAutoplay, onClickMakeClip,
+    const { autoplay, onClickAddToPlaylist, onClickAutoplay, onClickMakeClip,
       onClickShare, onClickTimeJumpBack, onClickTimeJumpForward, showAddToPlaylist,
       showAutoplay, showMakeClip, showShare, showTimeSkips } = this.props
 
@@ -85,7 +85,7 @@ export class MediaControls extends React.Component<Props, State> {
             <div
               className='media-controls__autoplay'
               onClick={onClickAutoplay}>
-              Autoplay {isAutoplayOn ? 'On' : 'Off'}
+              Autoplay {autoplay ? 'On' : 'Off'}
             </div>
         }
       </div>

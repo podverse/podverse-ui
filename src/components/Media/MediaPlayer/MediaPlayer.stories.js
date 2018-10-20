@@ -3,7 +3,8 @@ import { storiesOf } from '@storybook/react'
 import { MediaPlayer } from './MediaPlayer'
 import { sampleClip, sampleText } from 'storybook/constants'
 
-const { episodeMediaUrl } = sampleClip
+const { endTime, episodeMediaUrl, episodeTitle, podcastImageUrl, 
+  podcastTitle, startTime, title } = sampleClip
 
 const handleOnEpisodeEnd = () => {
   console.log('handleOnEpisodeEnd')
@@ -19,17 +20,21 @@ storiesOf('Media', module)
     () => (
       <React.Fragment>
         <MediaPlayer
-          clipEndTime={900}
-          clipStartTime={600}
+          autoplay={false}
+          clipEndTime={endTime}
+          clipStartTime={startTime}
+          clipTitle={title}
+          episodeTitle={episodeTitle}
           handleOnEpisodeEnd={handleOnEpisodeEnd}
           handleOnPastClipTime={handleOnPastClipTime}
-          // url={select('url', [
-          //   episodeMediaUrl,
-          //   'http://traffic.libsyn.com/altucher/JAS-400-ImCelebrating400Episodes-Pt1-v01-FREE.mp3',
-          //   'http://traffic.libsyn.com/altucher/JAS-390-DanRoth-v01-FREE.mp3?dest-id=172343'
-          // ])} 
-          url={episodeMediaUrl}
-          />
+          imageUrl={podcastImageUrl}
+          mediaUrl={episodeMediaUrl}
+          muted={false}
+          playbackRate={1}
+          playing={false}
+          podcastTitle={podcastTitle}
+          showMute={false}
+          url={episodeMediaUrl} />
         { sampleText }
       </React.Fragment>
     )

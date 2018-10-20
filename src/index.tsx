@@ -3,8 +3,9 @@ import 'scss/styles.scss'
 
 addFontAwesomeIcons()
 
+export { MediaControls } from 'components/Media/MediaControls/MediaControls'
+export { MediaHeader } from 'components/Media/MediaHeader/MediaHeader'
+export { MediaInfo } from 'components/Media/MediaInfo/MediaInfo'
 export { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
-export { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/MediaListItemA'
-export { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'
-export { MediaListItemC } from 'components/Media/MediaListItem/MediaListItemC/MediaListItemC'
 export { MediaListSelect } from 'components/Media/MediaListSelect/MediaListSelect'
+export { MediaPlayer } from 'components/Media/MediaPlayer/MediaPlayer'
