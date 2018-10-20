@@ -32,6 +32,7 @@ type State = {
   clipFinished: boolean
   clipStartFlagPositionX?: number
   duration: number | null
+  isClientSide: boolean
   playbackRate: number
   played: number
   playedSeconds: number
@@ -110,6 +111,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       clipFinished: false,
       clipStartFlagPositionX: -1,
       duration: null,
+      isClientSide: false,
       playbackRate: props.playbackRate || 1,
       played: 0,
       playedSeconds: 0,
@@ -130,6 +132,8 @@ export class MediaPlayer extends React.Component<Props, State> {
         this.player.seekTo(this.player.getCurrentTime() + 5)
       }
     })
+
+    this.setState({ isClientSide: true })
   }
 
   playerRef = player => {
@@ -238,10 +242,6 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
-  onMore = () => {
-    alert('more')
-  }
-
   showAddTo = () => {
     alert('add to playlist')
   }
@@ -263,25 +263,28 @@ export class MediaPlayer extends React.Component<Props, State> {
       handleOnEpisodeEnd, handleOnSkip, handleOnTimeJumpBackward,
       handleOnTimeJumpForward, imageUrl, podcastTitle, showAutoplay,
       showTimeJumpBackward } = this.props
-    const { duration, playbackRate, played, playedSeconds, playing,
+    const { duration, isClientSide, playbackRate, played, playedSeconds, playing,
       progressPreviewTime } = this.state
 
     const { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
 
     return (
       <React.Fragment>
-        <FilePlayer
-          muted={false}
-          onDuration={this.onDuration}
-          onEnded={handleOnEpisodeEnd}
-          onPlay={this.onPlay}
-          onProgress={this.onProgress}
-          playbackRate={playbackRate}
-          playing={playing}
-          ref={this.playerRef}
-          style={{ display: 'none' }}
-          url={episodeMediaUrl}
-          volume={1} />
+        {
+          isClientSide &&
+            <FilePlayer
+              muted={false}
+              onDuration={this.onDuration}
+              onEnded={handleOnEpisodeEnd}
+              onPlay={this.onPlay}
+              onProgress={this.onProgress}
+              playbackRate={playbackRate}
+              playing={playing}
+              ref={this.playerRef}
+              style={{ display: 'none' }}
+              url={episodeMediaUrl}
+              volume={1} />
+        }
         <div className='mp-headline'>
           <div className='mp-headline__title'>
             {clipTitle}

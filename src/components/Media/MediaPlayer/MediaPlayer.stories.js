@@ -24,11 +24,11 @@ storiesOf('Media', module)
           clipEndTime={endTime}
           clipStartTime={startTime}
           clipTitle={title}
+          episodeMediaUrl={episodeMediaUrl}
           episodeTitle={episodeTitle}
           handleOnEpisodeEnd={handleOnEpisodeEnd}
           handleOnPastClipTime={handleOnPastClipTime}
           imageUrl={podcastImageUrl}
-          mediaUrl={episodeMediaUrl}
           playbackRate={1}
           playing={false}
           podcastTitle={podcastTitle}

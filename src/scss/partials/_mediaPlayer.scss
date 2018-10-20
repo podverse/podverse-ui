@@ -1,4 +1,6 @@
 .mp-headline {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
   border-top-style: solid;
   border-top-width: 1px;
   bottom: 88px; left: 0; right: 0;
@@ -151,8 +153,8 @@
 
 [theme=light] {
   .mp-headline {
-    background-color: $white;
-    border-color: $gray-light;
+    background-color: $gray-light;
+    border-color: $gray;
     color: $black;
   }
 
@@ -178,7 +180,7 @@
 [theme=dark] {
   .mp-headline {
     background-color: $black;
-    border-color: $gray-dark;
+    border-color: $gray;
     color: $white;
   }
 
@@ -198,23 +200,5 @@
 
   .progress .progress-bar {
     background-color: $blue;
-  }
-}
-
-@media(max-width: 500px) {
-  .mp__mute {
-    display: none;
-  }
-}
-
-@media(max-width: 450px) {
-  .mp__previous {
-    display: none;
-  }
-}
-
-@media(max-width: 400px) {
-  .mp__skip {
-    display: none;
   }
 }
