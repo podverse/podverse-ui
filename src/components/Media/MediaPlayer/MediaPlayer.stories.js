@@ -29,7 +29,6 @@ storiesOf('Media', module)
           handleOnPastClipTime={handleOnPastClipTime}
           imageUrl={podcastImageUrl}
           mediaUrl={episodeMediaUrl}
-          muted={false}
           playbackRate={1}
           playing={false}
           podcastTitle={podcastTitle}

@@ -1,7 +1,9 @@
 import * as React from 'react'
+import { readableClipTime } from 'lib/util';
 
 type Props = {
-  clipReadableTime: string
+  clipEndTime: string
+  clipStartTime: string
   clipTitle: string
   description: string
   onClickClipTime: (event: React.MouseEvent<HTMLDivElement>) => void
@@ -31,7 +33,7 @@ export class MediaInfo extends React.Component<Props, State> {
   }
 
   render () {
-    const { clipReadableTime, clipTitle, description,
+    const { clipEndTime, clipStartTime, clipTitle, description,
       onClickClipTime, isFullEpisode } = this.props
     const { showDescription } = this.state
 
@@ -44,11 +46,11 @@ export class MediaInfo extends React.Component<Props, State> {
             </div>
         }
         {
-          clipReadableTime &&
+          clipStartTime &&
             <div
-              className='media-info__clip-readable-time'
+              className='media-info__clip-time'
               onClick={onClickClipTime}>
-              {clipReadableTime}
+              {readableClipTime(clipStartTime, clipEndTime)}
             </div>
         }
         {

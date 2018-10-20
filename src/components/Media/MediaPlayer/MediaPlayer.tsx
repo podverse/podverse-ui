@@ -10,6 +10,7 @@ type Props = {
   clipEndTime?: number
   clipStartTime?: number
   clipTitle?: string
+  episodeMediaUrl?: string
   episodeTitle?: string
   handleOnAutoplay?: Function
   handleOnEpisodeEnd?: Function
@@ -18,7 +19,6 @@ type Props = {
   handleOnTimeJumpBackward?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleOnTimeJumpForward?: (event: React.MouseEvent<HTMLButtonElement>) => void
   imageUrl?: string
-  mediaUrl?: string
   playbackRate?: number
   playing?: boolean
   podcastTitle?: string
@@ -259,9 +259,9 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { clipEndTime, clipStartTime, clipTitle, episodeTitle,
+    const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       handleOnEpisodeEnd, handleOnSkip, handleOnTimeJumpBackward,
-      handleOnTimeJumpForward, imageUrl, mediaUrl, podcastTitle, showAutoplay,
+      handleOnTimeJumpForward, imageUrl, podcastTitle, showAutoplay,
       showTimeJumpBackward } = this.props
     const { duration, playbackRate, played, playedSeconds, playing,
       progressPreviewTime } = this.state
@@ -280,7 +280,7 @@ export class MediaPlayer extends React.Component<Props, State> {
           playing={playing}
           ref={this.playerRef}
           style={{ display: 'none' }}
-          mediaUrl={mediaUrl}
+          url={episodeMediaUrl}
           volume={1} />
         <div className='mp-headline'>
           <div className='mp-headline__title'>
@@ -303,9 +303,9 @@ export class MediaPlayer extends React.Component<Props, State> {
             </div>
           </div>
           <button
-            className='mp-header__queue'
-            onClick={this.showQueue}>
-            <FontAwesomeIcon icon='list-ul' />
+            className='mp-header__add'
+            onClick={this.showAddTo}>
+            <FontAwesomeIcon icon='plus-circle' />
           </button>
           <button
             className='mp-header__clip'
@@ -313,9 +313,9 @@ export class MediaPlayer extends React.Component<Props, State> {
             <FontAwesomeIcon icon='cut' />
           </button>
           <button
-            className='mp-header__add'
-            onClick={this.showAddTo}>
-            <FontAwesomeIcon icon='plus-circle' />
+            className='mp-header__queue'
+            onClick={this.showQueue}>
+            <FontAwesomeIcon icon='list-ul' />
           </button>
           <button
             className='mp-header__share'
