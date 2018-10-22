@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { convertSecToHHMMSS, readableClipTime } from 'lib/util'
+import { AddToModal } from './AddToModal/AddToModal'
+import { MakeClipModal } from './MakeClipModal/MakeClipModal'
+import { QueueModal } from './QueueModal/QueueModal'
+import { ShareModal } from './ShareModal/ShareModal'
 
 type Props = {
   autoplay?: boolean
@@ -13,14 +17,21 @@ type Props = {
   clipTitle?: string
   episodeMediaUrl?: string
   episodeTitle?: string
+  handleAddTo?: Function
+  handleMakeClip?: Function
   handleOnAutoplay?: Function
   handleOnEpisodeEnd?: Function
   handleOnPastClipTime?: Function
   handleOnSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleOnTimeJumpBackward?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleOnTimeJumpForward?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleQueue?: Function
+  handleShare?: Function
   imageUrl?: string
   playbackRate?: number
+  playerClipLink?: string
+  playerEpisodeLink?: string
+  playerPodcastLink?: string
   playing?: boolean
   podcastTitle?: string
   showAutoplay?: boolean
@@ -34,6 +45,10 @@ type State = {
   clipStartFlagPositionX?: number
   duration: number | null
   isClientSide: boolean
+  openAddToModal: boolean
+  openMakeClipModal: boolean
+  openQueueModal: boolean
+  openShareModal: boolean
   playbackRate: number
   played: number
   playedSeconds: number
@@ -113,6 +128,10 @@ export class MediaPlayer extends React.Component<Props, State> {
       clipStartFlagPositionX: -1,
       duration: null,
       isClientSide: false,
+      openAddToModal: false,
+      openMakeClipModal: false,
+      openQueueModal: false,
+      openShareModal: false,
       playbackRate: props.playbackRate || 1,
       played: 0,
       playedSeconds: 0,
@@ -262,28 +281,45 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
-  showAddTo = () => {
-    alert('add to playlist')
+  showAddToModal = () => {
+    this.setState({ openAddToModal: true })
   }
 
-  showMakeClip = () => {
-    alert('make clip')
+  showMakeClipModal = () => {
+    this.setState({ openMakeClipModal: true })
   }
 
-  showQueue = () => {
-    alert('queue')
+  showQueueModal = () => {
+    this.setState({ openQueueModal: true })
   }
 
-  showShare = () => {
-    alert('share')
+  showShareModal = () => {
+    this.setState({ openShareModal: true })
+  }
+
+  hideAddToModal = () => {
+    this.setState({ openAddToModal: false })
+  }
+
+  hideMakeClipModal = () => {
+    this.setState({ openMakeClipModal: false })
+  }
+
+  hideQueueModal = () => {
+    this.setState({ openQueueModal: false })
+  }
+
+  hideShareModal = () => {
+    this.setState({ openShareModal: false })
   }
 
   render () {
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       handleOnEpisodeEnd, handleOnSkip, handleOnTimeJumpBackward,
-      handleOnTimeJumpForward, imageUrl, podcastTitle, showAutoplay,
-      showTimeJumpBackward } = this.props
-    const { duration, isClientSide, playbackRate, played, playedSeconds, playing,
+      handleOnTimeJumpForward, imageUrl, playerClipLink, playerEpisodeLink,
+      podcastTitle, showAutoplay, showTimeJumpBackward } = this.props
+    const { duration, isClientSide, openAddToModal, openMakeClipModal, openQueueModal,
+      openShareModal, playbackRate, played, playedSeconds, playing,
       progressPreviewTime } = this.state
 
     const { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
@@ -307,45 +343,58 @@ export class MediaPlayer extends React.Component<Props, State> {
         }
         <div className='mp-headline'>
           <div className='mp-headline__inner'>
-            <div className='mp-headline__title'>
-              {clipTitle}
-            </div>
-            <div className='mp-headline__time'>
-              {readableClipTime(clipStartTime, clipEndTime)}
-            </div>
+            <a
+              className='mp-headline__link'
+              { ... playerClipLink &&
+                { href: playerClipLink }
+              }>
+              <div className='mp-headline__title'>
+                {clipTitle}
+              </div>
+              <div className='mp-headline__time'>
+                {readableClipTime(clipStartTime, clipEndTime)}
+              </div>
+            </a>
           </div>
         </div>
         <div className='mp-header'>
           <div className='mp-header__inner'>
-            <img
-              className='mp-header__image'
-              src={imageUrl} />
-            <div className='mp-header__wrap'>
-              <div className='mp-header-wrap__top'>
-                {podcastTitle}
+            <a
+              className='mp-header__link'
+              {
+                ... playerEpisodeLink &&
+                  { href: playerEpisodeLink }
+              }>
+              <img
+                className='mp-header__image'
+                src={imageUrl} />
+              <div className='mp-header__wrap'>
+                <div className='mp-header-wrap__top'>
+                  {podcastTitle}
+                </div>
+                <div className='mp-header-wrap__bottom'>
+                  {episodeTitle}
+                </div>
               </div>
-              <div className='mp-header-wrap__bottom'>
-                {episodeTitle}
-              </div>
-            </div>
+            </a>
             <button
               className='mp-header__add'
-              onClick={this.showAddTo}>
+              onClick={this.showAddToModal}>
               <FontAwesomeIcon icon='plus-circle' />
             </button>
             <button
               className='mp-header__clip'
-              onClick={this.showMakeClip}>
+              onClick={this.showMakeClipModal}>
               <FontAwesomeIcon icon='cut' />
             </button>
             <button
               className='mp-header__queue'
-              onClick={this.showQueue}>
+              onClick={this.showQueueModal}>
               <FontAwesomeIcon icon='list-ul' />
             </button>
             <button
               className='mp-header__share'
-              onClick={this.showShare}>
+              onClick={this.showShareModal}>
               <FontAwesomeIcon icon='share' />
             </button>
           </div>
@@ -431,6 +480,18 @@ export class MediaPlayer extends React.Component<Props, State> {
             </button>
           </div>
         </div>
+        <AddToModal
+          hideModal={this.hideAddToModal}
+          isOpen={openAddToModal} />
+        <MakeClipModal
+          hideModal={this.hideMakeClipModal}
+          isOpen={openMakeClipModal} />
+        <QueueModal
+          hideModal={this.hideQueueModal}
+          isOpen={openQueueModal} />
+        <ShareModal
+          hideModal={this.hideShareModal}
+          isOpen={openShareModal} />
       </React.Fragment>
     )
   }

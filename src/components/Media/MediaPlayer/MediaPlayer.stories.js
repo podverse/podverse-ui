@@ -30,6 +30,8 @@ storiesOf('Media', module)
           handleOnPastClipTime={handleOnPastClipTime}
           imageUrl={podcastImageUrl}
           playbackRate={1}
+          playerClipLink='/clip/1234'
+          playerEpisodeLink='/episode/1234'
           playing={false}
           podcastTitle={podcastTitle}
           showMute={false}

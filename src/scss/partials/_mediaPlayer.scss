@@ -19,6 +19,11 @@
     width: 100%;
   }
 
+  .mp-headline__link {
+    display: flex;
+    width: 100%;
+  }
+
   .mp-headline__title {
     flex: 1 1 auto;
     overflow: hidden;
@@ -43,6 +48,11 @@
     display: flex;
     flex: 1;
     margin: auto;
+  }
+
+  .mp-header__link {
+    display: flex;
+    flex: 1;
   }
 
   .mp-header__image {
@@ -169,6 +179,13 @@
 }
 
 [theme=light] {
+  .mp-headline, .mp-header, .mp {
+    & a {
+      color: $black;
+      text-decoration: none;
+    }
+  }
+
   .mp-headline {
     background-color: $gray-light;
     border-color: $gray;
@@ -195,6 +212,13 @@
 }
 
 [theme=dark] {
+  .mp-headline, .mp-header, .mp {
+    & a {
+      color: $white;
+      text-decoration: none;
+    }
+  }
+
   .mp-headline {
     background-color: $black;
     border-color: $gray;
