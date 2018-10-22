@@ -2,6 +2,7 @@ import * as React from 'react'
 import FilePlayer from 'react-player/lib/players/FilePlayer'
 import { Progress } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { convertSecToHHMMSS, readableClipTime } from 'lib/util'
 
@@ -217,6 +218,25 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.setState({ playing: false })
   }
 
+  onMouseOverProgress = e => {
+    const offsetX = e.nativeEvent.offsetX
+    const width = e.currentTarget.offsetWidth
+    const { duration } = this.state
+
+    if (duration) {
+      const previewTime = duration * (offsetX / width)
+      this.setState({
+        progressPreviewTime: previewTime
+      })
+    }
+  }
+
+  onMouseOutProgress = e => {
+    this.setState({
+      progressPreviewTime: -1
+    })
+  }
+
   onSeekMouseDown = e => {
     this.setState({ seeking: true })
   }
@@ -286,125 +306,130 @@ export class MediaPlayer extends React.Component<Props, State> {
               volume={1} />
         }
         <div className='mp-headline'>
-          <div className='mp-headline__title'>
-            {clipTitle}
-          </div>
-          <div className='mp-headline__time'>
-            {readableClipTime(clipStartTime, clipEndTime)}
+          <div className='mp-headline__inner'>
+            <div className='mp-headline__title'>
+              {clipTitle}
+            </div>
+            <div className='mp-headline__time'>
+              {readableClipTime(clipStartTime, clipEndTime)}
+            </div>
           </div>
         </div>
         <div className='mp-header'>
-          <img
-            className='mp-header__image'
-            src={imageUrl} />
-          <div className='mp-header__wrap'>
-            <div className='mp-header-wrap__top'>
-              {podcastTitle}
+          <div className='mp-header__inner'>
+            <img
+              className='mp-header__image'
+              src={imageUrl} />
+            <div className='mp-header__wrap'>
+              <div className='mp-header-wrap__top'>
+                {podcastTitle}
+              </div>
+              <div className='mp-header-wrap__bottom'>
+                {episodeTitle}
+              </div>
             </div>
-            <div className='mp-header-wrap__bottom'>
-              {episodeTitle}
-            </div>
+            <button
+              className='mp-header__add'
+              onClick={this.showAddTo}>
+              <FontAwesomeIcon icon='plus-circle' />
+            </button>
+            <button
+              className='mp-header__clip'
+              onClick={this.showMakeClip}>
+              <FontAwesomeIcon icon='cut' />
+            </button>
+            <button
+              className='mp-header__queue'
+              onClick={this.showQueue}>
+              <FontAwesomeIcon icon='list-ul' />
+            </button>
+            <button
+              className='mp-header__share'
+              onClick={this.showShare}>
+              <FontAwesomeIcon icon='share' />
+            </button>
           </div>
-          <button
-            className='mp-header__add'
-            onClick={this.showAddTo}>
-            <FontAwesomeIcon icon='plus-circle' />
-          </button>
-          <button
-            className='mp-header__clip'
-            onClick={this.showMakeClip}>
-            <FontAwesomeIcon icon='cut' />
-          </button>
-          <button
-            className='mp-header__queue'
-            onClick={this.showQueue}>
-            <FontAwesomeIcon icon='list-ul' />
-          </button>
-          <button
-            className='mp-header__share'
-            onClick={this.showShare}>
-            <FontAwesomeIcon icon='share' />
-          </button>
         </div>
         <div className='mp'>
-          <button
-            className='mp__play-pause'
-            onClick={this.playPause}>
-            {
-              playing ?
-                <FontAwesomeIcon icon='pause' /> :
-                <FontAwesomeIcon icon='play' />
-            }
-          </button>
-          <span className='mp__current-time'>
-            {convertSecToHHMMSS(playedSeconds)}
-          </span>
-          <div
-            className='mp__progress-bar-wrapper'
-            ref={this.progressBarWidth}>
-            <div
-              className='mp-progress-bar__preview'
-              style={{
-                display: 'block',
-                left: '125px'
-              }}>
-              {progressPreviewTime}
-            </div>
-            <div
-              className='mp-progress-bar__clip-start'
-              style={{
-                display: `${clipStartFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
-                left: `${clipStartFlagPositionX}px`
-              }} />
-            <div
-              className='mp-progress-bar__clip-end'
-              style={{
-                display: `${clipEndFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
-                left: `${clipEndFlagPositionX}px`
-              }} />
-            <Progress
-              className='mp__progress-bar'
-              onClick={this.setCurrentTime}
-              value={played * 100} />
-          </div>
-          <span
-            className='mp__duration'
-            ref={this.durationNode}>
-            {
-              duration ? convertSecToHHMMSS(duration) : timePlaceholder
-            }
-          </span>
-          {
-            (showTimeJumpBackward && handleOnTimeJumpBackward) &&
+          <div className='mp__inner'>
             <button
-            className='mp__time-jump-backward'
-            onClick={handleOnTimeJumpBackward}>
-                <FontAwesomeIcon icon='undo-alt' />
-              </button>
-          }
-          <button
-            className='mp__time-jump-forward'
-            onClick={handleOnTimeJumpForward}>
-            <FontAwesomeIcon icon='redo-alt' />
-          </button>
-          <button
-            className='mp__playback-rate'
-            onClick={this.setPlaybackRate}>
-            {getPlaybackRateText(playbackRate)}
-          </button>
-          {
-            (showAutoplay) &&
+              className='mp__play-pause'
+              onClick={this.playPause}>
+              {
+                playing ?
+                  <FontAwesomeIcon icon='pause' /> :
+                  <FontAwesomeIcon icon='play' />
+              }
+            </button>
+            <span className='mp__current-time'>
+              {convertSecToHHMMSS(playedSeconds)}
+            </span>
+            <div
+              className='mp__progress-bar-wrapper'
+              data-iscapture='true'
+              data-tip
+              ref={this.progressBarWidth}>
+              <div
+                className='mp-progress-bar__clip-start'
+                style={{
+                  display: `${clipStartFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                  left: `${clipStartFlagPositionX}px`
+                }} />
+              <div
+                className='mp-progress-bar__clip-end'
+                style={{
+                  display: `${clipEndFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                  left: `${clipEndFlagPositionX}px`
+                }} />
+              <ReactTooltip
+                className='mp-progress-bar__preview'>
+                {convertSecToHHMMSS(progressPreviewTime)}
+              </ReactTooltip>
+              <Progress
+                className='mp__progress-bar'
+                onClick={this.setCurrentTime}
+                onMouseMove={this.onMouseOverProgress}
+                value={played * 100} />
+            </div>
+            <span
+              className='mp__duration'
+              ref={this.durationNode}>
+              {
+                duration ? convertSecToHHMMSS(duration) : timePlaceholder
+              }
+            </span>
+            {
+              (showTimeJumpBackward && handleOnTimeJumpBackward) &&
               <button
-                className='mp__autoplay'
-                onClick={this.onAutoplay}>
-                <FontAwesomeIcon icon='infinity' />
-              </button>
-          }
-          <button
-            className='mp__skip'
-            onClick={handleOnSkip}>
-            <FontAwesomeIcon icon='step-forward' />
-          </button>
+              className='mp__time-jump-backward'
+              onClick={handleOnTimeJumpBackward}>
+                  <FontAwesomeIcon icon='undo-alt' />
+                </button>
+            }
+            <button
+              className='mp__time-jump-forward'
+              onClick={handleOnTimeJumpForward}>
+              <FontAwesomeIcon icon='redo-alt' />
+            </button>
+            <button
+              className='mp__playback-rate'
+              onClick={this.setPlaybackRate}>
+              {getPlaybackRateText(playbackRate)}
+            </button>
+            {
+              (showAutoplay) &&
+              <button
+              className='mp__autoplay'
+              onClick={this.onAutoplay}>
+                  <FontAwesomeIcon icon='infinity' />
+                </button>
+            }
+            <button
+              className='mp__skip'
+              onClick={handleOnSkip}>
+              <FontAwesomeIcon icon='step-forward' />
+            </button>
+          </div>
         </div>
       </React.Fragment>
     )
