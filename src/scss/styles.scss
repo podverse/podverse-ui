@@ -7,11 +7,11 @@
 @import 'core/reset';
 @import 'core/_global';
 
-@import 'partials/_button';
-@import 'partials/mediaControls';
-@import 'partials/mediaHeader';
-@import 'partials/mediaInfo';
+@import 'partials/_mediaControls';
+@import 'partials/_mediaHeader';
+@import 'partials/_mediaInfo';
 @import 'partials/_mediaListItem';
-@import 'partials/_MediaListSelect';
-@import 'partials/_MediaPlayer';
+@import 'partials/_mediaListSelect';
+@import 'partials/_mediaPlayer';
 @import 'partials/_navbar';
+@import 'partials/mediaPlayerModals'

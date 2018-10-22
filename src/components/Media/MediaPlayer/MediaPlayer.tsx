@@ -8,7 +8,7 @@ import { convertSecToHHMMSS, readableClipTime } from 'lib/util'
 import { AddToModal } from './AddToModal/AddToModal'
 import { MakeClipModal } from './MakeClipModal/MakeClipModal'
 import { QueueModal } from './QueueModal/QueueModal'
-import { ShareModal } from './ShareModal/ShareModal'
+import ShareModal from './ShareModal/ShareModal'
 
 type Props = {
   autoplay?: boolean
@@ -317,7 +317,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       handleOnEpisodeEnd, handleOnSkip, handleOnTimeJumpBackward,
       handleOnTimeJumpForward, imageUrl, playerClipLink, playerEpisodeLink,
-      podcastTitle, showAutoplay, showTimeJumpBackward } = this.props
+      playerPodcastLink, podcastTitle, showAutoplay, showTimeJumpBackward } = this.props
     const { duration, isClientSide, openAddToModal, openMakeClipModal, openQueueModal,
       openShareModal, playbackRate, played, playedSeconds, playing,
       progressPreviewTime } = this.state
@@ -491,7 +491,10 @@ export class MediaPlayer extends React.Component<Props, State> {
           isOpen={openQueueModal} />
         <ShareModal
           hideModal={this.hideShareModal}
-          isOpen={openShareModal} />
+          isOpen={openShareModal}
+          playerClipLink={playerClipLink}
+          playerEpisodeLink={playerEpisodeLink}
+          playerPodcastLink={playerPodcastLink} />
       </React.Fragment>
     )
   }

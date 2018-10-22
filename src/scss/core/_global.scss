@@ -2,44 +2,43 @@
   font-size: $root-text-size;
 }
 
-[theme=light] {
-  background-color: $white;
-}
-
-[theme=dark] {
-  background-color: $black;
-}
-
 body {
   line-height: $root-text-line-height;
 }
 
 h1 {
   font-size: $text-3x-rem;
+  margin-bottom: 1rem;
 }
 
 h2 {
   font-size: $text-2x-rem;
+  margin-bottom: 1rem;
 }
 
 h3 {
   font-size: $text-xl-rem;
+  margin-bottom: 1rem;
 }
 
 h4 {
   font-size: $text-lg-rem;
+  margin-bottom: 1rem;
 }
 
 h5 {
   font-size: $text-sm-rem;
+  margin-bottom: 1rem;
 }
 
 h6 {
   font-size: $text-xs-rem;
+  margin-bottom: 1rem;
 }
 
 p {
   font-size: $text-md-rem;
+  margin-bottom: 1rem;
 }
 
 .text-wrapper {
@@ -53,4 +52,26 @@ p {
 
 .hide {
   display: none;
+}
+
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+[theme=light] {
+  background-color: $white;
+
+  .close-btn {
+    color: $black;
+  }
+}
+
+[theme=dark] {
+  background-color: $black;
+
+  .close-btn {
+    color: $white;
+  }
 }
