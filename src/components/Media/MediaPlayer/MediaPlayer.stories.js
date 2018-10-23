@@ -14,6 +14,8 @@ const handleOnPastClipTime = () => {
   console.log('handlePastClipTime')
 }
 
+const stubFunction = () => {console.log('stub a dub dub')}
+
 storiesOf('Media', module)
   .addWithJSX(
     'MediaPlayer',
@@ -26,6 +28,8 @@ storiesOf('Media', module)
           clipTitle={title}
           episodeMediaUrl={episodeMediaUrl}
           episodeTitle={episodeTitle}
+          handleAddTo={stubFunction}
+          handleMakeClip={stubFunction}
           handleOnEpisodeEnd={handleOnEpisodeEnd}
           handleOnPastClipTime={handleOnPastClipTime}
           imageUrl={podcastImageUrl}

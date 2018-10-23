@@ -315,17 +315,17 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   render () {
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
-      handleOnEpisodeEnd, handleOnSkip, handleOnTimeJumpBackward,
-      handleOnTimeJumpForward, imageUrl, playerClipLink, playerEpisodeLink,
-      playerPodcastLink, podcastTitle, showAutoplay, showTimeJumpBackward } = this.props
+      handleAddTo, handleMakeClip, handleOnEpisodeEnd, handleOnSkip,
+      handleOnTimeJumpBackward, handleOnTimeJumpForward, imageUrl, playerClipLink,
+      playerEpisodeLink, playerPodcastLink, podcastTitle, showAutoplay,
+      showTimeJumpBackward } = this.props
     const { duration, isClientSide, openAddToModal, openMakeClipModal, openQueueModal,
       openShareModal, playbackRate, played, playedSeconds, playing,
       progressPreviewTime } = this.state
 
     const { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
     const currentTime = this.player ? this.player.getCurrentTime() : 0
-    console.log(currentTime);
-    
+
     return (
       <React.Fragment>
         {
@@ -384,11 +384,14 @@ export class MediaPlayer extends React.Component<Props, State> {
               onClick={this.showAddToModal}>
               <FontAwesomeIcon icon='plus-circle' />
             </button>
-            <button
-              className='mp-header__clip'
-              onClick={this.showMakeClipModal}>
-              <FontAwesomeIcon icon='cut' />
-            </button>
+            {
+              handleMakeClip &&
+                <button
+                  className='mp-header__clip'
+                  onClick={this.showMakeClipModal}>
+                  <FontAwesomeIcon icon='cut' />
+                </button>
+            }
             <button
               className='mp-header__queue'
               onClick={this.showQueueModal}>
@@ -482,14 +485,22 @@ export class MediaPlayer extends React.Component<Props, State> {
             </button>
           </div>
         </div>
-        <AddToModal
-          hideModal={this.hideAddToModal}
-          isOpen={openAddToModal} />
-        <MakeClipModal
-          hideModal={this.hideMakeClipModal}
-          isOpen={openMakeClipModal}
-          isPublic={true}
-          startTime={currentTime} />
+        {
+          (openAddToModal && handleAddTo) &&
+            <AddToModal
+              hideModal={this.hideAddToModal}
+              isOpen={openAddToModal} />
+
+        }
+        {
+          (openMakeClipModal && handleMakeClip) &&
+            <MakeClipModal
+              handleSubmit={handleMakeClip}
+              hideModal={this.hideMakeClipModal}
+              isPublic={true}
+              isOpen={openMakeClipModal}
+              startTime={currentTime} />
+        }
         <QueueModal
           hideModal={this.hideQueueModal}
           isOpen={openQueueModal} />

@@ -11,6 +11,7 @@
   padding: 0 0.25rem;
   position: fixed;
   text-align: left;
+  z-index: 10;
 
   .mp-headline__inner {
     max-width: $player-max-width;
@@ -44,6 +45,7 @@
   display: flex;
   height: 45px;
   position: fixed;
+  z-index: 10;
 
   .mp-header__inner {
     max-width: $player-max-width;
@@ -114,6 +116,7 @@
   display: flex;
   height: 44px;
   position: fixed;
+  z-index: 10;
 
   .mp__inner {
     max-width: $player-max-width;

@@ -3,3 +3,18 @@
     min-width: 80px;
   }
 }
+
+.make-clip-modal {
+  h4 {
+    display: inline-block;
+  }
+
+  .make-clip__is-public {
+    float: right;
+    width: auto;
+  }
+
+  .make-clip-modal__save {
+    margin-left: 1rem;
+  }
+}
