@@ -74,7 +74,7 @@ class ShareModal extends React.Component<Props, State> {
 
     return (
       <Modal
-        contentLabel='Share modal'
+        contentLabel='Share links'
         isOpen={isOpen}
         onRequestClose={hideModal}
         portalClassName='mp-share-modal'

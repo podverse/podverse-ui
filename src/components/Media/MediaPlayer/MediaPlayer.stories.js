@@ -32,6 +32,7 @@ storiesOf('Media', module)
           playbackRate={1}
           playerClipLink='/clip/1234'
           playerEpisodeLink='/episode/1234'
+          playerPodcastLink='/podcast/1234'
           playing={false}
           podcastTitle={podcastTitle}
           showMute={false}

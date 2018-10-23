@@ -6,7 +6,7 @@ import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { convertSecToHHMMSS, readableClipTime } from 'lib/util'
 import { AddToModal } from './AddToModal/AddToModal'
-import { MakeClipModal } from './MakeClipModal/MakeClipModal'
+import MakeClipModal from './MakeClipModal/MakeClipModal'
 import { QueueModal } from './QueueModal/QueueModal'
 import ShareModal from './ShareModal/ShareModal'
 
@@ -323,7 +323,9 @@ export class MediaPlayer extends React.Component<Props, State> {
       progressPreviewTime } = this.state
 
     const { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
-
+    const currentTime = this.player ? this.player.getCurrentTime() : 0
+    console.log(currentTime);
+    
     return (
       <React.Fragment>
         {
@@ -485,7 +487,9 @@ export class MediaPlayer extends React.Component<Props, State> {
           isOpen={openAddToModal} />
         <MakeClipModal
           hideModal={this.hideMakeClipModal}
-          isOpen={openMakeClipModal} />
+          isOpen={openMakeClipModal}
+          isPublic={true}
+          startTime={currentTime} />
         <QueueModal
           hideModal={this.hideQueueModal}
           isOpen={openQueueModal} />
