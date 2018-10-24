@@ -6,6 +6,16 @@ import { sampleClip, sampleText } from 'storybook/constants'
 const { endTime, episodeMediaUrl, episodeTitle, podcastImageUrl, 
   podcastTitle, startTime, title } = sampleClip
 
+const nowPlayingItem = {
+  clipEndTime: endTime,
+  clipStartTime: startTime,
+  clipTitle: title,
+  episodeMediaUrl: episodeMediaUrl,
+  episodeTitle: episodeTitle,
+  imageUrl: podcastImageUrl,
+  podcastTitle: podcastTitle
+}
+
 const handleOnEpisodeEnd = () => {
   console.log('handleOnEpisodeEnd')
 }
@@ -23,24 +33,17 @@ storiesOf('Media', module)
       <React.Fragment>
         <MediaPlayer
           autoplay={false}
-          clipEndTime={endTime}
-          clipStartTime={startTime}
-          clipTitle={title}
-          episodeMediaUrl={episodeMediaUrl}
-          episodeTitle={episodeTitle}
           handleAddTo={stubFunction}
           handleMakeClip={stubFunction}
           handleOnEpisodeEnd={handleOnEpisodeEnd}
           handleOnPastClipTime={handleOnPastClipTime}
-          imageUrl={podcastImageUrl}
+          nowPlayingItem={nowPlayingItem}
           playbackRate={1}
           playerClipLink='/clip/1234'
           playerEpisodeLink='/episode/1234'
           playerPodcastLink='/podcast/1234'
           playing={false}
-          podcastTitle={podcastTitle}
-          showMute={false}
-          url={episodeMediaUrl} />
+          showMute={false} />
         { sampleText }
       </React.Fragment>
     )

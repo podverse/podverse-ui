@@ -1,6 +1,13 @@
 const kPriorityQueue = 'mediaPlayerPriorityQueue'
 const kSecondaryQueue = 'mediaPlayerSecondaryQueue'
 
+export const getPriorityQueueItems = () => {
+  const jsonItems = localStorage.getItem(kPriorityQueue)
+  if (jsonItems) {
+    return JSON.parse(jsonItems)
+  }
+}
+
 export const addItemToPriorityQueue = (newItem, isLast) => {
   const jsonItems = localStorage.getItem(kPriorityQueue)
 
@@ -26,6 +33,13 @@ export const removeItemFromPriorityQueue = (item) => {
     const items = JSON.parse(queueItems)
     const newItems = items.filter(obj => obj.id !== item.id)
     localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
+  }
+}
+
+export const getSecondaryQueueItems = () => {
+  const jsonItems = localStorage.getItem(kSecondaryQueue)
+  if (jsonItems) {
+    return JSON.parse(jsonItems)
   }
 }
 
