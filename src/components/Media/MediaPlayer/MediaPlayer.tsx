@@ -28,7 +28,6 @@ type Props = {
   playerPodcastLink?: string
   playing?: boolean
   showAutoplay?: boolean
-  showTimeJumpBackward?: boolean
 }
 
 type State = {
@@ -108,8 +107,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     nowPlayingItem: {},
     playbackRate: 1,
     playing: false,
-    showAutoplay: true,
-    showTimeJumpBackward: false
+    showAutoplay: true
   }
 
   constructor (props) {
@@ -278,20 +276,20 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
-  showAddToModal = () => {
-    this.setState({ openAddToModal: true })
+  toggleAddToModal = () => {
+    this.setState({ openAddToModal: !this.state.openAddToModal })
   }
 
-  showMakeClipModal = () => {
-    this.setState({ openMakeClipModal: true })
+  toggleMakeClipModal = () => {
+    this.setState({ openMakeClipModal: !this.state.openMakeClipModal })
   }
 
-  showQueueModal = () => {
-    this.setState({ openQueueModal: true })
+  toggleQueueModal = () => {
+    this.setState({ openQueueModal: !this.state.openQueueModal })
   }
 
-  showShareModal = () => {
-    this.setState({ openShareModal: true })
+  toggleShareModal = () => {
+    this.setState({ openShareModal: !this.state.openShareModal })
   }
 
   hideAddToModal = () => {
@@ -312,7 +310,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   render () {
     const { handleItemSkip, handleMakeClip, handleOnEpisodeEnd,
-      handlePlaylistItemAdd, handleToggleAutoplay, nowPlayingItem, playerClipLink,
+      handleToggleAutoplay, nowPlayingItem, playerClipLink,
       playerEpisodeLink, playerPodcastLink, showAutoplay } = this.props
     const { duration, isClientSide, openAddToModal, openMakeClipModal, openQueueModal,
       openShareModal, playbackRate, played, playedSeconds, playing,
@@ -379,25 +377,25 @@ export class MediaPlayer extends React.Component<Props, State> {
             </a>
             <button
               className='mp-header__add'
-              onClick={this.showAddToModal}>
+              onClick={this.toggleAddToModal}>
               <FontAwesomeIcon icon='plus-circle' />
             </button>
             {
               handleMakeClip &&
                 <button
                   className='mp-header__clip'
-                  onClick={this.showMakeClipModal}>
+                  onClick={this.toggleMakeClipModal}>
                   <FontAwesomeIcon icon='cut' />
                 </button>
             }
             <button
               className='mp-header__queue'
-              onClick={this.showQueueModal}>
+              onClick={this.toggleQueueModal}>
               <FontAwesomeIcon icon='list-ul' />
             </button>
             <button
               className='mp-header__share'
-              onClick={this.showShareModal}>
+              onClick={this.toggleShareModal}>
               <FontAwesomeIcon icon='share' />
             </button>
           </div>
@@ -476,7 +474,7 @@ export class MediaPlayer extends React.Component<Props, State> {
           </div>
         </div>
         {
-          (openAddToModal && handlePlaylistItemAdd) &&
+          openAddToModal &&
             <AddToModal
               hideModal={this.hideAddToModal}
               isOpen={openAddToModal} />
