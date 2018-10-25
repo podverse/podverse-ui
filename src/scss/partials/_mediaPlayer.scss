@@ -48,18 +48,21 @@
   z-index: 10;
 
   .mp-header__inner {
-    max-width: $player-max-width;
     display: flex;
     flex: 1;
+    max-width: $player-max-width;
     margin: auto;
+    width: 100%;
   }
 
   .mp-header__link {
     display: flex;
     flex: 1;
+    min-width: 0;
   }
 
   .mp-header__image {
+    flex: 0 0 44px;
     height: 44px;
     margin-right: 0.5rem;
     width: 44px;
@@ -129,10 +132,15 @@
   }
 
   .mp__current-time {
-    flex: 0 0 auto;
     margin: auto;
-    min-width: 38px;
-    text-align: right;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    left: 4px;
+    color: #eee;
+    z-index: 1000;
+    font-size: 13px;
+    pointer-events: none;
   }
 
   .mp__progress-bar-wrapper {
@@ -160,10 +168,15 @@
   }
 
   .mp__duration {
-    flex: 0 0 auto;
     margin: auto;
-    min-width: 38px;
-    text-align: left;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 4px;
+    color: #eee;
+    z-index: 1000;
+    font-size: 13px;
+    pointer-events: none;
   }
 
   .mp__mute {

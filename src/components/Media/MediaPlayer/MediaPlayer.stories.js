@@ -27,19 +27,26 @@ const stubFunction = () => {console.log('stub a dub dub')}
 const handleItemSkip = () => {
   const nextItem = popNextFromQueue()
   store.set({
+    playing: false,
     nowPlayingItem: convertToNowPlayingItem(nextItem)
   })
 }
 
+const handleTogglePlay = () => {
+  store.set({
+    playing: !store.get('playing')
+  })
+}
+
 const store = new Store({ 
-  autoplay: false,
-  handleItemSkip: handleItemSkip,
+  handleItemSkip,
   handleMakeClip: stubFunction,
   handleOnEpisodeEnd: stubFunction,
   handleOnPastClipTime: stubFunction,
   handlePlaylistCreate: stubFunction,
   handlePlaylistItemAdd: stubFunction,
   handleToggleAutoplay: stubFunction,
+  handleTogglePlay,
   nowPlayingItem,
   playbackRate: 1,
   playerClipLink: '/clip/1234',

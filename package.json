@@ -10,7 +10,7 @@
   },
   "main": "build/bundle.min.js",
   "scripts": {
-    "storybook": "start-storybook -p 6006 -c .storybook",
+    "storybook": "start-storybook -p 6006 -c .storybook -s ./.storybook/public",
     "build": "npm run build-lib && build-storybook",
     "build-lib": "webpack",
     "build-storybook": "build-storybook"

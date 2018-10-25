@@ -13,14 +13,14 @@ import ShareModal from './ShareModal/ShareModal'
 // import { getPriorityQueueItems, getSecondaryQueueItems } from 'lib/mediaPlayerQueue';
 
 type Props = {
-  autoplay?: boolean
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleMakeClip?: Function
   handleOnEpisodeEnd?: Function
-  handleOnPastClipTime?: Function
+  handleOnPastClipTime?: Function 
   handlePlaylistCreate?: Function
   handlePlaylistItemAdd?: Function
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   nowPlayingItem: NowPlayingItem
   playbackRate?: number
   playerClipLink?: string
@@ -31,12 +31,12 @@ type Props = {
 }
 
 type State = {
-  autoplay: boolean
   clipEndFlagPositionX?: number
   clipFinished: boolean
   clipStartFlagPositionX?: number
   duration: number | null
   isClientSide: boolean
+  isLoading: boolean
   openAddToModal: boolean
   openMakeClipModal: boolean
   openQueueModal: boolean
@@ -44,7 +44,6 @@ type State = {
   playbackRate: number
   played: number
   playedSeconds: number
-  playing: boolean
   progressPreviewTime: number
   seeking: boolean
 }
@@ -98,12 +97,27 @@ const changePlaybackRate = num => {
   }
 }
 
-const timePlaceholder = '-:--:--'
+const timePlaceholder = '--:--:--'
+
+// Force ReactPlayer to refresh every time the mediaUrl changes, to ensure
+// playback behavior handles properly.
+let mediaUrl
+let reactPlayerKey = 0
+const incrementReactPlayerKey = () => reactPlayerKey++
+const hasMediaUrlChanged = (newUrl) => {
+  if (!mediaUrl) {
+    mediaUrl = newUrl
+    return false
+  } else {
+    const hasChanged = mediaUrl !== newUrl
+    mediaUrl = newUrl
+    return hasChanged
+  }
+}
 
 export class MediaPlayer extends React.Component<Props, State> {
 
   static defaultProps: Props = {
-    autoplay: false,
     nowPlayingItem: {},
     playbackRate: 1,
     playing: false,
@@ -114,12 +128,12 @@ export class MediaPlayer extends React.Component<Props, State> {
     super(props)
 
     this.state = {
-      autoplay: props.autoplay || false,
       clipEndFlagPositionX: -1,
       clipFinished: false,
       clipStartFlagPositionX: -1,
       duration: null,
       isClientSide: false,
+      isLoading: true,
       openAddToModal: false,
       openMakeClipModal: false,
       openQueueModal: false,
@@ -127,7 +141,6 @@ export class MediaPlayer extends React.Component<Props, State> {
       playbackRate: props.playbackRate || 1,
       played: 0,
       playedSeconds: 0,
-      playing: props.playing || props.autoplay || false,
       progressPreviewTime: -1,
       seeking: false
     }
@@ -157,10 +170,6 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.player = player
   }
 
-  playPause = e => {
-    this.setState({ playing: !this.state.playing })
-  }
-
   setCurrentTime = e => {
     const offsetX = e.nativeEvent.offsetX
     const width = e.currentTarget.offsetWidth
@@ -177,13 +186,14 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { nowPlayingItem } = this.props
     const { clipEndTime, clipStartTime } = nowPlayingItem
     const { duration } = this.state
+
     let clipEndFlagPositionX = -1
     let clipStartFlagPositionX = -1
 
     if (this.progressBarWidth.current) {
       const width = this.progressBarWidth.current.offsetWidth
 
-      if (duration && this.durationNode.current.innerText !== timePlaceholder) {
+      if (duration && duration > 0 && this.durationNode.current.innerText !== timePlaceholder) {
         const positionOffset = width / duration
 
         if (clipStartTime) {
@@ -206,14 +216,30 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.player.seekTo(this.player.getCurrentTime() + 15)
   }
 
+  handleItemSkip = (evt) => {
+    if (this.props.handleItemSkip) {
+      this.setState({
+        duration: 0,
+        isLoading: true,
+        played: 0,
+        playedSeconds: 0
+      })
+      this.props.handleItemSkip(evt)
+    }
+  }
+
   onDuration = (duration) => {
     const { nowPlayingItem } = this.props
     const { clipStartTime } = nowPlayingItem
 
+    this.setState({
+      duration,
+      isLoading: false
+    })
+
     if (clipStartTime && clipStartTime > 0) {
       this.player.seekTo(clipStartTime)
     }
-    this.setState({ duration })
   }
 
   onPlay = () => {
@@ -225,10 +251,6 @@ export class MediaPlayer extends React.Component<Props, State> {
       handleOnPastClipTime()
       return
     }
-  }
-
-  onPause = () => {
-    this.setState({ playing: false })
   }
 
   onMouseOverProgress = e => {
@@ -265,8 +287,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     if (clipEndTime && !clipFinished && this.player.getCurrentTime() > clipEndTime) {
       this.setState({
-        clipFinished: true,
-        playing: false
+        clipFinished: true
       })
       return
     }
@@ -309,17 +330,23 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { handleItemSkip, handleMakeClip, handleOnEpisodeEnd,
-      handleToggleAutoplay, nowPlayingItem, playerClipLink,
-      playerEpisodeLink, playerPodcastLink, showAutoplay } = this.props
-    const { duration, isClientSide, openAddToModal, openMakeClipModal, openQueueModal,
-      openShareModal, playbackRate, played, playedSeconds, playing,
+    const { handleMakeClip, handleOnEpisodeEnd, handleToggleAutoplay,
+      handleTogglePlay, nowPlayingItem, playerClipLink, playerEpisodeLink,
+      playerPodcastLink, playing, showAutoplay } = this.props
+    const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
+      openQueueModal, openShareModal, playbackRate, played, playedSeconds,
       progressPreviewTime } = this.state
 
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       imageUrl, podcastTitle } = nowPlayingItem
 
-    const { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
+    // Force ReactPlayer to reload if it receives a new mediaUrl, set loading state,
+    // and clear clip flags.
+    if (hasMediaUrlChanged(episodeMediaUrl)) {
+      incrementReactPlayerKey()
+    }
+
+    let { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
     const currentTime = this.player ? this.player.getCurrentTime() : 0
 
     return (
@@ -327,6 +354,7 @@ export class MediaPlayer extends React.Component<Props, State> {
         {
           isClientSide &&
             <FilePlayer
+              key={reactPlayerKey}
               muted={false}
               onDuration={this.onDuration}
               onEnded={handleOnEpisodeEnd}
@@ -404,21 +432,23 @@ export class MediaPlayer extends React.Component<Props, State> {
           <div className='mp__inner'>
             <button
               className='mp__play-pause'
-              onClick={this.playPause}>
+              onClick={handleTogglePlay}>
               {
                 playing ?
                   <FontAwesomeIcon icon='pause' /> :
                   <FontAwesomeIcon icon='play' />
               }
             </button>
-            <span className='mp__current-time'>
-              {convertSecToHHMMSS(playedSeconds)}
-            </span>
             <div
               className='mp__progress-bar-wrapper'
               data-iscapture='true'
               data-tip
               ref={this.progressBarWidth}>
+              <span className={`mp__current-time`}>
+                {
+                  !isLoading && duration ? convertSecToHHMMSS(playedSeconds) : timePlaceholder
+                }
+              </span>
               <div
                 className='mp-progress-bar__clip-start'
                 style={{
@@ -435,19 +465,26 @@ export class MediaPlayer extends React.Component<Props, State> {
                 className='mp-progress-bar__preview'>
                 {convertSecToHHMMSS(progressPreviewTime)}
               </ReactTooltip>
-              <Progress
-                className='mp__progress-bar'
-                onClick={this.setCurrentTime}
-                onMouseMove={this.onMouseOverProgress}
-                value={played * 100} />
-            </div>
-            <span
-              className='mp__duration'
-              ref={this.durationNode}>
               {
-                duration ? convertSecToHHMMSS(duration) : timePlaceholder
+                !isLoading &&
+                  <Progress
+                    className='mp__progress-bar'
+                    onClick={this.setCurrentTime}
+                    onMouseMove={this.onMouseOverProgress}
+                    value={played * 100} />
               }
-            </span>
+              {
+                isLoading &&
+                  <div>IT'S loading</div>
+              }
+              <span
+                className={`mp__duration`}
+                ref={this.durationNode}>
+                {
+                  !isLoading && duration ? convertSecToHHMMSS(duration) : timePlaceholder
+                }
+              </span>
+            </div>
             <button
               className='mp__time-jump-forward'
               onClick={this.handleTimeJumpForward}>
@@ -468,7 +505,7 @@ export class MediaPlayer extends React.Component<Props, State> {
             }
             <button
               className='mp__skip'
-              onClick={handleItemSkip}>
+              onClick={this.handleItemSkip}>
               <FontAwesomeIcon icon='step-forward' />
             </button>
           </div>
