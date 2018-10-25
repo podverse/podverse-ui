@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react'
 import { text } from '@storybook/addon-knobs'
 import { MediaInfo } from './MediaInfo'
 
-import { sampleClip } from 'storybook/constants'
-const { episodeDescription, title } = sampleClip
+import { sampleMediaRef1 } from 'storybook/constants'
+const { episodeDescription, title } = sampleMediaRef1
 
 storiesOf('Media', module)
   .addWithJSX(

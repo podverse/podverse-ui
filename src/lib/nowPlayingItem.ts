@@ -11,6 +11,8 @@ export type NowPlayingItem = {
 export const convertToNowPlayingItem = (data) => {
   let nowPlayingItem: NowPlayingItem = {}
 
+  if (!data) { return {} }
+
   // If it has a pubDate field, assume it is an Episode
   if (data.pubDate) {
     nowPlayingItem.episodeMediaUrl = data.mediaUrl
@@ -18,13 +20,14 @@ export const convertToNowPlayingItem = (data) => {
     nowPlayingItem.imageUrl = data.podcast.imageUrl
     nowPlayingItem.podcastTitle = data.podcast.title
   } else { // Else assume it is a MediaRef
+    const isRelational = !!data.episode
     nowPlayingItem.clipEndTime = data.endTime
     nowPlayingItem.clipStartTime = data.startTime
     nowPlayingItem.clipTitle = data.title
-    nowPlayingItem.episodeMediaUrl = data.episode.mediaUrl
-    nowPlayingItem.episodeTitle = data.episode.title
-    nowPlayingItem.imageUrl = data.episode.podcast.imageUrl
-    nowPlayingItem.podcastTitle = data.episode.podcast.title
+    nowPlayingItem.episodeMediaUrl = isRelational ? data.episode.mediaUrl : data.episodeMediaUrl
+    nowPlayingItem.episodeTitle = isRelational ? data.episode.title : data.episodeTitle
+    nowPlayingItem.imageUrl = isRelational ? data.episode.podcast.imageUrl : data.podcastImageUrl
+    nowPlayingItem.podcastTitle = isRelational ? data.episode.podcast.title : data.podcastTitle
   }
 
   return nowPlayingItem

@@ -11,5 +11,6 @@ export { MediaPlayer } from 'components/Media/MediaPlayer/MediaPlayer'
 
 export { addItemToPriorityQueue, addItemsToSecondaryQueue,
   clearItemsFromSecondaryQueue, getPriorityQueueItems, getSecondaryQueueItems,
+  popNextFromPriorityQueue, popNextFromQueue, popNextFromSecondaryQueue,
   removeItemFromPriorityQueue } from 'lib/mediaPlayerQueue'
 export { convertToNowPlayingItem } from 'lib/nowPlayingItem'

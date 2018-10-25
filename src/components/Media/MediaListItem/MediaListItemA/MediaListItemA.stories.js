@@ -3,10 +3,10 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { MediaListItemA } from './MediaListItemA'
 import { text } from '@storybook/addon-knobs'
-import { sampleClip } from 'storybook/constants'
+import { sampleMediaRef1 } from 'storybook/constants'
 
 const {episodePubDate, episodeTitle, podcastImageUrl,
-  podcastTitle, title} = sampleClip
+  podcastTitle, title} = sampleMediaRef1
 
 storiesOf('Media', module)
   .addWithJSX(
