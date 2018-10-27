@@ -336,8 +336,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       playerPodcastLink, playing, showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
-      openQueueModal, openShareModal, playbackRate, played, playedSeconds,
-      progressPreviewTime } = this.state
+      openQueueModal, openShareModal, playbackRate, progressPreviewTime } = this.state
 
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       imageUrl, podcastTitle } = nowPlayingItem
@@ -449,7 +448,7 @@ export class MediaPlayer extends React.Component<Props, State> {
               {
                 (!isLoading && duration) &&
                   <span className={`mp-player__current-time`}>
-                    {convertSecToHHMMSS(playedSeconds)}
+                    {convertSecToHHMMSS(this.player.getCurrentTime())}
                   </span>
               }
               <div
@@ -472,7 +471,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                 className='mp-player__progress-bar'
                 onClick={this.setCurrentTime}
                 onMouseMove={this.onMouseOverProgress}
-                value={played * 100} />
+                value={duration && this.player ? (this.player.getCurrentTime() / duration) * 100 : 0} />
               {
                 (!isLoading && duration) &&
                   <span

@@ -32,6 +32,14 @@ const handleItemSkip = () => {
   })
 }
 
+const handleOnEnded = () => {
+  const autoplay = store.get('autoplay')
+  
+  if (autoplay) {
+    handleItemSkip()
+  }
+}
+
 const handleToggleAutoplay = () => {
   store.set({
     autoplay: !store.get('autoplay')
@@ -48,7 +56,7 @@ const store = new Store({
   autoplay: false,
   handleItemSkip,
   handleMakeClip: stubFunction,
-  handleOnEpisodeEnd: stubFunction,
+  handleOnEpisodeEnd: handleOnEnded,
   handleOnPastClipTime: stubFunction,
   handlePlaylistCreate: stubFunction,
   handlePlaylistItemAdd: stubFunction,
