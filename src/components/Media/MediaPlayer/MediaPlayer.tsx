@@ -18,6 +18,7 @@ type Props = {
   handleMakeClip?: Function
   handleOnEpisodeEnd?: Function
   handleOnPastClipTime?: Function
+  handlePause?: Function
   handlePlaylistCreate?: Function
   handlePlaylistItemAdd?: Function
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -220,6 +221,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   handleItemSkip = (evt) => {
     if (this.props.handleItemSkip) {
       this.setState({
+        clipFinished: false,
         duration: 0,
         isLoading: true,
         played: 0,
@@ -249,8 +251,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { clipFinished } = this.state
 
     if (clipEndTime && clipFinished && this.player.getCurrentTime() > clipEndTime && handleOnPastClipTime) {
-      handleOnPastClipTime()
-      return
+      handleOnPastClipTime(true)
     }
   }
 
@@ -273,28 +274,61 @@ export class MediaPlayer extends React.Component<Props, State> {
     })
   }
 
-  onSeekMouseDown = e => {
+  onSeekMouseDown = () => {
     this.setState({ seeking: true })
   }
 
-  onSeekMouseUp = e => {
+  onSeekMouseUp = () => {
     this.setState({ seeking: false })
   }
 
   onProgress = state => {
-    const { nowPlayingItem } = this.props
+    const { autoplay, handleOnPastClipTime, handlePause, nowPlayingItem } = this.props
     const { clipEndTime } = nowPlayingItem
     const { clipFinished, seeking } = this.state
 
     if (clipEndTime && !clipFinished && this.player.getCurrentTime() > clipEndTime) {
-      this.setState({
-        clipFinished: true
-      })
+
+      if (autoplay && handleOnPastClipTime) {
+        handleOnPastClipTime(true)
+      } else {
+        this.setState({
+          clipFinished: true
+        })
+
+        if (handlePause) {
+          handlePause()
+        }
+      }
+
       return
     }
 
     if (!seeking) {
       this.setState(state)
+    }
+  }
+
+  onSeek = () => {
+    const { autoplay, handleOnPastClipTime, handlePause, nowPlayingItem } = this.props
+    const { clipEndTime } = nowPlayingItem
+    const { clipFinished } = this.state
+
+    if (clipEndTime && !clipFinished && this.player.getCurrentTime() > clipEndTime && handleOnPastClipTime) {
+
+      if (autoplay && handleOnPastClipTime) {
+        handleOnPastClipTime(true)
+      } else {
+        this.setState({
+          clipFinished: true
+        })
+
+        if (handlePause) {
+          handlePause()
+        }
+      }
+
+      return
     }
   }
 
@@ -361,6 +395,7 @@ export class MediaPlayer extends React.Component<Props, State> {
               onEnded={handleOnEpisodeEnd}
               onPlay={this.onPlay}
               onProgress={this.onProgress}
+              onSeek={this.onSeek}
               playbackRate={playbackRate}
               playing={playing}
               ref={this.playerRef}
@@ -368,22 +403,25 @@ export class MediaPlayer extends React.Component<Props, State> {
               url={episodeMediaUrl}
               volume={1} />
         }
-        <div className='mp__headline'>
-          <div className='mp-headline__inner'>
-            <a
-              className='mp-headline__link'
-              { ... playerClipLink &&
-                { href: playerClipLink }
-              }>
-              <div className='mp-headline__title'>
-                {clipTitle}
+        {
+          clipStartTime &&
+            <div className='mp__headline'>
+              <div className='mp-headline__inner'>
+                <a
+                  className='mp-headline__link'
+                  { ... playerClipLink &&
+                    { href: playerClipLink }
+                  }>
+                  <div className='mp-headline__title'>
+                    {clipTitle}
+                  </div>
+                  <div className='mp-headline__time'>
+                    {readableClipTime(clipStartTime, clipEndTime)}
+                  </div>
+                </a>
               </div>
-              <div className='mp-headline__time'>
-                {readableClipTime(clipStartTime, clipEndTime)}
-              </div>
-            </a>
-          </div>
-        </div>
+            </div>
+        }
         <div className='mp__header'>
           <div className='mp-header__inner'>
             <a

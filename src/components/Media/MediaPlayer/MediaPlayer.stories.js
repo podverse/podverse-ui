@@ -27,8 +27,8 @@ const stubFunction = () => {console.log('stub a dub dub')}
 const handleItemSkip = () => {
   const nextItem = popNextFromQueue()
   store.set({
-    playing: store.get('autoplay'),
-    nowPlayingItem: convertToNowPlayingItem(nextItem)
+    nowPlayingItem: convertToNowPlayingItem(nextItem),
+    playing: store.get('autoplay')
   })
 }
 
@@ -38,6 +38,23 @@ const handleOnEnded = () => {
   if (autoplay) {
     handleItemSkip()
   }
+}
+
+const handleOnPastClipTime = (shouldPlay) => {
+  const nowPlayingItem = store.get('nowPlayingItem')
+  nowPlayingItem.clipStartTime = null
+  nowPlayingItem.clipEndTime = null
+  nowPlayingItem.clipTitle = null
+  store.set({
+    nowPlayingItem,
+    playing: shouldPlay
+  })
+}
+
+const handlePause = () => {
+  store.set({
+    playing: false
+  })
 }
 
 const handleToggleAutoplay = () => {
@@ -57,7 +74,8 @@ const store = new Store({
   handleItemSkip,
   handleMakeClip: stubFunction,
   handleOnEpisodeEnd: handleOnEnded,
-  handleOnPastClipTime: stubFunction,
+  handleOnPastClipTime,
+  handlePause,
   handlePlaylistCreate: stubFunction,
   handlePlaylistItemAdd: stubFunction,
   handleToggleAutoplay,
