@@ -1,3 +1,11 @@
+.mp-add-to-modal {
+  .no-wrap div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 .mp-share-modal {
   .form-group .input-group .btn {
     min-width: 80px;

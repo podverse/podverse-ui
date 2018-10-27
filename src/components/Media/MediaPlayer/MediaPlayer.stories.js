@@ -9,7 +9,7 @@ import { addItemToPriorityQueue, addItemsToSecondaryQueue,
   popNextFromQueue } from 'lib/mediaPlayerQueue'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 
-const { endTime, episodeMediaUrl, episodeTitle, podcastImageUrl, 
+const { endTime, episodeMediaUrl, episodePubDate, episodeTitle, podcastImageUrl, 
   podcastTitle, startTime, title } = sampleMediaRef1
 
 const nowPlayingItem = {
@@ -17,6 +17,7 @@ const nowPlayingItem = {
   clipStartTime: startTime,
   clipTitle: title,
   episodeMediaUrl: episodeMediaUrl,
+  episodePubDate: episodePubDate,
   episodeTitle: episodeTitle,
   imageUrl: podcastImageUrl,
   podcastTitle: podcastTitle

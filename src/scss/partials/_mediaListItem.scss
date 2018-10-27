@@ -1,5 +1,5 @@
 .media-list__item {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .media-list-item__a, .media-list-item__b, .media-list-item__c {
@@ -99,6 +99,31 @@
     margin-bottom: .75em;
   }
 }
+
+.media-list-item__d {
+  @supports (-webkit-line-clamp: 2) {
+    .media-list-item-d__title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    }
+  }
+
+  .media-list-item-d__sub-title-side {
+    float: right;
+    margin-left: 1em;
+    margin-top: 0.25em;
+    text-align: right;
+    font-size: $text-sm-em;
+  }
+  
+  .media-list-item-d__sub-title {
+    font-size: $text-sm-em;
+    margin-top: 0.25em;
+  }
+}
+
 
 html[theme=light] {
   [class^=media-list-item__] {

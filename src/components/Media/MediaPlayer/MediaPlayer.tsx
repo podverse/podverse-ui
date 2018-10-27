@@ -557,7 +557,8 @@ export class MediaPlayer extends React.Component<Props, State> {
           openAddToModal &&
             <AddToModal
               hideModal={this.hideAddToModal}
-              isOpen={openAddToModal} />
+              isOpen={openAddToModal}
+              nowPlayingItem={nowPlayingItem} />
 
         }
         {
