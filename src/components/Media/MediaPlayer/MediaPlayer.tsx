@@ -13,10 +13,11 @@ import ShareModal from './ShareModal/ShareModal'
 // import { getPriorityQueueItems, getSecondaryQueueItems } from 'lib/mediaPlayerQueue';
 
 type Props = {
+  autoplay?: boolean
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleMakeClip?: Function
   handleOnEpisodeEnd?: Function
-  handleOnPastClipTime?: Function 
+  handleOnPastClipTime?: Function
   handlePlaylistCreate?: Function
   handlePlaylistItemAdd?: Function
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -193,7 +194,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     if (this.progressBarWidth.current) {
       const width = this.progressBarWidth.current.offsetWidth
 
-      if (duration && duration > 0 && this.durationNode.current.innerText !== timePlaceholder) {
+      if (duration && duration > 0 && this.durationNode && this.durationNode.current && this.durationNode.current.innerText !== timePlaceholder) {
         const positionOffset = width / duration
 
         if (clipStartTime) {
@@ -330,9 +331,10 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { handleMakeClip, handleOnEpisodeEnd, handleToggleAutoplay,
+    const { autoplay, handleMakeClip, handleOnEpisodeEnd, handleToggleAutoplay,
       handleTogglePlay, nowPlayingItem, playerClipLink, playerEpisodeLink,
       playerPodcastLink, playing, showAutoplay } = this.props
+
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, playbackRate, played, playedSeconds,
       progressPreviewTime } = this.state
@@ -350,7 +352,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     const currentTime = this.player ? this.player.getCurrentTime() : 0
 
     return (
-      <React.Fragment>
+      <div className='mp'>
         {
           isClientSide &&
             <FilePlayer
@@ -367,7 +369,7 @@ export class MediaPlayer extends React.Component<Props, State> {
               url={episodeMediaUrl}
               volume={1} />
         }
-        <div className='mp-headline'>
+        <div className='mp__headline'>
           <div className='mp-headline__inner'>
             <a
               className='mp-headline__link'
@@ -383,7 +385,7 @@ export class MediaPlayer extends React.Component<Props, State> {
             </a>
           </div>
         </div>
-        <div className='mp-header'>
+        <div className='mp__header'>
           <div className='mp-header__inner'>
             <a
               className='mp-header__link'
@@ -404,34 +406,34 @@ export class MediaPlayer extends React.Component<Props, State> {
               </div>
             </a>
             <button
-              className='mp-header__add'
+              className={`mp-header__add ${openAddToModal ? 'active' : ''}`}
               onClick={this.toggleAddToModal}>
               <FontAwesomeIcon icon='plus-circle' />
             </button>
             {
               handleMakeClip &&
                 <button
-                  className='mp-header__clip'
+                  className={`mp-header__clip ${openMakeClipModal ? 'active' : ''}`}
                   onClick={this.toggleMakeClipModal}>
                   <FontAwesomeIcon icon='cut' />
                 </button>
             }
             <button
-              className='mp-header__queue'
+              className={`mp-header__queue ${openQueueModal ? 'active' : ''}`}
               onClick={this.toggleQueueModal}>
               <FontAwesomeIcon icon='list-ul' />
             </button>
             <button
-              className='mp-header__share'
+              className={`mp-header__share ${openShareModal ? 'active' : ''}`}
               onClick={this.toggleShareModal}>
               <FontAwesomeIcon icon='share' />
             </button>
           </div>
         </div>
-        <div className='mp'>
-          <div className='mp__inner'>
+        <div className='mp__player'>
+          <div className='mp-player__inner'>
             <button
-              className='mp__play-pause'
+              className='mp-player__play-pause'
               onClick={handleTogglePlay}>
               {
                 playing ?
@@ -440,15 +442,16 @@ export class MediaPlayer extends React.Component<Props, State> {
               }
             </button>
             <div
-              className='mp__progress-bar-wrapper'
+              className='mp-player__progress-bar-wrapper'
               data-iscapture='true'
               data-tip
               ref={this.progressBarWidth}>
-              <span className={`mp__current-time`}>
-                {
-                  !isLoading && duration ? convertSecToHHMMSS(playedSeconds) : timePlaceholder
-                }
-              </span>
+              {
+                (!isLoading && duration) &&
+                  <span className={`mp-player__current-time`}>
+                    {convertSecToHHMMSS(playedSeconds)}
+                  </span>
+              }
               <div
                 className='mp-progress-bar__clip-start'
                 style={{
@@ -465,46 +468,40 @@ export class MediaPlayer extends React.Component<Props, State> {
                 className='mp-progress-bar__preview'>
                 {convertSecToHHMMSS(progressPreviewTime)}
               </ReactTooltip>
+              <Progress
+                className='mp-player__progress-bar'
+                onClick={this.setCurrentTime}
+                onMouseMove={this.onMouseOverProgress}
+                value={played * 100} />
               {
-                !isLoading &&
-                  <Progress
-                    className='mp__progress-bar'
-                    onClick={this.setCurrentTime}
-                    onMouseMove={this.onMouseOverProgress}
-                    value={played * 100} />
+                (!isLoading && duration) &&
+                  <span
+                    className={`mp-player__duration`}
+                    ref={this.durationNode}>
+                    {convertSecToHHMMSS(duration)}
+                  </span>
               }
-              {
-                isLoading &&
-                  <div>IT'S loading</div>
-              }
-              <span
-                className={`mp__duration`}
-                ref={this.durationNode}>
-                {
-                  !isLoading && duration ? convertSecToHHMMSS(duration) : timePlaceholder
-                }
-              </span>
             </div>
             <button
-              className='mp__time-jump-forward'
+              className='mp-player__time-jump-forward'
               onClick={this.handleTimeJumpForward}>
               <FontAwesomeIcon icon='redo-alt' />
             </button>
             <button
-              className='mp__playback-rate'
+              className='mp-player__playback-rate'
               onClick={this.setPlaybackRate}>
               {getPlaybackRateText(playbackRate)}
             </button>
             {
               (showAutoplay) &&
               <button
-              className='mp__autoplay'
+              className={`mp-player__autoplay ${autoplay ? 'active' : ''}`}
               onClick={handleToggleAutoplay}>
                   <FontAwesomeIcon icon='infinity' />
                 </button>
             }
             <button
-              className='mp__skip'
+              className='mp-player__skip'
               onClick={this.handleItemSkip}>
               <FontAwesomeIcon icon='step-forward' />
             </button>
@@ -535,7 +532,7 @@ export class MediaPlayer extends React.Component<Props, State> {
           playerClipLink={playerClipLink}
           playerEpisodeLink={playerEpisodeLink}
           playerPodcastLink={playerPodcastLink} />
-      </React.Fragment>
+      </div>
     )
   }
 }
