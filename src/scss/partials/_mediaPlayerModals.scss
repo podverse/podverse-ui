@@ -13,6 +13,8 @@
   .scrollable-area {
     overflow: auto;
     height: calc(100% - 1.5em);
+    margin-right: -1em;
+    padding-right: 1em;
   }
 
   .mp-add-to-modal__play-next, .mp-add-to-modal__play-last {

@@ -34,7 +34,9 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   return (
     <a
       className={`media-list__item ${noWrap ? 'no-wrap' : ''}`}
-      href={href}
+      {...href &&
+        { href }
+      }
       onClick={handleOnClick}>
       {
         (itemType === 'clip' && dataClip) &&
