@@ -332,20 +332,29 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
+  toggleModal = (key) => {
+    this.setState({
+      openAddToModal: key === 'addTo' ? !this.state.openAddToModal : false,
+      openMakeClipModal: key === 'makeClip' ? !this.state.openMakeClipModal : false,
+      openQueueModal: key === 'queue' ? !this.state.openQueueModal : false,
+      openShareModal: key === 'share' ? !this.state.openShareModal : false
+    })
+  }
+
   toggleAddToModal = () => {
-    this.setState({ openAddToModal: !this.state.openAddToModal })
+    this.toggleModal('addTo')
   }
 
   toggleMakeClipModal = () => {
-    this.setState({ openMakeClipModal: !this.state.openMakeClipModal })
+    this.toggleModal('makeClip')
   }
 
   toggleQueueModal = () => {
-    this.setState({ openQueueModal: !this.state.openQueueModal })
+    this.toggleModal('queue')
   }
 
   toggleShareModal = () => {
-    this.setState({ openShareModal: !this.state.openShareModal })
+    this.toggleModal('share')
   }
 
   hideAddToModal = () => {
