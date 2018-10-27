@@ -37,6 +37,10 @@ const handleOnEnded = () => {
   
   if (autoplay) {
     handleItemSkip()
+  } else {
+    store.set({
+      playing: false
+    })
   }
 }
 
