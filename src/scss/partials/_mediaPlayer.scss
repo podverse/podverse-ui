@@ -18,32 +18,32 @@
     padding: 0 0.25rem;
     position: fixed;
     text-align: left;
-
+  
     .mp-headline__inner {
       max-width: $player-max-width;
       display: flex;
       margin: auto;
       width: 100%;
     }
-
+  
     .mp-headline__link {
       display: flex;
       width: 100%;
     }
-
+  
     .mp-headline__title {
       flex: 1 1 auto;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
+  
     .mp-headline__time {
       flex: 0 0 auto;
       margin-left: 0.25rem;
     }
   }
-
+  
   .mp__header {
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -51,7 +51,7 @@
     display: flex;
     height: 45px;
     position: fixed;
-
+  
     .mp-header__inner {
       display: flex;
       flex: 1;
@@ -59,26 +59,26 @@
       margin: auto;
       width: 100%;
     }
-
+  
     .mp-header__link {
       display: flex;
       flex: 1;
       min-width: 0;
     }
-
+  
     .mp-header__image {
       flex: 0 0 44px;
       height: 44px;
       margin-right: 0.5rem;
       width: 44px;
     }
-
+  
     .mp-header__wrap {
       flex: 1 1 auto;
       height: 44px;
       min-width: 0;
       text-align: left;
-
+  
       .mp-header-wrap__top {
         font-weight: bold;
         height: 22px;
@@ -97,12 +97,12 @@
         white-space: nowrap;
       }
     }
-
+  
     .mp-header__queue {
       flex: 0 0 36px;
       margin: 8px 0;
     }
-
+  
     .mp-header__add {
       flex: 0 0 36px;
       margin: 8px 0;
@@ -118,23 +118,23 @@
       margin: 8px 0;
     }
   }
-
+  
   .mp__player {
     bottom: 0; left: 0; right: 0;
     display: flex;
     height: 44px;
     position: fixed;
-
+  
     .mp-player__inner {
       max-width: $player-max-width;
       display: flex;
       flex: 1;
     }
-
+  
     .mp-player__play-pause {
       flex: 0 0 44px;
     }
-
+  
     .mp-player__current-time {
       margin: auto;
       text-align: left;
@@ -146,13 +146,13 @@
       font-size: 13px;
       pointer-events: none;
     }
-
+  
     .mp-player__progress-bar-wrapper {
       flex: 1 1 auto;
       margin: auto 4px;
       position: relative;
       width: 100%;
-
+  
       .mp-progress-bar__clip-start,
       .mp-progress-bar__clip-end {
         background-color: yellow;
@@ -164,13 +164,13 @@
         z-index: 1;
       }
     }
-
+  
     .mp-player__progress-bar {
       cursor: pointer;
       flex: 1 1 auto;
       margin: 0;
     }
-
+  
     .mp-player__duration {
       margin: auto;
       text-align: right;
@@ -182,35 +182,41 @@
       font-size: 13px;
       pointer-events: none;
     }
-
+  
     .mp-player__mute {
       flex: 0 0 36px;
     }
-
+  
     .mp-player__time-jump-forward {
       flex: 0 0 36px;
       margin: 8px 0;
     }
-
+  
     .mp-player__playback-rate {
       flex: 0 0 36px;
       margin: 8px 0;
     }
-
+  
     .mp-player__autoplay {
       flex: 0 0 36px;
       margin: 8px 0;
     }
-
+  
     .mp-player__skip {
       flex: 0 0 36px;
       margin: 8px 0;
     }
   }
+
 }
 
+
 [theme=light] {
-  .mp {
+  .mp__headline, .mp__header, .mp__player {
+    background-color: $gray-light;
+    border-color: $gray;
+    color: $black;
+
     a {
       color: $black;
       text-decoration: none;
@@ -222,35 +228,22 @@
       }
     }
 
-    .mp__headline {
-      background-color: $gray-light;
-      border-color: $gray;
-      color: $black;
+    .progress {
+      background-color: $gray;
     }
 
-    .mp__header {
-      background-color: $gray-light;
-      border-color: $gray;
-      color: $black;
-    }
-
-    .mp__player {
-      background-color: $gray-light;
-      color: $black;
-
-      .progress {
-        background-color: $gray;
-      }
-
-      .progress .progress-bar {
-        background-color: $blue;
-      }
+    .progress .progress-bar {
+      background-color: $blue;
     }
   }
 }
 
 [theme=dark] {
-  .mp {
+  .mp__headline, .mp__header, .mp__player {
+    background-color: $gray-light;
+    border-color: $gray;
+    color: $black;
+
     a {
       color: $white;
       text-decoration: none;
@@ -260,29 +253,12 @@
       color: $blue;
     }
 
-    .mp__headline {
-      background-color: $black;
-      border-color: $gray;
-      color: $white;
+    .progress {
+      background-color: $gray;
     }
 
-    .mp__header {
-      background-color: $gray-dark;
-      border-color: $gray;
-      color: $white;
-    }
-
-    .mp__player {
-      background-color: $gray-dark;
-      color: $white;
-
-      .progress {
-        background-color: $gray;
-      }
-
-      .progress .progress-bar {
-        background-color: $blue;
-      }
+    .progress .progress-bar {
+      background-color: $blue;
     }
   }
 }

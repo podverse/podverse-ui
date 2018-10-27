@@ -414,9 +414,9 @@ export class MediaPlayer extends React.Component<Props, State> {
               url={episodeMediaUrl}
               volume={1} />
         }
-        {
-          clipStartTime &&
-            <div className='mp__headline'>
+        <div className='mp__headline'>
+          {
+            clipStartTime &&
               <div className='mp-headline__inner'>
                 <a
                   className='mp-headline__link'
@@ -431,8 +431,8 @@ export class MediaPlayer extends React.Component<Props, State> {
                   </div>
                 </a>
               </div>
-            </div>
-        }
+          }
+        </div>
         <div className='mp__header'>
           <div className='mp-header__inner'>
             <a

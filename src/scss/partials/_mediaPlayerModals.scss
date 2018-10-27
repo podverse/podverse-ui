@@ -1,19 +1,12 @@
 .mp-add-to-modal {
   position: relative;
 
-  .scrollable-area {
-    bottom: 1.25em;
-    left: 1.25em;
-    position: absolute;
-    overflow: auto;
-    right: 1.25em;
-    top: 45px;
-  }
-}
-
-.mp-add-to-modal {
   h4 { 
     margin-bottom: 0;
+  }
+
+  .scrollable-area {
+    overflow: auto;
   }
 
   .mp-add-to-modal__play-next, .mp-add-to-modal__play-last {
@@ -41,5 +34,13 @@
 
   .make-clip-modal__save {
     margin-left: 1rem;
+  }
+
+  @media (max-height: 480px) {
+    .ReactModal__Content {
+      left: 0 !important;
+      top: 0 !important;
+      transform: none !important;
+    }
   }
 }
