@@ -17,7 +17,9 @@ export const AddToModal: React.StatelessComponent<Props> = props => {
     <Modal
       contentLabel='Add To'
       isOpen={isOpen}
-      portalClassName='mp-add-to-modal'>
+      onRequestClose={hideModal}
+      portalClassName='mp-add-to-modal'
+      shouldCloseOnOverlayClick>
       <h4>
         Add To
       </h4>
