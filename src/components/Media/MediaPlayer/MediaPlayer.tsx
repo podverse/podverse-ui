@@ -14,6 +14,8 @@ import ShareModal from './ShareModal/ShareModal'
 
 type Props = {
   autoplay?: boolean
+  handleAddToQueuePlayLast?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleAddToQueuePlayNext?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleMakeClip?: Function
   handleOnEpisodeEnd?: Function
@@ -164,8 +166,10 @@ export class MediaPlayer extends React.Component<Props, State> {
     document.body.addEventListener('keydown', (event) => {
       if (event.keyCode === keyLeftArrow) {
         this.player.seekTo(this.player.getCurrentTime() - 5)
+        this.forceUpdate() // Force update so the time updates immediately
       } else if (event.keyCode === keyRightArrow) {
         this.player.seekTo(this.player.getCurrentTime() + 5)
+        this.forceUpdate() // Force update so the time updates immediately
       }
     })
   }
@@ -218,6 +222,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   handleTimeJumpForward = () => {
     this.player.seekTo(this.player.getCurrentTime() + 15)
+    this.forceUpdate() // Force update so the time updates immediately
   }
 
   handleItemSkip = (evt) => {
@@ -245,6 +250,8 @@ export class MediaPlayer extends React.Component<Props, State> {
     if (clipStartTime && clipStartTime > 0) {
       this.player.seekTo(clipStartTime)
     }
+
+    this.forceUpdate() // Force update so the time updates immediately
   }
 
   onPlay = () => {
@@ -376,9 +383,10 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { autoplay, handleMakeClip, handleOnEpisodeEnd, handleToggleAutoplay,
-      handleTogglePlay, nowPlayingItem, playerClipLink, playerEpisodeLink,
-      playerPodcastLink, playing, playlists, showAutoplay } = this.props
+    const { autoplay, handleAddToQueuePlayLast, handleAddToQueuePlayNext, handleMakeClip,
+      handleOnEpisodeEnd, handleToggleAutoplay, handleTogglePlay, nowPlayingItem,
+      playerClipLink, playerEpisodeLink, playerPodcastLink, playing, playlists,
+      showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, playbackRate, progressPreviewTime } = this.state
@@ -558,6 +566,8 @@ export class MediaPlayer extends React.Component<Props, State> {
         {
           openAddToModal &&
             <AddToModal
+              handleAddToQueuePlayNext={handleAddToQueuePlayNext}
+              handleAddToQueuePlayLast={handleAddToQueuePlayLast}
               hideModal={this.hideAddToModal}
               isOpen={openAddToModal}
               nowPlayingItem={nowPlayingItem}
