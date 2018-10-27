@@ -60,6 +60,17 @@ p {
   top: 20px;
 }
 
+.no-wrap div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.over-media-player {
+  position: absolute;
+  z-index: 11;
+}
+
 [theme=light] {
   background-color: $white;
 

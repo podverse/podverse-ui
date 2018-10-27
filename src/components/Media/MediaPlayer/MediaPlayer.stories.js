@@ -3,7 +3,9 @@ import { storiesOf } from '@storybook/react'
 import { State, Store } from '@sambego/storybook-state'
 import { MediaPlayer } from './MediaPlayer'
 import { sampleMediaRef1, sampleMediaRef2, sampleMediaRef3, sampleMediaRef3b,
-  sampleMediaRef4, sampleMediaRef5, sampleMediaRef6, sampleText } from 'storybook/constants'
+  sampleMediaRef4, sampleMediaRef5, sampleMediaRef6, samplePlaylist1,
+  samplePlaylist2, samplePlaylist3, samplePlaylist4, samplePlaylist5,
+  samplePlaylist6, sampleText } from 'storybook/constants'
 import { addItemToPriorityQueue, addItemsToSecondaryQueue,
   clearItemsFromPriorityQueue, clearItemsFromSecondaryQueue,
   popNextFromQueue } from 'lib/mediaPlayerQueue'
@@ -22,6 +24,9 @@ const nowPlayingItem = {
   imageUrl: podcastImageUrl,
   podcastTitle: podcastTitle
 }
+
+const playlists = [samplePlaylist1, samplePlaylist2, samplePlaylist3, samplePlaylist4,
+  samplePlaylist5, samplePlaylist6]
 
 const stubFunction = () => {console.log('stub a dub dub')}
 
@@ -91,6 +96,7 @@ const store = new Store({
   playerEpisodeLink: '/episode/1234',
   playerPodcastLink: '/podcast/1234',
   playing: false,
+  playlists: playlists,
   showMute: false
 })
 

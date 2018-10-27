@@ -29,6 +29,7 @@ type Props = {
   playerEpisodeLink?: string
   playerPodcastLink?: string
   playing?: boolean
+  playlists: any
   showAutoplay?: boolean
 }
 
@@ -123,6 +124,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     nowPlayingItem: {},
     playbackRate: 1,
     playing: false,
+    playlists: [],
     showAutoplay: true
   }
 
@@ -376,7 +378,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   render () {
     const { autoplay, handleMakeClip, handleOnEpisodeEnd, handleToggleAutoplay,
       handleTogglePlay, nowPlayingItem, playerClipLink, playerEpisodeLink,
-      playerPodcastLink, playing, showAutoplay } = this.props
+      playerPodcastLink, playing, playlists, showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, playbackRate, progressPreviewTime } = this.state
@@ -558,8 +560,8 @@ export class MediaPlayer extends React.Component<Props, State> {
             <AddToModal
               hideModal={this.hideAddToModal}
               isOpen={openAddToModal}
-              nowPlayingItem={nowPlayingItem} />
-
+              nowPlayingItem={nowPlayingItem}
+              playlists={playlists} />
         }
         {
           (openMakeClipModal && handleMakeClip) &&

@@ -1,8 +1,25 @@
 .mp-add-to-modal {
-  .no-wrap div {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  position: relative;
+
+  .scrollable-area {
+    bottom: 1.25em;
+    left: 1.25em;
+    position: absolute;
+    overflow: auto;
+    right: 1.25em;
+    top: 45px;
+  }
+}
+
+.mp-add-to-modal {
+  h4 { 
+    margin-bottom: 0;
+  }
+
+  .mp-add-to-modal__play-next, .mp-add-to-modal__play-last {
+    height: 45px;
+    line-height: 43px;
+    margin-bottom: 0.25em;
   }
 }
 

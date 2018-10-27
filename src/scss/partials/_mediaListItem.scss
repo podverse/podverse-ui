@@ -101,6 +101,11 @@
 }
 
 .media-list-item__d {
+
+  & :not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+
   @supports (-webkit-line-clamp: 2) {
     .media-list-item-d__title {
       display: -webkit-box;
