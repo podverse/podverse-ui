@@ -86,6 +86,10 @@ const handlePause = () => {
   })
 }
 
+const handleQueueItemClick = () => {
+  alert('queue item clicked')
+}
+
 const handleToggleAutoplay = () => {
   store.set({
     autoplay: !store.get('autoplay')
@@ -106,6 +110,7 @@ const store = new Store({
   handleMakeClip: stubFunction,
   handleOnEpisodeEnd: handleOnEnded,
   handleOnPastClipTime,
+  handleQueueItemClick,
   handlePause,
   handlePlaylistCreate: stubFunction,
   handlePlaylistItemAdd,
