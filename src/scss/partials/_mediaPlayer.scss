@@ -52,10 +52,15 @@
     display: flex;
     height: 41px;
     position: fixed;
+
+    button {
+      margin: 3px 0;
+    }
   
     .mp-header__inner {
       display: flex;
       flex: 1;
+      height: 40px;
       max-width: $player-max-width;
       margin: auto;
       width: 100%;
@@ -81,7 +86,7 @@
       text-align: left;
   
       .mp-header-wrap__top {
-        font-weight: 600;
+        font-weight: 500;
         height: 20px;
         line-height: 20px;
         overflow: hidden;
@@ -90,7 +95,7 @@
       }
     
       .mp-header-wrap__bottom {
-        font-weight: 600;
+        font-weight: 500;
         height: 20px;
         line-height: 20px;
         overflow: hidden;
@@ -121,6 +126,10 @@
     display: flex;
     height: 40px;
     position: fixed;
+
+    button {
+      margin: 2px 0;
+    }
   
     .mp-player__inner {
       max-width: $player-max-width;
@@ -139,8 +148,8 @@
       top: -2px;
       left: 4px;
       color: #eee;
-      z-index: 1000;
-      font-size: 13px;
+      z-index: 1;
+      font-size: 12px;
       pointer-events: none;
     }
   
@@ -179,8 +188,8 @@
       top: -2px;
       right: 4px;
       color: #eee;
-      z-index: 1000;
-      font-size: 13px;
+      z-index: 1;
+      font-size: 12px;
       pointer-events: none;
     }
   
@@ -190,22 +199,18 @@
   
     .mp-player__time-jump-forward {
       flex: 0 0 36px;
-      margin: 8px 0;
     }
   
     .mp-player__playback-rate {
       flex: 0 0 40px;
-      margin: 8px 0;
     }
   
     .mp-player__autoplay {
       flex: 0 0 36px;
-      margin: 8px 0;
     }
   
     .mp-player__skip {
       flex: 0 0 36px;
-      margin: 8px 0;
     }
   }
 
