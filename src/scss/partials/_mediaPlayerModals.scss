@@ -24,8 +24,8 @@
 
   .mp-add-to-modal__play-next, .mp-add-to-modal__play-last {
     display: inline-block;
-    height: 57px;
-    line-height: 55px;
+    height: 51px;
+    line-height: 49px;
     padding: 0 0.25em;
     text-align: center;
     text-decoration: none;
@@ -53,11 +53,23 @@
   .make-clip__is-public {
     float: right;
     margin-top: -6px;
-    width: auto;
+
+    .dropdown-toggle {
+      width: 156px;
+      text-align: right;
+    }
+
+    .dropdown-menu {
+      min-width: unset;
+      padding: 0;
+      text-align: right;
+    }
 
     .dropdown-item {
+      line-height: 1.5;
+      min-width: 154px;
       padding: 6px 12px;
-      text-align: left;
+      text-align: right;
     }
   }
 

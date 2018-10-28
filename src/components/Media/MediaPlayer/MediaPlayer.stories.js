@@ -50,7 +50,7 @@ const handleItemSkip = () => {
   const result = popNextFromQueue()
 
   store.set({
-    nowPlayingItem: convertToNowPlayingItem(result.nextItem),
+    nowPlayingItem: result.nextItem,
     playing: store.get('autoplay'),
     queuePrimaryItems: result.primaryItems,
     queueSecondaryItems: result.secondaryItems,
@@ -132,8 +132,8 @@ const store = new Store({
 clearItemsFromPriorityQueue()
 clearItemsFromSecondaryQueue()
 addItemToPriorityQueue(sampleNowPlayingItem1)
-addItemToPriorityQueue(sampleNowPlayingItem3)
 addItemToPriorityQueue(sampleNowPlayingItem3b, true)
+addItemToPriorityQueue(sampleNowPlayingItem3)
 addItemsToSecondaryQueue([sampleNowPlayingItem4, sampleNowPlayingItem6,
   sampleNowPlayingItem5, sampleNowPlayingItem2])
 

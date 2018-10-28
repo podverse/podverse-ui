@@ -400,6 +400,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodePubDate,
       episodeTitle, imageUrl, podcastTitle } = nowPlayingItem
+console.log(nowPlayingItem);
 
     // Force ReactPlayer to reload if it receives a new mediaUrl, set loading state,
     // and clear clip flags.
@@ -437,10 +438,10 @@ export class MediaPlayer extends React.Component<Props, State> {
                 { href: playerClipLink }
               }>
               <div className='mp-headline__title'>
-                {clipTitle ? clipTitle : `${readableDate(episodePubDate)}`}
+                {clipTitle ? clipTitle : ''}
               </div>
               <div className='mp-headline__time'>
-                {readableClipTime(clipStartTime, clipEndTime)}
+                {clipStartTime ? readableClipTime(clipStartTime, clipEndTime) : `${readableDate(episodePubDate)}`}
               </div>
             </a>
           </div>
