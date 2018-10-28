@@ -71,7 +71,7 @@ export const QueueModal: React.StatelessComponent<Props> = props => {
       <div className='scrollable-area'>
         <h6>Next Up</h6>
         {primaryItemNodes}
-        <h6>Auto</h6>
+        <h6>Autoplay</h6>
         {secondaryItemNodes}
       </div>
     </Modal>

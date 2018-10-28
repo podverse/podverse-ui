@@ -10,7 +10,6 @@ import { AddToModal } from './AddToModal/AddToModal'
 import MakeClipModal from './MakeClipModal/MakeClipModal'
 import { QueueModal } from './QueueModal/QueueModal'
 import ShareModal from './ShareModal/ShareModal'
-// import { getPriorityQueueItems, getSecondaryQueueItems } from 'lib/mediaPlayerQueue';
 
 type Props = {
   autoplay?: boolean
