@@ -27,6 +27,8 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     href = `/clip/${dataClip.id}`
   } else if (itemType === 'episode' || itemType === 'podcast-episode') {
     href = `/episode/${dataEpisode.id}`
+  } else if (itemType === 'playlist') {
+    href = `/playlist/${dataPlaylist.id}`
   } else if (itemType === 'podcast') {
     href = `/podcast/${dataPodcast.id}`
   }

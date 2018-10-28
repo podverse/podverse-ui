@@ -151,6 +151,7 @@ class MakeClipModal extends React.Component<Props, State> {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
+          <div className='clearfix'></div>
           <Row>
             <Col xs='6'>
               <FormGroup>

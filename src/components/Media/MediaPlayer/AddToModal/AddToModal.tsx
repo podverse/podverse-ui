@@ -57,9 +57,9 @@ export const AddToModal: React.StatelessComponent<Props> = props => {
           dataNowPlayingItem={nowPlayingItem}
           itemType='now-playing-item'
           noWrap={true} />
-        <h5>
+        <h6>
           Queue
-        </h5>
+        </h6>
         <a
           className='mp-add-to-modal__play-next'
           href='#'>
@@ -70,9 +70,9 @@ export const AddToModal: React.StatelessComponent<Props> = props => {
           href='#'>
           <FontAwesomeIcon icon='play' /> Play Last
         </a>
-        <h5>
+        <h6>
           Playlist
-        </h5>
+        </h6>
         {playlistMediaListItems}
       </div>
     </Modal>

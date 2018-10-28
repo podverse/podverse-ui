@@ -80,7 +80,7 @@
       text-align: left;
   
       .mp-header-wrap__top {
-        font-weight: bold;
+        font-weight: 600;
         height: 22px;
         line-height: 22px;
         overflow: hidden;
@@ -89,7 +89,7 @@
       }
     
       .mp-header-wrap__bottom {
-        font-weight: bold;
+        font-weight: 600;
         height: 22px;
         line-height: 22px;
         overflow: hidden;
@@ -139,7 +139,7 @@
       margin: auto;
       text-align: left;
       position: absolute;
-      top: 0;
+      top: -2px;
       left: 4px;
       color: #eee;
       z-index: 1000;
@@ -169,13 +169,17 @@
       cursor: pointer;
       flex: 1 1 auto;
       margin: 0;
+      
+      .progress-bar {
+        transition: none;
+      }
     }
   
     .mp-player__duration {
       margin: auto;
       text-align: right;
       position: absolute;
-      top: 0;
+      top: -2px;
       right: 4px;
       color: #eee;
       z-index: 1000;

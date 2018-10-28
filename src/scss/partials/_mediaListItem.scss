@@ -101,10 +101,8 @@
 }
 
 .media-list-item__d {
+  padding: 0.5em 0;
 
-  & :not(:last-child) {
-    margin-bottom: 0.5em;
-  }
 
   @supports (-webkit-line-clamp: 2) {
     .media-list-item-d__title {
@@ -118,7 +116,6 @@
   .media-list-item-d__sub-title-side {
     float: right;
     margin-left: 1em;
-    margin-top: 0.25em;
     text-align: right;
     font-size: $text-sm-em;
   }
