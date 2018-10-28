@@ -50,9 +50,7 @@ export const AddToModal: React.StatelessComponent<Props> = props => {
       portalClassName='mp-add-to-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
-      <h4>
-        Add To
-      </h4>
+      <h5>Add To</h5>
       <CloseButton onClick={hideModal} />
       <div className='scrollable-area'>
         <MediaListItem

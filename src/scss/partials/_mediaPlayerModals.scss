@@ -6,7 +6,7 @@
     text-decoration: none;
   }
 
-  h4 {
+  h5 {
     margin-bottom: 0;
   }
 
@@ -57,13 +57,19 @@
 }
 
 .make-clip-modal {
-  h4 {
+  h5 {
     display: inline-block;
   }
 
   .make-clip__is-public {
     float: right;
+    margin-top: -6px;
     width: auto;
+
+    .dropdown-item {
+      padding: 6px 12px;
+      text-align: left;
+    }
   }
 
   .make-clip-modal__save {

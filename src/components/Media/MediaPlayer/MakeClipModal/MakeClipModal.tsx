@@ -117,11 +117,9 @@ class MakeClipModal extends React.Component<Props, State> {
         portalClassName='make-clip-modal'
         style={customStyles}>
         <Form>
-          <h4>
-            Make Clip
-          </h4>
+          <h5>Make Clip</h5>
           <Dropdown
-            className='make-clip__is-public'
+            className='make-clip__is-public transparent-btn'
             isOpen={isPublicIsOpen}
             toggle={this.toggleIsPublic}>
             <DropdownToggle caret>
@@ -139,16 +137,22 @@ class MakeClipModal extends React.Component<Props, State> {
               }
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem
-                data-value='public'
-                onClick={this.selectIsPublic}>
-                <FontAwesomeIcon icon='globe-americas' /> Public
-              </DropdownItem>
-              <DropdownItem
-                data-value='only-with-link'
-                onClick={this.selectIsPublic}>
-                <FontAwesomeIcon icon='link' /> Only with link
-              </DropdownItem>
+              {
+                !isPublic &&
+                  <DropdownItem
+                    data-value='public'
+                    onClick={this.selectIsPublic}>
+                    <FontAwesomeIcon icon='globe-americas' /> Public
+                  </DropdownItem>
+              }
+              {
+                isPublic &&
+                  <DropdownItem
+                    data-value='only-with-link'
+                    onClick={this.selectIsPublic}>
+                    <FontAwesomeIcon icon='link' /> Only with link
+                  </DropdownItem>
+              }
             </DropdownMenu>
           </Dropdown>
           <div className='clearfix'></div>

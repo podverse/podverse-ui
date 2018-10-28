@@ -81,9 +81,7 @@ class ShareModal extends React.Component<Props, State> {
         portalClassName='mp-share-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
-        <h4>
-          Share
-        </h4>
+        <h5>Share</h5>
         <CloseButton onClick={hideModal} />
         {
           playerClipLink &&
