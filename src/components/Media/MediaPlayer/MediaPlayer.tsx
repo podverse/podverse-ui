@@ -26,6 +26,8 @@ type Props = {
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   nowPlayingItem: NowPlayingItem
+  queuePrimaryItems: NowPlayingItem[]
+  queueSecondaryItems: NowPlayingItem[]
   playbackRate?: number
   playerClipLink?: string
   playerEpisodeLink?: string
@@ -126,6 +128,8 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   static defaultProps: Props = {
     nowPlayingItem: {},
+    queuePrimaryItems: [],
+    queueSecondaryItems: [],
     playbackRate: 1,
     playing: false,
     playlists: [],
@@ -388,7 +392,8 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { autoplay, handleAddToQueuePlayLast, handleAddToQueuePlayNext, handleMakeClip,
       handleOnEpisodeEnd, handlePlaylistItemAdd, handleToggleAutoplay, handleTogglePlay,
       nowPlayingItem, playerClipLink, playerEpisodeLink, playerPodcastLink, playing,
-      playlists, showAddToPlaylists, showAddToQueue, showAutoplay } = this.props
+      playlists, queuePrimaryItems, queueSecondaryItems, showAddToPlaylists, showAddToQueue,
+      showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, playbackRate, progressPreviewTime } = this.state
@@ -586,7 +591,9 @@ export class MediaPlayer extends React.Component<Props, State> {
         }
         <QueueModal
           hideModal={this.hideQueueModal}
-          isOpen={openQueueModal} />
+          isOpen={openQueueModal}
+          primaryItems={queuePrimaryItems}
+          secondaryItems={queueSecondaryItems} />
         <ShareModal
           hideModal={this.hideShareModal}
           isOpen={openShareModal}

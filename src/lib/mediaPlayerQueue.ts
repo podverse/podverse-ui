@@ -2,11 +2,27 @@ const kPriorityQueue = 'mediaPlayerPriorityQueue'
 const kSecondaryQueue = 'mediaPlayerSecondaryQueue'
 
 export const popNextFromQueue = () => {
+  let nextItem
   const nextPriorityItem = popNextFromPriorityQueue()
-  if (nextPriorityItem) return nextPriorityItem
 
-  const nextSecondaryItem = popNextFromSecondaryQueue()
-  if (nextSecondaryItem) return nextSecondaryItem
+  if (nextPriorityItem) {
+    nextItem = nextPriorityItem
+  } else {
+    const nextSecondaryItem = popNextFromSecondaryQueue()
+
+    if (nextSecondaryItem) {
+      nextItem = nextSecondaryItem
+    }
+  }
+
+  const priorityItems = getPriorityQueueItems()
+  const secondaryItems = getSecondaryQueueItems()
+
+  return {
+    nextItem,
+    priorityItems,
+    secondaryItems
+  }
 }
 
 export const addItemToPriorityQueue = (newItem, isLast) => {

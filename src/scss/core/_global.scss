@@ -26,7 +26,8 @@ html body {
   }
 
   h6 {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    padding: 0 0.25em;
   }
 
   p {
@@ -75,6 +76,11 @@ html body {
 [theme=light] {
   background-color: $white;
 
+  h6 {
+    background-color: $black;
+    color: $gray-light;
+  }
+
   .close-btn {
     color: $black;
   }
@@ -82,10 +88,16 @@ html body {
   .transparent-btn, .transparent-btn button.btn {
     color: $black;
   }
+
 }
 
 [theme=dark] {
   background-color: $black;
+
+  h6 {
+    background-color: $white;
+    color: $gray-dark;
+  }
 
   .close-btn {
     color: $white;

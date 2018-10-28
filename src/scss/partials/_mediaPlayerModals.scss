@@ -10,11 +10,6 @@
     margin-bottom: 0;
   }
 
-  h6 {
-    margin-bottom: 0;
-    padding: 0 0.25em;
-  }
-
   .scrollable-area {
     overflow: auto;
     height: calc(100% - 2.25em);
@@ -50,12 +45,6 @@
   }
 }
 
-.mp-share-modal {
-  .form-group .input-group .btn {
-    min-width: 80px;
-  }
-}
-
 .make-clip-modal {
   h5 {
     display: inline-block;
@@ -85,16 +74,26 @@
   }
 }
 
+.mp-queue-modal {
+  .scrollable-area {
+    overflow: auto;
+    height: calc(100% - 2.5em);
+    margin-right: -1em;
+    padding-right: 1em;
+  }
+}
+
+.mp-share-modal {
+  .form-group .input-group .btn {
+    min-width: 80px;
+  }
+}
+
 [theme=light] {
   .mp-add-to-modal {
     a {
       border-color: $gray-light;
       color: $black;
-    }
-
-    h6 {
-      background-color: $black;
-      color: $gray-light;
     }
 
     .media-list-item__d {
@@ -108,11 +107,6 @@
     a {
       border-color: $gray-dark;
       color: $white;
-    }
-
-    h6 {
-      background-color: $white;
-      color: $gray-dark;
     }
 
     .media-list-item__d {

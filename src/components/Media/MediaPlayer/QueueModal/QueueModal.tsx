@@ -1,17 +1,21 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
+import { CloseButton } from 'components/CloseButton/CloseButton'
+import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 
 export interface Props {
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
+  primaryItems: any
+  secondaryItems: any
 }
 
 const customStyles = {
   content: {
     bottom: 'unset',
+    height: 'calc(100% - 72px)',
     left: '50%',
-    maxWidth: '420px',
-    overflow: 'unset',
+    maxWidth: '480px',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -20,7 +24,39 @@ const customStyles = {
 }
 
 export const QueueModal: React.StatelessComponent<Props> = props => {
-  const { hideModal, isOpen } = props
+  const { hideModal, isOpen, primaryItems, secondaryItems } = props
+
+  const primaryItemNodes = primaryItems.map(x => {
+    if (x.clipStartTime) {
+      return (
+        <MediaListItem
+          dataNowPlayingItem={x}
+          itemType='now-playing-item' />
+      )
+    } else {
+      return (
+        <MediaListItem
+          dataNowPlayingItem={x}
+          itemType='now-playing-item' />
+      )
+    }
+  })
+
+  const secondaryItemNodes = secondaryItems.map(x => {
+    if (x.clipStartTime) {
+      return (
+        <MediaListItem
+          dataNowPlayingItem={x}
+          itemType='now-playing-item' />
+      )
+    } else {
+      return (
+        <MediaListItem
+          dataNowPlayingItem={x}
+          itemType='now-playing-item' />
+      )
+    }
+  })
 
   return (
     <Modal
@@ -30,10 +66,14 @@ export const QueueModal: React.StatelessComponent<Props> = props => {
       portalClassName='mp-queue-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
-      Queue modal :)
-      <button onClick={hideModal}>
-        Hide modal
-      </button>
+      <h5>Queue</h5>
+      <CloseButton onClick={hideModal} />
+      <div className='scrollable-area'>
+        <h6>Next Up</h6>
+        {primaryItemNodes}
+        <h6>Auto</h6>
+        {secondaryItemNodes}
+      </div>
     </Modal>
   )
 }
