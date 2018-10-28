@@ -1,5 +1,6 @@
 .mp {
   bottom: 0;
+  font-size: 14px;
   left: 0;
   position: fixed;
   right: 0;
@@ -10,7 +11,7 @@
     border-bottom-width: 1px;
     border-top-style: solid;
     border-top-width: 1px;
-    bottom: 89px; left: 0; right: 0;
+    bottom: 81px; left: 0; right: 0;
     display: flex;
     height: 26px;
     line-height: 24px;
@@ -47,9 +48,9 @@
   .mp__header {
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    bottom:  44px; left: 0; right: 0;
+    bottom:  40px; left: 0; right: 0;
     display: flex;
-    height: 45px;
+    height: 41px;
     position: fixed;
   
     .mp-header__inner {
@@ -67,10 +68,10 @@
     }
   
     .mp-header__image {
-      flex: 0 0 44px;
-      height: 44px;
+      flex: 0 0 40px;
+      height: 40px;
       margin-right: 0.5rem;
-      width: 44px;
+      width: 40px;
     }
   
     .mp-header__wrap {
@@ -81,8 +82,8 @@
   
       .mp-header-wrap__top {
         font-weight: 600;
-        height: 22px;
-        line-height: 22px;
+        height: 20px;
+        line-height: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -90,8 +91,8 @@
     
       .mp-header-wrap__bottom {
         font-weight: 600;
-        height: 22px;
-        line-height: 22px;
+        height: 20px;
+        line-height: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -100,29 +101,25 @@
   
     .mp-header__queue {
       flex: 0 0 36px;
-      margin: 8px 0;
     }
   
     .mp-header__add {
       flex: 0 0 36px;
-      margin: 8px 0;
     }
     
     .mp-header__clip {
       flex: 0 0 36px;
-      margin: 8px 0;
     }
     
     .mp-header__share {
       flex: 0 0 36px;
-      margin: 8px 0;
     }
   }
   
   .mp__player {
     bottom: 0; left: 0; right: 0;
     display: flex;
-    height: 44px;
+    height: 40px;
     position: fixed;
   
     .mp-player__inner {
@@ -197,7 +194,7 @@
     }
   
     .mp-player__playback-rate {
-      flex: 0 0 36px;
+      flex: 0 0 40px;
       margin: 8px 0;
     }
   

@@ -114,7 +114,7 @@ const store = new Store({
   playerPodcastLink: '/podcast/1234',
   playing: false,
   playlists: playlists,
-  showAddToPlaylists: false,
+  showAddToPlaylists: true,
   showAddToQueue: true
 })
 
