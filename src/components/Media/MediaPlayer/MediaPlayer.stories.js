@@ -30,6 +30,21 @@ const playlists = [samplePlaylist1, samplePlaylist2, samplePlaylist3, samplePlay
 
 const stubFunction = () => {console.log('stub a dub dub')}
 
+const handleAddToQueuePlayLast = (event) => {
+  event.preventDefault()
+  alert('add to queue play last')
+}
+
+const handleAddToQueuePlayNext = (event) => {
+  event.preventDefault()
+  alert('add to queue play next')
+}
+
+const handlePlaylistItemAdd = (event) => {
+  event.preventDefault()
+  alert('add item to playlist')
+}
+
 const handleItemSkip = () => {
   const nextItem = popNextFromQueue()
   store.set({
@@ -81,13 +96,15 @@ const handleTogglePlay = () => {
 
 const store = new Store({
   autoplay: false,
+  handleAddToQueuePlayLast,
+  handleAddToQueuePlayNext,
   handleItemSkip,
   handleMakeClip: stubFunction,
   handleOnEpisodeEnd: handleOnEnded,
   handleOnPastClipTime,
   handlePause,
   handlePlaylistCreate: stubFunction,
-  handlePlaylistItemAdd: stubFunction,
+  handlePlaylistItemAdd,
   handleToggleAutoplay,
   handleTogglePlay,
   nowPlayingItem,
@@ -97,7 +114,8 @@ const store = new Store({
   playerPodcastLink: '/podcast/1234',
   playing: false,
   playlists: playlists,
-  showMute: false
+  showAddToPlaylists: false,
+  showAddToQueue: true
 })
 
 clearItemsFromPriorityQueue()

@@ -6,12 +6,15 @@ import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 import { NowPlayingItem } from 'lib/nowPlayingItem'
 
 export interface Props {
-  handleAddToQueuePlayLast?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleAddToQueuePlayNext?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleAddToQueuePlayLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleAddToQueuePlayNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   nowPlayingItem: NowPlayingItem
   playlists: any
+  showPlaylists?: boolean
+  showQueue?: boolean
 }
 
 const customStyles = {
@@ -28,12 +31,13 @@ const customStyles = {
 }
 
 export const AddToModal: React.StatelessComponent<Props> = props => {
-  const { handleAddToQueuePlayLast, handleAddToQueuePlayNext, hideModal,
-    isOpen, nowPlayingItem, playlists } = props
+  const { handleAddToQueuePlayLast, handleAddToQueuePlayNext, handlePlaylistItemAdd,
+    hideModal, isOpen, nowPlayingItem, playlists, showPlaylists, showQueue } = props
 
   const playlistMediaListItems = playlists.map(x =>
     <MediaListItem
       dataPlaylist={x}
+      handleOnClick={handlePlaylistItemAdd}
       itemType='playlist'
       noWrap={true} />
   )
@@ -41,8 +45,6 @@ export const AddToModal: React.StatelessComponent<Props> = props => {
   return (
     <Modal
       contentLabel='Add To'
-      handleAddToQueuePlayLast={handleAddToQueuePlayLast}
-      handleAddToQueuePlayNext={handleAddToQueuePlayNext}
       isOpen={isOpen}
       onRequestClose={hideModal}
       portalClassName='mp-add-to-modal over-media-player'
@@ -57,23 +59,35 @@ export const AddToModal: React.StatelessComponent<Props> = props => {
           dataNowPlayingItem={nowPlayingItem}
           itemType='now-playing-item'
           noWrap={true} />
-        <h6>
-          Queue
-        </h6>
-        <a
-          className='mp-add-to-modal__play-next'
-          href='#'>
-          <FontAwesomeIcon icon='play' /> Play Next
-        </a>
-        <a
-          className='mp-add-to-modal__play-last'
-          href='#'>
-          <FontAwesomeIcon icon='play' /> Play Last
-        </a>
-        <h6>
-          Playlist
-        </h6>
-        {playlistMediaListItems}
+        {
+          showQueue &&
+            <React.Fragment>
+              <h6>
+                  Queue
+              </h6>
+                <a
+                  className='mp-add-to-modal__play-next'
+                  onClick={handleAddToQueuePlayNext}
+                  href='#'>
+                  <FontAwesomeIcon icon='play' /> Play Next
+              </a>
+                <a
+                  className='mp-add-to-modal__play-last'
+                  onClick={handleAddToQueuePlayLast}
+                  href='#'>
+                  <FontAwesomeIcon icon='play' /> Play Last
+              </a>
+            </React.Fragment>
+        }
+        {
+          showPlaylists &&
+            <React.Fragment>
+              <h6>
+                Playlist
+              </h6>
+              {playlistMediaListItems}
+            </React.Fragment>
+        }
       </div>
     </Modal>
   )

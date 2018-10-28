@@ -14,15 +14,15 @@ import ShareModal from './ShareModal/ShareModal'
 
 type Props = {
   autoplay?: boolean
-  handleAddToQueuePlayLast?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleAddToQueuePlayNext?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleAddToQueuePlayLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleAddToQueuePlayNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleMakeClip?: Function
   handleOnEpisodeEnd?: Function
   handleOnPastClipTime?: Function
   handlePause?: Function
   handlePlaylistCreate?: Function
-  handlePlaylistItemAdd?: Function
+  handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   nowPlayingItem: NowPlayingItem
@@ -33,6 +33,8 @@ type Props = {
   playing?: boolean
   playlists: any
   showAutoplay?: boolean
+  showAddToPlaylists?: boolean
+  showAddToQueue?: boolean
 }
 
 type State = {
@@ -384,9 +386,9 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   render () {
     const { autoplay, handleAddToQueuePlayLast, handleAddToQueuePlayNext, handleMakeClip,
-      handleOnEpisodeEnd, handleToggleAutoplay, handleTogglePlay, nowPlayingItem,
-      playerClipLink, playerEpisodeLink, playerPodcastLink, playing, playlists,
-      showAutoplay } = this.props
+      handleOnEpisodeEnd, handlePlaylistItemAdd, handleToggleAutoplay, handleTogglePlay,
+      nowPlayingItem, playerClipLink, playerEpisodeLink, playerPodcastLink, playing,
+      playlists, showAddToPlaylists, showAddToQueue, showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, playbackRate, progressPreviewTime } = this.state
@@ -566,12 +568,15 @@ export class MediaPlayer extends React.Component<Props, State> {
         {
           openAddToModal &&
             <AddToModal
-              handleAddToQueuePlayNext={handleAddToQueuePlayNext}
               handleAddToQueuePlayLast={handleAddToQueuePlayLast}
+              handleAddToQueuePlayNext={handleAddToQueuePlayNext}
+              handlePlaylistItemAdd={handlePlaylistItemAdd}
               hideModal={this.hideAddToModal}
               isOpen={openAddToModal}
               nowPlayingItem={nowPlayingItem}
-              playlists={playlists} />
+              playlists={playlists}
+              showPlaylists={showAddToPlaylists}
+              showQueue={showAddToQueue} />
         }
         {
           (openMakeClipModal && handleMakeClip) &&

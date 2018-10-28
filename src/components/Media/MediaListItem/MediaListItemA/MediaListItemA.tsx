@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 export interface Props {
-  handleOnClick?: () => void
   /** the url of the left positioned image */
   imageUrl?: string
   showImage?: boolean
@@ -18,7 +17,7 @@ export interface Props {
 }
 
 export const MediaListItemA: React.StatelessComponent<Props> = props => {
-  const { imageUrl, showImage, subTitleBottom, subTitleBottomSide, 
+  const { imageUrl, showImage, subTitleBottom, subTitleBottomSide,
     subTitleTop, subTitleTopSide, title } = props
 
   return (

@@ -13,7 +13,7 @@ type Props = {
   dataNowPlayingItem?: any
   dataPlaylist?: any
   dataPodcast?: any
-  handleOnClick?: () => void
+  handleOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   itemType: string
   noWrap?: boolean
 }
@@ -43,7 +43,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       {
         (itemType === 'clip' && dataClip) &&
           <MediaListItemA
-            handleOnClick={handleOnClick}
             imageUrl={dataClip.podcastImageUrl}
             subTitleBottom={dataClip.episodeTitle}
             subTitleBottomSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
@@ -53,7 +52,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       {
         (itemType === 'episode' && dataEpisode) &&
           <MediaListItemA
-            handleOnClick={handleOnClick}
             imageUrl={dataEpisode.podcast.imageUrl}
             subTitleBottom='Full Episode'
             subTitleBottomSide={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
@@ -63,7 +61,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       {
         (itemType === 'episode-clip' && dataClip) &&
           <MediaListItemA
-            handleOnClick={handleOnClick}
             showImage={false}
             subTitleTop={dataClip.startTime}
             subTitleTopSide='duration'
@@ -72,7 +69,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       {
         (itemType === 'now-playing-item' && (dataNowPlayingItem && dataNowPlayingItem.clipStartTime)) &&
           <MediaListItemA
-            handleOnClick={handleOnClick}
             imageUrl={dataNowPlayingItem.imageUrl}
             subTitleBottom={dataNowPlayingItem.episodeTitle}
             subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
@@ -82,7 +78,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       {
         (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime)) &&
           <MediaListItemA
-            handleOnClick={handleOnClick}
             imageUrl={dataNowPlayingItem.imageUrl}
             subTitleBottom='Full Episode'
             subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
@@ -92,7 +87,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       {
         (itemType === 'playlist' && dataPlaylist) &&
         <MediaListItemD
-          handleOnClick={handleOnClick}
           subTitle={dataPlaylist.lastUpdated ? readableDate(dataPlaylist.lastUpdated) : ''}
           subTitleSide={`items: ${dataPlaylist.items.length}`}
           title={dataPlaylist.title} />
@@ -100,7 +94,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       {
         (itemType === 'podcast' && dataPodcast) &&
           <MediaListItemB
-            handleOnClick={handleOnClick}
             imageUrl={dataPodcast.imageUrl}
             subTitle={dataPodcast.lastEpisodeTitle}
             subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
@@ -109,7 +102,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       {
         (itemType === 'podcast-clip' && dataClip) &&
           <MediaListItemA
-            handleOnClick={handleOnClick}
             imageUrl={dataClip.podcastImageUrl}
             subTitleBottom={dataClip.startTime}
             subTitleBottomSide={dataClip.endTime}
@@ -122,7 +114,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
           <MediaListItemC
             date={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
             description={striptags(dataEpisode.description)}
-            handleOnClick={handleOnClick}
             title={dataClip.episodeTitle} />
       }
     </a>
