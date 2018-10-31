@@ -400,7 +400,6 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodePubDate,
       episodeTitle, imageUrl, podcastTitle } = nowPlayingItem
-console.log(nowPlayingItem);
 
     // Force ReactPlayer to reload if it receives a new mediaUrl, set loading state,
     // and clear clip flags.
@@ -412,197 +411,198 @@ console.log(nowPlayingItem);
     const currentTime = this.player ? this.player.getCurrentTime() : 0
 
     return (
-      <div className='mp'>
-        {
-          isClientSide &&
-            <FilePlayer
-              key={reactPlayerKey}
-              muted={false}
-              onDuration={this.onDuration}
-              onEnded={handleOnEpisodeEnd}
-              onPlay={this.onPlay}
-              onProgress={this.onProgress}
-              onSeek={this.onSeek}
-              playbackRate={playbackRate}
-              playing={playing}
-              ref={this.playerRef}
-              style={{ display: 'none' }}
-              url={episodeMediaUrl}
-              volume={1} />
-        }
-        <div className='mp__headline'>
-          <div className='mp-headline__inner'>
-            <a
-              className='mp-headline__link'
-              { ... playerClipLink &&
-                { href: playerClipLink }
-              }>
-              <div className='mp-headline__title'>
-                {clipTitle ? clipTitle : ''}
-              </div>
-              <div className='mp-headline__time'>
-                {clipStartTime ? readableClipTime(clipStartTime, clipEndTime) : `${readableDate(episodePubDate)}`}
-              </div>
-            </a>
-          </div>
-        </div>
-        <div className='mp__header'>
-          <div className='mp-header__inner'>
-            <a
-              className='mp-header__link'
-              {
-                ... playerEpisodeLink &&
-                  { href: playerEpisodeLink }
-              }>
-              <img
-                className='mp-header__image'
-                src={imageUrl} />
-              <div className='mp-header__wrap'>
-                <div className='mp-header-wrap__top'>
-                  {podcastTitle}
+      nowPlayingItem.episodeMediaUrl ?
+        <div className='mp'>
+          {
+            isClientSide &&
+              <FilePlayer
+                key={reactPlayerKey}
+                muted={false}
+                onDuration={this.onDuration}
+                onEnded={handleOnEpisodeEnd}
+                onPlay={this.onPlay}
+                onProgress={this.onProgress}
+                onSeek={this.onSeek}
+                playbackRate={playbackRate}
+                playing={playing}
+                ref={this.playerRef}
+                style={{ display: 'none' }}
+                url={episodeMediaUrl}
+                volume={1} />
+          }
+          <div className='mp__headline'>
+            <div className='mp-headline__inner'>
+              <a
+                className='mp-headline__link'
+                { ... playerClipLink &&
+                  { href: playerClipLink }
+                }>
+                <div className='mp-headline__title'>
+                  {clipTitle ? clipTitle : ''}
                 </div>
-                <div className='mp-header-wrap__bottom'>
-                  {episodeTitle}
+                <div className='mp-headline__time'>
+                  {clipStartTime ? readableClipTime(clipStartTime, clipEndTime) : `${readableDate(episodePubDate)}`}
                 </div>
-              </div>
-            </a>
-            <button
-              className={`mp-header__add ${openAddToModal ? 'active' : ''}`}
-              onClick={this.toggleAddToModal}>
-              <FontAwesomeIcon icon='plus-circle' />
-            </button>
-            {
-              handleMakeClip &&
-                <button
-                  className={`mp-header__clip ${openMakeClipModal ? 'active' : ''}`}
-                  onClick={this.toggleMakeClipModal}>
-                  <FontAwesomeIcon icon='cut' />
-                </button>
-            }
-            <button
-              className={`mp-header__queue ${openQueueModal ? 'active' : ''}`}
-              onClick={this.toggleQueueModal}>
-              <FontAwesomeIcon icon='list-ul' />
-            </button>
-            <button
-              className={`mp-header__share ${openShareModal ? 'active' : ''}`}
-              onClick={this.toggleShareModal}>
-              <FontAwesomeIcon icon='share' />
-            </button>
-          </div>
-        </div>
-        <div className='mp__player'>
-          <div className='mp-player__inner'>
-            <button
-              className='mp-player__play-pause'
-              onClick={handleTogglePlay}>
-              {
-                playing ?
-                  <FontAwesomeIcon icon='pause' /> :
-                  <FontAwesomeIcon icon='play' />
-              }
-            </button>
-            <div
-              className='mp-player__progress-bar-wrapper'
-              data-iscapture='true'
-              data-tip
-              ref={this.progressBarWidth}>
-              {
-                (!isLoading && duration) &&
-                  <span className={`mp-player__current-time`}>
-                    {convertSecToHHMMSS(this.player.getCurrentTime())}
-                  </span>
-              }
-              <div
-                className='mp-progress-bar__clip-start'
-                style={{
-                  display: `${clipStartFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
-                  left: `${clipStartFlagPositionX}px`
-                }} />
-              <div
-                className='mp-progress-bar__clip-end'
-                style={{
-                  display: `${clipEndFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
-                  left: `${clipEndFlagPositionX}px`
-                }} />
-              <ReactTooltip
-                className='mp-progress-bar__preview'>
-                {convertSecToHHMMSS(progressPreviewTime)}
-              </ReactTooltip>
-              <Progress
-                className='mp-player__progress-bar'
-                onClick={this.setCurrentTime}
-                onMouseMove={this.onMouseOverProgress}
-                value={duration && this.player ? (this.player.getCurrentTime() / duration) * 100 : 0} />
-              {
-                (!isLoading && duration) &&
-                  <span
-                    className={`mp-player__duration`}
-                    ref={this.durationNode}>
-                    {convertSecToHHMMSS(duration)}
-                  </span>
-              }
+              </a>
             </div>
-            <button
-              className='mp-player__time-jump-forward'
-              onClick={this.handleTimeJumpForward}>
-              <FontAwesomeIcon icon='redo-alt' />
-            </button>
-            <button
-              className='mp-player__playback-rate'
-              onClick={this.setPlaybackRate}>
-              {getPlaybackRateText(playbackRate)}
-            </button>
-            {
-              (showAutoplay) &&
-              <button
-              className={`mp-player__autoplay ${autoplay ? 'active' : ''}`}
-              onClick={handleToggleAutoplay}>
-                  <FontAwesomeIcon icon='infinity' />
-                </button>
-            }
-            <button
-              className='mp-player__skip'
-              onClick={this.handleItemSkip}>
-              <FontAwesomeIcon icon='step-forward' />
-            </button>
           </div>
-        </div>
-        {
-          openAddToModal &&
-            <AddToModal
-              handleAddToQueuePlayLast={handleAddToQueuePlayLast}
-              handleAddToQueuePlayNext={handleAddToQueuePlayNext}
-              handlePlaylistItemAdd={handlePlaylistItemAdd}
-              hideModal={this.hideAddToModal}
-              isOpen={openAddToModal}
-              nowPlayingItem={nowPlayingItem}
-              playlists={playlists}
-              showPlaylists={showAddToPlaylists}
-              showQueue={showAddToQueue} />
-        }
-        {
-          (openMakeClipModal && handleMakeClip) &&
-            <MakeClipModal
-              handleSubmit={handleMakeClip}
-              hideModal={this.hideMakeClipModal}
-              isPublic={true}
-              isOpen={openMakeClipModal}
-              startTime={currentTime} />
-        }
-        <QueueModal
-          handleOnClick={handleQueueItemClick}
-          hideModal={this.hideQueueModal}
-          isOpen={openQueueModal}
-          primaryItems={queuePrimaryItems}
-          secondaryItems={queueSecondaryItems} />
-        <ShareModal
-          hideModal={this.hideShareModal}
-          isOpen={openShareModal}
-          playerClipLink={playerClipLink}
-          playerEpisodeLink={playerEpisodeLink}
-          playerPodcastLink={playerPodcastLink} />
-      </div>
+          <div className='mp__header'>
+            <div className='mp-header__inner'>
+              <a
+                className='mp-header__link'
+                {
+                  ... playerEpisodeLink &&
+                    { href: playerEpisodeLink }
+                }>
+                <img
+                  className='mp-header__image'
+                  src={imageUrl} />
+                <div className='mp-header__wrap'>
+                  <div className='mp-header-wrap__top'>
+                    {podcastTitle}
+                  </div>
+                  <div className='mp-header-wrap__bottom'>
+                    {episodeTitle}
+                  </div>
+                </div>
+              </a>
+              <button
+                className={`mp-header__add ${openAddToModal ? 'active' : ''}`}
+                onClick={this.toggleAddToModal}>
+                <FontAwesomeIcon icon='plus-circle' />
+              </button>
+              {
+                handleMakeClip &&
+                  <button
+                    className={`mp-header__clip ${openMakeClipModal ? 'active' : ''}`}
+                    onClick={this.toggleMakeClipModal}>
+                    <FontAwesomeIcon icon='cut' />
+                  </button>
+              }
+              <button
+                className={`mp-header__queue ${openQueueModal ? 'active' : ''}`}
+                onClick={this.toggleQueueModal}>
+                <FontAwesomeIcon icon='list-ul' />
+              </button>
+              <button
+                className={`mp-header__share ${openShareModal ? 'active' : ''}`}
+                onClick={this.toggleShareModal}>
+                <FontAwesomeIcon icon='share' />
+              </button>
+            </div>
+          </div>
+          <div className='mp__player'>
+            <div className='mp-player__inner'>
+              <button
+                className='mp-player__play-pause'
+                onClick={handleTogglePlay}>
+                {
+                  playing ?
+                    <FontAwesomeIcon icon='pause' /> :
+                    <FontAwesomeIcon icon='play' />
+                }
+              </button>
+              <div
+                className='mp-player__progress-bar-wrapper'
+                data-iscapture='true'
+                data-tip
+                ref={this.progressBarWidth}>
+                {
+                  (!isLoading && duration) &&
+                    <span className={`mp-player__current-time`}>
+                      {convertSecToHHMMSS(this.player.getCurrentTime())}
+                    </span>
+                }
+                <div
+                  className='mp-progress-bar__clip-start'
+                  style={{
+                    display: `${clipStartFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                    left: `${clipStartFlagPositionX}px`
+                  }} />
+                <div
+                  className='mp-progress-bar__clip-end'
+                  style={{
+                    display: `${clipEndFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                    left: `${clipEndFlagPositionX}px`
+                  }} />
+                <ReactTooltip
+                  className='mp-progress-bar__preview'>
+                  {convertSecToHHMMSS(progressPreviewTime)}
+                </ReactTooltip>
+                <Progress
+                  className='mp-player__progress-bar'
+                  onClick={this.setCurrentTime}
+                  onMouseMove={this.onMouseOverProgress}
+                  value={duration && this.player ? (this.player.getCurrentTime() / duration) * 100 : 0} />
+                {
+                  (!isLoading && duration) &&
+                    <span
+                      className={`mp-player__duration`}
+                      ref={this.durationNode}>
+                      {convertSecToHHMMSS(duration)}
+                    </span>
+                }
+              </div>
+              <button
+                className='mp-player__time-jump-forward'
+                onClick={this.handleTimeJumpForward}>
+                <FontAwesomeIcon icon='redo-alt' />
+              </button>
+              <button
+                className='mp-player__playback-rate'
+                onClick={this.setPlaybackRate}>
+                {getPlaybackRateText(playbackRate)}
+              </button>
+              {
+                (showAutoplay) &&
+                <button
+                className={`mp-player__autoplay ${autoplay ? 'active' : ''}`}
+                onClick={handleToggleAutoplay}>
+                    <FontAwesomeIcon icon='infinity' />
+                  </button>
+              }
+              <button
+                className='mp-player__skip'
+                onClick={this.handleItemSkip}>
+                <FontAwesomeIcon icon='step-forward' />
+              </button>
+            </div>
+          </div>
+          {
+            openAddToModal &&
+              <AddToModal
+                handleAddToQueuePlayLast={handleAddToQueuePlayLast}
+                handleAddToQueuePlayNext={handleAddToQueuePlayNext}
+                handlePlaylistItemAdd={handlePlaylistItemAdd}
+                hideModal={this.hideAddToModal}
+                isOpen={openAddToModal}
+                nowPlayingItem={nowPlayingItem}
+                playlists={playlists}
+                showPlaylists={showAddToPlaylists}
+                showQueue={showAddToQueue} />
+          }
+          {
+            (openMakeClipModal && handleMakeClip) &&
+              <MakeClipModal
+                handleSubmit={handleMakeClip}
+                hideModal={this.hideMakeClipModal}
+                isPublic={true}
+                isOpen={openMakeClipModal}
+                startTime={currentTime} />
+          }
+          <QueueModal
+            handleOnClick={handleQueueItemClick}
+            hideModal={this.hideQueueModal}
+            isOpen={openQueueModal}
+            primaryItems={queuePrimaryItems}
+            secondaryItems={queueSecondaryItems} />
+          <ShareModal
+            hideModal={this.hideShareModal}
+            isOpen={openShareModal}
+            playerClipLink={playerClipLink}
+            playerEpisodeLink={playerEpisodeLink}
+            playerPodcastLink={playerPodcastLink} />
+        </div> : <React.Fragment></React.Fragment>
     )
   }
 }

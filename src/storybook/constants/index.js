@@ -12,3 +12,5 @@ export { samplePlaylist1, samplePlaylist2, samplePlaylist3, samplePlaylist4,
   samplePlaylist5, samplePlaylist6 } from './samplePlaylist'
 export { samplePodcast } from './samplePodcast'
 export { sampleText } from './sampleText'
+
+export const stubFunction = () => { console.log('stub a dub dub') }

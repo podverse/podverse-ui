@@ -5,12 +5,11 @@ import { MediaPlayer } from './MediaPlayer'
 import { sampleMediaRef1, sampleNowPlayingItem1, sampleNowPlayingItem2, sampleNowPlayingItem3,
   sampleNowPlayingItem3b, sampleNowPlayingItem4, sampleNowPlayingItem5, 
   sampleNowPlayingItem6, samplePlaylist1, samplePlaylist2, samplePlaylist3,
-  samplePlaylist4, samplePlaylist5, samplePlaylist6, sampleText } from 'storybook/constants'
+  samplePlaylist4, samplePlaylist5, samplePlaylist6, sampleText, stubFunction } from 'storybook/constants'
 import { addItemToPriorityQueue, addItemsToSecondaryQueue,
   clearItemsFromPriorityQueue, clearItemsFromSecondaryQueue,
   getPriorityQueueItems, getSecondaryQueueItems,
   popNextFromQueue } from 'lib/mediaPlayerQueue'
-import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 
 const { endTime, episodeMediaUrl, episodePubDate, episodeTitle, podcastImageUrl, 
   podcastTitle, startTime, title } = sampleMediaRef1
@@ -28,8 +27,6 @@ const nowPlayingItem = {
 
 const playlists = [samplePlaylist1, samplePlaylist2, samplePlaylist3, samplePlaylist4,
   samplePlaylist5, samplePlaylist6]
-
-const stubFunction = () => {console.log('stub a dub dub')}
 
 const handleAddToQueuePlayLast = (event) => {
   event.preventDefault()

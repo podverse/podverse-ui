@@ -1,0 +1,29 @@
+.more-dropdown-menu {
+  .btn {
+    border-radius: 44px;
+    border-style: solid;
+    border-width: 1px;
+    height: 44px;
+    width: 44px;
+  }
+}
+
+[theme=light] {
+  .more-dropdown-menu {
+    .btn {
+      background-color: $white;
+      border-color: $black;
+      color: $black;
+    }
+  }
+}
+
+[theme=dark] {
+  .more-dropdown-menu {
+    .btn {
+      background-color: $black;
+      border-color: $white;
+      color: $white;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import * as React from 'react'
 export interface Props {
   /** the url of the left positioned image */
   imageUrl?: string
+  moreMenuItems?: any
   showImage?: boolean
   /** the subtitle positioned bottom-left  */
   subTitleBottom?: string
