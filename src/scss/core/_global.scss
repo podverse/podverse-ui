@@ -35,6 +35,10 @@ html body {
     margin-bottom: 1rem;
   }
 
+  label {
+    margin-bottom: 0.25rem;
+  }
+
   .text-wrapper {
     overflow: hidden;
   }
@@ -76,6 +80,11 @@ html body {
 [theme=light] {
   background-color: $white;
 
+  // Next.js puts contents in div.view and has a #fff bg by default
+  body, .view {
+    background-color: $white;
+  }
+
   h6 {
     background-color: $black;
     color: $gray-light;
@@ -89,10 +98,32 @@ html body {
     color: $black;
   }
 
+  .ReactModal__Overlay {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+
+    .ReactModal__Content {
+      background-color: $white !important;
+      border-color: $gray-light !important;
+
+      h5 {
+        color: $black;
+      }
+
+      label {
+        color: $black;
+      }
+    }
+  }
+
 }
 
 [theme=dark] {
   background-color: $black;
+
+  // Next.js puts contents in div.view and has a #fff bg by default
+  body, .view {
+    background-color: $black;
+  }
 
   h6 {
     background-color: $white;
@@ -105,5 +136,22 @@ html body {
 
   .transparent-btn, .transparent-btn button.btn {
     color: $white;
+  }
+
+  .ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+
+    .ReactModal__Content {
+      background-color: $black !important;
+      border-color: $gray-dark !important;
+
+      h5 {
+        color: $white;
+      }
+
+      label {
+        color: $white;
+      }
+    }
   }
 }

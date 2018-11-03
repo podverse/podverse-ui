@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
 
 type Props = {
-  items?: any,
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  items: any
 }
 
 type State = {
@@ -47,12 +46,13 @@ export class MoreDropdown extends React.Component<Props, State> {
     return (
       <Dropdown
         className='more-dropdown-menu'
+        direction='left'
         isOpen={isOpen}
         toggle={this.toggleMenu} >
         <DropdownToggle>
           <FontAwesomeIcon icon='ellipsis-h' />
         </DropdownToggle>
-        <DropdownMenu>
+        <DropdownMenu right>
           {dropdownItemNodes}
         </DropdownMenu>
       </Dropdown>

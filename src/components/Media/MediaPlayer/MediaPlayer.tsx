@@ -6,9 +6,9 @@ import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { NowPlayingItem } from 'lib/nowPlayingItem'
 import { convertSecToHHMMSS, readableClipTime, readableDate } from 'lib/util'
-import { AddToModal } from './AddToModal/AddToModal'
+import AddToModal from './AddToModal/AddToModal'
 import MakeClipModal from './MakeClipModal/MakeClipModal'
-import { QueueModal } from './QueueModal/QueueModal'
+import QueueModal from './QueueModal/QueueModal'
 import ShareModal from './ShareModal/ShareModal'
 
 type Props = {
@@ -21,6 +21,7 @@ type Props = {
   handleOnPastClipTime?: Function
   handleQueueItemClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePause?: Function
+  handlePlaybackRateClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handlePlaylistCreate?: Function
   handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -28,7 +29,8 @@ type Props = {
   nowPlayingItem: NowPlayingItem
   queuePrimaryItems: NowPlayingItem[]
   queueSecondaryItems: NowPlayingItem[]
-  playbackRate?: number
+  playbackRate: number
+  playbackRateText: string
   playerClipLink?: string
   playerEpisodeLink?: string
   playerPodcastLink?: string
@@ -50,7 +52,6 @@ type State = {
   openMakeClipModal: boolean
   openQueueModal: boolean
   openShareModal: boolean
-  playbackRate: number
   played: number
   playedSeconds: number
   progressPreviewTime: number
@@ -66,44 +67,6 @@ export interface MediaPlayer {
   durationNode: any
   player: any
   progressBarWidth: any
-}
-
-const getPlaybackRateText = num => {
-  switch (num) {
-    case 0.5:
-      return '0.5x'
-    case 0.75:
-      return '0.75x'
-    case 1:
-      return '1x'
-    case 1.25:
-      return '1.25x'
-    case 1.5:
-      return '1.5x'
-    case 2:
-      return '2x'
-    default:
-      return '1x'
-  }
-}
-
-const changePlaybackRate = num => {
-  switch (num) {
-    case 0.5:
-      return 0.75
-    case 0.75:
-      return 1
-    case 1:
-      return 1.25
-    case 1.25:
-      return 1.5
-    case 1.5:
-      return 2
-    case 2:
-      return 0.5
-    default:
-      return 1
-  }
 }
 
 const timePlaceholder = '--:--:--'
@@ -131,6 +94,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     queuePrimaryItems: [],
     queueSecondaryItems: [],
     playbackRate: 1,
+    playbackRateText: '1x',
     playing: false,
     playlists: [],
     showAutoplay: true
@@ -150,7 +114,6 @@ export class MediaPlayer extends React.Component<Props, State> {
       openMakeClipModal: false,
       openQueueModal: false,
       openShareModal: false,
-      playbackRate: props.playbackRate || 1,
       played: 0,
       playedSeconds: 0,
       progressPreviewTime: -1,
@@ -188,12 +151,6 @@ export class MediaPlayer extends React.Component<Props, State> {
     const offsetX = e.nativeEvent.offsetX
     const width = e.currentTarget.offsetWidth
     this.player.seekTo(offsetX / width)
-  }
-
-  setPlaybackRate = e => {
-    this.setState({
-      playbackRate: changePlaybackRate(this.state.playbackRate)
-    })
   }
 
   getClipFlagPositions = (): ClipFlagPositions => {
@@ -390,13 +347,14 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   render () {
     const { autoplay, handleAddToQueuePlayLast, handleAddToQueuePlayNext, handleMakeClip,
-      handleOnEpisodeEnd, handleQueueItemClick, handlePlaylistItemAdd, handleToggleAutoplay,
-      handleTogglePlay, nowPlayingItem, playerClipLink, playerEpisodeLink, playerPodcastLink,
-      playing, playlists, queuePrimaryItems, queueSecondaryItems, showAddToPlaylists,
-      showAddToQueue, showAutoplay } = this.props
+      handleOnEpisodeEnd, handleQueueItemClick, handlePlaybackRateClick, handlePlaylistItemAdd,
+      handleToggleAutoplay, handleTogglePlay, nowPlayingItem, playbackRate, playbackRateText,
+      playerClipLink, playerEpisodeLink, playerPodcastLink, playing, playlists, queuePrimaryItems,
+      queueSecondaryItems, showAddToPlaylists, showAddToQueue,
+      showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
-      openQueueModal, openShareModal, playbackRate, progressPreviewTime } = this.state
+      openQueueModal, openShareModal, progressPreviewTime } = this.state
 
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodePubDate,
       episodeTitle, imageUrl, podcastTitle } = nowPlayingItem
@@ -438,7 +396,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                   { href: playerClipLink }
                 }>
                 <div className='mp-headline__title'>
-                  {clipTitle ? clipTitle : ''}
+                  {clipTitle ? clipTitle : 'Full Episode'}
                 </div>
                 <div className='mp-headline__time'>
                   {clipStartTime ? readableClipTime(clipStartTime, clipEndTime) : `${readableDate(episodePubDate)}`}
@@ -550,8 +508,8 @@ export class MediaPlayer extends React.Component<Props, State> {
               </button>
               <button
                 className='mp-player__playback-rate'
-                onClick={this.setPlaybackRate}>
-                {getPlaybackRateText(playbackRate)}
+                onClick={handlePlaybackRateClick}>
+                {playbackRateText}
               </button>
               {
                 (showAutoplay) &&

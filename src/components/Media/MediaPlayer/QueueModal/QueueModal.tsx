@@ -7,8 +7,15 @@ export interface Props {
   handleOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
-  primaryItems: any
-  secondaryItems: any
+  primaryItems: any[]
+  secondaryItems: any[]
+}
+
+const defaultProps: Props = {
+  hideModal: () => { console.log('hideModal') },
+  isOpen: false,
+  primaryItems: [],
+  secondaryItems: []
 }
 
 const customStyles = {
@@ -24,7 +31,7 @@ const customStyles = {
   }
 }
 
-export const QueueModal: React.StatelessComponent<Props> = props => {
+const QueueModal: React.StatelessComponent<Props> = props => {
   const { handleOnClick, hideModal, isOpen, primaryItems, secondaryItems } = props
 
   const primaryItemNodes = primaryItems.map(x => {
@@ -82,3 +89,7 @@ export const QueueModal: React.StatelessComponent<Props> = props => {
     </Modal>
   )
 }
+
+QueueModal.defaultProps = defaultProps
+
+export default QueueModal

@@ -53,7 +53,7 @@ export const getPriorityQueueItems = () => {
 export const popNextFromPriorityQueue = () => {
   const items = getPriorityQueueItems()
 
-  if (items.length > 0) {
+  if (items && items.length > 0) {
     const nextItem = items.shift()
     localStorage.setItem(kPriorityQueue, JSON.stringify(items))
     return nextItem
@@ -103,7 +103,7 @@ export const getSecondaryQueueItems = () => {
 export const popNextFromSecondaryQueue = () => {
   const items = getSecondaryQueueItems()
 
-  if (items.length > 0) {
+  if (items && items.length > 0) {
     const nextItem = items.shift()
     localStorage.setItem(kSecondaryQueue, JSON.stringify(items))
     return nextItem

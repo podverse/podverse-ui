@@ -1,3 +1,45 @@
 .media-info {
   clear: both;
+  margin: 1rem 0;
+
+  .media-info__show-more {
+    cursor: pointer;
+    margin-top: 0.5rem;
+  }
+
+  .media-info__description {
+    margin-top: 0.5rem;
+  }
+}
+
+html[theme=light] {
+  .media-info {
+    .media-info__clip-title {
+      color: $black;
+    }
+
+    .media-info__clip-time {
+      color: $gray;
+    }
+
+    .media-info__show-more {
+      color: $blue;
+    }
+  }
+}
+
+html[theme=dark] {
+  .media-info {
+    .media-info__clip-title {
+      color: $white;
+    }
+
+    .media-info__clip-time {
+      color: $gray;
+    }
+
+    .media-info__show-more {
+      color: $blue;
+    }
+  }
 }

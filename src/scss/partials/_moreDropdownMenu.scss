@@ -1,10 +1,15 @@
-.more-dropdown-menu {
+.more-dropdown-menu {  
   .btn {
     border-radius: 44px;
     border-style: solid;
     border-width: 1px;
     height: 44px;
     width: 44px;
+  }
+
+  .dropdown-menu {
+    // force left, vertical-center position
+    transform: translate3d(-170px, -43px, 0px) !important; 
   }
 }
 

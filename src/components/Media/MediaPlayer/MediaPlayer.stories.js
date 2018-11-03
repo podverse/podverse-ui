@@ -28,6 +28,45 @@ const nowPlayingItem = {
 const playlists = [samplePlaylist1, samplePlaylist2, samplePlaylist3, samplePlaylist4,
   samplePlaylist5, samplePlaylist6]
 
+
+const getPlaybackRateText = num => {
+  switch (num) {
+    case 0.5:
+      return '0.5x'
+    case 0.75:
+      return '0.75x'
+    case 1:
+      return '1x'
+    case 1.25:
+      return '1.25x'
+    case 1.5:
+      return '1.5x'
+    case 2:
+      return '2x'
+    default:
+      return '1x'
+  }
+}
+
+const getPlaybackRateNextValue = num => {
+  switch (num) {
+    case 0.5:
+      return 0.75
+    case 0.75:
+      return 1
+    case 1:
+      return 1.25
+    case 1.25:
+      return 1.5
+    case 1.5:
+      return 2
+    case 2:
+      return 0.5
+    default:
+      return 1
+  }
+}
+
 const handleAddToQueuePlayLast = (event) => {
   event.preventDefault()
   alert('add to queue play last')
@@ -83,6 +122,16 @@ const handlePause = () => {
   })
 }
 
+const handlePlaybackRateClick = () => {
+  const playbackRate = store.get('playbackRate')
+  const nextPlaybackRate = getPlaybackRateNextValue(playbackRate)
+  
+  store.set({ 
+    playbackRate: nextPlaybackRate,
+    playbackRateText: getPlaybackRateText(nextPlaybackRate)
+  })
+}
+
 const handleQueueItemClick = () => {
   alert('queue item clicked')
 }
@@ -109,12 +158,14 @@ const store = new Store({
   handleOnPastClipTime,
   handleQueueItemClick,
   handlePause,
+  handlePlaybackRateClick,
   handlePlaylistCreate: stubFunction,
   handlePlaylistItemAdd,
   handleToggleAutoplay,
   handleTogglePlay,
   nowPlayingItem,
   playbackRate: 1,
+  playbackRateText: '1x',
   playerClipLink: '/clip/1234',
   playerEpisodeLink: '/episode/1234',
   playerPodcastLink: '/podcast/1234',

@@ -12,9 +12,16 @@ export interface Props {
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   nowPlayingItem: NowPlayingItem
-  playlists: any
+  playlists: any[]
   showPlaylists?: boolean
   showQueue?: boolean
+}
+
+const defaultProps: Props = {
+  hideModal: () => { console.log('hideModal') },
+  isOpen: false,
+  nowPlayingItem: {},
+  playlists: []
 }
 
 const customStyles = {
@@ -30,7 +37,7 @@ const customStyles = {
   }
 }
 
-export const AddToModal: React.StatelessComponent<Props> = props => {
+const AddToModal: React.StatelessComponent<Props> = props => {
   const { handleAddToQueuePlayLast, handleAddToQueuePlayNext, handlePlaylistItemAdd,
     hideModal, isOpen, nowPlayingItem, playlists, showPlaylists, showQueue } = props
 
@@ -90,3 +97,7 @@ export const AddToModal: React.StatelessComponent<Props> = props => {
     </Modal>
   )
 }
+
+AddToModal.defaultProps = defaultProps
+
+export default AddToModal

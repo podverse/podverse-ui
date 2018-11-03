@@ -12,7 +12,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006 -c .storybook -s ./.storybook/public",
     "build": "npm run build-lib && build-storybook",
-    "build-lib": "webpack",
+    "build-lib": "nodemon --exec webpack --ext ts,tsx,scss --ignore ./build",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

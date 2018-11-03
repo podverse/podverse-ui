@@ -145,7 +145,7 @@
       margin: auto;
       text-align: left;
       position: absolute;
-      top: -2px;
+      top: 0px;
       left: 4px;
       color: #eee;
       z-index: 1;
@@ -185,7 +185,7 @@
       margin: auto;
       text-align: right;
       position: absolute;
-      top: -2px;
+      top: 0px;
       right: 4px;
       color: #eee;
       z-index: 1;
@@ -227,6 +227,8 @@
     }
 
     button {
+      color: $black;
+
       &.active {
         color: $blue;
       }
@@ -244,13 +246,21 @@
 
 [theme=dark] {
   .mp__headline, .mp__header, .mp__player {
-    background-color: $gray-light;
+    background-color: $gray-dark;
     border-color: $gray;
     color: $black;
 
     a {
       color: $white;
       text-decoration: none;
+
+      &:hover {
+        color: $gray-light;
+      }
+    }
+
+    button {
+      color: $white;
     }
 
     .active {
