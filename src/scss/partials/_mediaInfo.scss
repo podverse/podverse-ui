@@ -1,6 +1,10 @@
 .media-info {
   clear: both;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
+
+  .media-info__clip-time {
+    margin-top: 0.25rem;
+  }
 
   .media-info__show-more {
     cursor: pointer;
@@ -25,6 +29,10 @@ html[theme=light] {
     .media-info__show-more {
       color: $blue;
     }
+
+    .media-info__description {
+      color: $black;
+    }
   }
 }
 
@@ -40,6 +48,10 @@ html[theme=dark] {
 
     .media-info__show-more {
       color: $blue;
+    }
+
+    .media-info__description {
+      color: $white;
     }
   }
 }

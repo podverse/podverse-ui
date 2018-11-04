@@ -150,12 +150,12 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
           }
         </a>
       </div>
-      <div className='media-list__right'>
-        {
-          showMoreMenu &&
+      {
+        showMoreMenu &&
+          <div className='media-list__right'>
             <MoreDropdown items={moreMenuItems} />
-        }
-      </div>
+          </div>
+      }
     </div>
   )
 }

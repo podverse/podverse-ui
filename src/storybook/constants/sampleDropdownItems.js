@@ -16,13 +16,13 @@ export const mediaListSelectItemsPlayer = [
 export const mediaListSubSelectItemsPlayer = [
   {
     href: '#',
-    label: 'Clips from this podcast',
+    label: 'From this podcast',
     onClick: () => console.log('clips from this podcast'),
     value: 'from-podcast'
   },
   {
     href: '#',
-    label: 'Clips from this episode',
+    label: 'From this episode',
     onClick: () => console.log('clips from this episode'),
     value: 'from-episode'
   },

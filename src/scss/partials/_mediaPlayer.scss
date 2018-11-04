@@ -6,24 +6,46 @@
   right: 0;
   z-index: 10;
 
+  button {
+    height: 36px;
+  }
+
+  .mp-headline__inner, .mp-header__inner, .mp-player__inner {
+    max-width: $player-max-width;
+    margin: auto;
+  }
+
+  @media(max-width: ($player-max-width + 1rem)) {
+    .mp-headline__inner {
+      .mp-headline__title {
+        margin-left: 0.5rem;
+      }
+
+      .mp-headline__time {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .mp-header__image {
+      margin-left: 0.5rem;
+    }
+  }
+
   .mp__headline {
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-top-style: solid;
     border-top-width: 1px;
-    bottom: 81px; left: 0; right: 0;
+    bottom: 82px; left: 0; right: 0;
     display: flex;
-    height: 26px;
-    line-height: 24px;
+    height: 27px;
+    line-height: 25px;
     min-width: 0;
-    padding: 0 0.25rem;
     position: fixed;
     text-align: left;
   
     .mp-headline__inner {
-      max-width: $player-max-width;
       display: flex;
-      margin: auto;
       width: 100%;
     }
   
@@ -48,7 +70,7 @@
   .mp__header {
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    bottom:  40px; left: 0; right: 0;
+    bottom:  41px; left: 0; right: 0;
     display: flex;
     height: 41px;
     position: fixed;
@@ -61,9 +83,6 @@
       display: flex;
       flex: 1;
       height: 40px;
-      max-width: $player-max-width;
-      margin: auto;
-      width: 100%;
     }
   
     .mp-header__link {
@@ -118,13 +137,14 @@
     
     .mp-header__share {
       flex: 0 0 40px;
+      margin-right: -0.625rem;
     }
   }
   
   .mp__player {
     bottom: 0; left: 0; right: 0;
     display: flex;
-    height: 40px;
+    height: 41px;
     position: fixed;
 
     button {
@@ -132,7 +152,6 @@
     }
   
     .mp-player__inner {
-      max-width: $player-max-width;
       display: flex;
       flex: 1;
     }
@@ -211,7 +230,17 @@
   
     .mp-player__skip {
       flex: 0 0 40px;
+      margin-right: -0.625rem;
     }
+  }
+}
+
+@media(max-width: ($player-max-width + 1rem)) {
+  .mp-header__share {
+    margin-right: auto !important;
+  }
+  .mp-player__skip {
+    margin-right: auto !important;
   }
 }
 
@@ -246,8 +275,8 @@
 
 [theme=dark] {
   .mp__headline, .mp__header, .mp__player {
-    background-color: $gray-dark;
-    border-color: $gray;
+    background-color: $gray-darker;
+    border-color: $gray-dark;
     color: $black;
 
     a {

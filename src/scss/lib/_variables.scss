@@ -1,4 +1,4 @@
-$player-max-width: none;
+$player-max-width: 41.25rem; // 680px
 
 // Text Sizes
 $root-text-size: 16px;
@@ -23,22 +23,28 @@ $text-xs-rem: .75rem;
 $text-tiny-rem: .5rem;
 
 // Colors
-$white: #FFF;
-$gray-light: #999;
-$gray: #666;
-$gray-dark: #333;
+$white: #fff;
+$gray-lightest: #eee;
+$gray-lighter: #c1c1c1;
+$gray-light: #9c9c9c;
+$gray: #777;
+$gray-dark: #575757;
+$gray-darker: #373737;
+$gray-darkest: #111;
 $black: #000;
+
+$blue-lighter: #4f83bf;
 $blue: #2968B1;
-$link-blue: #0275d8;
+$blue-darker: #225691;
 
 $brand-color: $blue;
 
 // Light Theme Colors
 $light-text-primary-color: $black;
 $light-text-secondary-color: $gray;
-$light-text-link-color: $link-blue;
+$light-text-link-color: $blue;
 
 // Dark Theme Colors
 $dark-text-primary-color: $white;
 $dark-text-secondary-color: $gray-light;
-$dark-text-link-color: $link-blue;
+$dark-text-link-color: $blue;
