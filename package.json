@@ -26,6 +26,7 @@
     "react-player": "^1.6.6",
     "react-tooltip": "^3.9.0",
     "reactstrap": "^6.5.0",
+    "sanitize-html": "^1.19.1",
     "striptags": "^3.1.1",
     "tslint": "^5.11.0",
     "tslint-config-standard": "^8.0.1"

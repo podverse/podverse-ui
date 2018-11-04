@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { readableClipTime } from 'lib/util';
+import { readableClipTime } from 'lib/util'
+const sanitizeHtml = require('sanitize-html')
 
 type Props = {
   clipEndTime: string
@@ -26,7 +27,7 @@ export class MediaInfo extends React.Component<Props, State> {
     this.toggleDescription = this.toggleDescription.bind(this)
   }
 
-  toggleDescription() {
+  toggleDescription () {
     this.setState(prevState => ({
       showDescription: !prevState.showDescription
     }))
@@ -63,11 +64,14 @@ export class MediaInfo extends React.Component<Props, State> {
         }
         {
           (description && showDescription) &&
-            <div className='media-info__description'>
-              {description}
-            </div>
+            <div
+              className='media-info__description'
+              dangerouslySetInnerHTML={
+                {
+                  __html: sanitizeHtml(description)
+                }} />
         }
       </div>
     )
-  } 
+  }
 }
