@@ -2,6 +2,14 @@
   font-size: $text-lg-rem;
 }
 
-.media-list__sub-select button {
-  font-size: $text-md-rem;
+.media-list__sub-select {
+  // The Reactstrap Dropdown direction='down' appears to be buggy,
+  // so manually force the dropdown-menu to load below the dropdown.
+  .dropdown-menu {
+    transform: translate3d(-12px, 36px, 0px) !important;
+  }
+
+  button {
+    font-size: $text-md-rem;
+  }
 }

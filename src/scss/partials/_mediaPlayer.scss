@@ -246,8 +246,8 @@
 
 [theme=light] {
   .mp__headline, .mp__header, .mp__player {
-    background-color: $gray-light;
-    border-color: $gray;
+    background-color: $gray-lighter;
+    border-color: $gray-light;
     color: $black;
 
     a {
@@ -264,7 +264,7 @@
     }
 
     .progress {
-      background-color: $gray;
+      background-color: $gray-light;
     }
 
     .progress .progress-bar {

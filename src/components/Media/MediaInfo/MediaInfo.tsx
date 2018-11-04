@@ -68,7 +68,9 @@ export class MediaInfo extends React.Component<Props, State> {
               className='media-info__description'
               dangerouslySetInnerHTML={
                 {
-                  __html: sanitizeHtml(description)
+                  __html: sanitizeHtml(description, {
+                    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+                  })
                 }} />
         }
       </div>

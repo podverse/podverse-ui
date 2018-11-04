@@ -54,9 +54,12 @@ export class MediaListSelect extends React.Component<Props, State> {
     return (
       <Dropdown
         className={selectClass}
+        direction='down'
         isOpen={this.state.dropdownOpen}
         toggle={this.toggle}>
-        <DropdownToggle caret>
+        <DropdownToggle
+          caret
+          className='transparent' >
           {selectedText}
         </DropdownToggle>
         <DropdownMenu>

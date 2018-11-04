@@ -1,24 +1,37 @@
+body {
+  .btn-secondary.dropdown-toggle {
+    margin: 0 -0.75rem;
+
+    &.transparent {
+      background-color: transparent !important;
+    }
+  }
+}
+
 [theme=light] {
   body {
-    .btn-secondary, .btn-secondary.dropdown-toggle {
+    .btn-secondary.dropdown-toggle {
       background-color: $gray-lightest;
       border: none !important;
-      box-shadow: none !important;
       color: $black;
+      margin: 0 -0.75rem;
       
       &:hover {
-        background-color: $gray-lighter;
+        background-color: $gray-lightest;
         color: $black;
+        text-decoration: underline;
       }
   
       &:focus {
-        background-color: $gray-lighter;
+        background-color: $gray-lightest;
         color: $black;
+        text-decoration: underline;
       }
 
       &:active {
-        background-color: $gray-lighter;
+        background-color: $gray-lightest;
         color: $black;
+        text-decoration: underline;
       }
     }
 
@@ -40,38 +53,40 @@
 
 [theme=dark] {
   body {
-    .btn-secondary, .btn-secondary.dropdown-toggle {
-      background-color: $gray-darkest;
+    .btn-secondary.dropdown-toggle {
+      background-color: transparent;
       border: none !important;
-      box-shadow: none !important;
       color: $white;
       
       &:hover {
-        background-color: $gray-darker;
+        background-color: transparent;
         color: $white;
+        text-decoration: underline;
       }
   
       &:focus {
-        background-color: $gray-darker;
+        background-color: transparent;
         color: $white;
+        text-decoration: underline;
       }
 
       &:active {
-        background-color: $gray-darker;
+        background-color: transparent;
         color: $white;
+        text-decoration: underline;
       }
     }
 
     .dropdown-menu {
-      background-color: $black;
+      background-color: $gray-darker;
 
       .dropdown-item {
-        background-color: $black;
-        border-color: $gray-darker;
+        background-color: $gray-darker;
+        border-color: $gray;
         color: $white;
   
         &:hover {
-          background-color: $gray-darkest;
+          background-color: $gray-dark;
         }
       }
     }
