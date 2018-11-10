@@ -52,7 +52,7 @@ export class MoreDropdown extends React.Component<Props, State> {
         <DropdownToggle>
           <FontAwesomeIcon icon='ellipsis-h' />
         </DropdownToggle>
-        <DropdownMenu right>
+        <DropdownMenu>
           {dropdownItemNodes}
         </DropdownMenu>
       </Dropdown>

@@ -9,6 +9,8 @@ export { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 export { MediaListSelect } from 'components/Media/MediaListSelect/MediaListSelect'
 export { MediaPlayer } from 'components/Media/MediaPlayer/MediaPlayer'
 
+export { Navbar } from 'components/Navbar/Navbar'
+
 export { addItemToPriorityQueue, addItemsToSecondaryQueue,
   clearItemsFromSecondaryQueue, getPriorityQueueItems, getSecondaryQueueItems,
   popNextFromPriorityQueue, popNextFromQueue, popNextFromSecondaryQueue,

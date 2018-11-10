@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 type Props = {
-  isSubSelect: boolean
+  isSubSelect?: boolean
   items: Array<any>
-  name: string
-  selected: string
+  name?: string
+  selected?: string
 }
 
 type State = {
@@ -13,6 +13,10 @@ type State = {
 }
 
 export class MediaListSelect extends React.Component<Props, State> {
+  static defaultProps: Props = {
+    items: []
+  }
+
   constructor (props) {
     super(props)
 

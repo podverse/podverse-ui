@@ -4,7 +4,7 @@ import { CloseButton } from 'components/CloseButton/CloseButton'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 
 export interface Props {
-  handleOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   primaryItems: any[]
@@ -32,21 +32,21 @@ const customStyles = {
 }
 
 const QueueModal: React.StatelessComponent<Props> = props => {
-  const { handleOnClick, hideModal, isOpen, primaryItems, secondaryItems } = props
+  const { handleAnchorOnClick, hideModal, isOpen, primaryItems, secondaryItems } = props
 
   const primaryItemNodes = primaryItems.map(x => {
     if (x.clipStartTime) {
       return (
         <MediaListItem
           dataNowPlayingItem={x}
-          handleOnClick={handleOnClick}
+          handleAnchorOnClick={handleAnchorOnClick}
           itemType='now-playing-item' />
       )
     } else {
       return (
         <MediaListItem
           dataNowPlayingItem={x}
-          handleOnClick={handleOnClick}
+          handleAnchorOnClick={handleAnchorOnClick}
           itemType='now-playing-item' />
       )
     }
@@ -57,14 +57,14 @@ const QueueModal: React.StatelessComponent<Props> = props => {
       return (
         <MediaListItem
           dataNowPlayingItem={x}
-          handleOnClick={handleOnClick}
+          handleAnchorOnClick={handleAnchorOnClick}
           itemType='now-playing-item' />
       )
     } else {
       return (
         <MediaListItem
           dataNowPlayingItem={x}
-          handleOnClick={handleOnClick}
+          handleAnchorOnClick={handleAnchorOnClick}
           itemType='now-playing-item' />
       )
     }

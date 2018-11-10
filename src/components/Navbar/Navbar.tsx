@@ -12,6 +12,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type Props = {
   brandImageUrl?: string
@@ -26,28 +27,33 @@ type State = {
   isOpen: boolean
 }
 
-export default class Navbar extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
+export class Navbar extends React.Component<Props, State> {
 
-    this.toggle = this.toggle.bind(this);
+  constructor (props) {
+    super(props)
+
+    this.toggle = this.toggle.bind(this)
     this.state = {
       isOpen: false
-    };
+    }
   }
-  toggle() {
+
+  toggle () {
     this.setState({
       isOpen: !this.state.isOpen
-    });
+    })
   }
-  render() {
+
+  render () {
     const { brandImageUrl, brandText, brandUrl, dropdownItems,
       dropdownText, navItems } = this.props
 
-    const navItemsEls = navItems.map(x => 
+    const navItemsEls = navItems.map(x =>
       <NavItem>
-        <NavLink href={x.href}>{x.label}</NavLink>
-      </NavItem>  
+        <NavLink href={x.href}>
+          {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+        </NavLink>
+      </NavItem>
     )
 
     const dropdownItemsEls = dropdownItems.map(x =>
@@ -55,14 +61,14 @@ export default class Navbar extends React.Component<Props, State> {
     )
 
     return (
-      <div>
-        <BSNavbar color="light" light expand="sm">
+      <div className='navbar__bg'>
+        <BSNavbar color='light' light expand='sm'>
           <NavbarBrand href={brandUrl}>{
             brandImageUrl ? <img src={brandImageUrl} /> : brandText
           }</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className='ml-auto' navbar>
               {navItemsEls}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
@@ -76,6 +82,6 @@ export default class Navbar extends React.Component<Props, State> {
           </Collapse>
         </BSNavbar>
       </div>
-    );
+    )
   }
 }

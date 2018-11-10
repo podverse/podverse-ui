@@ -1,10 +1,5 @@
 .mp {
-  bottom: 0;
   font-size: 14px;
-  left: 0;
-  position: fixed;
-  right: 0;
-  z-index: 10;
 
   button {
     height: 36px;
@@ -15,7 +10,7 @@
     margin: auto;
   }
 
-  @media(max-width: ($player-max-width + 1rem)) {
+  @media(max-width: ($player-max-width + 16px)) {
     .mp-headline__inner {
       .mp-headline__title {
         margin-left: 0.5rem;
@@ -32,16 +27,12 @@
   }
 
   .mp__headline {
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
     border-top-style: solid;
     border-top-width: 1px;
-    bottom: 82px; left: 0; right: 0;
     display: flex;
     height: 27px;
     line-height: 25px;
     min-width: 0;
-    position: fixed;
     text-align: left;
   
     .mp-headline__inner {
@@ -70,10 +61,10 @@
   .mp__header {
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    bottom:  41px; left: 0; right: 0;
+    border-top-style: solid;
+    border-top-width: 1px;
     display: flex;
-    height: 41px;
-    position: fixed;
+    height: 42px;
 
     button {
       margin: 3px 0;
@@ -142,10 +133,9 @@
   }
   
   .mp__player {
-    bottom: 0; left: 0; right: 0;
     display: flex;
     height: 41px;
-    position: fixed;
+    position: relative;
 
     button {
       margin: 2px 0;
@@ -235,7 +225,7 @@
   }
 }
 
-@media(max-width: ($player-max-width + 1rem)) {
+@media(max-width: ($player-max-width + 16px)) {
   .mp-header__share {
     margin-right: auto !important;
   }
@@ -248,7 +238,6 @@
   .mp__headline, .mp__header, .mp__player {
     background-color: $gray-lighter;
     border-color: $gray-light;
-    color: $black;
 
     a {
       color: $black;
@@ -277,7 +266,6 @@
   .mp__headline, .mp__header, .mp__player {
     background-color: $gray-darker;
     border-color: $gray-dark;
-    color: $black;
 
     a {
       color: $white;

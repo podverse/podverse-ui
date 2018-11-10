@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { NowPlayingItem } from 'lib/nowPlayingItem'
-import { convertSecToHHMMSS, readableClipTime, readableDate } from 'lib/util'
+import { convertSecToHHMMSS, readableClipTime } from 'lib/util'
 import AddToModal from './AddToModal/AddToModal'
 import MakeClipModal from './MakeClipModal/MakeClipModal'
 import QueueModal from './QueueModal/QueueModal'
@@ -356,8 +356,8 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, progressPreviewTime } = this.state
 
-    const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodePubDate,
-      episodeTitle, imageUrl, podcastTitle } = nowPlayingItem
+    const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
+      imageUrl, podcastTitle } = nowPlayingItem
 
     // Force ReactPlayer to reload if it receives a new mediaUrl, set loading state,
     // and clear clip flags.
@@ -388,22 +388,25 @@ export class MediaPlayer extends React.Component<Props, State> {
                 url={episodeMediaUrl}
                 volume={1} />
           }
-          <div className='mp__headline'>
-            <div className='mp-headline__inner'>
-              <a
-                className='mp-headline__link'
-                { ... playerClipLink &&
-                  { href: playerClipLink }
-                }>
-                <div className='mp-headline__title'>
-                  {clipTitle ? clipTitle : 'Full Episode'}
+          {
+            clipStartTime &&
+              <div className='mp__headline'>
+                <div className='mp-headline__inner'>
+                  <a
+                    className='mp-headline__link'
+                    { ... playerClipLink &&
+                      { href: playerClipLink }
+                    }>
+                    <div className='mp-headline__title'>
+                      {clipTitle}
+                    </div>
+                    <div className='mp-headline__time'>
+                      {readableClipTime(clipStartTime, clipEndTime)}
+                    </div>
+                  </a>
                 </div>
-                <div className='mp-headline__time'>
-                  {clipStartTime ? readableClipTime(clipStartTime, clipEndTime) : `${readableDate(episodePubDate)}`}
-                </div>
-              </a>
-            </div>
-          </div>
+              </div>
+          }
           <div className='mp__header'>
             <div className='mp-header__inner'>
               <a
@@ -549,7 +552,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                 startTime={currentTime} />
           }
           <QueueModal
-            handleOnClick={handleQueueItemClick}
+            handleAnchorOnClick={handleQueueItemClick}
             hideModal={this.hideQueueModal}
             isOpen={openQueueModal}
             primaryItems={queuePrimaryItems}

@@ -44,7 +44,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
   const playlistMediaListItems = playlists.map(x =>
     <MediaListItem
       dataPlaylist={x}
-      handleOnClick={handlePlaylistItemAdd}
+      handleAnchorOnClick={handlePlaylistItemAdd}
       itemType='playlist'
       noWrap={true} />
   )

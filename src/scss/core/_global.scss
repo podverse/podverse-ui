@@ -6,22 +6,27 @@ html body {
   line-height: $root-text-line-height;
 
   h1 {
+    font-size: $text-3x-rem;
     margin-bottom: 1rem;
   }
 
   h2 {
+    font-size: $text-2x-rem;
     margin-bottom: 1rem;
   }
 
   h3 {
+    font-size: $text-xl-rem;
     margin-bottom: 1rem;
   }
 
   h4 {
+    font-size: $text-lg-rem;
     margin-bottom: 1rem;
   }
 
   h5 {
+    font-size: $text-md-rem;
     margin-bottom: 1rem;
   }
 
@@ -32,7 +37,7 @@ html body {
 
   p {
     font-size: $text-md-rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
   }
 
   label {
@@ -65,6 +70,15 @@ html body {
     border: none !important;
   }
 
+  .info-img {
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+
+  .responsive {
+    max-width: 100%;
+  }
+
   .no-wrap div {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -85,9 +99,21 @@ html body {
     background-color: $white;
   }
 
+  h1, h2, h3, h4, h5 {
+    color: $gray-dark;
+  }
+
   h6 {
     background-color: $black;
     color: $gray-light;
+  }
+
+  p {
+    color: $black;
+  }
+
+  hr {
+    border-color: $gray-light;
   }
 
   .close-btn {
@@ -125,9 +151,21 @@ html body {
     background-color: $black;
   }
 
+  h1, h2, h3, h4, h5 {
+    color: $gray-light;
+  }
+
   h6 {
     background-color: $white;
     color: $gray-darker;
+  }
+
+  p {
+    color: $white;
+  }
+
+  hr {
+    border-color: $gray-dark;
   }
 
   .close-btn {
