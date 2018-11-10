@@ -8,9 +8,9 @@ import { copyToClipboard } from 'lib/util'
 type Props = {
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
-  playerClipLink?: string
-  playerEpisodeLink?: string
-  playerPodcastLink?: string
+  playerClipLinkHref?: string
+  playerEpisodeLinkHref?: string
+  playerPodcastLinkHref?: string
 }
 
 type State = {
@@ -45,7 +45,7 @@ class ShareModal extends React.Component<Props, State> {
   }
 
   handleClipCopy () {
-    copyToClipboard(this.props.playerClipLink)
+    copyToClipboard(this.props.playerClipLinkHref)
     this.setState({ lastCopied: 'clip' })
     setTimeout(() => {
       this.setState({ lastCopied: undefined })
@@ -53,7 +53,7 @@ class ShareModal extends React.Component<Props, State> {
   }
 
   handleEpisodeCopy () {
-    copyToClipboard(this.props.playerEpisodeLink)
+    copyToClipboard(this.props.playerEpisodeLinkHref)
     this.setState({ lastCopied: 'episode' })
     setTimeout(() => {
       this.setState({ lastCopied: undefined })
@@ -61,7 +61,7 @@ class ShareModal extends React.Component<Props, State> {
   }
 
   handlePodcastCopy () {
-    copyToClipboard(this.props.playerPodcastLink)
+    copyToClipboard(this.props.playerPodcastLinkHref)
     this.setState({ lastCopied: 'podcast' })
     setTimeout(() => {
       this.setState({ lastCopied: undefined })
@@ -69,8 +69,8 @@ class ShareModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { hideModal, isOpen, playerClipLink, playerEpisodeLink,
-      playerPodcastLink } = this.props
+    const { hideModal, isOpen, playerClipLinkHref, playerEpisodeLinkHref,
+      playerPodcastLinkHref } = this.props
     const { lastCopied } = this.state
 
     return (
@@ -84,13 +84,13 @@ class ShareModal extends React.Component<Props, State> {
         <h5>Share</h5>
         <CloseButton onClick={hideModal} />
         {
-          playerClipLink &&
+          playerClipLinkHref &&
           <FormGroup>
             <Label for='share-copy-clip'>Clip</Label>
             <InputGroup id='share-copy-clip'>
               <Input
                 readOnly={true}
-                value={playerClipLink} />
+                value={playerClipLinkHref} />
               <InputGroupAddon
                 addonType='append'>
                 <Button onClick={this.handleClipCopy}>
@@ -103,13 +103,13 @@ class ShareModal extends React.Component<Props, State> {
           </FormGroup>
         }
         {
-          playerEpisodeLink &&
+          playerEpisodeLinkHref &&
           <FormGroup>
             <Label for='share-copy-episode'>Episode</Label>
             <InputGroup id='share-copy-episode'>
               <Input
                 readOnly={true}
-                value={playerEpisodeLink} />
+                value={playerEpisodeLinkHref} />
               <InputGroupAddon
                 addonType='append'>
                 <Button onClick={this.handleEpisodeCopy}>
@@ -122,13 +122,13 @@ class ShareModal extends React.Component<Props, State> {
           </FormGroup>
         }
         {
-          playerPodcastLink &&
+          playerPodcastLinkHref &&
           <FormGroup>
             <Label for='share-copy-podcast'>Podcast</Label>
             <InputGroup id='share-copy-podcast'>
               <Input
                 readOnly={true}
-                value={playerPodcastLink} />
+                value={playerPodcastLinkHref} />
               <InputGroupAddon
                 addonType='append'>
                 <Button onClick={this.handlePodcastCopy}>

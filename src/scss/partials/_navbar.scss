@@ -5,6 +5,10 @@
     max-width: $body-max-width;
     padding: 0.25rem 0rem;
 
+    a {
+      cursor: pointer;
+    }
+
     .nav-item {
       margin-left: 0.75rem;
     }

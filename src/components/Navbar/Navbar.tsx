@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 import {
   Collapse,
   Navbar as BSNavbar,
@@ -11,8 +11,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+} from 'reactstrap'
+import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = {
   brandImageUrl?: string
@@ -49,23 +50,34 @@ export class Navbar extends React.Component<Props, State> {
       dropdownText, navItems } = this.props
 
     const navItemsEls = navItems.map(x =>
-      <NavItem>
-        <NavLink href={x.href}>
-          {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
-        </NavLink>
-      </NavItem>
+      <Link
+        {...(x.href ? { href: x.href } : {})}
+        {...(x.as ? { as: x.as } : {})}>
+        <NavItem>
+          <NavLink>
+            {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+          </NavLink>
+        </NavItem>
+      </Link>
     )
 
     const dropdownItemsEls = dropdownItems.map(x =>
-      <DropdownItem href={x.href}>{x.label}</DropdownItem>
+      <Link
+        {...(x.href ? { href: x.href } : {})}
+        {...(x.as ? { as: x.as } : {})}>
+        <DropdownItem>{x.label}</DropdownItem>
+      </Link>
     )
 
     return (
       <div className='navbar__bg'>
         <BSNavbar color='light' light expand='sm'>
-          <NavbarBrand href={brandUrl}>{
-            brandImageUrl ? <img src={brandImageUrl} /> : brandText
-          }</NavbarBrand>
+          <Link
+            {...(brandUrl ? { href: brandUrl } : {})}>
+            <NavbarBrand>{
+              brandImageUrl ? <img src={brandImageUrl} /> : brandText
+            }</NavbarBrand>
+          </Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className='ml-auto' navbar>
