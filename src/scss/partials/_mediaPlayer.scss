@@ -1,11 +1,20 @@
 .mp {
   font-size: 14px;
 
+  a {
+    cursor: pointer;
+  }
+
   button {
     height: 36px;
   }
 
-  .mp-headline__inner, .mp-header__inner, .mp-player__inner {
+  .mp-headline__inner {
+    max-width: $player-max-width;
+    margin: 0 auto;
+  }
+  
+  .mp-header__inner, .mp-player__inner {
     max-width: $player-max-width;
     margin: auto;
   }

@@ -16,6 +16,7 @@ type Props = {
   autoplay?: boolean
   handleAddToQueuePlayLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleAddToQueuePlayNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleClipRestart?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleMakeClip?: Function
   handleOnEpisodeEnd?: Function
@@ -190,7 +191,14 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   handleTimeJumpForward = () => {
     this.player.seekTo(this.player.getCurrentTime() + 15)
-    this.forceUpdate() // Force update so the time updates immediately
+    this.forceUpdate()
+  }
+
+  handleClipRestart = () => {
+    const { nowPlayingItem } = this.props
+    const { clipStartTime } = nowPlayingItem
+    this.player.seekTo(clipStartTime)
+    this.forceUpdate()
   }
 
   handleItemSkip = (evt) => {
@@ -411,9 +419,11 @@ export class MediaPlayer extends React.Component<Props, State> {
                       </div>
                     </a>
                   </Link>
-                  <div className='mp-headline__time'>
+                  <a
+                    className='mp-headline__time'
+                    onClick={this.handleClipRestart}>
                     {readableClipTime(clipStartTime, clipEndTime)}
-                  </div>
+                  </a>
                 </div>
               </div>
           }
