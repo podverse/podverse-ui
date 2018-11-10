@@ -19,7 +19,7 @@ type Props = {
   brandText?: string
   brandUrl?: string
   dropdownItems?: any
-  dropdownText?: string
+  dropdownText?: any
   navItems?: any
 }
 
