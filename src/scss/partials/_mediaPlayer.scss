@@ -50,12 +50,11 @@
     }
   
     .mp-headline__link {
-      display: flex;
-      width: 100%;
-    }
-  
-    .mp-headline__title {
       flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    .mp-headline__title {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -63,7 +62,7 @@
   
     .mp-headline__time {
       flex: 0 0 auto;
-      margin-left: 0.25rem;
+      margin-left: 0.5rem;
     }
   }
   
