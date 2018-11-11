@@ -1,22 +1,22 @@
 const kPriorityQueue = 'mediaPlayerPriorityQueue'
 const kSecondaryQueue = 'mediaPlayerSecondaryQueue'
 
-export const popNextFromQueue = () => {
+export const popNextFromQueueStorage = () => {
   let nextItem
-  const nextPriorityItem = popNextFromPriorityQueue()
+  const nextPriorityItem = popNextFromPriorityQueueStorage()
 
   if (nextPriorityItem) {
     nextItem = nextPriorityItem
   } else {
-    const nextSecondaryItem = popNextFromSecondaryQueue()
+    const nextSecondaryItem = popNextFromSecondaryQueueStorage()
 
     if (nextSecondaryItem) {
       nextItem = nextSecondaryItem
     }
   }
 
-  const priorityItems = getPriorityQueueItems()
-  const secondaryItems = getSecondaryQueueItems()
+  const priorityItems = getPriorityQueueItemsStorage()
+  const secondaryItems = getSecondaryQueueItemsStorage()
 
   return {
     nextItem,
@@ -25,7 +25,7 @@ export const popNextFromQueue = () => {
   }
 }
 
-export const addItemToPriorityQueue = (newItem, isLast) => {
+export const addItemToPriorityQueueStorage = (newItem, isLast) => {
   const jsonItems = localStorage.getItem(kPriorityQueue)
 
   if (jsonItems) {
@@ -43,15 +43,15 @@ export const addItemToPriorityQueue = (newItem, isLast) => {
   }
 }
 
-export const getPriorityQueueItems = () => {
+export const getPriorityQueueItemsStorage = () => {
   const jsonItems = localStorage.getItem(kPriorityQueue)
   if (jsonItems) {
     return JSON.parse(jsonItems)
   }
 }
 
-export const popNextFromPriorityQueue = () => {
-  const items = getPriorityQueueItems()
+export const popNextFromPriorityQueueStorage = () => {
+  const items = getPriorityQueueItemsStorage()
 
   if (items && items.length > 0) {
     const nextItem = items.shift()
@@ -60,7 +60,7 @@ export const popNextFromPriorityQueue = () => {
   }
 }
 
-export const removeItemFromPriorityQueue = (item) => {
+export const removeItemFromPriorityQueueStorage = (item) => {
   const queueItems = localStorage.getItem(kPriorityQueue)
 
   if (queueItems) {
@@ -70,11 +70,11 @@ export const removeItemFromPriorityQueue = (item) => {
   }
 }
 
-export const clearItemsFromPriorityQueue = (item) => {
+export const clearItemsFromPriorityQueueStorage = (item) => {
   localStorage.setItem(kPriorityQueue, JSON.stringify([]))
 }
 
-export const addItemsToSecondaryQueue = (newItems) => {
+export const addItemsToSecondaryQueueStorage = (newItems) => {
   const jsonItems = localStorage.getItem(kSecondaryQueue)
 
   if (jsonItems) {
@@ -93,15 +93,15 @@ export const addItemsToSecondaryQueue = (newItems) => {
   }
 }
 
-export const getSecondaryQueueItems = () => {
+export const getSecondaryQueueItemsStorage = () => {
   const jsonItems = localStorage.getItem(kSecondaryQueue)
   if (jsonItems) {
     return JSON.parse(jsonItems)
   }
 }
 
-export const popNextFromSecondaryQueue = () => {
-  const items = getSecondaryQueueItems()
+export const popNextFromSecondaryQueueStorage = () => {
+  const items = getSecondaryQueueItemsStorage()
 
   if (items && items.length > 0) {
     const nextItem = items.shift()
@@ -110,6 +110,6 @@ export const popNextFromSecondaryQueue = () => {
   }
 }
 
-export const clearItemsFromSecondaryQueue = (item) => {
+export const clearItemsFromSecondaryQueueStorage = (item) => {
   localStorage.setItem(kSecondaryQueue, JSON.stringify([]))
 }

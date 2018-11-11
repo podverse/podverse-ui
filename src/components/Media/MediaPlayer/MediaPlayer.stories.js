@@ -6,10 +6,10 @@ import { sampleMediaRef1, sampleNowPlayingItem1, sampleNowPlayingItem2, sampleNo
   sampleNowPlayingItem3b, sampleNowPlayingItem4, sampleNowPlayingItem5, 
   sampleNowPlayingItem6, samplePlaylist1, samplePlaylist2, samplePlaylist3,
   samplePlaylist4, samplePlaylist5, samplePlaylist6, sampleText, stubFunction } from 'storybook/constants'
-import { addItemToPriorityQueue, addItemsToSecondaryQueue,
-  clearItemsFromPriorityQueue, clearItemsFromSecondaryQueue,
-  getPriorityQueueItems, getSecondaryQueueItems,
-  popNextFromQueue } from 'lib/mediaPlayerQueue'
+import { addItemToPriorityQueueStorage, addItemsToSecondaryQueueStorage,
+  clearItemsFromPriorityQueueStorage, clearItemsFromSecondaryQueueStorage,
+  getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage,
+  popNextFromQueueStorage } from 'lib/mediaPlayerQueue'
 
 const { endTime, episodeMediaUrl, episodePubDate, episodeTitle, podcastImageUrl, 
   podcastTitle, startTime, title } = sampleMediaRef1
@@ -83,12 +83,12 @@ const handlePlaylistItemAdd = (event) => {
 }
 
 const handleItemSkip = () => {
-  const result = popNextFromQueue()
+  const result = popNextFromQueueStorage()
 
   store.set({
     nowPlayingItem: result.nextItem,
     playing: store.get('autoplay'),
-    queuePrimaryItems: result.primaryItems,
+    queuePriorityItems: result.priorityItems,
     queueSecondaryItems: result.secondaryItems,
   })
 }
@@ -171,18 +171,18 @@ const store = new Store({
   playerPodcastLinkHref: '/podcast/1234',
   playing: false,
   playlists: playlists,
-  queuePrimaryItems: getPriorityQueueItems(),
-  queueSecondaryItems: getSecondaryQueueItems(),
+  queuePriorityItems: getPriorityQueueItemsStorage(),
+  queueSecondaryItems: getSecondaryQueueItemsStorage(),
   showAddToPlaylists: true,
   showAddToQueue: true
 })
 
-clearItemsFromPriorityQueue()
-clearItemsFromSecondaryQueue()
-addItemToPriorityQueue(sampleNowPlayingItem1)
-addItemToPriorityQueue(sampleNowPlayingItem3b, true)
-addItemToPriorityQueue(sampleNowPlayingItem3)
-addItemsToSecondaryQueue([sampleNowPlayingItem4, sampleNowPlayingItem6,
+clearItemsFromPriorityQueueStorage()
+clearItemsFromSecondaryQueueStorage()
+addItemToPriorityQueueStorage(sampleNowPlayingItem1)
+addItemToPriorityQueueStorage(sampleNowPlayingItem3b, true)
+addItemToPriorityQueueStorage(sampleNowPlayingItem3)
+addItemsToSecondaryQueueStorage([sampleNowPlayingItem4, sampleNowPlayingItem6,
   sampleNowPlayingItem5, sampleNowPlayingItem2])
 
 storiesOf('Media', module)

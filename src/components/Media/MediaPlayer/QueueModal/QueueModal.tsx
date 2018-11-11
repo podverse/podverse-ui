@@ -7,14 +7,14 @@ export interface Props {
   handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
-  primaryItems: any[]
+  priorityItems: any[]
   secondaryItems: any[]
 }
 
 const defaultProps: Props = {
   hideModal: () => { console.log('hideModal') },
   isOpen: false,
-  primaryItems: [],
+  priorityItems: [],
   secondaryItems: []
 }
 
@@ -32,9 +32,9 @@ const customStyles = {
 }
 
 const QueueModal: React.StatelessComponent<Props> = props => {
-  const { handleAnchorOnClick, hideModal, isOpen, primaryItems, secondaryItems } = props
+  const { handleAnchorOnClick, hideModal, isOpen, priorityItems, secondaryItems } = props
 
-  const primaryItemNodes = primaryItems.map(x => {
+  const priorityItemNodes = priorityItems.map(x => {
     if (x.clipStartTime) {
       return (
         <MediaListItem
@@ -81,10 +81,20 @@ const QueueModal: React.StatelessComponent<Props> = props => {
       <h5>Queue</h5>
       <CloseButton onClick={hideModal} />
       <div className='scrollable-area'>
-        <h6>Next Up</h6>
-        {primaryItemNodes}
-        <h6>Autoplay</h6>
-        {secondaryItemNodes}
+        {
+          priorityItemNodes.length > 0 &&
+            <React.Fragment>
+              <h6>Next Up</h6>
+              {priorityItemNodes}
+            </React.Fragment>
+        }
+        {
+          secondaryItemNodes.length > 0 &&
+            <React.Fragment>
+              <h6>Auto Queue</h6>
+              {secondaryItemNodes}
+            </React.Fragment>
+        }
       </div>
     </Modal>
   )

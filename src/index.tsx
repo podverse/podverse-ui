@@ -11,8 +11,8 @@ export { MediaPlayer } from 'components/Media/MediaPlayer/MediaPlayer'
 
 export { Navbar } from 'components/Navbar/Navbar'
 
-export { addItemToPriorityQueue, addItemsToSecondaryQueue,
-  clearItemsFromSecondaryQueue, getPriorityQueueItems, getSecondaryQueueItems,
-  popNextFromPriorityQueue, popNextFromQueue, popNextFromSecondaryQueue,
-  removeItemFromPriorityQueue } from 'lib/mediaPlayerQueue'
+export { addItemToPriorityQueueStorage, addItemsToSecondaryQueueStorage,
+  clearItemsFromSecondaryQueueStorage, getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage,
+  popNextFromPriorityQueueStorage, popNextFromQueueStorage, popNextFromSecondaryQueueStorage,
+  removeItemFromPriorityQueueStorage } from 'lib/mediaPlayerQueue'
 export { convertToNowPlayingItem } from 'lib/nowPlayingItem'
