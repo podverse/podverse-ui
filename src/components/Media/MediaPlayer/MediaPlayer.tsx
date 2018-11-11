@@ -77,6 +77,8 @@ export interface MediaPlayer {
 
 const timePlaceholder = '--:--:--'
 
+let lastNowPlayingItem: NowPlayingItem = {}
+
 // Force ReactPlayer to refresh every time the mediaUrl changes, to ensure
 // playback behavior handles properly.
 let mediaUrl
@@ -373,6 +375,16 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       imageUrl, podcastTitle } = nowPlayingItem
 
+    // If the new NowPlayingItem is the same episode as the last one, but it is a
+    // different clip, then make the player seek to the new clipStartTime
+    if (lastNowPlayingItem.episodeMediaUrl === episodeMediaUrl &&
+        (lastNowPlayingItem.clipEndTime !== clipEndTime ||
+        lastNowPlayingItem.clipStartTime !== clipStartTime ||
+        lastNowPlayingItem.clipTitle !== clipTitle) &&
+        this.player) {
+      this.player.seekTo(clipStartTime)
+    }
+
     // Force ReactPlayer to reload if it receives a new mediaUrl, set loading state,
     // and clear clip flags.
     if (hasMediaUrlChanged(episodeMediaUrl)) {
@@ -381,6 +393,8 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     let { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
     const currentTime = this.player ? this.player.getCurrentTime() : 0
+
+    lastNowPlayingItem = nowPlayingItem
 
     return (
       nowPlayingItem.episodeMediaUrl ?
