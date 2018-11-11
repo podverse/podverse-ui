@@ -40,6 +40,10 @@ html body {
     margin: 1rem 0;
   }
 
+  a, a:not([href]):not([tabindex]) {
+    cursor: pointer;
+  }
+
   label {
     margin-bottom: 0.25rem;
   }
@@ -112,6 +116,14 @@ html body {
     color: $black;
   }
 
+  a, a:not([href]):not([tabindex]) {
+    color: $blue-darker;
+    
+    &:hover {
+      color: $blue;
+    }
+  }
+
   hr {
     border-color: $gray-light;
   }
@@ -162,6 +174,14 @@ html body {
 
   p {
     color: $white;
+  }
+
+  a, a:not([href]):not([tabindex]) {
+    color: $blue-lighter;
+
+    &:hover {
+      color: $blue;
+    }
   }
 
   hr {

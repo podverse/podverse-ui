@@ -7,6 +7,7 @@
     width: 44px;
   }
 
+  // Default menu to left position
   .dropdown-menu {
     // force left, vertical-center position
     transform: translate3d(-173px, -43px, 0px) !important; 

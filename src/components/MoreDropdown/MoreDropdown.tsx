@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
 
 type Props = {
+  className?: string
+  direction?: string
   items: any
 }
 
@@ -13,6 +15,7 @@ type State = {
 export class MoreDropdown extends React.Component<Props, State> {
 
   static defaultProps: Props = {
+    direction: 'left',
     items: []
   }
 
@@ -31,7 +34,7 @@ export class MoreDropdown extends React.Component<Props, State> {
   }
 
   render () {
-    const { items } = this.props
+    const { className, direction, items } = this.props
     const { isOpen } = this.state
 
     const dropdownItemNodes = items.map(x =>
@@ -45,8 +48,8 @@ export class MoreDropdown extends React.Component<Props, State> {
 
     return (
       <Dropdown
-        className='more-dropdown-menu'
-        direction='left'
+        className={`more-dropdown-menu ${className ? className : ''}`}
+        direction={direction}
         isOpen={isOpen}
         toggle={this.toggleMenu} >
         <DropdownToggle>

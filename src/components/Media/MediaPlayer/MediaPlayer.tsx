@@ -7,15 +7,15 @@ import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { NowPlayingItem } from 'lib/nowPlayingItem'
 import { convertSecToHHMMSS, readableClipTime } from 'lib/util'
-import AddToModal from './AddToModal/AddToModal'
-import MakeClipModal from './MakeClipModal/MakeClipModal'
-import QueueModal from './QueueModal/QueueModal'
-import ShareModal from './ShareModal/ShareModal'
+import AddToModal from 'components/Media/Modals/AddToModal/AddToModal'
+import MakeClipModal from 'components/Media/Modals/MakeClipModal/MakeClipModal'
+import QueueModal from 'components/Media/Modals/QueueModal/QueueModal'
+import ShareModal from 'components/Media/Modals/ShareModal/ShareModal'
 
 type Props = {
   autoplay?: boolean
-  handleAddToQueuePlayLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  handleAddToQueuePlayNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleAddToQueueLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleAddToQueueNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleClipRestart?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleMakeClip?: Function
@@ -28,6 +28,7 @@ type Props = {
   handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
   queuePriorityItems: NowPlayingItem[]
   queueSecondaryItems: NowPlayingItem[]
@@ -41,10 +42,8 @@ type Props = {
   playerEpisodeLinkOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   playerPodcastLinkHref?: string
   playing?: boolean
-  playlists: any
+  playlists: any[]
   showAutoplay?: boolean
-  showAddToPlaylists?: boolean
-  showAddToQueue?: boolean
 }
 
 type State = {
@@ -361,13 +360,12 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { autoplay, handleAddToQueuePlayLast, handleAddToQueuePlayNext, handleMakeClip,
+    const { autoplay, handleAddToQueueLast, handleAddToQueueNext, handleMakeClip,
       handleOnEpisodeEnd, handleQueueItemClick, handlePlaybackRateClick, handlePlaylistItemAdd,
-      handleToggleAutoplay, handleTogglePlay, nowPlayingItem, playbackRate, playbackRateText,
-      playerClipLinkAs, playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs,
-      playerEpisodeLinkHref, playerEpisodeLinkOnClick, playerPodcastLinkHref, playing,
-      playlists, queuePriorityItems, queueSecondaryItems, showAddToPlaylists, showAddToQueue,
-      showAutoplay } = this.props
+      handleToggleAutoplay, handleTogglePlay, isLoggedIn, nowPlayingItem, playbackRate,
+      playbackRateText, playerClipLinkAs, playerClipLinkHref, playerClipLinkOnClick,
+      playerEpisodeLinkAs, playerEpisodeLinkHref, playerEpisodeLinkOnClick, playerPodcastLinkHref,
+      playing, playlists, queuePriorityItems, queueSecondaryItems, showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, progressPreviewTime } = this.state
@@ -570,15 +568,15 @@ export class MediaPlayer extends React.Component<Props, State> {
           {
             openAddToModal &&
               <AddToModal
-                handleAddToQueuePlayLast={handleAddToQueuePlayLast}
-                handleAddToQueuePlayNext={handleAddToQueuePlayNext}
+                handleAddToQueueLast={handleAddToQueueLast}
+                handleAddToQueueNext={handleAddToQueueNext}
                 handlePlaylistItemAdd={handlePlaylistItemAdd}
                 hideModal={this.hideAddToModal}
                 isOpen={openAddToModal}
                 nowPlayingItem={nowPlayingItem}
                 playlists={playlists}
-                showPlaylists={showAddToPlaylists}
-                showQueue={showAddToQueue} />
+                showPlaylists={isLoggedIn}
+                showQueue={false} />
           }
           {
             (openMakeClipModal && handleMakeClip) &&

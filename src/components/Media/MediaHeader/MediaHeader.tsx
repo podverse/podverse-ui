@@ -1,18 +1,52 @@
 import * as React from 'react'
+import { getEpisodeUrl, getPodcastUrl } from 'lib/constants'
+import { readableDate } from 'lib/util'
 
 type Props = {
-  bottomText?: string | Array<any>
-  bottomTextSide?: string
-  imageUrl?: string
-  subTitle?: string | Array<any>
-  subTitleLink?: string
-  title?: string
-  titleLink?: string
+  episode?: any
+  mediaRef?: any
+  nowPlayingItem?: any
+  podcast?: any
 }
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
-  const { bottomText, bottomTextSide, imageUrl, subTitle, subTitleLink,
-    title, titleLink } = props
+  const { episode, mediaRef, nowPlayingItem, podcast } = props
+
+  let bottomText
+  let bottomTextSide
+  let imgUrl
+  let subTitle
+  let subTitleLink
+  let title
+  let titleLink
+
+  if (episode) {
+    console.log('episode')
+  } else if (mediaRef) {
+    const { episodeId, episodePubDate, episodeTitle, podcastId, podcastImageUrl,
+      podcastTitle } = mediaRef
+
+    bottomText = readableDate(episodePubDate)
+    bottomTextSide = ''
+    imgUrl = podcastImageUrl
+    subTitle = episodeTitle
+    subTitleLink = getEpisodeUrl(episodeId)
+    title = podcastTitle
+    titleLink = getPodcastUrl(podcastId)
+  } else if (nowPlayingItem) {
+    const { episodeId, episodePubDate, episodeTitle, imageUrl, podcastId,
+      podcastTitle } = nowPlayingItem
+
+    bottomText = readableDate(episodePubDate)
+    bottomTextSide = ''
+    imgUrl = imageUrl
+    subTitle = episodeTitle
+    subTitleLink = getEpisodeUrl(episodeId)
+    title = podcastTitle
+    titleLink = getPodcastUrl(podcastId)
+  } else if (podcast) {
+    console.log('podcast')
+  }
 
   let parsedSubTitle = ''
   if (subTitle instanceof Array) {
@@ -36,7 +70,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
 
   return (
     <div className='media-header'>
-      <img className='media-header__image' src={imageUrl} />
+      <img className='media-header__image' src={imgUrl} />
       <div className='text-wrapper'>
         {
           title &&

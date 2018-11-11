@@ -67,12 +67,12 @@ const getPlaybackRateNextValue = num => {
   }
 }
 
-const handleAddToQueuePlayLast = (event) => {
+const handleAddToQueueLast = (event) => {
   event.preventDefault()
   alert('add to queue play last')
 }
 
-const handleAddToQueuePlayNext = (event) => {
+const handleAddToQueueNext = (event) => {
   event.preventDefault()
   alert('add to queue play next')
 }
@@ -150,8 +150,8 @@ const handleTogglePlay = () => {
 
 const store = new Store({
   autoplay: false,
-  handleAddToQueuePlayLast,
-  handleAddToQueuePlayNext,
+  handleAddToQueueLast,
+  handleAddToQueueNext,
   handleItemSkip,
   handleMakeClip: stubFunction,
   handleOnEpisodeEnd: handleOnEnded,
