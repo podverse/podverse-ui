@@ -15,6 +15,7 @@ type Props = {
   isLoggedIn?: boolean
   mediaRef?: any
   nowPlayingItem?: any
+  playing?: boolean
   playlists: any[]
   podcast?: any
 }
@@ -63,7 +64,7 @@ export class MediaInfo extends React.Component<Props, State> {
 
   render () {
     const { episode, handleAddToPlaylist, handleAddToQueueLast, handleAddToQueueNext,
-      handlePlayItem, isLoggedIn, mediaRef, nowPlayingItem, podcast,
+      handlePlayItem, isLoggedIn, mediaRef, nowPlayingItem, playing, podcast,
       playlists } = this.props
     const { showAddToModal, showDescription } = this.state
 
@@ -106,7 +107,12 @@ export class MediaInfo extends React.Component<Props, State> {
             <Button
               className='media-info-controls__play'
               onClick={handlePlayItem}>
-              <FontAwesomeIcon icon='play' />
+              {
+                playing ?
+                  <FontAwesomeIcon icon={'pause'} />
+                  : <FontAwesomeIcon icon={'play'} />
+              }
+
             </Button>
             <Button
               className='media-info-controls__add-to'

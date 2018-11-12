@@ -243,63 +243,67 @@
 }
 
 [theme=light] {
-  .mp__headline, .mp__header, .mp__player {
-    background-color: $gray-lighter;
-    border-color: $gray-light;
-    color: $black;
-
-    a {
-      color: $black;
-      text-decoration: none;
-    }
-
-    button {
+  .mp {
+    .mp__headline, .mp__header, .mp__player {
+      background-color: $gray-lighter;
+      border-color: $gray-light;
       color: $black;
 
-      &.active {
-        color: $blue;
+      a {
+        color: $black;
+        text-decoration: none;
       }
-    }
 
-    .progress {
-      background-color: $gray-light;
-    }
+      button {
+        color: $black;
 
-    .progress .progress-bar {
-      background-color: $blue;
+        &.active {
+          color: $blue;
+        }
+      }
+
+      .progress {
+        background-color: $gray-light;
+      }
+
+      .progress .progress-bar {
+        background-color: $blue;
+      }
     }
   }
 }
 
 [theme=dark] {
-  .mp__headline, .mp__header, .mp__player {
-    background-color: $gray-darker;
-    border-color: $gray-dark;
-    color: $white;
-
-    a {
+  .mp {
+    .mp__headline, .mp__header, .mp__player {
+      background-color: $gray-darker;
+      border-color: $gray-dark;
       color: $white;
-      text-decoration: none;
-
-      &:hover {
-        color: $gray-light;
+  
+      a {
+        color: $white;
+        text-decoration: none;
+  
+        &:hover {
+          color: $gray-light;
+        }
       }
-    }
-
-    button {
-      color: $white;
-    }
-
-    .active {
-      color: $blue;
-    }
-
-    .progress {
-      background-color: $gray;
-    }
-
-    .progress .progress-bar {
-      background-color: $blue;
+  
+      button {
+        color: $white;
+      }
+  
+      .active {
+        color: $blue;
+      }
+  
+      .progress {
+        background-color: $gray;
+      }
+  
+      .progress .progress-bar {
+        background-color: $blue;
+      }
     }
   }
 }
