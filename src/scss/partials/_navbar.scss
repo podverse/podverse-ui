@@ -16,7 +16,18 @@
 
   @media(max-width: ($player-max-width + 16px)) {
     .navbar {
-      padding: 0.25rem 0.5rem;
+      padding: 0.25rem 1rem;
+    }
+  }
+
+  @media(max-width: 575px) {
+    .navbar-nav {
+      padding-top: 0.5rem;
+      
+      .nav-link {
+        padding: 0.75rem 0;
+        text-align: right;
+      }
     }
   }
 }

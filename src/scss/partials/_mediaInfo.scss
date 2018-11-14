@@ -17,6 +17,10 @@
     margin: 1rem 0 0.5rem 0;
 
     .media-info-controls__play svg {
+      margin-left: 2px;
+    }
+
+    .media-info-controls__play.playing svg {
       margin-left: 1px;
     }
 

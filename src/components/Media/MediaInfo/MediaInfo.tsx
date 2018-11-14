@@ -105,14 +105,13 @@ export class MediaInfo extends React.Component<Props, State> {
           }
           <div className='media-info__controls'>
             <Button
-              className='media-info-controls__play'
+              className={`media-info-controls__play ${playing ? 'playing' : ''}`}
               onClick={handlePlayItem}>
               {
                 playing ?
                   <FontAwesomeIcon icon={'pause'} />
                   : <FontAwesomeIcon icon={'play'} />
               }
-
             </Button>
             <Button
               className='media-info-controls__add-to'
