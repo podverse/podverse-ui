@@ -38,7 +38,7 @@ export class MediaListSelect extends React.Component<Props, State> {
 
     let selectedText
     const itemNodes = items.map((x, index) => {
-      if (selected === x.value) {
+      if (!selected && index === 0 || selected === x.value) {
         selectedText = x.label
         return
       }

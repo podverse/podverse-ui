@@ -30,8 +30,6 @@ type Props = {
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
-  queuePriorityItems: NowPlayingItem[]
-  queueSecondaryItems: NowPlayingItem[]
   playbackRate: number
   playbackRateText: string
   playerClipLinkAs?: string
@@ -40,9 +38,12 @@ type Props = {
   playerEpisodeLinkAs?: string
   playerEpisodeLinkHref?: string
   playerEpisodeLinkOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  playerPodcastLinkAs?: string
   playerPodcastLinkHref?: string
   playing?: boolean
   playlists: any[]
+  queuePriorityItems: NowPlayingItem[]
+  queueSecondaryItems: NowPlayingItem[]
   showAutoplay?: boolean
 }
 
@@ -364,7 +365,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       handleOnEpisodeEnd, handleQueueItemClick, handlePlaybackRateClick, handlePlaylistItemAdd,
       handleToggleAutoplay, handleTogglePlay, isLoggedIn, nowPlayingItem, playbackRate,
       playbackRateText, playerClipLinkAs, playerClipLinkHref, playerClipLinkOnClick,
-      playerEpisodeLinkAs, playerEpisodeLinkHref, playerEpisodeLinkOnClick, playerPodcastLinkHref,
+      playerEpisodeLinkAs, playerEpisodeLinkHref, playerEpisodeLinkOnClick, playerPodcastLinkAs,
       playing, playlists, queuePriorityItems, queueSecondaryItems, showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
@@ -596,9 +597,9 @@ export class MediaPlayer extends React.Component<Props, State> {
           <ShareModal
             hideModal={this.hideShareModal}
             isOpen={openShareModal}
-            playerClipLinkHref={playerClipLinkHref}
-            playerEpisodeLinkHref={playerEpisodeLinkHref}
-            playerPodcastLinkHref={playerPodcastLinkHref} />
+            playerClipLinkHref={playerClipLinkAs}
+            playerEpisodeLinkHref={playerEpisodeLinkAs}
+            playerPodcastLinkHref={playerPodcastLinkAs} />
         </div> : <React.Fragment></React.Fragment>
     )
   }
