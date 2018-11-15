@@ -3,7 +3,7 @@ import * as Modal from 'react-modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
-import { convertToNowPlayingItem } from 'lib/nowPlayingItem';
+import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 
 export interface Props {
   episode?: any

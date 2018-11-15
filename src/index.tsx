@@ -3,6 +3,11 @@ import 'scss/styles.scss'
 
 addFontAwesomeIcons()
 
+// export { ForgotPasswordModal } from 'components/Auth/ForgotPasswordModal'
+export { LoginModal } from 'components/Auth/LoginModal'
+// export { ResetPassword } from 'components/Auth/ResetPassword'
+// export { SignUpModal } from 'components/Auth/SignUpModal'
+
 export { MediaHeader } from 'components/Media/MediaHeader/MediaHeader'
 export { MediaInfo } from 'components/Media/MediaInfo/MediaInfo'
 export { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
