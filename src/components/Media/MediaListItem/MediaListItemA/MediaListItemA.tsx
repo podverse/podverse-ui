@@ -24,7 +24,7 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
   return (
     <div className='media-list-item__a'>
       {
-        showImage &&
+        (showImage && imageUrl) &&
           <img className='media-list-item-a__image' src={imageUrl} />
       }
       <div className='text-wrapper'>

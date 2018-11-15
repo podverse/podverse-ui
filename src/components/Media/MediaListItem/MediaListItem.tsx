@@ -137,11 +137,41 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                   title={dataNowPlayingItem.episodeTitle} />
             }
             {
+              (itemType === 'now-playing-item-clip-from-episode' && dataNowPlayingItem) &&
+                <MediaListItemA
+                  subTitleBottom={dataNowPlayingItem.clipStartTime}
+                  subTitleBottomSide='duration'
+                  title={dataNowPlayingItem.clipTitle} />
+            }
+            {
+              (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
+                <MediaListItemA
+                  subTitleBottom={dataNowPlayingItem.episodeTitle}
+                  subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                  title={dataNowPlayingItem.clipTitle} />
+            }
+            {
+              (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
+                <MediaListItemA
+                  subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                  subTitleTop={dataNowPlayingItem.podcastTitle}
+                  title={dataNowPlayingItem.episodeTitle} />
+            }
+            {
+              (itemType === 'now-playing-item-episode-all-podcasts' && dataNowPlayingItem) &&
+                <MediaListItemA
+                  imageUrl={dataNowPlayingItem.imageUrl}
+                  subTitleBottom='Full Episode'
+                  subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                  subTitleTop={dataNowPlayingItem.podcastTitle}
+                  title={dataNowPlayingItem.episodeTitle} />
+            }
+            {
               (itemType === 'playlist' && dataPlaylist) &&
-              <MediaListItemD
-                subTitle={dataPlaylist.lastUpdated ? readableDate(dataPlaylist.lastUpdated) : ''}
-                subTitleSide={`items: ${dataPlaylist.items.length}`}
-                title={dataPlaylist.title} />
+                <MediaListItemD
+                  subTitle={dataPlaylist.lastUpdated ? readableDate(dataPlaylist.lastUpdated) : ''}
+                  subTitleSide={`items: ${dataPlaylist.items.length}`}
+                  title={dataPlaylist.title} />
             }
             {
               (itemType === 'podcast' && dataPodcast) &&
