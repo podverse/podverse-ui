@@ -24,7 +24,6 @@ const customStyles = {
     left: '50%',
     maxWidth: '420px',
     overflow: 'unset',
-    padding: '1.5rem',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',

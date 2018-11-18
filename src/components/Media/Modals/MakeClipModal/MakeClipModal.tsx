@@ -38,7 +38,6 @@ const customStyles = {
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    padding: '1.5rem',
     width: '100%'
   }
 }

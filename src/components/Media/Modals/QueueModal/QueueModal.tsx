@@ -28,7 +28,6 @@ const customStyles = {
     height: 'calc(100% - 72px)',
     left: '50%',
     maxWidth: '480px',
-    padding: '1.5rem',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',

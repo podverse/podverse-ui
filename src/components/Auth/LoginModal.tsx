@@ -21,7 +21,6 @@ const customStyles = {
     bottom: 'unset',
     left: '50%',
     maxWidth: '320px',
-    padding: '1.5rem',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -83,7 +82,9 @@ export class LoginModal extends React.Component<Props, State> {
         appElement={appEl}
         contentLabel='Login'
         isOpen={isOpen}
+        onRequestClose={hideModal}
         portalClassName='login-modal'
+        shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
           <h4>Login</h4>

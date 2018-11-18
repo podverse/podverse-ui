@@ -7,7 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
+  Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
@@ -40,9 +40,7 @@ export class Navbar extends React.Component<Props, State> {
   }
 
   toggle () {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    this.setState({ isOpen: !this.state.isOpen })
   }
 
   render () {
@@ -65,7 +63,13 @@ export class Navbar extends React.Component<Props, State> {
       <Link
         {...(x.href ? { href: x.href } : {})}
         {...(x.as ? { as: x.as } : {})}>
-        <DropdownItem>{x.label}</DropdownItem>
+        <DropdownItem
+          onClick={() => {
+            x.onClick()
+            this.setState({ isOpen: false })
+          }}>
+          {x.label}
+        </DropdownItem>
       </Link>
     )
 
@@ -79,17 +83,21 @@ export class Navbar extends React.Component<Props, State> {
             }</NavbarBrand>
           </Link>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse navbar>
             <Nav className='ml-auto' navbar>
               {navItemsEls}
-              <UncontrolledDropdown nav inNavbar>
+              <Dropdown
+                inNavbar
+                isOpen={this.state.isOpen}
+                nav
+                toggle={this.toggle}>
                 <DropdownToggle nav caret>
                   {dropdownText}
                 </DropdownToggle>
                 <DropdownMenu right>
                   {dropdownItemsEls}
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </Dropdown>
             </Nav>
           </Collapse>
         </BSNavbar>

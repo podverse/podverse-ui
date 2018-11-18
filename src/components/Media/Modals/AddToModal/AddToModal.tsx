@@ -34,7 +34,6 @@ let customStyles = {
     left: '50%',
     maxHeight: 'none',
     maxWidth: '420px',
-    padding: '1.5rem',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
