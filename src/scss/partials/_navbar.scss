@@ -9,6 +9,13 @@
       cursor: pointer;
     }
 
+    .navbar-brand {
+      background-size: cover;
+      margin: 3px 0 2px 0;
+      height: 26px;    
+      width: 143px;  
+    }
+
     .nav-item {
       margin-left: 0.75rem;
     }
@@ -47,6 +54,10 @@
           color: $gray-dark !important;
         }
       }
+
+      .navbar-brand {
+        background-image: url('/static/images/podverse-logo-black.png');
+      }
     }
   }
 }
@@ -65,6 +76,10 @@
         &:hover {
           color: $gray-light !important;
         }
+      }
+
+      .navbar-brand {
+        background-image: url('/static/images/podverse-logo-white.png');
       }
     }
   }

@@ -16,7 +16,7 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = {
-  brandImageUrl?: string
+  brandHideText?: boolean
   brandText?: string
   brandUrl?: string
   dropdownItems?: any
@@ -46,7 +46,7 @@ export class Navbar extends React.Component<Props, State> {
   }
 
   render () {
-    const { brandImageUrl, brandText, brandUrl, dropdownItems,
+    const { brandHideText, brandText, brandUrl, dropdownItems,
       dropdownText, navItems } = this.props
 
     const navItemsEls = navItems.map(x =>
@@ -75,7 +75,7 @@ export class Navbar extends React.Component<Props, State> {
           <Link
             {...(brandUrl ? { href: brandUrl } : {})}>
             <NavbarBrand>{
-              brandImageUrl ? <img src={brandImageUrl} /> : brandText
+              brandHideText ? null : brandText
             }</NavbarBrand>
           </Link>
           <NavbarToggler onClick={this.toggle} />
