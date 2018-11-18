@@ -53,7 +53,14 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     } else if (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime)) {
       anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}`
       anchorAs = `/episode/${dataNowPlayingItem.episodeId}`
+    } else if (itemType === 'now-playing-item-clip-from-episode' || itemType === 'now-playing-item-clip-from-podcast') {
+      anchorHref = `/clip?id=${dataNowPlayingItem.clipId}`
+      anchorAs = `/clip/${dataNowPlayingItem.clipId}`
+    } else if (itemType === 'now-playing-item-episode-from-podcast' || itemType === 'now-playing-item-episode-from-all-podcasts') {
+      anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}`
+      anchorAs = `/episode/${dataNowPlayingItem.episodeId}`
     }
+
   }
 
   const moreMenuItems = [
