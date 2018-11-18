@@ -34,10 +34,11 @@ const customStyles = {
   content: {
     bottom: 'unset',
     left: '50%',
-    maxWidth: '600px',
+    maxWidth: '540px',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
+    padding: '1.5rem',
     width: '100%'
   }
 }
@@ -154,7 +155,7 @@ class MakeClipModal extends React.Component<Props, State> {
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h4>Make Clip</h4>
+          <h4><FontAwesomeIcon icon='cut' /> &nbsp;Make Clip</h4>
           <Dropdown
             className='make-clip-modal__is-public transparent-btn'
             isOpen={isPublicIsOpen}

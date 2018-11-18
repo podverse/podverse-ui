@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Button, FormGroup, Input, InputGroup,
   InputGroupAddon, Label } from 'reactstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { copyToClipboard } from 'lib/util'
 
@@ -23,6 +24,7 @@ const customStyles = {
     left: '50%',
     maxWidth: '420px',
     overflow: 'unset',
+    padding: '1.5rem',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -88,7 +90,7 @@ class ShareModal extends React.Component<Props, State> {
         portalClassName='mp-share-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
-        <h4>Share</h4>
+        <h4><FontAwesomeIcon icon='share' /> &nbsp;Share</h4>
         <CloseButton onClick={hideModal} />
         {
           playerClipLinkHref &&

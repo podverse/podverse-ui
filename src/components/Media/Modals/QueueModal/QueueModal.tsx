@@ -1,7 +1,9 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
+
 
 export interface Props {
   handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
@@ -24,6 +26,7 @@ const customStyles = {
     height: 'calc(100% - 72px)',
     left: '50%',
     maxWidth: '480px',
+    padding: '1.5rem',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -85,7 +88,7 @@ const QueueModal: React.StatelessComponent<Props> = props => {
       portalClassName='mp-queue-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
-      <h4>Queue</h4>
+      <h4><FontAwesomeIcon icon='list-ul' /> &nbsp;Queue</h4>
       <CloseButton onClick={hideModal} />
       <div className='scrollable-area'>
         {

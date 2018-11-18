@@ -34,6 +34,7 @@ let customStyles = {
     left: '50%',
     maxHeight: 'none',
     maxWidth: '420px',
+    padding: '1.5rem',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -87,7 +88,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       portalClassName='mp-add-to-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
-      <h4>Add To</h4>
+      <h4><FontAwesomeIcon icon='plus-circle' /> &nbsp; Add To</h4>
       <CloseButton onClick={hideModal} />
       <div className='scrollable-area'>
         {
