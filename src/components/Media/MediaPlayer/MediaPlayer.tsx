@@ -29,12 +29,14 @@ type Props = {
   handlePlaybackRateClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handlePlaylistCreate?: Function
   handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleSetPlayedAfterClipFinished?: Function
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
   playbackRate: number
   playbackRateText: string
+  playedAfterClipFinished?: boolean
   playerClipLinkAs?: string
   playerClipLinkHref?: string
   playerClipLinkOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
@@ -235,11 +237,16 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   onPlay = () => {
-    const { clipFinished, handleOnPastClipTime, nowPlayingItem } = this.props
+    const { clipFinished, handleOnPastClipTime, handleSetPlayedAfterClipFinished,
+      nowPlayingItem } = this.props
     const { clipEndTime } = nowPlayingItem
 
     if (clipEndTime && clipFinished && this.player.getCurrentTime() > clipEndTime && handleOnPastClipTime) {
       handleOnPastClipTime(true)
+    }
+
+    if (clipEndTime && clipFinished && this.player.getCurrentTime() > clipEndTime && handleSetPlayedAfterClipFinished) {
+      handleSetPlayedAfterClipFinished()
     }
   }
 
@@ -271,14 +278,18 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   onProgress = state => {
-    const { autoplay, clipFinished, handleOnPastClipTime, handlePause,
-      nowPlayingItem } = this.props
+    const { autoplay, handleOnPastClipTime, handlePause, handleSetPlayedAfterClipFinished,
+      nowPlayingItem, playedAfterClipFinished } = this.props
     const { clipEndTime } = nowPlayingItem
     const { seeking } = this.state
 
-    if (clipEndTime && !clipFinished && this.player.getCurrentTime() > clipEndTime) {
+    if (clipEndTime && !playedAfterClipFinished && this.player.getCurrentTime() > clipEndTime) {
       if (handleOnPastClipTime) {
-        handleOnPastClipTime(true)
+        handleOnPastClipTime()
+
+        if (autoplay && handleSetPlayedAfterClipFinished) {
+          handleSetPlayedAfterClipFinished()
+        }
       }
 
       if (!autoplay && handlePause) {
@@ -288,21 +299,6 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     if (!seeking) {
       this.setState(state)
-    }
-  }
-
-  onSeek = () => {
-    const { clipFinished, handleOnPastClipTime, handlePause, nowPlayingItem } = this.props
-    const { clipEndTime } = nowPlayingItem
-
-    if (clipEndTime && !clipFinished && this.player.getCurrentTime() > clipEndTime && handleOnPastClipTime) {
-      if (handleOnPastClipTime) {
-        handleOnPastClipTime()
-      }
-
-      if (handlePause) {
-        handlePause()
-      }
     }
   }
 
@@ -364,12 +360,13 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { autoplay, clipFinished, handleAddToQueueLast, handleAddToQueueNext, handleMakeClip,
+    const { autoplay, handleAddToQueueLast, handleAddToQueueNext, handleMakeClip,
       handleOnEpisodeEnd, handleQueueItemClick, handlePlaybackRateClick, handlePlaylistItemAdd,
       handleToggleAutoplay, handleTogglePlay, isLoggedIn, nowPlayingItem, playbackRate,
-      playbackRateText, playerClipLinkAs, playerClipLinkHref, playerClipLinkOnClick,
-      playerEpisodeLinkAs, playerEpisodeLinkHref, playerEpisodeLinkOnClick, playerPodcastLinkAs,
-      playing, playlists, queuePriorityItems, queueSecondaryItems, showAutoplay } = this.props
+      playbackRateText, playedAfterClipFinished, playerClipLinkAs, playerClipLinkHref,
+      playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref, playerEpisodeLinkOnClick,
+      playerPodcastLinkAs, playing, playlists, queuePriorityItems, queueSecondaryItems,
+      showAutoplay } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, progressPreviewTime } = this.state
@@ -410,7 +407,6 @@ export class MediaPlayer extends React.Component<Props, State> {
                 onEnded={handleOnEpisodeEnd}
                 onPlay={this.onPlay}
                 onProgress={this.onProgress}
-                onSeek={this.onSeek}
                 playbackRate={playbackRate}
                 playing={playing}
                 ref={this.playerRef}
@@ -419,7 +415,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                 volume={1} />
           }
           {
-            (clipStartTime && !clipFinished) ?
+            (clipStartTime && !playedAfterClipFinished) ?
               <div className='mp__headline'>
                 <div className='mp-headline__inner'>
                   <Link
@@ -515,7 +511,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                     </span>
                 }
                 {
-                  !clipFinished &&
+                  !playedAfterClipFinished &&
                     <React.Fragment>
                       <div
                         className='mp-progress-bar__clip-start'
