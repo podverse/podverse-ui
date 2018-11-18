@@ -180,6 +180,26 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                   title={dataNowPlayingItem.episodeTitle} />
             }
             {
+              (itemType === 'now-playing-item-queue-clip' && dataNowPlayingItem) &&
+              <MediaListItemA
+                imageUrl={dataNowPlayingItem.podcastImageUrl}
+                subTitleTop={dataNowPlayingItem.episodeTitle}
+                subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
+                subTitleBottomSide={secondsToReadableDuration(
+                  calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
+                )}
+                title={dataNowPlayingItem.clipTitle} />
+            }
+            {
+              (itemType === 'now-playing-item-queue-episode' && dataNowPlayingItem) &&
+              <MediaListItemA
+                imageUrl={dataNowPlayingItem.podcastImageUrl}
+                subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                subTitleTop={'Full Episode'}
+                title={dataNowPlayingItem.episodeTitle} />
+            }
+            {
               (itemType === 'playlist' && dataPlaylist) &&
                 <MediaListItemD
                   subTitle={dataPlaylist.lastUpdated ? readableDate(dataPlaylist.lastUpdated) : ''}

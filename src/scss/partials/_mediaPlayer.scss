@@ -8,11 +8,6 @@
   button {
     height: 36px;
   }
-
-  .mp-headline__inner {
-    max-width: $player-max-width;
-    margin: 0 auto;
-  }
   
   .mp-header__inner, .mp-player__inner {
     max-width: $player-max-width;
@@ -20,48 +15,7 @@
   }
 
   @media(max-width: ($player-max-width + 16px)) {
-    .mp-headline__inner {
-      .mp-headline__title {
-        margin-left: 0.5rem;
-      }
-
-      .mp-headline__time {
-        margin-right: 0.5rem;
-      }
-    }
-
     .mp-header__image {
-      margin-left: 0.5rem;
-    }
-  }
-
-  .mp__headline {
-    border-top-style: solid;
-    border-top-width: 1px;
-    display: flex;
-    height: 27px;
-    line-height: 25px;
-    min-width: 0;
-    text-align: left;
-  
-    .mp-headline__inner {
-      display: flex;
-      width: 100%;
-    }
-  
-    .mp-headline__link {
-      flex: 1 1 auto;
-      overflow: hidden;
-    }
-
-    .mp-headline__title {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  
-    .mp-headline__time {
-      flex: 0 0 auto;
       margin-left: 0.5rem;
     }
   }

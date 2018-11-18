@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { NowPlayingItem } from 'lib/nowPlayingItem'
-import { convertSecToHHMMSS, readableClipTime } from 'lib/util'
+import { convertSecToHHMMSS } from 'lib/util'
 import AddToModal from 'components/Media/Modals/AddToModal/AddToModal'
 import MakeClipModal from 'components/Media/Modals/MakeClipModal/MakeClipModal'
 import QueueModal from 'components/Media/Modals/QueueModal/QueueModal'
@@ -371,7 +371,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, progressPreviewTime } = this.state
 
-    const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
+    const { clipEndTime, clipId, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       podcastImageUrl, podcastTitle } = nowPlayingItem
 
     // If the new NowPlayingItem is the same episode as the last one, but it is a
@@ -379,7 +379,8 @@ export class MediaPlayer extends React.Component<Props, State> {
     if (lastNowPlayingItem.episodeMediaUrl === episodeMediaUrl &&
         (lastNowPlayingItem.clipEndTime !== clipEndTime ||
         lastNowPlayingItem.clipStartTime !== clipStartTime ||
-        lastNowPlayingItem.clipTitle !== clipTitle) &&
+        lastNowPlayingItem.clipTitle !== clipTitle ||
+        lastNowPlayingItem.clipId !== clipId) &&
         this.player) {
       this.player.seekTo(clipStartTime)
     }
@@ -394,6 +395,40 @@ export class MediaPlayer extends React.Component<Props, State> {
     const currentTime = this.player ? this.player.getCurrentTime() : 0
 
     lastNowPlayingItem = nowPlayingItem
+
+    const isClip = clipId && !playedAfterClipFinished ? true : false
+
+    const headerLink = (
+      <Link
+        {...(isClip && playerClipLinkAs ? { as: playerClipLinkAs } : {})}
+        {...(isClip && playerClipLinkHref ? { href: playerClipLinkHref } : {})}
+        {...(!isClip && playerEpisodeLinkAs ? { as: playerEpisodeLinkAs } : {})}
+        {...(!isClip && playerEpisodeLinkHref ? { href: playerEpisodeLinkHref } : {})}>
+        <a
+          className='mp-header__link'
+          {
+            ...playerEpisodeLinkOnClick &&
+            { ...(!isClip ? { onClick: playerEpisodeLinkOnClick } : {}) }
+          }
+          {
+            ...playerClipLinkOnClick &&
+            { ...(isClip ? { onClick: playerClipLinkOnClick } : {}) }
+          }
+        >
+          <img
+            className='mp-header__image'
+            src={podcastImageUrl} />
+          <div className='mp-header__wrap'>
+            <div className='mp-header-wrap__top'>
+              {podcastTitle}
+            </div>
+            <div className='mp-header-wrap__bottom'>
+              {episodeTitle}
+            </div>
+          </div>
+        </a>
+      </Link>
+    )
 
     return (
       nowPlayingItem.episodeMediaUrl ?
@@ -414,59 +449,13 @@ export class MediaPlayer extends React.Component<Props, State> {
                 url={episodeMediaUrl}
                 volume={1} />
           }
-          {
-            (clipStartTime && !playedAfterClipFinished) ?
-              <div className='mp__headline'>
-                <div className='mp-headline__inner'>
-                  <Link
-                    {...(playerClipLinkAs ? { as: playerClipLinkAs } : {})}
-                    {...(playerClipLinkHref ? { href: playerClipLinkHref } : {})}>
-                    <a
-                      className='mp-headline__link'
-                      { ... playerClipLinkOnClick &&
-                        { onClick: playerClipLinkOnClick }
-                      }>
-                      <div className='mp-headline__title'>
-                        {clipTitle}
-                      </div>
-                    </a>
-                  </Link>
-                  <a
-                    className='mp-headline__time'
-                    onClick={this.handleClipRestart}>
-                    {readableClipTime(clipStartTime, clipEndTime)}
-                  </a>
-                </div>
-              </div> : null
-          }
           <div className='mp__header'>
             <div className='mp-header__inner'>
-              <Link
-                {...(playerEpisodeLinkAs ? { as: playerEpisodeLinkAs } : {})}
-                {...(playerEpisodeLinkHref ? { href: playerEpisodeLinkHref } : {})}>
-                <a
-                  className='mp-header__link'
-                  {
-                    ... playerEpisodeLinkOnClick &&
-                      { onClick: playerEpisodeLinkOnClick }
-                  }>
-                  <img
-                    className='mp-header__image'
-                    src={podcastImageUrl} />
-                  <div className='mp-header__wrap'>
-                    <div className='mp-header-wrap__top'>
-                      {podcastTitle}
-                    </div>
-                    <div className='mp-header-wrap__bottom'>
-                      {episodeTitle}
-                    </div>
-                  </div>
-                </a>
-              </Link>
+              {headerLink}
               <button
-                className={`mp-header__add ${openAddToModal ? 'active' : ''}`}
-                onClick={this.toggleAddToModal}>
-                <FontAwesomeIcon icon='plus-circle' />
+                className={`mp-header__queue ${openQueueModal ? 'active' : ''}`}
+                onClick={this.toggleQueueModal}>
+                <FontAwesomeIcon icon='list-ul' />
               </button>
               {
                 handleMakeClip &&
@@ -477,9 +466,9 @@ export class MediaPlayer extends React.Component<Props, State> {
                   </button>
               }
               <button
-                className={`mp-header__queue ${openQueueModal ? 'active' : ''}`}
-                onClick={this.toggleQueueModal}>
-                <FontAwesomeIcon icon='list-ul' />
+                className={`mp-header__add ${openAddToModal ? 'active' : ''}`}
+                onClick={this.toggleAddToModal}>
+                <FontAwesomeIcon icon='plus-circle' />
               </button>
               <button
                 className={`mp-header__share ${openShareModal ? 'active' : ''}`}
@@ -599,6 +588,7 @@ export class MediaPlayer extends React.Component<Props, State> {
             handleAnchorOnClick={handleQueueItemClick}
             hideModal={this.hideQueueModal}
             isOpen={openQueueModal}
+            nowPlayingItem={nowPlayingItem}
             priorityItems={queuePriorityItems}
             secondaryItems={queueSecondaryItems} />
           <ShareModal
