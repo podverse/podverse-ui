@@ -99,8 +99,8 @@ class MakeClipModal extends React.Component<Props, State> {
     } else {
       this.props.handleSave({
         isPublic,
-        startTimeSeconds,
-        endTimeSeconds,
+        startTime: startTimeSeconds,
+        endTime: endTimeSeconds,
         title
       })
     }
@@ -138,9 +138,15 @@ class MakeClipModal extends React.Component<Props, State> {
     const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen,
       isSaving } = this.state
 
+    let appEl
+    // @ts-ignore
+    if (process.browser) {
+      appEl = document.querySelector('body')
+    }
+
     return (
       <Modal
-        appElement={document ? document.querySelector('body') : null}
+        appElement={appEl}
         contentLabel='Make clip'
         isOpen={isOpen}
         onRequestClose={hideModal}

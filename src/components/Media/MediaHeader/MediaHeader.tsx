@@ -34,12 +34,12 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     title = podcastTitle
     titleLink = getPodcastUrl(podcastId)
   } else if (nowPlayingItem) {
-    const { episodeId, episodePubDate, episodeTitle, imageUrl, podcastId,
+    const { episodeId, episodePubDate, episodeTitle, podcastImageUrl, podcastId,
       podcastTitle } = nowPlayingItem
 
     bottomText = readableDate(episodePubDate)
     bottomTextSide = ''
-    imgUrl = imageUrl
+    imgUrl = podcastImageUrl
     subTitle = episodeTitle
     subTitleLink = getEpisodeUrl(episodeId)
     title = podcastTitle

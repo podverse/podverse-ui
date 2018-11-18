@@ -372,7 +372,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       openQueueModal, openShareModal, progressPreviewTime } = this.state
 
     const { clipEndTime, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
-      imageUrl, podcastTitle } = nowPlayingItem
+      podcastImageUrl, podcastTitle } = nowPlayingItem
 
     // If the new NowPlayingItem is the same episode as the last one, but it is a
     // different clip, then make the player seek to the new clipStartTime
@@ -452,7 +452,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                   }>
                   <img
                     className='mp-header__image'
-                    src={imageUrl} />
+                    src={podcastImageUrl} />
                   <div className='mp-header__wrap'>
                     <div className='mp-header-wrap__top'>
                       {podcastTitle}

@@ -72,9 +72,15 @@ const AddToModal: React.StatelessComponent<Props> = props => {
     playingItem = nowPlayingItem
   }
 
+  let appEl
+  // @ts-ignore
+  if (process.browser) {
+    appEl = document.querySelector('body')
+  }
+
   return (
     <Modal
-      appElement={document ? document.querySelector('body') : null}
+      appElement={appEl}
       contentLabel='Add To'
       isOpen={isOpen}
       onRequestClose={hideModal}

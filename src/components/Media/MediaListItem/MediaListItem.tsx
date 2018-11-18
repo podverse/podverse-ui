@@ -121,7 +121,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             {
               (itemType === 'now-playing-item' && (dataNowPlayingItem && dataNowPlayingItem.clipStartTime)) &&
                 <MediaListItemA
-                  imageUrl={dataNowPlayingItem.imageUrl}
+                  imageUrl={dataNowPlayingItem.podcastImageUrl}
                   subTitleBottom={dataNowPlayingItem.episodeTitle}
                   subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   subTitleTop={dataNowPlayingItem.podcastTitle}
@@ -130,7 +130,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             {
               (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime)) &&
                 <MediaListItemA
-                  imageUrl={dataNowPlayingItem.imageUrl}
+                  imageUrl={dataNowPlayingItem.podcastImageUrl}
                   subTitleBottom='Full Episode'
                   subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   subTitleTop={dataNowPlayingItem.podcastTitle}
@@ -166,7 +166,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             {
               (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem) &&
                 <MediaListItemA
-                  imageUrl={dataNowPlayingItem.imageUrl}
+                  imageUrl={dataNowPlayingItem.podcastImageUrl}
                   subTitleBottom='Full Episode'
                   subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   subTitleTop={dataNowPlayingItem.podcastTitle}

@@ -71,9 +71,15 @@ export class LoginModal extends React.Component<Props, State> {
     const { hideModal, isOpen } = this.props
     const { errorGeneral, isLoading } = this.state
 
+    let appEl
+    // @ts-ignore
+    if (process.browser) {
+      appEl = document.querySelector('body')
+    }
+
     return (
       <Modal
-        appElement={document ? document.querySelector('body') : null}
+        appElement={appEl}
         contentLabel='Login'
         isOpen={isOpen}
         portalClassName='login-modal'

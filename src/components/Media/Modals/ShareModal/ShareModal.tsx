@@ -73,9 +73,15 @@ class ShareModal extends React.Component<Props, State> {
       playerPodcastLinkHref } = this.props
     const { lastCopied } = this.state
 
+    let appEl
+    // @ts-ignore
+    if (process.browser) {
+      appEl = document.querySelector('body')
+    }
+
     return (
       <Modal
-        appElement={document ? document.querySelector('body') : null}
+        appElement={appEl}
         contentLabel='Share links'
         isOpen={isOpen}
         onRequestClose={hideModal}

@@ -70,9 +70,15 @@ const QueueModal: React.StatelessComponent<Props> = props => {
     }
   })
 
+  let appEl
+  // @ts-ignore
+  if (process.browser) {
+    appEl = document.querySelector('body')
+  }
+
   return (
     <Modal
-      appElement={document ? document.querySelector('body') : null}
+      appElement={appEl}
       contentLabel='Queue'
       isOpen={isOpen}
       onRequestClose={hideModal}
