@@ -37,7 +37,7 @@ const customStyles = {
 }
 
 const QueueModal: React.StatelessComponent<Props> = props => {
-  const { handleAnchorOnClick, hideModal, isOpen, nowPlayingItem, priorityItems, 
+  const { handleAnchorOnClick, hideModal, isOpen, nowPlayingItem, priorityItems,
     secondaryItems } = props
 
   const priorityItemNodes = priorityItems.map(x => {
