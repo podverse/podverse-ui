@@ -9,6 +9,12 @@
     transform: translate3d(-12px, 36px, 0px) !important;
   }
 
+  &.align-right {
+    .dropdown-menu {
+      transform: translate3d(-50px, 36px, 0px) !important;
+    }
+  }
+
   button {
     font-size: $text-md-rem;
   }

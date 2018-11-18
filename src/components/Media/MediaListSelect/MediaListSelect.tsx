@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 type Props = {
+  className?: string
   isSubSelect?: boolean
   items: Array<any>
   name?: string
@@ -14,6 +15,7 @@ type State = {
 
 export class MediaListSelect extends React.Component<Props, State> {
   static defaultProps: Props = {
+    className: '',
     items: []
   }
 
@@ -34,7 +36,7 @@ export class MediaListSelect extends React.Component<Props, State> {
   }
 
   render () {
-    const { isSubSelect, items, name, selected } = this.props
+    const { className, isSubSelect, items, name, selected } = this.props
 
     let selectedText
     const itemNodes = items.map((x, index) => {
@@ -57,7 +59,7 @@ export class MediaListSelect extends React.Component<Props, State> {
 
     return (
       <Dropdown
-        className={selectClass}
+        className={`${selectClass} ${className}`}
         direction='down'
         isOpen={this.state.dropdownOpen}
         toggle={this.toggle}>
