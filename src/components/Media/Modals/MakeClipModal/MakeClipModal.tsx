@@ -140,7 +140,7 @@ class MakeClipModal extends React.Component<Props, State> {
 
     return (
       <Modal
-        appElement={document.querySelector('body')}
+        appElement={document ? document.querySelector('body') : null}
         contentLabel='Make clip'
         isOpen={isOpen}
         onRequestClose={hideModal}

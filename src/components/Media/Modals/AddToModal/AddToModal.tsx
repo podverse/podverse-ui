@@ -74,7 +74,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
 
   return (
     <Modal
-      appElement={document.querySelector('body')}
+      appElement={document ? document.querySelector('body') : null}
       contentLabel='Add To'
       isOpen={isOpen}
       onRequestClose={hideModal}
