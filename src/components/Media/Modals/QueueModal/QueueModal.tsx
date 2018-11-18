@@ -78,7 +78,7 @@ const QueueModal: React.StatelessComponent<Props> = props => {
       portalClassName='mp-queue-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
-      <h5>Queue</h5>
+      <h4>Queue</h4>
       <CloseButton onClick={hideModal} />
       <div className='scrollable-area'>
         {

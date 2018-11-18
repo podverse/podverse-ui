@@ -69,7 +69,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
   } else if (mediaRef) {
     playingItem = convertToNowPlayingItem(mediaRef)
   } else if (nowPlayingItem) {
-    playingItem = convertToNowPlayingItem(nowPlayingItem)
+    playingItem = nowPlayingItem
   }
 
   return (
@@ -80,7 +80,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       portalClassName='mp-add-to-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
-      <h5>Add To</h5>
+      <h4>Add To</h4>
       <CloseButton onClick={hideModal} />
       <div className='scrollable-area'>
         {

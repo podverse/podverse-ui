@@ -78,7 +78,7 @@ export class LoginModal extends React.Component<Props, State> {
         portalClassName='login-modal'
         style={customStyles}>
         <Form>
-          <h5>Login</h5>
+          <h4>Login</h4>
           <CloseButton onClick={hideModal} />
           {
             errorGeneral &&

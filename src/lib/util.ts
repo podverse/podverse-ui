@@ -69,6 +69,60 @@ export const convertSecToHHMMSS = (sec: number) => {
   return result
 }
 
+export function convertHHMMSSToSeconds (hhmmssString) {
+
+  if (hhmmssString) {
+    var hhmmssArray = hhmmssString.split(':') || 0,
+      hours = 0,
+      minutes = 0,
+      seconds = 0;
+  
+    if (hhmmssArray.length === 3) {
+      hours = parseInt(hhmmssArray[0]);
+      minutes = parseInt(hhmmssArray[1]);
+      seconds = parseInt(hhmmssArray[2]);
+  
+  
+      if (hours < 0 || minutes > 59 || minutes < 0 || seconds > 59 || seconds < 0) {
+        console.log('Invalid time provided.');
+        return -1;
+      }
+  
+      hours = hours * 3600;
+      minutes = minutes * 60;
+  
+    } else if (hhmmssArray.length === 2) {
+      minutes = parseInt(hhmmssArray[0]);
+      seconds = parseInt(hhmmssArray[1]);
+  
+      if (minutes > 59 || minutes < 0 || seconds > 59 || seconds < 0) {
+        console.log('Invalid time provided.');
+        return -1;
+      }
+  
+      minutes = minutes * 60;
+  
+    } else if (hhmmssArray.length === 1) {
+      seconds = parseInt(hhmmssArray[0]) || 0
+  
+      if (seconds > 59 || seconds < 0) {
+        console.log('Invalid time provided.')
+        return -1
+      }
+  
+    } else {
+      console.log('Invalid time provided.')
+      return -1
+    }
+
+    return hours + minutes + seconds;
+
+  } else {
+    return null
+  }
+
+}
+
 export const readableClipTime = (startTime, endTime) => {
   let s = convertSecToHHMMSS(startTime)
   if (startTime && endTime) {
@@ -77,6 +131,33 @@ export const readableClipTime = (startTime, endTime) => {
   } else {
     return `Start: ${s}`
   }
+}
+
+export function calcDuration (startTime, endTime) {
+  if (endTime > startTime) {
+    return endTime - startTime
+  } else {
+    return
+  }
+}
+
+export function secondsToReadableDuration (sec) {
+  sec = Number(sec)
+  const h = Math.floor(sec / 3600)
+  const m = Math.floor(sec % 3600 / 60)
+  const s = Math.floor(sec % 3600 % 60)
+
+  const hDisplay = h > 0 ? h + 'h ' : ''
+  const mDisplay = m > 0 ? m + 'm ' : ''
+  const sDisplay = s > 0 ? s + 's' : ''
+
+  let fullDisplay = hDisplay + mDisplay + sDisplay
+
+  if (fullDisplay.substr(fullDisplay.length - 1) === ' ') {
+    fullDisplay = fullDisplay.substr(0, fullDisplay.length - 1)
+  }
+
+  return fullDisplay
 }
 
 export const copyToClipboard = (text) => {

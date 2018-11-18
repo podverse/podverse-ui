@@ -5,7 +5,7 @@ import { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/Me
 import { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'
 import { MediaListItemC } from 'components/Media/MediaListItem/MediaListItemC/MediaListItemC'
 import { MediaListItemD } from 'components/Media/MediaListItem/MediaListItemD/MediaListItemD'
-import { readableDate } from 'lib/util'
+import { readableDate, readableClipTime, secondsToReadableDuration, calcDuration } from 'lib/util'
 
 const striptags = require('striptags')
 
@@ -139,26 +139,32 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             {
               (itemType === 'now-playing-item-clip-from-episode' && dataNowPlayingItem) &&
                 <MediaListItemA
-                  subTitleBottom={dataNowPlayingItem.clipStartTime}
-                  subTitleBottomSide='duration'
+                  subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
+                  subTitleBottomSide={secondsToReadableDuration(
+                    calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
+                  )}
                   title={dataNowPlayingItem.clipTitle} />
             }
             {
               (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
                 <MediaListItemA
-                  subTitleBottom={dataNowPlayingItem.episodeTitle}
-                  subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                  subTitleTop={dataNowPlayingItem.episodeTitle}
+                  subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                  subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
+                  subTitleBottomSide={secondsToReadableDuration(
+                    calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
+                  )}
                   title={dataNowPlayingItem.clipTitle} />
             }
             {
               (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
                 <MediaListItemA
                   subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                  subTitleTop={dataNowPlayingItem.podcastTitle}
+                  subTitleTop={'Full Episode'}
                   title={dataNowPlayingItem.episodeTitle} />
             }
             {
-              (itemType === 'now-playing-item-episode-all-podcasts' && dataNowPlayingItem) &&
+              (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem) &&
                 <MediaListItemA
                   imageUrl={dataNowPlayingItem.imageUrl}
                   subTitleBottom='Full Episode'

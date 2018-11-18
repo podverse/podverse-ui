@@ -14,9 +14,12 @@ import ShareModal from 'components/Media/Modals/ShareModal/ShareModal'
 
 type Props = {
   autoplay?: boolean
+  clipFinished?: boolean
   handleAddToQueueLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleAddToQueueNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleClipEndTimePreview?: Function
   handleClipRestart?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleClipStartTimePreview?: Function
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleMakeClip?: Function
   handleOnEpisodeEnd?: Function
@@ -49,7 +52,6 @@ type Props = {
 
 type State = {
   clipEndFlagPositionX?: number
-  clipFinished: boolean
   clipStartFlagPositionX?: number
   duration: number | null
   isClientSide: boolean
@@ -113,7 +115,6 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     this.state = {
       clipEndFlagPositionX: -1,
-      clipFinished: false,
       clipStartFlagPositionX: -1,
       duration: null,
       isClientSide: false,
@@ -132,6 +133,8 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.progressBarWidth = React.createRef()
 
     this.handleTimeJumpForward = this.handleTimeJumpForward.bind(this)
+    this.handleClipEndTimePreview = this.handleClipEndTimePreview.bind(this)
+    this.handleClipStartTimePreview = this.handleClipStartTimePreview.bind(this)
   }
 
   componentDidMount () {
@@ -206,7 +209,6 @@ export class MediaPlayer extends React.Component<Props, State> {
   handleItemSkip = (evt) => {
     if (this.props.handleItemSkip) {
       this.setState({
-        clipFinished: false,
         duration: 0,
         isLoading: true,
         played: 0,
@@ -229,13 +231,12 @@ export class MediaPlayer extends React.Component<Props, State> {
       this.player.seekTo(clipStartTime)
     }
 
-    this.forceUpdate() // Force update so the time updates immediately
+    this.forceUpdate()
   }
 
   onPlay = () => {
-    const { handleOnPastClipTime, nowPlayingItem } = this.props
+    const { clipFinished, handleOnPastClipTime, nowPlayingItem } = this.props
     const { clipEndTime } = nowPlayingItem
-    const { clipFinished } = this.state
 
     if (clipEndTime && clipFinished && this.player.getCurrentTime() > clipEndTime && handleOnPastClipTime) {
       handleOnPastClipTime(true)
@@ -270,25 +271,19 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   onProgress = state => {
-    const { autoplay, handleOnPastClipTime, handlePause, nowPlayingItem } = this.props
+    const { autoplay, clipFinished, handleOnPastClipTime, handlePause,
+      nowPlayingItem } = this.props
     const { clipEndTime } = nowPlayingItem
-    const { clipFinished, seeking } = this.state
+    const { seeking } = this.state
 
     if (clipEndTime && !clipFinished && this.player.getCurrentTime() > clipEndTime) {
-
-      if (autoplay && handleOnPastClipTime) {
+      if (handleOnPastClipTime) {
         handleOnPastClipTime(true)
-      } else {
-        this.setState({
-          clipFinished: true
-        })
-
-        if (handlePause) {
-          handlePause()
-        }
       }
 
-      return
+      if (!autoplay && handlePause) {
+        handlePause()
+      }
     }
 
     if (!seeking) {
@@ -297,25 +292,17 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   onSeek = () => {
-    const { autoplay, handleOnPastClipTime, handlePause, nowPlayingItem } = this.props
+    const { clipFinished, handleOnPastClipTime, handlePause, nowPlayingItem } = this.props
     const { clipEndTime } = nowPlayingItem
-    const { clipFinished } = this.state
 
     if (clipEndTime && !clipFinished && this.player.getCurrentTime() > clipEndTime && handleOnPastClipTime) {
-
-      if (autoplay && handleOnPastClipTime) {
-        handleOnPastClipTime(true)
-      } else {
-        this.setState({
-          clipFinished: true
-        })
-
-        if (handlePause) {
-          handlePause()
-        }
+      if (handleOnPastClipTime) {
+        handleOnPastClipTime()
       }
 
-      return
+      if (handlePause) {
+        handlePause()
+      }
     }
   }
 
@@ -360,8 +347,24 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.setState({ openShareModal: false })
   }
 
+  handleClipEndTimePreview = (clipEndTime) => {
+    const { handleClipEndTimePreview } = this.props
+
+    if (clipEndTime && handleClipEndTimePreview) {
+      handleClipEndTimePreview()
+    }
+  }
+
+  handleClipStartTimePreview = (clipStartTime) => {
+    const { handleClipStartTimePreview } = this.props
+
+    if (clipStartTime && handleClipStartTimePreview) {
+      handleClipStartTimePreview()
+    }
+  }
+
   render () {
-    const { autoplay, handleAddToQueueLast, handleAddToQueueNext, handleMakeClip,
+    const { autoplay, clipFinished, handleAddToQueueLast, handleAddToQueueNext, handleMakeClip,
       handleOnEpisodeEnd, handleQueueItemClick, handlePlaybackRateClick, handlePlaylistItemAdd,
       handleToggleAutoplay, handleTogglePlay, isLoggedIn, nowPlayingItem, playbackRate,
       playbackRateText, playerClipLinkAs, playerClipLinkHref, playerClipLinkOnClick,
@@ -416,7 +419,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                 volume={1} />
           }
           {
-            clipStartTime &&
+            (clipStartTime && !clipFinished) ?
               <div className='mp__headline'>
                 <div className='mp-headline__inner'>
                   <Link
@@ -438,7 +441,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                     {readableClipTime(clipStartTime, clipEndTime)}
                   </a>
                 </div>
-              </div>
+              </div> : null
           }
           <div className='mp__header'>
             <div className='mp-header__inner'>
@@ -511,18 +514,23 @@ export class MediaPlayer extends React.Component<Props, State> {
                       {convertSecToHHMMSS(this.player.getCurrentTime())}
                     </span>
                 }
-                <div
-                  className='mp-progress-bar__clip-start'
-                  style={{
-                    display: `${clipStartFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
-                    left: `${clipStartFlagPositionX}px`
-                  }} />
-                <div
-                  className='mp-progress-bar__clip-end'
-                  style={{
-                    display: `${clipEndFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
-                    left: `${clipEndFlagPositionX}px`
-                  }} />
+                {
+                  !clipFinished &&
+                    <React.Fragment>
+                      <div
+                        className='mp-progress-bar__clip-start'
+                        style={{
+                          display: `${clipStartFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                          left: `${clipStartFlagPositionX}px`
+                        }} />
+                      <div
+                        className='mp-progress-bar__clip-end'
+                        style={{
+                          display: `${clipEndFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                          left: `${clipEndFlagPositionX}px`
+                        }} />
+                    </React.Fragment>
+                }
                 <ReactTooltip
                   className='mp-progress-bar__preview'>
                   {convertSecToHHMMSS(progressPreviewTime)}
@@ -582,10 +590,13 @@ export class MediaPlayer extends React.Component<Props, State> {
           {
             (openMakeClipModal && handleMakeClip) &&
               <MakeClipModal
+                handleClipEndTimePreview={this.handleClipEndTimePreview}
+                handleClipStartTimePreview={this.handleClipStartTimePreview}
                 handleSubmit={handleMakeClip}
                 hideModal={this.hideMakeClipModal}
                 isPublic={true}
                 isOpen={openMakeClipModal}
+                player={this.player}
                 startTime={currentTime} />
           }
           <QueueModal

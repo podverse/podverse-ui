@@ -2,22 +2,25 @@ import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Button, Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
   Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap'
-import { convertSecToHHMMSS } from 'lib/util'
+import { convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/util'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type Props = {
-  handleSubmit: Function,
-  hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void,
-  isPublic: boolean,
-  isOpen: boolean,
+  handleClipEndTimePreview: Function
+  handleClipStartTimePreview: Function
+  handleSubmit: Function
+  hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
+  isPublic: boolean
+  isOpen: boolean
+  player: any
   startTime: number
 }
 
 type State = {
-  errorEndTime?: string,
-  errorStartTime?: string,
-  isPublic: boolean,
-  isPublicIsOpen: boolean,
+  errorEndTime?: string
+  errorStartTime?: string
+  isPublic: boolean
+  isPublicIsOpen: boolean
   isSaving: boolean
 }
 
@@ -67,6 +70,8 @@ class MakeClipModal extends React.Component<Props, State> {
     this.selectIsPublic = this.selectIsPublic.bind(this)
     this.toggleIsPublic = this.toggleIsPublic.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClipEndTimePreview = this.handleClipEndTimePreview.bind(this)
+    this.handleClipStartTimePreview = this.handleClipStartTimePreview.bind(this)
   }
 
   selectIsPublic (e) {
@@ -105,6 +110,26 @@ class MakeClipModal extends React.Component<Props, State> {
     })
   }
 
+  handleClipStartTimePreview () {
+    const { handleClipStartTimePreview, player } = this.props
+    const startTime = convertHHMMSSToSeconds(this.inputStartTime.current.value)
+
+    if (startTime && startTime > 0) {
+      player.seekTo(startTime)
+      handleClipStartTimePreview(startTime)
+    }
+  }
+
+  handleClipEndTimePreview () {
+    const { handleClipEndTimePreview, player } = this.props
+    const endTime = convertHHMMSSToSeconds(this.inputEndTime.current.value)
+
+    if (endTime && endTime > 0) {
+      player.seekTo(endTime < 3 ? 0 : endTime - 3)
+      handleClipEndTimePreview(endTime)
+    }
+  }
+
   render () {
     const { hideModal, isOpen, startTime } = this.props
     const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen,
@@ -114,12 +139,14 @@ class MakeClipModal extends React.Component<Props, State> {
       <Modal
         contentLabel='Make clip'
         isOpen={isOpen}
+        onRequestClose={hideModal}
         portalClassName='make-clip-modal'
+        shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h5>Make Clip</h5>
+          <h4>Make Clip</h4>
           <Dropdown
-            className='make-clip__is-public transparent-btn'
+            className='make-clip-modal__is-public transparent-btn'
             isOpen={isPublicIsOpen}
             toggle={this.toggleIsPublic}>
             <DropdownToggle caret>
@@ -160,6 +187,12 @@ class MakeClipModal extends React.Component<Props, State> {
             <Col xs='6'>
               <FormGroup>
                 <Label for='make-clip-modal__start-time'>Start Time</Label>
+                <button
+                  className='make-clip-modal__start-time-preview'
+                  onClick={this.handleClipStartTimePreview}
+                  type='button'>
+                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> Preview
+                </button>
                 <Input
                   defaultValue={convertSecToHHMMSS(startTime)}
                   innerRef={this.inputStartTime}
@@ -177,7 +210,13 @@ class MakeClipModal extends React.Component<Props, State> {
             </Col>
             <Col xs='6'>
               <FormGroup>
-                <Label for='make-clip__end-time'>End Time</Label>
+                <Label for='make-clip-modal__end-time'>End Time</Label>
+                <button
+                  className='make-clip-modal__end-time-preview'
+                  onClick={this.handleClipEndTimePreview}
+                  type='button'>
+                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> Preview
+                </button>
                 <Input
                   innerRef={this.inputEndTime}
                   invalid={!!errorEndTime}
