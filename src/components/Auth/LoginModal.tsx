@@ -83,7 +83,7 @@ export class LoginModal extends React.Component<Props, State> {
         contentLabel='Login'
         isOpen={isOpen}
         onRequestClose={hideModal}
-        portalClassName='login-modal'
+        portalClassName='login-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
@@ -109,14 +109,14 @@ export class LoginModal extends React.Component<Props, State> {
               placeholder='********'
               type='password' />
           </FormGroup>
-          <div className='text-right'>
+          <div className='login-modal__btns text-right'>
             <Button
-              className='login-modal__cancel'
+              className='login-modal-btns__cancel'
               onClick={hideModal}>
               Cancel
             </Button>
             <Button
-              className={`login-modal__login ${isLoading ? 'is-loading' : ''}`}
+              className={`login-modal-btns__login ${isLoading ? 'is-loading' : ''}`}
               onClick={this.handleSubmit}>
               Login
             </Button>
