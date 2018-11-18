@@ -72,6 +72,7 @@ const QueueModal: React.StatelessComponent<Props> = props => {
 
   return (
     <Modal
+      appElement={document.querySelector('body')}
       contentLabel='Queue'
       isOpen={isOpen}
       onRequestClose={hideModal}

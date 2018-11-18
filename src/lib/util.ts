@@ -69,23 +69,32 @@ export const convertSecToHHMMSS = (sec: number) => {
   return result
 }
 
+export function validateHHMMSSString (hhmmss) {
+  const regex = new RegExp('^(([0-9][0-9]):([0-5][0-9]):([0-5][0-9]))$|(([0-9]):([0-5][0-9]):([0-5][0-9]))$|^(([0-5][0-9]):([0-5][0-9]))$|^(([0-9]):([0-5][0-9]))$|^([0-5][0-9])$|^([0-9])')
+  return regex.test(hhmmss)
+}
+
 export function convertHHMMSSToSeconds (hhmmssString) {
 
   if (hhmmssString) {
+
+    if (!validateHHMMSSString(hhmmssString)) {
+      return -1
+    }
+
     var hhmmssArray = hhmmssString.split(':') || 0,
       hours = 0,
       minutes = 0,
       seconds = 0;
-  
+
     if (hhmmssArray.length === 3) {
-      hours = parseInt(hhmmssArray[0]);
-      minutes = parseInt(hhmmssArray[1]);
-      seconds = parseInt(hhmmssArray[2]);
-  
-  
+      hours = parseInt(hhmmssArray[0])
+      minutes = parseInt(hhmmssArray[1])
+      seconds = parseInt(hhmmssArray[2])
+
       if (hours < 0 || minutes > 59 || minutes < 0 || seconds > 59 || seconds < 0) {
-        console.log('Invalid time provided.');
-        return -1;
+        console.log('Invalid time provided.')
+        return -1
       }
   
       hours = hours * 3600;
@@ -101,7 +110,7 @@ export function convertHHMMSSToSeconds (hhmmssString) {
       }
   
       minutes = minutes * 60;
-  
+      
     } else if (hhmmssArray.length === 1) {
       seconds = parseInt(hhmmssArray[0]) || 0
   

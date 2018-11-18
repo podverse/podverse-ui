@@ -73,6 +73,7 @@ export class LoginModal extends React.Component<Props, State> {
 
     return (
       <Modal
+        appElement={document.querySelector('body')}
         contentLabel='Login'
         isOpen={isOpen}
         portalClassName='login-modal'

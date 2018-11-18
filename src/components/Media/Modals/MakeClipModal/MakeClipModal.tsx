@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 type Props = {
   handleClipEndTimePreview: Function
   handleClipStartTimePreview: Function
-  handleSubmit: Function
+  handleSave: Function
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isPublic: boolean
   isOpen: boolean
@@ -59,7 +59,7 @@ class MakeClipModal extends React.Component<Props, State> {
     this.state = {
       errorEndTime: undefined,
       errorStartTime: undefined,
-      isPublic: props.initialIsPublic,
+      isPublic: props.initialIsPublic || true,
       isPublicIsOpen: false,
       isSaving: false
     }
@@ -69,7 +69,7 @@ class MakeClipModal extends React.Component<Props, State> {
     this.inputTitle = React.createRef()
     this.selectIsPublic = this.selectIsPublic.bind(this)
     this.toggleIsPublic = this.toggleIsPublic.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSave = this.handleSave.bind(this)
     this.handleClipEndTimePreview = this.handleClipEndTimePreview.bind(this)
     this.handleClipStartTimePreview = this.handleClipStartTimePreview.bind(this)
   }
@@ -83,21 +83,24 @@ class MakeClipModal extends React.Component<Props, State> {
     this.setState({ isPublicIsOpen: !this.state.isPublicIsOpen })
   }
 
-  async handleSubmit () {
+  async handleSave () {
     const { isPublic } = this.state
     const { value: startTime } = this.inputStartTime.current
     const { value: endTime } = this.inputEndTime.current
     const { value: title } = this.inputTitle.current
+
+    const startTimeSeconds = convertHHMMSSToSeconds(startTime)
+    const endTimeSeconds = convertHHMMSSToSeconds(endTime)
 
     await this.clearErrors()
 
     if (!startTime) {
       this.setState({ errorStartTime: 'required' })
     } else {
-      this.props.handleSubmit({
-        endTime,
+      this.props.handleSave({
         isPublic,
-        startTime,
+        startTimeSeconds,
+        endTimeSeconds,
         title
       })
     }
@@ -137,6 +140,7 @@ class MakeClipModal extends React.Component<Props, State> {
 
     return (
       <Modal
+        appElement={document.querySelector('body')}
         contentLabel='Make clip'
         isOpen={isOpen}
         onRequestClose={hideModal}
@@ -191,7 +195,7 @@ class MakeClipModal extends React.Component<Props, State> {
                   className='make-clip-modal__start-time-preview'
                   onClick={this.handleClipStartTimePreview}
                   type='button'>
-                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> Preview
+                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; Preview
                 </button>
                 <Input
                   defaultValue={convertSecToHHMMSS(startTime)}
@@ -215,7 +219,7 @@ class MakeClipModal extends React.Component<Props, State> {
                   className='make-clip-modal__end-time-preview'
                   onClick={this.handleClipEndTimePreview}
                   type='button'>
-                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> Preview
+                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; Preview
                 </button>
                 <Input
                   innerRef={this.inputEndTime}
@@ -235,9 +239,9 @@ class MakeClipModal extends React.Component<Props, State> {
           <FormGroup>
             <Label for='make-clip-modal__title'>Title</Label>
             <Input
+              innerRef={this.inputTitle}
               name='make-clip-modal__title'
               placeholder='optional'
-              ref={this.inputTitle}
               type='textarea' />
           </FormGroup>
           <div className='text-right'>
@@ -248,7 +252,7 @@ class MakeClipModal extends React.Component<Props, State> {
             </Button>
             <Button
               className={`make-clip-modal__save ${isSaving ? 'is-loading' : ''}`}
-              onClick={this.handleSubmit}>
+              onClick={this.handleSave}>
               Save
             </Button>
           </div>

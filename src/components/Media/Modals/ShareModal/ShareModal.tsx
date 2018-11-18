@@ -75,6 +75,7 @@ class ShareModal extends React.Component<Props, State> {
 
     return (
       <Modal
+        appElement={document.querySelector('body')}
         contentLabel='Share links'
         isOpen={isOpen}
         onRequestClose={hideModal}

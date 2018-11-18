@@ -588,7 +588,7 @@ export class MediaPlayer extends React.Component<Props, State> {
               <MakeClipModal
                 handleClipEndTimePreview={this.handleClipEndTimePreview}
                 handleClipStartTimePreview={this.handleClipStartTimePreview}
-                handleSubmit={handleMakeClip}
+                handleSave={handleMakeClip}
                 hideModal={this.hideMakeClipModal}
                 isPublic={true}
                 isOpen={openMakeClipModal}

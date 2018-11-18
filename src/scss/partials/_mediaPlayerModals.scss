@@ -87,8 +87,8 @@
     }
   }
 
-  .make-clip-modal__save {
-    margin-left: 1rem;
+  .make-clip-modal__save, .make-clip-modal__cancel {
+    margin: 0.5rem 0 0 1rem;
   }
 
   @media (max-height: 480px) {
