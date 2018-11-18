@@ -279,11 +279,11 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   onProgress = state => {
     const { autoplay, handleOnPastClipTime, handlePause, handleSetPlayedAfterClipFinished,
-      nowPlayingItem, playedAfterClipFinished } = this.props
+      nowPlayingItem, playedAfterClipFinished, playing } = this.props
     const { clipEndTime } = nowPlayingItem
     const { seeking } = this.state
 
-    if (clipEndTime && !playedAfterClipFinished && this.player.getCurrentTime() > clipEndTime) {
+    if (clipEndTime && !playedAfterClipFinished && this.player.getCurrentTime() > clipEndTime && playing) {
       if (handleOnPastClipTime) {
         handleOnPastClipTime()
 
