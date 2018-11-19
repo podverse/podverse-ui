@@ -1,18 +1,19 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
-import { Alert, Button, Form, FormGroup, Input, Label } from 'reactstrap'
+import { Alert, Form, FormGroup, Input, Label } from 'reactstrap'
+import Button from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 
 type Props = {
   handleLogin: Function,
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void,
+  isLoading: boolean
   isOpen: boolean
 }
 
 type State = {
   email?: string
   errorGeneral?: string
-  isLoading: boolean
   password?: string
 }
 
@@ -40,7 +41,6 @@ export class LoginModal extends React.Component<Props, State> {
     this.state = {
       email: '',
       errorGeneral: undefined,
-      isLoading: false,
       password: ''
     }
 
@@ -66,8 +66,8 @@ export class LoginModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { hideModal, isOpen } = this.props
-    const { email, errorGeneral, isLoading, password } = this.state
+    const { hideModal, isLoading, isOpen } = this.props
+    const { email, errorGeneral, password } = this.state
 
     let appEl
     // @ts-ignore
@@ -116,14 +116,13 @@ export class LoginModal extends React.Component<Props, State> {
           <div className='login-modal__btns text-right'>
             <Button
               className='login-modal-btns__cancel'
-              onClick={hideModal}>
-              Cancel
-            </Button>
+              onClick={hideModal}
+              text='Cancel' />
             <Button
-              className={`login-modal-btns__login ${isLoading ? 'is-loading' : ''}`}
-              onClick={this.handleLogin}>
-              Login
-            </Button>
+              className='login-modal-btns__login'
+              isLoading={isLoading}
+              onClick={this.handleLogin}
+              text='Login' />
           </div>
         </Form>
       </Modal>
