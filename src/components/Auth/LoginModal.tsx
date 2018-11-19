@@ -4,16 +4,16 @@ import { Alert, Button, Form, FormGroup, Input, Label } from 'reactstrap'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 
 type Props = {
-  handleSubmit: Function,
+  handleLogin: Function,
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void,
   isOpen: boolean
 }
 
 type State = {
-  errorGeneral?: string,
+  email?: string
+  errorGeneral?: string
   isLoading: boolean
   password?: string
-  username?: string
 }
 
 const customStyles = {
@@ -38,38 +38,36 @@ export class LoginModal extends React.Component<Props, State> {
     super(props)
 
     this.state = {
+      email: '',
       errorGeneral: undefined,
       isLoading: false,
-      password: '',
-      username: ''
+      password: ''
     }
 
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
   handleInputChange (event) {
-    debugger
+    const { stateKey } = event.target.dataset
+    const newState = {}
+    newState[stateKey] = event.target.value
+    this.setState(newState)
   }
 
-  handleSubmit () {
-    const { password, username } = this.state
-
+  handleLogin () {
+    const { email, password } = this.state
     this.clearErrors()
-
-    this.props.handleSubmit({
-      password,
-      username
-    })
+    this.props.handleLogin(email, password)
   }
 
   clearErrors () {
-    return this.setState({
-      errorGeneral: undefined
-    })
+    this.setState({ errorGeneral: undefined })
   }
 
   render () {
     const { hideModal, isOpen } = this.props
-    const { errorGeneral, isLoading } = this.state
+    const { email, errorGeneral, isLoading, password } = this.state
 
     let appEl
     // @ts-ignore
@@ -96,18 +94,24 @@ export class LoginModal extends React.Component<Props, State> {
               </Alert>
           }
           <FormGroup>
-            <Label for='login-modal__username'>Email</Label>
+            <Label for='login-modal__email'>Email</Label>
             <Input
-              name='login-modal__username'
+              data-state-key='email'
+              name='login-modal__email'
+              onChange={this.handleInputChange}
               placeholder='hello@podverse.fm'
-              type='text' />
+              type='text'
+              value={email} />
           </FormGroup>
           <FormGroup>
             <Label for='login-modal__password'>Password</Label>
             <Input
+              data-state-key='password'
               name='login-modal__password'
+              onChange={this.handleInputChange}
               placeholder='********'
-              type='password' />
+              type='password'
+              value={password} />
           </FormGroup>
           <div className='login-modal__btns text-right'>
             <Button
@@ -117,7 +121,7 @@ export class LoginModal extends React.Component<Props, State> {
             </Button>
             <Button
               className={`login-modal-btns__login ${isLoading ? 'is-loading' : ''}`}
-              onClick={this.handleSubmit}>
+              onClick={this.handleLogin}>
               Login
             </Button>
           </div>
