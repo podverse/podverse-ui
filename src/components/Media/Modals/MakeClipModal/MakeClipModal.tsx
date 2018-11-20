@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Button, Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
   Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap'
-import { convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/util'
+import { convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = {

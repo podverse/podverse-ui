@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { getEpisodeUrl, getPodcastUrl } from 'lib/constants'
-import { readableDate } from 'lib/util'
+import { readableDate } from 'lib/utility'
 
 type Props = {
   episode?: any

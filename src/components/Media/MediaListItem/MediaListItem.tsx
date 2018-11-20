@@ -5,7 +5,7 @@ import { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/Me
 import { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'
 import { MediaListItemC } from 'components/Media/MediaListItem/MediaListItemC/MediaListItemC'
 import { MediaListItemD } from 'components/Media/MediaListItem/MediaListItemD/MediaListItemD'
-import { readableDate, readableClipTime, secondsToReadableDuration, calcDuration } from 'lib/util'
+import { readableDate, readableClipTime, secondsToReadableDuration, calcDuration } from 'lib/utility'
 
 const striptags = require('striptags')
 

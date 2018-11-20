@@ -4,7 +4,7 @@ import { Button, FormGroup, Input, InputGroup,
   InputGroupAddon, Label } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CloseButton } from 'components/CloseButton/CloseButton'
-import { copyToClipboard } from 'lib/util'
+import { copyToClipboard } from 'lib/utility'
 
 type Props = {
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void

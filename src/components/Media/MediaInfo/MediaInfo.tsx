@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Button } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { readableClipTime } from 'lib/util'
+import { readableClipTime } from 'lib/utility'
 import AddToModal from 'components/Media/Modals/AddToModal/AddToModal'
 const sanitizeHtml = require('sanitize-html')
 
