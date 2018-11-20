@@ -1,3 +1,5 @@
+export { validatePassword } from './validatePassword'
+
 export const readableDate = (date) => {
   const dateObj = new Date(date),
     year = dateObj.getFullYear(),
