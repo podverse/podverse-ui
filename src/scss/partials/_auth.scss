@@ -1,9 +1,96 @@
 html {
   .login-modal__btns {
+    display: flex;
     margin-top: 1.5rem;
-  
-    button {
-      margin-left: 1rem;
+
+    .login-modal-btns__left {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: flex-start;
+
+      button {
+        font-size: 14px;
+        line-height: 26px;
+        padding: .375rem 0.25rem;
+        min-width: 52px;
+
+        &:first-child {
+          margin-right: 0.75rem;
+        }
+      }
+    }
+
+    .login-modal-btns__right {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+
+      button {
+        &:last-child {
+          margin-left: 1rem;
+        }
+      }
     }
   }
+
+  .forgot-password-modal__btns {
+    display: flex;
+    margin-top: 1.5rem;
+
+    .forgot-password-modal-btns__left {
+      flex: 1 1 auto;
+
+      button {
+        font-size: 14px;
+        line-height: 26px;
+      }
+    }
+
+    .forgot-password-modal-btns__right {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+
+      button {
+        &:last-child {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+
+  .sign-up-modal__btns {
+    display: flex;
+    margin-top: 1.5rem;
+
+    .sign-up-modal-btns__left {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: flex-start;
+
+      button {
+        font-size: 14px;
+        line-height: 26px;
+        padding: .375rem 0.25rem;
+        min-width: 52px;
+
+        &:first-child {
+          margin-right: 0.75rem;
+        }
+      }
+    }
+
+    .sign-up-modal-btns__right {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+
+      button {
+        &:last-child {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+
 }

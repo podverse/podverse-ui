@@ -5,10 +5,12 @@ import Button from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 
 type Props = {
-  handleLogin: Function,
-  hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void,
+  handleLogin: Function
+  hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoading: boolean
   isOpen: boolean
+  showForgotPasswordModal: (event: React.MouseEvent<HTMLButtonElement>) => void
+  showSignUpModal: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 type State = {
@@ -21,7 +23,7 @@ const customStyles = {
   content: {
     bottom: 'unset',
     left: '50%',
-    maxWidth: '320px',
+    maxWidth: '380px',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -66,7 +68,8 @@ export class LoginModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { hideModal, isLoading, isOpen } = this.props
+    const { hideModal, isLoading, isOpen, showForgotPasswordModal, showSignUpModal
+      } = this.props
     const { email, errorGeneral, password } = this.state
 
     let appEl
@@ -113,16 +116,28 @@ export class LoginModal extends React.Component<Props, State> {
               type='password'
               value={password} />
           </FormGroup>
-          <div className='login-modal__btns text-right'>
-            <Button
-              className='login-modal-btns__cancel'
-              onClick={hideModal}
-              text='Cancel' />
-            <Button
-              className='login-modal-btns__login'
-              isLoading={isLoading}
-              onClick={this.handleLogin}
-              text='Login' />
+          <div className='login-modal__btns'>
+            <div className='login-modal-btns__left'>
+              <Button
+                className='login-modal-btns-left__forgot transparent-btn'
+                onClick={showForgotPasswordModal}
+                text='Forgot?' />
+              <Button
+                className='login-modal-btns-left__sign-up transparent-btn'
+                onClick={showSignUpModal}
+                text='Sign Up' />
+            </div>
+            <div className='login-modal-btns__right'>
+              <Button
+                className='login-modal-btns-right__cancel'
+                onClick={hideModal}
+                text='Cancel' />
+              <Button
+                className='login-modal-btns-right__login'
+                isLoading={isLoading}
+                onClick={this.handleLogin}
+                text='Login' />
+            </div>
           </div>
         </Form>
       </Modal>
