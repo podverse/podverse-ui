@@ -1,7 +1,8 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Alert, Form, FormGroup, Input, Label } from 'reactstrap'
-import Button from 'components/Button/Button'
+import { PVButton as Button } from 'components/Button/Button'
+import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 
 type Props = {
@@ -116,29 +117,30 @@ export class LoginModal extends React.Component<Props, State> {
               type='password'
               value={password} />
           </FormGroup>
-          <div className='login-modal__btns'>
-            <div className='login-modal-btns__left'>
-              <Button
-                className='login-modal-btns-left__forgot transparent-btn'
-                onClick={showForgotPasswordModal}
-                text='Forgot?' />
-              <Button
-                className='login-modal-btns-left__sign-up transparent-btn'
-                onClick={showSignUpModal}
-                text='Sign Up' />
-            </div>
-            <div className='login-modal-btns__right'>
-              <Button
-                className='login-modal-btns-right__cancel'
-                onClick={hideModal}
-                text='Cancel' />
-              <Button
-                className='login-modal-btns-right__login'
-                isLoading={isLoading}
-                onClick={this.handleLogin}
-                text='Login' />
-            </div>
-          </div>
+          <ButtonGroup
+            childrenLeft={
+              <React.Fragment>
+                <Button
+                  onClick={showForgotPasswordModal}
+                  text='Forgot?' />
+                <Button
+                  onClick={showSignUpModal}
+                  text='Sign Up' />
+              </React.Fragment>
+            }
+            childrenRight={
+              <React.Fragment>
+                <Button
+                  className='login-modal-btns-right__cancel'
+                  onClick={hideModal}
+                  text='Cancel' />
+                <Button
+                  className='login-modal-btns-right__login'
+                  isLoading={isLoading}
+                  onClick={this.handleLogin}
+                  text='Login' />
+              </React.Fragment>
+            } />
         </Form>
       </Modal>
     )

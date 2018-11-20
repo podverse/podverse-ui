@@ -1,7 +1,8 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Alert, Form, FormGroup, Input, Label } from 'reactstrap'
-import Button from 'components/Button/Button'
+import { PVButton as Button } from 'components/Button/Button'
+import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 
 type Props = {
@@ -127,21 +128,19 @@ export class SignUpModal extends React.Component<Props, State> {
               type='password'
               value={passwordConfirm} />
           </FormGroup>
-          <div className='sign-up-modal__btns'>
-            <div className='sign-up-modal-btns__left'>
-            </div>
-            <div className='sign-up-modal-btns__right'>
-              <Button
-                className='sign-up-modal-btns-right__cancel'
-                onClick={hideModal}
-                text='Cancel' />
-              <Button
-                className='sign-up-modal-btns-right__signup'
-                isLoading={isLoading}
-                onClick={this.handleSignUp}
-                text='Submit' />
-            </div>
-          </div>
+          <ButtonGroup
+            childrenLeft
+            childrenRight={
+              <React.Fragment>
+                <Button
+                  onClick={hideModal}
+                  text='Cancel' />
+                <Button
+                  isLoading={isLoading}
+                  onClick={this.handleSignUp}
+                  text='Submit' />
+              </React.Fragment>
+            } />
         </Form>
       </Modal>
     )

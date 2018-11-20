@@ -9,7 +9,7 @@ export interface Props {
   text?: string
 }
 
-const PVButton: React.StatelessComponent<Props> = props => {
+export const PVButton: React.StatelessComponent<Props> = props => {
   const { className, isLoading, onClick, text } = props
 
   return (
@@ -26,5 +26,3 @@ const PVButton: React.StatelessComponent<Props> = props => {
     </Button>
   )
 }
-
-export default PVButton

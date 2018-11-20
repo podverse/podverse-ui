@@ -123,6 +123,10 @@ html body {
       color: $blue;
     }
   }
+  
+  label {
+    color: $black;
+  }
 
   hr {
     border-color: $gray-light;
@@ -144,10 +148,6 @@ html body {
       border-color: $gray-light !important;
 
       h5 {
-        color: $black;
-      }
-
-      label {
         color: $black;
       }
     }
@@ -184,6 +184,10 @@ html body {
     }
   }
 
+  label {
+    color: $white;
+  }
+
   hr {
     border-color: $gray-dark;
   }
@@ -204,10 +208,6 @@ html body {
       border-color: $gray-darker !important;
 
       h5 {
-        color: $white;
-      }
-
-      label {
         color: $white;
       }
     }

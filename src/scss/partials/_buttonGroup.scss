@@ -1,0 +1,33 @@
+  .form-btn-group {
+    display: flex;
+    margin-top: 1.5rem;
+
+    .form-btn-group__left {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: flex-start;
+
+      button {
+        font-size: 14px;
+        line-height: 26px;
+        padding: .375rem 0.25rem;
+        min-width: 52px;
+
+        &:first-child {
+          margin-right: 0.75rem;
+        }
+      }
+    }
+
+    .form-btn-group__right {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+
+      button {
+        &:last-child {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }

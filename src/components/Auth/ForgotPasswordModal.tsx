@@ -1,7 +1,8 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Alert, Form, FormGroup, Input, Label } from 'reactstrap'
-import Button from 'components/Button/Button'
+import { PVButton as Button } from 'components/Button/Button'
+import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 
 type Props = {
@@ -101,20 +102,19 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
               type='text'
               value={email} />
           </FormGroup>
-          <div className='forgot-password-modal__btns'>
-            <div className='forgot-password-modal-btns__left' />
-            <div className='forgot-password-modal-btns__right'>
-              <Button
-                className='forgot-password-modal-btns-right__cancel'
-                onClick={hideModal}
-                text='Cancel' />
-              <Button
-                className='forgot-password-modal-right__send'
-                isLoading={isLoading}
-                onClick={this.handleSubmit}
-                text='Send' />
-            </div>
-          </div>
+          <ButtonGroup
+            childrenLeft
+            childrenRight={
+              <React.Fragment>
+                <Button
+                  onClick={hideModal}
+                  text='Cancel' />
+                <Button
+                  isLoading={isLoading}
+                  onClick={this.handleSubmit}
+                  text='Submit' />
+              </React.Fragment>
+            } />
         </Form>
       </Modal>
     )
