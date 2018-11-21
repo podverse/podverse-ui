@@ -1,6 +1,6 @@
   .form-btn-group {
     display: flex;
-    margin-top: 1.5rem;
+    margin-top: 1.75rem;
 
     .form-btn-group__left {
       display: flex;
@@ -31,3 +31,26 @@
       }
     }
   }
+
+  [theme=light] {
+    .form-btn-group {
+      .form-btn-group__left {
+        button {
+          background-color: transparent;
+          border-color: transparent;
+        }
+      }
+    }
+  }
+  
+  [theme=dark] {
+    .form-btn-group {
+      .form-btn-group__left {
+        button {
+          background-color: transparent;
+          border-color: transparent;
+        }
+      }
+    }
+  }
+  

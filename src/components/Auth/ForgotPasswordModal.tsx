@@ -1,9 +1,10 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
-import { Alert, Form, FormGroup, Input, Label } from 'reactstrap'
+import { Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap'
 import { PVButton as Button } from 'components/Button/Button'
 import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
+import { validateEmail } from 'lib/utility/validation'
 
 type Props = {
   handleSubmit: Function,
@@ -14,7 +15,7 @@ type Props = {
 
 type State = {
   email?: string
-  errorGeneral?: string
+  errorEmail?: string
 }
 
 const customStyles = {
@@ -29,10 +30,6 @@ const customStyles = {
   }
 }
 
-const errorsGeneral = {
-  invalidFormat: 'Please provide a valid email address.'
-}
-
 export class ForgotPasswordModal extends React.Component<Props, State> {
 
   constructor (props) {
@@ -40,33 +37,46 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
 
     this.state = {
       email: '',
-      errorGeneral: undefined
+      errorEmail: undefined
     }
 
-    this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEmailInputBlur = this.handleEmailInputBlur.bind(this)
+    this.handleEmailInputChange = this.handleEmailInputChange.bind(this)
   }
 
-  handleInputChange (event) {
-    const { stateKey } = event.target.dataset
-    const newState = {}
-    newState[stateKey] = event.target.value
+  handleEmailInputBlur (event) {
+    const { value: email } = event.target
+    const newState: any = {}
+    newState.email = email
+
+    if (!validateEmail(email)) {
+      newState.errorEmail = 'Please provide a valid email address.'
+    }
+
+    this.setState(newState)
+  }
+
+  handleEmailInputChange (event) {
+    const { value: email } = event.target
+    const newState: any = {}
+    newState.email = email
+
+    if (validateEmail(email)) {
+      newState.errorEmail = null
+    }
+
     this.setState(newState)
   }
 
   handleSubmit () {
     const { email } = this.state
-    this.clearErrors()
     this.props.handleSubmit(email)
-  }
-
-  clearErrors () {
-    this.setState({ errorGeneral: undefined })
   }
 
   render () {
     const { hideModal, isLoading, isOpen } = this.props
-    const { email, errorGeneral } = this.state
+    const { email, errorEmail } = this.state
 
     let appEl
     // @ts-ignore
@@ -86,21 +96,23 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
         <Form>
           <h4>Forgot Password</h4>
           <CloseButton onClick={hideModal} />
-          {
-            errorGeneral &&
-            <Alert color='danger'>
-              {errorsGeneral[errorGeneral]}
-            </Alert>
-          }
           <FormGroup>
             <Label for='forgot-password-modal__email'>Email</Label>
             <Input
               data-state-key='email'
+              invalid={errorEmail}
               name='forgot-password-modal__email'
-              onChange={this.handleInputChange}
+              onBlur={this.handleEmailInputBlur}
+              onChange={this.handleEmailInputChange}
               placeholder='hello@podverse.fm'
               type='text'
               value={email} />
+            {
+              errorEmail &&
+              <FormFeedback invalid='true'>
+                {errorEmail}
+              </FormFeedback>
+            }
           </FormGroup>
           <ButtonGroup
             childrenLeft
@@ -110,6 +122,8 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
                   onClick={hideModal}
                   text='Cancel' />
                 <Button
+                  color='primary'
+                  disabled={!validateEmail(email)}
                   isLoading={isLoading}
                   onClick={this.handleSubmit}
                   text='Submit' />

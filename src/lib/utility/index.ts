@@ -1,4 +1,4 @@
-export { validatePassword } from './validatePassword'
+export { validateEmail, validatePassword } from './validation'
 
 export const readableDate = (date) => {
   const dateObj = new Date(date),

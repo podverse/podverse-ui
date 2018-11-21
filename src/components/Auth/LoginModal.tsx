@@ -136,6 +136,7 @@ export class LoginModal extends React.Component<Props, State> {
                   text='Cancel' />
                 <Button
                   className='login-modal-btns-right__login'
+                  color='primary'
                   isLoading={isLoading}
                   onClick={this.handleLogin}
                   text='Login' />
