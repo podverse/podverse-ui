@@ -1,12 +1,13 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
-import { Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap'
+import { Alert, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap'
 import { PVButton as Button } from 'components/Button/Button'
 import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { validateEmail } from 'lib/utility/validation'
 
 type Props = {
+  errorResponse?: string
   handleSubmit: Function,
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void,
   isLoading: boolean
@@ -75,7 +76,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { hideModal, isLoading, isOpen } = this.props
+    const { errorResponse, hideModal, isLoading, isOpen } = this.props
     const { email, errorEmail } = this.state
 
     let appEl
@@ -96,6 +97,12 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
         <Form>
           <h4>Forgot Password</h4>
           <CloseButton onClick={hideModal} />
+          {
+            (errorResponse && !isLoading) &&
+            <Alert color='danger'>
+              {errorResponse}
+            </Alert>
+          }
           <FormGroup>
             <Label for='forgot-password-modal__email'>Email</Label>
             <Input

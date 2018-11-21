@@ -6,6 +6,7 @@ import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 
 type Props = {
+  errorResponse?: string
   handleLogin: Function
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoading: boolean
@@ -16,7 +17,6 @@ type Props = {
 
 type State = {
   email?: string
-  errorGeneral?: string
   password?: string
 }
 
@@ -32,10 +32,6 @@ const customStyles = {
   }
 }
 
-const errorsGeneral = {
-  invalidFormat: 'Please provide a valid email address.'
-}
-
 export class LoginModal extends React.Component<Props, State> {
 
   constructor (props) {
@@ -43,7 +39,6 @@ export class LoginModal extends React.Component<Props, State> {
 
     this.state = {
       email: '',
-      errorGeneral: undefined,
       password: ''
     }
 
@@ -60,18 +55,13 @@ export class LoginModal extends React.Component<Props, State> {
 
   handleLogin () {
     const { email, password } = this.state
-    this.clearErrors()
     this.props.handleLogin(email, password)
   }
 
-  clearErrors () {
-    this.setState({ errorGeneral: undefined })
-  }
-
   render () {
-    const { hideModal, isLoading, isOpen, showForgotPasswordModal, showSignUpModal
-      } = this.props
-    const { email, errorGeneral, password } = this.state
+    const { errorResponse, hideModal, isLoading, isOpen, showForgotPasswordModal,
+      showSignUpModal } = this.props
+    const { email, password } = this.state
 
     let appEl
     // @ts-ignore
@@ -92,9 +82,9 @@ export class LoginModal extends React.Component<Props, State> {
           <h4>Login</h4>
           <CloseButton onClick={hideModal} />
           {
-            errorGeneral &&
+            (errorResponse && !isLoading) &&
               <Alert color='danger'>
-                {errorsGeneral[errorGeneral]}
+                {errorResponse}
               </Alert>
           }
           <FormGroup>

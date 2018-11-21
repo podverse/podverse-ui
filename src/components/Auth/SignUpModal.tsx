@@ -7,6 +7,7 @@ import { CloseButton } from 'components/CloseButton/CloseButton'
 import { validateEmail, validatePassword } from 'lib/utility/validation'
 
 type Props = {
+  errorResponse?: string
   handleSignUp: Function
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoading: boolean
@@ -17,7 +18,6 @@ type Props = {
 type State = {
   email?: string
   errorEmail?: string
-  errorGeneral?: string
   errorPassword?: string
   errorPasswordConfirm?: string
   password?: string
@@ -44,13 +44,13 @@ export class SignUpModal extends React.Component<Props, State> {
     this.state = {
       email: '',
       errorEmail: undefined,
-      errorGeneral: undefined,
       errorPassword: undefined,
       errorPasswordConfirm: undefined,
       password: '',
       passwordConfirm: ''
     }
 
+    this.handleSignUp = this.handleSignUp.bind(this)
     this.handleEmailInputBlur = this.handleEmailInputBlur.bind(this)
     this.handleEmailInputChange = this.handleEmailInputChange.bind(this)
     this.handlePasswordInputBlur = this.handlePasswordInputBlur.bind(this)
@@ -90,6 +90,8 @@ export class SignUpModal extends React.Component<Props, State> {
 
     if (password && !validatePassword(password)) {
       newState.errorPassword = 'Password must contain a number, uppercase, lowercase, and be at least 8 characters long.'
+    } else if (validatePassword(password)) {
+      newState.errorPassword = null
     }
 
     this.setState(newState)
@@ -134,12 +136,7 @@ export class SignUpModal extends React.Component<Props, State> {
 
   handleSignUp () {
     const { email, passwordConfirm } = this.state
-    this.clearErrors()
     this.props.handleSignUp(email, passwordConfirm)
-  }
-
-  clearErrors () {
-    this.setState({ errorGeneral: undefined })
   }
 
   hasEmailAndConfirmedValidPassword () {
@@ -153,8 +150,8 @@ export class SignUpModal extends React.Component<Props, State> {
 
   render () {
 
-    const { hideModal, isLoading, isOpen } = this.props
-    const { email, errorEmail, errorGeneral, errorPassword, errorPasswordConfirm,
+    const { errorResponse, hideModal, isLoading, isOpen } = this.props
+    const { email, errorEmail, errorPassword, errorPasswordConfirm,
       password, passwordConfirm } = this.state
 
     let appEl
@@ -176,9 +173,9 @@ export class SignUpModal extends React.Component<Props, State> {
           <h4>Sign Up</h4>
           <CloseButton onClick={hideModal} />
           {
-            errorGeneral &&
+            (errorResponse && !isLoading) &&
             <Alert color='danger'>
-              {errorGeneral}
+              {errorResponse}
             </Alert>
           }
           <FormGroup>
