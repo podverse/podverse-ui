@@ -121,11 +121,11 @@ export class MediaInfo extends React.Component<Props, State> {
           </div>
           {
             description &&
-              <div
+              <button
                 className='media-info__show-more'
                 onClick={this.toggleDescription}>
                 {this.state.showDescription ? 'Hide Notes' : 'Show Notes'}
-              </div>
+              </button>
           }
           {
             (description && showDescription) &&

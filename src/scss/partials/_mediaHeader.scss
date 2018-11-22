@@ -12,12 +12,22 @@
     display: block;
     font-size: $text-lg-rem;
     margin-bottom: 0.25rem;
+
+    &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
   }
 
   .media-header__sub-title {
     @include ellipsis;
     display: block;
     margin-bottom: 0.25rem;
+
+    &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
   }
 
   .media-header__bottom-text {
