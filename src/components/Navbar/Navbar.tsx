@@ -25,7 +25,8 @@ type Props = {
 }
 
 type State = {
-  isOpen: boolean
+  dropdownIsOpen: boolean
+  navBarIsOpen: boolean
 }
 
 export class Navbar extends React.Component<Props, State> {
@@ -33,14 +34,20 @@ export class Navbar extends React.Component<Props, State> {
   constructor (props) {
     super(props)
 
-    this.toggle = this.toggle.bind(this)
+    this.toggleDropdown = this.toggleDropdown.bind(this)
+    this.toggleNavBar = this.toggleNavBar.bind(this)
     this.state = {
-      isOpen: false
+      dropdownIsOpen: false,
+      navBarIsOpen: false
     }
   }
 
-  toggle () {
-    this.setState({ isOpen: !this.state.isOpen })
+  toggleDropdown () {
+    this.setState({ dropdownIsOpen: !this.state.dropdownIsOpen })
+  }
+
+  toggleNavBar () {
+    this.setState({ navBarIsOpen: !this.state.navBarIsOpen })
   }
 
   render () {
@@ -66,7 +73,7 @@ export class Navbar extends React.Component<Props, State> {
         <DropdownItem
           onClick={() => {
             x.onClick()
-            this.setState({ isOpen: false })
+            this.setState({ dropdownIsOpen: false })
           }}>
           {x.label}
         </DropdownItem>
@@ -82,15 +89,15 @@ export class Navbar extends React.Component<Props, State> {
               brandHideText ? null : brandText
             }</NavbarBrand>
           </Link>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse navbar>
+          <NavbarToggler onClick={this.toggleNavBar} />
+          <Collapse isOpen={this.state.navBarIsOpen} navbar>
             <Nav className='ml-auto' navbar>
               {navItemsEls}
               <Dropdown
                 inNavbar
-                isOpen={this.state.isOpen}
+                isOpen={this.state.dropdownIsOpen}
                 nav
-                toggle={this.toggle}>
+                toggle={this.toggleDropdown}>
                 <DropdownToggle nav caret>
                   {dropdownText}
                 </DropdownToggle>
