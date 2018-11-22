@@ -117,7 +117,7 @@ class MakeClipModal extends React.Component<Props, State> {
     const { handleClipStartTimePreview, player } = this.props
     const startTime = convertHHMMSSToSeconds(this.inputStartTime.current.value)
 
-    if (startTime && startTime > 0) {
+    if (player && startTime && startTime > 0) {
       player.seekTo(startTime)
       handleClipStartTimePreview(startTime)
     }
@@ -127,7 +127,7 @@ class MakeClipModal extends React.Component<Props, State> {
     const { handleClipEndTimePreview, player } = this.props
     const endTime = convertHHMMSSToSeconds(this.inputEndTime.current.value)
 
-    if (endTime && endTime > 0) {
+    if (player && endTime && endTime > 0) {
       player.seekTo(endTime < 3 ? 0 : endTime - 3)
       handleClipEndTimePreview(endTime)
     }

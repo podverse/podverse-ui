@@ -146,12 +146,14 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   setKeyboardEventListeners () {
     document.body.addEventListener('keydown', (event) => {
-      if (event.keyCode === keyLeftArrow) {
-        this.player.seekTo(this.player.getCurrentTime() - 5)
-        this.forceUpdate() // Force update so the time updates immediately
-      } else if (event.keyCode === keyRightArrow) {
-        this.player.seekTo(this.player.getCurrentTime() + 5)
-        this.forceUpdate() // Force update so the time updates immediately
+      if (this.player) {
+        if (event.keyCode === keyLeftArrow) {
+          this.player.seekTo(this.player.getCurrentTime() - 5)
+          this.forceUpdate() // Force update so the time updates immediately
+        } else if (event.keyCode === keyRightArrow) {
+          this.player.seekTo(this.player.getCurrentTime() + 5)
+          this.forceUpdate() // Force update so the time updates immediately
+        }
       }
     })
   }
@@ -163,7 +165,9 @@ export class MediaPlayer extends React.Component<Props, State> {
   setCurrentTime = e => {
     const offsetX = e.nativeEvent.offsetX
     const width = e.currentTarget.offsetWidth
-    this.player.seekTo(offsetX / width)
+    if (this.player) {
+      this.player.seekTo(offsetX / width)
+    }
   }
 
   getClipFlagPositions = (): ClipFlagPositions => {
@@ -197,14 +201,18 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   handleTimeJumpForward = () => {
-    this.player.seekTo(this.player.getCurrentTime() + 15)
-    this.forceUpdate()
+    if (this.player) {
+      this.player.seekTo(this.player.getCurrentTime() + 15)
+      this.forceUpdate()
+    }
   }
 
   handleClipRestart = () => {
     const { nowPlayingItem } = this.props
     const { clipStartTime } = nowPlayingItem
-    this.player.seekTo(clipStartTime)
+    if (this.player) {
+      this.player.seekTo(clipStartTime)
+    }
     this.forceUpdate()
   }
 
@@ -229,7 +237,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       isLoading: false
     })
 
-    if (clipStartTime && clipStartTime > 0) {
+    if (this.player && clipStartTime && clipStartTime > 0) {
       this.player.seekTo(clipStartTime)
     }
 
