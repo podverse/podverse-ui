@@ -50,6 +50,18 @@
     text-align: right;
   }
 
+  .media-list-item-a__sub-middle {
+    @include ellipsis;
+    margin-top: 0.125em;
+  }
+
+  .media-list-item-a__sub-middle-side {
+    float: right;
+    margin-left: 1em;
+    margin-top: 0.125em;
+    text-align: right;
+  }
+
   .media-list-item-a__sub-top {
     @include ellipsis;
   }

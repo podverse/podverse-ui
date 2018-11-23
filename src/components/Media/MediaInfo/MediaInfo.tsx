@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Button } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { readableClipTime } from 'lib/utility'
+import { calcDuration, readableClipTime, secondsToReadableDuration } from 'lib/utility'
 import AddToModal from 'components/Media/Modals/AddToModal/AddToModal'
 const sanitizeHtml = require('sanitize-html')
 
@@ -70,6 +70,7 @@ export class MediaInfo extends React.Component<Props, State> {
 
     let title
     let time
+    let duration
     let description
 
     if (episode) {
@@ -77,10 +78,16 @@ export class MediaInfo extends React.Component<Props, State> {
     } else if (mediaRef) {
       title = mediaRef.title || 'Untitled clip'
       time = readableClipTime(mediaRef.startTime, mediaRef.endTime)
+      duration = secondsToReadableDuration(
+        calcDuration(mediaRef.startTime, mediaRef.endTime)
+      )
       description = mediaRef.episodeDescription
     } else if (nowPlayingItem) {
       title = nowPlayingItem.clipTitle
       time = readableClipTime(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
+      duration = secondsToReadableDuration(
+        calcDuration(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
+      )
       description = nowPlayingItem.episodeDescription
     } else if (podcast) {
       console.log('podcast')
@@ -96,10 +103,14 @@ export class MediaInfo extends React.Component<Props, State> {
             </div>
           }
           {
+            duration &&
+            <div className='media-info__duration'>
+              {duration}
+            </div>
+          }
+          {
             time &&
-            <div
-              className='media-info__time'
-              onClick={() => console.log('hello')}>
+            <div className='media-info__time'>
               {time}
             </div>
           }

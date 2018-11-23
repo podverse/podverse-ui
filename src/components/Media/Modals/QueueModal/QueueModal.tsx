@@ -7,7 +7,7 @@ import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 
 export interface Props {
   handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
+  hideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   nowPlayingItem?: any
   priorityItems: any[]
@@ -15,7 +15,6 @@ export interface Props {
 }
 
 const defaultProps: Props = {
-  hideModal: () => { console.log('hideModal') },
   isOpen: false,
   nowPlayingItem: {},
   priorityItems: [],

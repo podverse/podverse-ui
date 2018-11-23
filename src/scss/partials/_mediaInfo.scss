@@ -8,6 +8,11 @@
     margin-top: 0.25rem;
   }
 
+  .media-info__duration {
+    float: right;
+    margin-top: 0.5rem;
+  }
+
   .media-info__time {
     margin-top: 0.5rem;
   }
@@ -54,7 +59,7 @@ html[theme=light] {
       color: $black;
     }
 
-    .media-info__time {
+    .media-info__time, .media-info__duration {
       color: $gray;
     }
 
@@ -84,7 +89,7 @@ html[theme=dark] {
       color: $white;
     }
 
-    .media-info__time {
+    .media-info__time, .media-info__duration {
       color: $gray;
     }
 

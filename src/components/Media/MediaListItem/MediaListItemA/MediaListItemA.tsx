@@ -1,25 +1,22 @@
 import * as React from 'react'
 
 export interface Props {
-  /** the url of the left positioned image */
   imageUrl?: string
   moreMenuItems?: any
   showImage?: boolean
-  /** the subtitle positioned bottom-left  */
   subTitleBottom?: string
-  /** the subtitle positioned bottom-right  */
   subTitleBottomSide?: string
-  /** the subtitle positioned top-left  */
+  subTitleMiddle?: string
+  subTitleMiddleSide?: string
   subTitleTop?: string
-  /** the subtitle positioned top-right  */
   subTitleTopSide?: string
-  /** the main title of the item  */
   title: string
 }
 
 export const MediaListItemA: React.StatelessComponent<Props> = props => {
   const { imageUrl, showImage, subTitleBottom, subTitleBottomSide,
-    subTitleTop, subTitleTopSide, title } = props
+    subTitleMiddle, subTitleMiddleSide, subTitleTop, subTitleTopSide,
+    title } = props
 
   return (
     <div className='media-list-item__a'>
@@ -36,6 +33,12 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
         </div>
         <div className='media-list-item-a__sub-top'>
           {subTitleTop}
+        </div>
+        <div className='media-list-item-a__sub-middle-side'>
+          {subTitleMiddleSide}
+        </div>
+        <div className='media-list-item-a__sub-middle'>
+          {subTitleMiddle}
         </div>
         <div className='media-list-item-a__sub-bottom-side'>
           {subTitleBottomSide}

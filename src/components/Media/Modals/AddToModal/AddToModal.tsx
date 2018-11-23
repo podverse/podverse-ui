@@ -11,7 +11,7 @@ export interface Props {
   handleAddToQueueNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleLoginClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
+  hideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   mediaRef?: any
   nowPlayingItem?: any
@@ -21,7 +21,6 @@ export interface Props {
 }
 
 const defaultProps: Props = {
-  hideModal: () => { console.log('hideModal') },
   isOpen: false,
   nowPlayingItem: {},
   playlists: []
