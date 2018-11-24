@@ -2,17 +2,15 @@ import * as React from 'react'
 import { Button } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { calcDuration, readableClipTime, secondsToReadableDuration } from 'lib/utility'
-import AddToModal from 'components/Media/Modals/AddToModal/AddToModal'
 const sanitizeHtml = require('sanitize-html')
 
 type Props = {
   episode?: any
-  handleAddToPlaylist?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  handleAddToQueueLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  handleAddToQueueNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleShowAddToModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleToggleAddToModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoggedIn?: boolean
+  loggedInUserId?: string
   mediaRef?: any
   nowPlayingItem?: any
   playing?: boolean
@@ -42,20 +40,6 @@ export class MediaInfo extends React.Component<Props, State> {
     this.toggleDescription = this.toggleDescription.bind(this)
   }
 
-  hideAddToModal = () => {
-    this.setState({ showAddToModal: false })
-  }
-
-  toggleModal = (key) => {
-    this.setState({
-      showAddToModal: key === 'addTo' ? !this.state.showAddToModal : false
-    })
-  }
-
-  toggleAddToModal = () => {
-    this.toggleModal('addTo')
-  }
-
   toggleDescription () {
     this.setState(prevState => ({
       showDescription: !prevState.showDescription
@@ -63,10 +47,9 @@ export class MediaInfo extends React.Component<Props, State> {
   }
 
   render () {
-    const { episode, handleAddToPlaylist, handleAddToQueueLast, handleAddToQueueNext,
-      handlePlayItem, isLoggedIn, mediaRef, nowPlayingItem, playing, podcast,
-      playlists } = this.props
-    const { showAddToModal, showDescription } = this.state
+    const { episode, handlePlayItem, loggedInUserId, mediaRef, nowPlayingItem,
+      playing, podcast, handleToggleAddToModal, handleToggleMakeClipModal } = this.props
+    const { showDescription } = this.state
 
     let title
     let time
@@ -126,9 +109,19 @@ export class MediaInfo extends React.Component<Props, State> {
             </Button>
             <Button
               className='media-info-controls__add-to'
-              onClick={this.toggleAddToModal}>
+              onClick={handleToggleAddToModal}>
               <FontAwesomeIcon icon='plus' />
             </Button>
+            {
+              (loggedInUserId
+                && nowPlayingItem.ownerId
+                && loggedInUserId === nowPlayingItem.ownerId) &&
+                <Button
+                  className='media-info-controls__edit'
+                  onClick={handleToggleMakeClipModal}>
+                  <FontAwesomeIcon icon='edit' />
+                </Button>
+            }
           </div>
           {
             description &&
@@ -150,18 +143,6 @@ export class MediaInfo extends React.Component<Props, State> {
                   }} />
           }
         </div>
-        <AddToModal
-          episode={episode}
-          handleAddToQueueLast={handleAddToQueueLast}
-          handleAddToQueueNext={handleAddToQueueNext}
-          handlePlaylistItemAdd={handleAddToPlaylist}
-          hideModal={this.hideAddToModal}
-          isOpen={showAddToModal}
-          mediaRef={mediaRef}
-          nowPlayingItem={nowPlayingItem}
-          playlists={playlists}
-          showPlaylists={isLoggedIn}
-          showQueue={true} />
       </React.Fragment>
     )
   }

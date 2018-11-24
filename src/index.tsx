@@ -17,6 +17,11 @@ export { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 export { MediaListSelect } from 'components/Media/MediaListSelect/MediaListSelect'
 export { MediaPlayer } from 'components/Media/MediaPlayer/MediaPlayer'
 
+export { AddToModal } from 'components/Media/Modals/AddToModal/AddToModal'
+export { MakeClipModal } from 'components/Media/Modals/MakeClipModal/MakeClipModal'
+export { QueueModal } from 'components/Media/Modals/QueueModal/QueueModal'
+export { ShareModal } from 'components/Media/Modals/ShareModal/ShareModal'
+
 export { Navbar } from 'components/Navbar/Navbar'
 
 export { addItemToPriorityQueueStorage, addItemsToSecondaryQueueStorage,

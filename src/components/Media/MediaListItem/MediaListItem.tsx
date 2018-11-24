@@ -196,8 +196,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                 )}
                 subTitleMiddle={dataNowPlayingItem.episodeTitle}
                 subTitleMiddleSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                subTitleTop={dataNowPlayingItem.episodeTitle}
-                subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                subTitleTop={dataNowPlayingItem.podcastTitle}
                 title={dataNowPlayingItem.clipTitle} />
             }
             {

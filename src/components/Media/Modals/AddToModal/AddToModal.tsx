@@ -9,9 +9,9 @@ export interface Props {
   episode?: any
   handleAddToQueueLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleAddToQueueNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleLoginClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  hideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   mediaRef?: any
   nowPlayingItem?: any
@@ -41,9 +41,9 @@ let customStyles = {
 }
 
 const AddToModal: React.StatelessComponent<Props> = props => {
-  const { episode, handleAddToQueueLast, handleAddToQueueNext, handleLoginClick,
-    handlePlaylistItemAdd, hideModal, isOpen, mediaRef, nowPlayingItem, playlists,
-    showPlaylists, showQueue } = props
+  const { episode, handleAddToQueueLast, handleAddToQueueNext, handleHideModal,
+    handleLoginClick, handlePlaylistItemAdd, isOpen, mediaRef, nowPlayingItem,
+    playlists, showPlaylists, showQueue } = props
 
   const playlistMediaListItems = playlists.map(x =>
     <MediaListItem
@@ -82,12 +82,12 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       appElement={appEl}
       contentLabel='Add To'
       isOpen={isOpen}
-      onRequestClose={hideModal}
+      onRequestClose={handleHideModal}
       portalClassName='mp-add-to-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
       <h4><FontAwesomeIcon icon='plus-circle' /> &nbsp; Add To</h4>
-      <CloseButton onClick={hideModal} />
+      <CloseButton onClick={handleHideModal} />
       <div className='scrollable-area'>
         {
           playingItem &&
@@ -141,4 +141,4 @@ const AddToModal: React.StatelessComponent<Props> = props => {
 
 AddToModal.defaultProps = defaultProps
 
-export default AddToModal
+export { AddToModal }

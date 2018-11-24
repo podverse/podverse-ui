@@ -1,13 +1,13 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
-import { Button, FormGroup, Input, InputGroup,
-  InputGroupAddon, Label } from 'reactstrap'
+import { Button, FormGroup, Input, InputGroup, InputGroupAddon,
+  Label } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { copyToClipboard } from 'lib/utility'
 
 type Props = {
-  hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   playerClipLinkHref?: string
   playerEpisodeLinkHref?: string
@@ -31,7 +31,7 @@ const customStyles = {
   }
 }
 
-class ShareModal extends React.Component<Props, State> {
+export class ShareModal extends React.Component<Props, State> {
 
   constructor (props) {
     super(props)
@@ -70,7 +70,7 @@ class ShareModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { hideModal, isOpen, playerClipLinkHref, playerEpisodeLinkHref,
+    const { handleHideModal, isOpen, playerClipLinkHref, playerEpisodeLinkHref,
       playerPodcastLinkHref } = this.props
     const { lastCopied } = this.state
 
@@ -85,12 +85,12 @@ class ShareModal extends React.Component<Props, State> {
         appElement={appEl}
         contentLabel='Share links'
         isOpen={isOpen}
-        onRequestClose={hideModal}
+        onRequestClose={handleHideModal}
         portalClassName='mp-share-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <h4><FontAwesomeIcon icon='share' /> &nbsp;Share</h4>
-        <CloseButton onClick={hideModal} />
+        <CloseButton onClick={handleHideModal} />
         {
           playerClipLinkHref &&
           <FormGroup>
@@ -101,7 +101,9 @@ class ShareModal extends React.Component<Props, State> {
                 value={playerClipLinkHref} />
               <InputGroupAddon
                 addonType='append'>
-                <Button onClick={this.handleClipCopy}>
+                <Button
+                  color='primary'
+                  onClick={this.handleClipCopy}>
                   {
                     lastCopied === 'clip' ? 'Copied!' : 'Copy'
                   }
@@ -120,7 +122,9 @@ class ShareModal extends React.Component<Props, State> {
                 value={playerEpisodeLinkHref} />
               <InputGroupAddon
                 addonType='append'>
-                <Button onClick={this.handleEpisodeCopy}>
+                <Button
+                  color='primary'
+                  onClick={this.handleEpisodeCopy}>
                   {
                     lastCopied === 'episode' ? 'Copied!' : 'Copy'
                   }
@@ -139,7 +143,9 @@ class ShareModal extends React.Component<Props, State> {
                 value={playerPodcastLinkHref} />
               <InputGroupAddon
                 addonType='append'>
-                <Button onClick={this.handlePodcastCopy}>
+                <Button
+                  color='primary'
+                  onClick={this.handlePodcastCopy}>
                   {
                     lastCopied === 'podcast' ? 'Copied!' : 'Copy'
                   }
@@ -152,5 +158,3 @@ class ShareModal extends React.Component<Props, State> {
     )
   }
 }
-
-export default ShareModal

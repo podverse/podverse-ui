@@ -7,18 +7,11 @@ import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 
 export interface Props {
   handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  hideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   nowPlayingItem?: any
   priorityItems: any[]
   secondaryItems: any[]
-}
-
-const defaultProps: Props = {
-  isOpen: false,
-  nowPlayingItem: {},
-  priorityItems: [],
-  secondaryItems: []
 }
 
 const customStyles = {
@@ -34,9 +27,9 @@ const customStyles = {
   }
 }
 
-const QueueModal: React.StatelessComponent<Props> = props => {
-  const { handleAnchorOnClick, hideModal, isOpen, nowPlayingItem, priorityItems,
-    secondaryItems } = props
+export const QueueModal: React.StatelessComponent<Props> = props => {
+  const { handleAnchorOnClick, handleHideModal, isOpen, nowPlayingItem = {},
+    priorityItems = [], secondaryItems = [] } = props
 
   const priorityItemNodes = priorityItems.map(x => {
     if (x.clipStartTime) {
@@ -88,12 +81,12 @@ const QueueModal: React.StatelessComponent<Props> = props => {
       appElement={appEl}
       contentLabel='Queue'
       isOpen={isOpen}
-      onRequestClose={hideModal}
+      onRequestClose={handleHideModal}
       portalClassName='mp-queue-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
       <h4><FontAwesomeIcon icon='list-ul' /> &nbsp;Queue</h4>
-      <CloseButton onClick={hideModal} />
+      <CloseButton onClick={handleHideModal} />
       <div className='scrollable-area'>
         {
           nowPlayingItem &&
@@ -123,7 +116,3 @@ const QueueModal: React.StatelessComponent<Props> = props => {
     </Modal>
   )
 }
-
-QueueModal.defaultProps = defaultProps
-
-export default QueueModal
