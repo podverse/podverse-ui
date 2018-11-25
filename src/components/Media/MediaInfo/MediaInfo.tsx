@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Button } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { calcDuration, readableClipTime, secondsToReadableDuration } from 'lib/utility'
+import { convertToNowPlayingItem } from 'lib/nowPlayingItem';
 const sanitizeHtml = require('sanitize-html')
 
 type Props = {
@@ -55,6 +56,7 @@ export class MediaInfo extends React.Component<Props, State> {
     let time
     let duration
     let description
+    let currentItem: any = {}
 
     if (episode) {
       console.log('episode')
@@ -65,6 +67,7 @@ export class MediaInfo extends React.Component<Props, State> {
         calcDuration(mediaRef.startTime, mediaRef.endTime)
       )
       description = mediaRef.episodeDescription
+      currentItem = convertToNowPlayingItem(mediaRef)
     } else if (nowPlayingItem) {
       title = nowPlayingItem.clipTitle
       time = readableClipTime(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
@@ -72,6 +75,7 @@ export class MediaInfo extends React.Component<Props, State> {
         calcDuration(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
       )
       description = nowPlayingItem.episodeDescription
+      currentItem = nowPlayingItem
     } else if (podcast) {
       console.log('podcast')
     }
@@ -114,8 +118,8 @@ export class MediaInfo extends React.Component<Props, State> {
             </Button>
             {
               (loggedInUserId
-                && nowPlayingItem.ownerId
-                && loggedInUserId === nowPlayingItem.ownerId) &&
+                && currentItem.ownerId
+                && loggedInUserId === currentItem.ownerId) &&
                 <Button
                   className='media-info-controls__edit'
                   onClick={handleToggleMakeClipModal}>

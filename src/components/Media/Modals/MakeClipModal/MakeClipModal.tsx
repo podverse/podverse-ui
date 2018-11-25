@@ -7,15 +7,18 @@ import { PVButton as Button } from 'components/Button/Button'
 import { convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/utility'
 
 type Props = {
+  endTime?: number
   handleEndTimePreview?: Function
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleStartTimePreview?: Function
   handleSave: Function
+  handleStartTimePreview?: Function
+  isEditing?: boolean
   isLoading?: boolean
   isOpen?: boolean
   isPublic?: boolean
   player?: any
   startTime: number
+  title?: string
 }
 
 type State = {
@@ -86,6 +89,7 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   async handleSave () {
+    const { isEditing } = this.props
     const { isPublic } = this.state
     const { value: startTime } = this.inputStartTime.current
     const { value: endTime } = this.inputEndTime.current
@@ -104,7 +108,7 @@ class MakeClipModal extends React.Component<Props, State> {
         startTime: startTimeSeconds,
         endTime: endTimeSeconds,
         title
-      })
+      }, isEditing)
     }
   }
 
@@ -115,7 +119,7 @@ class MakeClipModal extends React.Component<Props, State> {
     })
   }
 
-  endTimePreview() {
+  endTimePreview () {
     const { handleEndTimePreview, player } = this.props
     const endTime = convertHHMMSSToSeconds(this.inputEndTime.current.value)
 
@@ -136,7 +140,8 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { handleHideModal, isLoading, isOpen, startTime } = this.props
+    const { endTime, handleHideModal, isEditing, isLoading, isOpen, startTime,
+      title } = this.props
     const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen,
       isSaving } = this.state
 
@@ -156,7 +161,11 @@ class MakeClipModal extends React.Component<Props, State> {
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h4><FontAwesomeIcon icon='cut' /> &nbsp;Make Clip</h4>
+          {
+            isEditing ?
+              <h4><FontAwesomeIcon icon='edit' /> &nbsp;Edit Clip</h4> :
+              <h4><FontAwesomeIcon icon='cut' /> &nbsp;Make Clip</h4>
+          }
           <Dropdown
             className='make-clip-modal__is-public transparent-btn'
             isOpen={isPublicIsOpen}
@@ -230,6 +239,7 @@ class MakeClipModal extends React.Component<Props, State> {
                   <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; Preview
                 </button>
                 <Input
+                  defaultValue={endTime ? convertSecToHHMMSS(endTime) : ''}
                   innerRef={this.inputEndTime}
                   invalid={!!errorEndTime}
                   name='make-clip-modal__end-time'
@@ -247,6 +257,7 @@ class MakeClipModal extends React.Component<Props, State> {
           <FormGroup>
             <Label for='make-clip-modal__title'>Title</Label>
             <Input
+              defaultValue={title ? title : ''}
               innerRef={this.inputTitle}
               name='make-clip-modal__title'
               placeholder='optional'
