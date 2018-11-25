@@ -18,6 +18,7 @@ export { MediaListSelect } from 'components/Media/MediaListSelect/MediaListSelec
 export { MediaPlayer } from 'components/Media/MediaPlayer/MediaPlayer'
 
 export { AddToModal } from 'components/Media/Modals/AddToModal/AddToModal'
+export { ClipCreatedModal } from 'components/Media/Modals/ClipCreatedModal/ClipCreatedModal'
 export { MakeClipModal } from 'components/Media/Modals/MakeClipModal/MakeClipModal'
 export { QueueModal } from 'components/Media/Modals/QueueModal/QueueModal'
 export { ShareModal } from 'components/Media/Modals/ShareModal/ShareModal'

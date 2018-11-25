@@ -17,9 +17,6 @@ type Props = {
   clipFinished?: boolean
   handleClipRestart?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleMakeClipEndTimePreview?: Function
-  handleMakeClipStartTimePreview?: Function
-  handleMakeClipSave?: Function
   handleOnEpisodeEnd?: Function
   handleOnPastClipTime?: Function
   handleQueueItemClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
@@ -33,7 +30,6 @@ type Props = {
   handleToggleQueueModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoggedIn?: boolean
-  makeClipIsLoading?: boolean
   nowPlayingItem: NowPlayingItem
   playbackRate: number
   playbackRateText: string
