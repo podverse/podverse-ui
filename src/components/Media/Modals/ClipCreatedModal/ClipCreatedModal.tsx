@@ -3,6 +3,7 @@ import * as Modal from 'react-modal'
 import { Form, FormGroup, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PVButton as Button } from 'components/Button/Button'
+import { CloseButton } from 'components/CloseButton/CloseButton'
 import { copyToClipboard } from 'lib/utility'
 
 type Props = {
@@ -67,8 +68,9 @@ class ClipCreatedModal extends React.Component<Props, State> {
         portalClassName='make-clip-modal'
         shouldCloseOnOverlayClick
         style={customStyles}>
+        <h4><FontAwesomeIcon icon='share' /> &nbsp;Share Clip</h4>
+        <CloseButton onClick={handleHideModal} />
         <Form>
-          <h4><FontAwesomeIcon icon='share' /> &nbsp;Share Clip</h4>
           <FormGroup>
             <Label for='clip-created-copy-link'>Clip</Label>
             <InputGroup id='clip-created-copy-link'>
