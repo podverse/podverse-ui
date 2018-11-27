@@ -14,15 +14,15 @@ export const MediaListItemD: React.StatelessComponent<Props> = props => {
     <div
       className='media-list-item__d'
       onClick={handleOnClick}>
-      <div className='media-list-item-d__title'>
-        {title}
-      </div>
       {
         subTitleSide &&
           <div className='media-list-item-d__sub-title-side'>
             {subTitleSide}
           </div>
       }
+      <div className='media-list-item-d__title'>
+        {title}
+      </div>
       {
         subTitle &&
           <div className='media-list-item-d__sub-title'>

@@ -1,17 +1,25 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
+import { FormFeedback, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { PVButton as Button } from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 
 export interface Props {
+  createPlaylistIsSaving?: boolean
+  createPlaylistError?: string
+  createPlaylistShow?: boolean
   episode?: any
   handleAddToQueueLast?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleAddToQueueNext?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleCreatePlaylistHide?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleCreatePlaylistSave?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleLoginClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleToggleCreatePlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   mediaRef?: any
   nowPlayingItem?: any
@@ -40,10 +48,13 @@ let customStyles = {
   }
 }
 
+let inputTitle
+
 const AddToModal: React.StatelessComponent<Props> = props => {
-  const { episode, handleAddToQueueLast, handleAddToQueueNext, handleHideModal,
-    handleLoginClick, handlePlaylistItemAdd, isOpen, mediaRef, nowPlayingItem,
-    playlists, showPlaylists, showQueue } = props
+  const { createPlaylistError, createPlaylistIsSaving, createPlaylistShow, episode, handleAddToQueueLast,
+    handleAddToQueueNext, handleCreatePlaylistHide, handleCreatePlaylistSave, handleHideModal,
+    handleLoginClick, handlePlaylistItemAdd, handleToggleCreatePlaylist, isOpen, mediaRef,
+    nowPlayingItem, playlists, showPlaylists, showQueue } = props
 
   const playlistMediaListItems = playlists.map(x =>
     <MediaListItem
@@ -118,21 +129,66 @@ const AddToModal: React.StatelessComponent<Props> = props => {
           showPlaylists ?
             <React.Fragment>
               <h6>
-                Playlist
+                My Playlists
               </h6>
+              <div className='mp-add-to-modal__create-playlist'>
+                {
+                  !createPlaylistShow ?
+                    <button
+                      className='mp-add-to-modal-create-playlist__create'
+                      onClick={handleToggleCreatePlaylist}>
+                      <FontAwesomeIcon icon='plus' /> &nbsp;Create Playlist
+                    </button> :
+                    <FormGroup>
+                      <InputGroup>
+                        <Input
+                          innerRef={el => inputTitle = el}
+                          name='mp-add-to-modal-create-playlist__title'
+                          placeholder='title of playlist'
+                          type='text' />
+                        <InputGroupAddon addonType='append'>
+                          <Button
+                            className='mp-add-to-modal-create-playlist__cancel'
+                            color='secondary'
+                            isOnlyIcon
+                            onClick={handleCreatePlaylistHide}>
+                            <FontAwesomeIcon icon='times' />
+                          </Button>
+                        </InputGroupAddon>
+                        <InputGroupAddon addonType='append'>
+                          <Button
+                            className='mp-add-to-modal-create-playlist__save'
+                            color='primary'
+                            disabled={createPlaylistIsSaving}
+                            isLoading={createPlaylistIsSaving}
+                            isOnlyIcon
+                            onClick={() => handleCreatePlaylistSave &&
+                              handleCreatePlaylistSave(inputTitle.value)}>
+                            <FontAwesomeIcon icon='check' />
+                          </Button>
+                        </InputGroupAddon>
+                      </InputGroup>
+                      {
+                        createPlaylistError &&
+                        <FormFeedback invalid='true'>
+                          {createPlaylistError}
+                        </FormFeedback>
+                      }
+                    </FormGroup>
+                }
+              </div>
               {playlistMediaListItems}
             </React.Fragment>
             :
             <React.Fragment>
               <h6>
-                Playlist
+                My Playlists
               </h6>
               <div className='mp-add-to-modal__playlist-msg'>
                 <a onClick={handleLoginClick}>Login</a>
                 &nbsp;to add items to playlists
               </div>
             </React.Fragment>
-
         }
       </div>
     </Modal>

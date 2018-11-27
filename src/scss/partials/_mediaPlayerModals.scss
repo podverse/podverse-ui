@@ -32,15 +32,16 @@
     width: 50%;
   }
 
-  .media-list__item {
-    &:last-of-type .media-list-item__d {
-      border: none;
-    }
+  .mp-add-to-modal__create-playlist {
+    margin-top: 1.125rem;
 
-    .media-list-item__d {
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
-      padding: 0.5em 0.25em;
+    .mp-add-to-modal-create-playlist__create {
+      display: block;
+      height: 36px;
+      line-height: 36px;
+      margin: 1.25rem auto 0 auto;
+      text-align: center;
+      width: 160px;
     }
   }
 
@@ -121,7 +122,7 @@
       border-color: $gray-light;
     }
 
-    .mp-add-to-modal__play-next, .mp-add-to-modal__play-last {
+    .mp-add-to-modal__play-next, .mp-add-to-modal__play-last, .mp-add-to-modal__create-playlist {
       color: $black !important;
         
       &:hover {
@@ -131,10 +132,6 @@
 
     .mp-add-to-modal__playlist-msg {
       color: $black;
-    }
-
-    .media-list-item__d {
-      border-bottom-color: $gray-light;
     }
   }
 
@@ -153,7 +150,7 @@
       border-color: $gray-darker;
     }
 
-    .mp-add-to-modal__play-next, .mp-add-to-modal__play-last {
+    .mp-add-to-modal__play-next, .mp-add-to-modal__play-last, .mp-add-to-modal__create-playlist {
       color: $white !important;
 
       &:hover {
@@ -163,10 +160,6 @@
 
     .mp-add-to-modal__playlist-msg {
       color: $white;
-    }
-
-    .media-list-item__d {
-      border-bottom-color: $gray-darker;
     }
   }
 

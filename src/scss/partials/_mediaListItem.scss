@@ -130,8 +130,8 @@
 }
 
 .media-list-item__d {
-  padding: 0.5em 0;
-
+  margin: -0.25em 0;
+  padding: 0.75em 0;
 
   @supports (-webkit-line-clamp: 2) {
     .media-list-item-d__title {
@@ -144,9 +144,10 @@
 
   .media-list-item-d__sub-title-side {
     float: right;
+    font-size: $text-sm-em;
+    line-height: 20px;
     margin-left: 1em;
     text-align: right;
-    font-size: $text-sm-em;
   }
   
   .media-list-item-d__sub-title {
@@ -155,7 +156,6 @@
   }
 }
 
-
 html[theme=light] {
   [class^=media-list-item__] {
     [class*=__title], [class$=__description] {
@@ -163,6 +163,15 @@ html[theme=light] {
     }
     [class*=__sub], [class$=__date] {
       color: $gray;
+    }
+
+    &:hover {
+      [class*=__title], [class$=__description] {
+        color: $gray-darker;
+      }
+      [class*=__sub], [class$=__date] {
+        color: $gray-lighter;
+      }
     }
   }
 }
@@ -174,6 +183,15 @@ html[theme=dark] {
     }
     [class*=__sub], [class$=__date] {
       color: $gray-light;
+    }
+
+    &:hover {
+      [class*=__title], [class$=__description] {
+        color: $gray-lighter;
+      }
+      [class*=__sub], [class$=__date] {
+        color: $gray;
+      }
     }
   }
 }

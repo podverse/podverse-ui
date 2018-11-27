@@ -97,6 +97,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
           {...(anchorAs ? { as: anchorAs } : {})}>
           <a
             className={`media-list__item ${noWrap ? 'no-wrap' : ''}`}
+            {...(dataPlaylist ? { 'data-id': dataPlaylist.id } : {})}
             onClick={handleAnchorOnClick}>
             {
               (itemType === 'clip' && dataClip) &&
@@ -211,7 +212,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               (itemType === 'playlist' && dataPlaylist) &&
                 <MediaListItemD
                   subTitle={dataPlaylist.lastUpdated ? readableDate(dataPlaylist.lastUpdated) : ''}
-                  subTitleSide={`items: ${dataPlaylist.items.length}`}
+                  subTitleSide={`${dataPlaylist.itemCount || dataPlaylist.itemCount === 0 ? `items: ${dataPlaylist.itemCount}` : ''}`}
                   title={dataPlaylist.title} />
             }
             {
