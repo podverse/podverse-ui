@@ -68,6 +68,11 @@ html[theme=light] {
         background-color: $white;
         border-color: $black;
         color: $black;
+
+        &:hover {
+          border-color: $gray-darker;
+          color: $gray-darker;
+        }
       }
     }
 
@@ -98,6 +103,11 @@ html[theme=dark] {
         background-color: $black;
         border-color: $white;
         color: $white;
+
+        &:hover {
+          border-color: $gray-lighter;
+          color: $gray-lighter;
+        }
       }
     }
 

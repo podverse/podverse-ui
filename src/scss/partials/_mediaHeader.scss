@@ -7,11 +7,24 @@
     width: 4.75rem;
   }
 
+  .media-header__subscribe {
+    float: right;
+    height: 22px;
+    line-height: 22px;
+    margin-left: 1.5rem;
+    margin-right: 3px;
+    margin-top: 3px;
+    padding: 0;
+    width: 22px;
+  }
+
   .media-header__title {
     @include ellipsis;
     display: block;
+    float: left;
     font-size: $text-lg-rem;
     margin-bottom: 0.25rem;
+    max-width: calc(100% - 44px); // 100% minus the width of the subscribe button area
 
     &:focus {
       outline: none;
@@ -21,8 +34,11 @@
 
   .media-header__sub-title {
     @include ellipsis;
+    clear: both;
     display: block;
+    float: left;
     margin-bottom: 0.25rem;
+    max-width: 100%;
 
     &:focus {
       outline: none;
@@ -32,10 +48,13 @@
 
   .media-header__bottom-text {
     @include ellipsis;
+    clear: left;
     display: block;
+    
   }
 
   .media-header__bottom-text-side {
+    clear: both;
     float: right;
   }
 }

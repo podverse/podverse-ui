@@ -22,17 +22,17 @@ body {
       
       &:hover {
         background-color: $gray-lightest;
-        color: $black;
+        color: $gray-darker;
       }
   
       &:focus {
         background-color: $gray-lightest;
-        color: $black;
+        color: $gray-darker;
       }
 
       &:active {
         background-color: $gray-lightest;
-        color: $black;
+        color: $gray-darker;
       }
     }
 
@@ -61,17 +61,17 @@ body {
       
       &:hover {
         background-color: transparent;
-        color: $white;
+        color: $gray-lighter;
       }
   
       &:focus {
         background-color: transparent;
-        color: $white;
+        color: $gray-lighter;
       }
 
       &:active {
         background-color: transparent;
-        color: $white;
+        color: $gray-lighter;
       }
     }
 
