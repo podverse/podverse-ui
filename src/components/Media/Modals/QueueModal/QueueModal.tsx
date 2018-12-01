@@ -186,6 +186,7 @@ export class QueueModal extends React.Component<Props, State> {
           hasLink
           itemType='now-playing-item' />
       ))
+      historyItemNodes.reverse()
     }
 
     let appEl
