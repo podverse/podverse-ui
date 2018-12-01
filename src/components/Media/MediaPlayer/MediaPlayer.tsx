@@ -76,8 +76,6 @@ export interface MediaPlayer {
   progressBarWidth: any
 }
 
-const timePlaceholder = '--:--:--'
-
 let lastNowPlayingItem: NowPlayingItem = {}
 
 // Force ReactPlayer to refresh every time the mediaUrl changes, to ensure
@@ -178,7 +176,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     if (this.progressBarWidth.current) {
       const width = this.progressBarWidth.current.offsetWidth
 
-      if (duration && duration > 0 && this.durationNode && this.durationNode.current && this.durationNode.current.innerText !== timePlaceholder) {
+      if (duration && duration > 0) {
         const positionOffset = width / duration
 
         if (clipStartTime) {
@@ -216,8 +214,6 @@ export class MediaPlayer extends React.Component<Props, State> {
   itemSkip = (evt) => {
     if (this.props.handleItemSkip) {
       this.setState({
-        duration: 0,
-        isLoading: true,
         played: 0,
         playedSeconds: 0
       })
@@ -470,14 +466,14 @@ export class MediaPlayer extends React.Component<Props, State> {
                   onClick={this.setCurrentTime}
                   onMouseMove={this.onMouseOverProgress}
                   value={duration && typeof window !== 'undefined' && window.player ? (window.player.getCurrentTime() / duration) * 100 : 0} />
-                {
-                  (!isLoading && duration) &&
-                    <span
-                      className={`mp-player__duration`}
-                      ref={this.durationNode}>
-                      {convertSecToHHMMSS(duration)}
-                    </span>
-                }
+                <span
+                  className={`mp-player__duration`}
+                  ref={this.durationNode}>
+                  {
+                    (!isLoading && duration) &&
+                      convertSecToHHMMSS(duration)
+                  }
+                </span>
               </div>
               <button
                 className='mp-player__time-jump-forward'
