@@ -168,7 +168,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
           showPlaylists ?
             <React.Fragment>
               <h6>
-                My Playlists
+                Playlists
               </h6>
               <div className='mp-add-to-modal__create-playlist'>
                 {
@@ -221,7 +221,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
             :
             <React.Fragment>
               <h6>
-                My Playlists
+                Playlists
               </h6>
               <div className='mp-add-to-modal__playlist-msg'>
                 <a onClick={handleLoginClick}>Login</a>

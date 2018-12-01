@@ -20,6 +20,7 @@ type Props = {
   handleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasLink?: boolean
   itemType: string
   noWrap?: boolean
@@ -28,8 +29,8 @@ type Props = {
 
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast,
-    handleAddToPlaylist, handleAnchorOnClick, handlePlayItem, handleAddToQueueLast,
-    handleAddToQueueNext, hasLink, itemType, noWrap, showMoreMenu } = props
+    handleAnchorOnClick, handlePlayItem, handleAddToQueueLast, handleAddToQueueNext,
+    handleToggleAddToPlaylist, hasLink, itemType, noWrap, showMoreMenu } = props
 
   let anchorHref = ''
   let anchorAs = ''
@@ -89,7 +90,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     },
     {
       icon: 'list-ul',
-      onClick: handleAddToPlaylist,
+      onClick: handleToggleAddToPlaylist,
       text: 'Add to Playlist',
       value: 'add-to-playlist'
     }
