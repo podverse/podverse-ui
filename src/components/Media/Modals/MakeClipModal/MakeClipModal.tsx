@@ -12,10 +12,10 @@ type Props = {
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleSave: Function
   handleStartTimePreview?: Function
+  initialIsPublic?: boolean
   isEditing?: boolean
   isLoading?: boolean
   isOpen?: boolean
-  isPublic?: boolean
   player?: any
   startTime: number
   title?: string
@@ -64,7 +64,7 @@ class MakeClipModal extends React.Component<Props, State> {
     this.state = {
       errorEndTime: undefined,
       errorStartTime: undefined,
-      isPublic: props.initialIsPublic || true,
+      isPublic: props.initialIsPublic,
       isPublicIsOpen: false,
       isSaving: false
     }
