@@ -60,23 +60,35 @@
 }
 
 html[theme=light] {
-  .media-header__title {
-    color: $black;
-  }
-
-  .media-header__sub-title,
-  .media-header__bottom-text, .media-header__bottom-text-side {
-    color: $gray;
+  .media-header {
+    .media-header__title {
+      color: $black;
+    }
+  
+    .media-header__sub-title,
+    .media-header__bottom-text, .media-header__bottom-text-side {
+      color: $gray;
+    }
+  
+    .media-header__subscribe {
+      color: $gray;
+    }
   }
 }
 
 html[theme=dark] {
-  .media-header__title {
-    color: $white;
-  }
-
-  .media-header__sub-title,
-  .media-header__bottom-text, .media-header__bottom-text-side {
-    color: $gray-light;
+  .media-header {
+    .media-header__title {
+      color: $white;
+    }
+  
+    .media-header__sub-title,
+    .media-header__bottom-text, .media-header__bottom-text-side {
+      color: $gray-light;
+    }
+  
+    .media-header__subscribe {
+      color: $gray-light;
+    }
   }
 }

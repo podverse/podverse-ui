@@ -74,6 +74,10 @@ export const clearItemsFromPriorityQueueStorage = (item) => {
   localStorage.setItem(kPriorityQueue, JSON.stringify([]))
 }
 
+export const updatePriorityQueueStorage = (newItems) => {
+  localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
+}
+
 export const addItemsToSecondaryQueueStorage = (newItems) => {
   const jsonItems = localStorage.getItem(kSecondaryQueue)
 

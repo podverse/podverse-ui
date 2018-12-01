@@ -25,8 +25,9 @@ export { ShareModal } from 'components/Media/Modals/ShareModal/ShareModal'
 
 export { Navbar } from 'components/Navbar/Navbar'
 
-export { addItemToPriorityQueueStorage, addItemsToSecondaryQueueStorage,
-  clearItemsFromSecondaryQueueStorage, getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage,
-  popNextFromPriorityQueueStorage, popNextFromQueueStorage, popNextFromSecondaryQueueStorage,
-  removeItemFromPriorityQueueStorage } from 'lib/mediaPlayerQueue'
+export { addItemToPriorityQueueStorage, updatePriorityQueueStorage,
+  addItemsToSecondaryQueueStorage, clearItemsFromSecondaryQueueStorage,
+  getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage, popNextFromPriorityQueueStorage,
+  popNextFromQueueStorage, popNextFromSecondaryQueueStorage, removeItemFromPriorityQueueStorage
+  } from 'lib/mediaPlayerQueue'
 export { convertToNowPlayingItem } from 'lib/nowPlayingItem'
