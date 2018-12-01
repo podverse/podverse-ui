@@ -20,6 +20,10 @@ export interface Props {
   handleLoginClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleCreatePlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  isAddedToPlayLast?: boolean
+  isAddedToPlayNext?: boolean
+  isAddingToPlayLast?: boolean
+  isAddingToPlayNext?: boolean
   isOpen: boolean
   mediaRef?: any
   nowPlayingItem?: any
@@ -53,7 +57,8 @@ let inputTitle
 const AddToModal: React.StatelessComponent<Props> = props => {
   const { createPlaylistError, createPlaylistIsSaving, createPlaylistShow, episode, handleAddToQueueLast,
     handleAddToQueueNext, handleCreatePlaylistHide, handleCreatePlaylistSave, handleHideModal,
-    handleLoginClick, handlePlaylistItemAdd, handleToggleCreatePlaylist, isOpen, mediaRef,
+    handleLoginClick, handlePlaylistItemAdd, handleToggleCreatePlaylist, isAddedToPlayLast,
+    isAddedToPlayNext, isAddingToPlayLast, isAddingToPlayNext, isOpen, mediaRef,
     nowPlayingItem, playlists, showPlaylists, showQueue } = props
 
   const playlistMediaListItems = playlists.map(x =>
@@ -116,12 +121,46 @@ const AddToModal: React.StatelessComponent<Props> = props => {
               <a
                 className='mp-add-to-modal__play-next'
                 onClick={handleAddToQueueNext}>
-                <FontAwesomeIcon icon='level-up-alt' /> Play Next
+                {
+                  isAddingToPlayNext &&
+                    <React.Fragment>
+                      <FontAwesomeIcon icon='spinner' spin />
+                    </React.Fragment>
+                }
+                {
+                  isAddedToPlayNext &&
+                    <React.Fragment>
+                      Added!
+                    </React.Fragment>
+                }
+                {
+                  (!isAddedToPlayNext && !isAddingToPlayNext) &&
+                    <React.Fragment>
+                      <FontAwesomeIcon icon='level-up-alt' /> Play Next
+                    </React.Fragment>
+                }
               </a>
               <a
                 className='mp-add-to-modal__play-last'
                 onClick={handleAddToQueueLast}>
-                <FontAwesomeIcon icon='level-down-alt' /> Play Last
+                {
+                  isAddingToPlayLast &&
+                  <React.Fragment>
+                    <FontAwesomeIcon icon='spinner' spin />
+                  </React.Fragment>
+                }
+                {
+                  isAddedToPlayLast &&
+                  <React.Fragment>
+                    Added!
+                  </React.Fragment>
+                }
+                {
+                  (!isAddedToPlayLast && !isAddingToPlayLast) &&
+                  <React.Fragment>
+                    <FontAwesomeIcon icon='level-down-alt' /> Play Last
+                  </React.Fragment>
+                }
               </a>
             </React.Fragment>
         }
