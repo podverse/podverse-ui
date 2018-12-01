@@ -214,6 +214,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   itemSkip = (evt) => {
     if (this.props.handleItemSkip) {
       this.setState({
+        isLoading: true,
         played: 0,
         playedSeconds: 0
       })
@@ -319,6 +320,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     const { clipEndTime, clipId, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       podcastImageUrl, podcastTitle } = nowPlayingItem
 
+    let isLoadingOverride = isLoading
     // If the new NowPlayingItem is the same episode as the last one, but it is a
     // different clip, then make the player seek to the new clipStartTime
     if (lastNowPlayingItem.episodeMediaUrl === episodeMediaUrl &&
@@ -328,6 +330,8 @@ export class MediaPlayer extends React.Component<Props, State> {
         lastNowPlayingItem.clipId !== clipId) &&
         typeof window !== 'undefined' && window.player) {
       window.player.seekTo(clipStartTime)
+    } else if (lastNowPlayingItem === nowPlayingItem) {
+      isLoadingOverride = false
     }
 
     // Force ReactPlayer to reload if it receives a new mediaUrl, set loading state,
@@ -435,7 +439,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                 data-tip
                 ref={this.progressBarWidth}>
                 {
-                  (!isLoading && duration) &&
+                  (!isLoadingOverride && duration) &&
                     <span className={`mp-player__current-time`}>
                       {convertSecToHHMMSS(typeof window !== 'undefined' && window.player.getCurrentTime())}
                     </span>
@@ -446,13 +450,13 @@ export class MediaPlayer extends React.Component<Props, State> {
                       <div
                         className='mp-progress-bar__clip-start'
                         style={{
-                          display: `${clipStartFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                          display: `${clipStartFlagPositionX! > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
                           left: `${clipStartFlagPositionX}px`
                         }} />
                       <div
                         className='mp-progress-bar__clip-end'
                         style={{
-                          display: `${clipEndFlagPositionX! > -1 && duration ? 'block' : 'none'}`,
+                          display: `${clipEndFlagPositionX! > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
                           left: `${clipEndFlagPositionX}px`
                         }} />
                     </React.Fragment>
@@ -470,7 +474,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                   className={`mp-player__duration`}
                   ref={this.durationNode}>
                   {
-                    (!isLoading && duration) &&
+                    (!isLoadingOverride && duration) &&
                       convertSecToHHMMSS(duration)
                   }
                 </span>
