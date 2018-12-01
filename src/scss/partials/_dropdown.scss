@@ -5,6 +5,11 @@ body {
     &.transparent {
       background-color: transparent !important;
     }
+
+    &.header-dropdown {
+      font-size: $text-lg-rem;
+      margin: -0.375rem -0.75rem 0.875rem -0.75rem;
+    }
   }
 
   .dropdown-menu-right {
@@ -31,6 +36,11 @@ body {
       }
 
       &:active {
+        background-color: $gray-lightest;
+        color: $gray-darker;
+      }
+
+      &.header-dropdown {
         background-color: $gray-lightest;
         color: $gray-darker;
       }
@@ -70,6 +80,11 @@ body {
       }
 
       &:active {
+        background-color: transparent;
+        color: $gray-lighter;
+      }
+
+      &.header-dropdown {
         background-color: transparent;
         color: $gray-lighter;
       }

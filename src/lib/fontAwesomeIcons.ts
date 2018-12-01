@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheck, faCut, faEdit, faEllipsisH, faGlobeAmericas, faInfinity, faLevelDownAlt,
-  faLevelUpAlt, faLink, faListUl, faPause, faPlay, faPlayCircle, faPlus,
+import { faCheck, faCut, faEdit, faEllipsisH, faGlobeAmericas, faHistory, faInfinity,
+  faLevelDownAlt, faLevelUpAlt, faLink, faListUl, faPause, faPlay, faPlayCircle, faPlus,
   faPlusCircle, faRedoAlt, faSearch, faShare, faSpinner, faStepBackward, faStepForward,
   faTimes, faUndoAlt, faVolumeOff, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 
@@ -12,6 +12,7 @@ export const addFontAwesomeIcons = () => {
     faEdit,
     faEllipsisH,
     faGlobeAmericas,
+    faHistory,
     faInfinity,
     faLevelDownAlt,
     faLevelUpAlt,
