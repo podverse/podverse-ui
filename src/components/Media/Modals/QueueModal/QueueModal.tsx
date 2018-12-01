@@ -58,7 +58,7 @@ export class QueueModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { handleAnchorOnClick, handleHideModal, isOpen, nowPlayingItem = {},
+    const { handleHideModal, isOpen, nowPlayingItem = {},
       priorityItems = [], secondaryItems = [] } = this.props
 
     const priorityItemNodes = priorityItems.map((x, index) => (
@@ -72,11 +72,11 @@ export class QueueModal extends React.Component<Props, State> {
               x.clipStartTime ?
                 <MediaListItem
                   dataNowPlayingItem={x}
-                  handleAnchorOnClick={handleAnchorOnClick}
+                  hasLink
                   itemType='now-playing-item' />
                 : <MediaListItem
                   dataNowPlayingItem={x}
-                  handleAnchorOnClick={handleAnchorOnClick}
+                  hasLink
                   itemType='now-playing-item' />
             }
           </div>
@@ -95,11 +95,11 @@ export class QueueModal extends React.Component<Props, State> {
               x.clipStartTime ?
                 <MediaListItem
                   dataNowPlayingItem={x}
-                  handleAnchorOnClick={handleAnchorOnClick}
+                  hasLink
                   itemType='now-playing-item' />
                 : <MediaListItem
                   dataNowPlayingItem={x}
-                  handleAnchorOnClick={handleAnchorOnClick}
+                  hasLink
                   itemType='now-playing-item' />
             }
           </div>
@@ -134,6 +134,7 @@ export class QueueModal extends React.Component<Props, State> {
               <h6>Now Playing</h6>
               <MediaListItem
                 dataNowPlayingItem={nowPlayingItem}
+                hasLink
                 itemType={itemType}
                 noWrap={true} />
             </React.Fragment>
