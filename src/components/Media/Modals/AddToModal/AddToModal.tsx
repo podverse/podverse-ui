@@ -65,8 +65,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
     <MediaListItem
       dataPlaylist={x}
       handleAnchorOnClick={handlePlaylistItemAdd}
-      itemType='playlist'
-      noWrap={true} />
+      itemType='playlist' />
   )
 
   if (!showPlaylists && showQueue) {
@@ -109,8 +108,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
           playingItem &&
             <MediaListItem
               dataNowPlayingItem={playingItem}
-              itemType='now-playing-item'
-              noWrap={true} />
+              itemType='now-playing-item' />
         }
         {
           showQueue &&

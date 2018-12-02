@@ -22,7 +22,7 @@ type Props = {
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasLink?: boolean
-  itemType: string
+  itemType?: string
   noWrap?: boolean
   showMoreMenu?: boolean
 }
@@ -211,8 +211,9 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               (itemType === 'now-playing-item-queue-episode' && dataNowPlayingItem) &&
               <MediaListItemA
                 imageUrl={dataNowPlayingItem.podcastImageUrl}
-                subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                subTitleTop={'Full Episode'}
+                subTitleBottom='Full Episode'
+                subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                subTitleTop={dataNowPlayingItem.podcastTitle}
                 title={dataNowPlayingItem.episodeTitle} />
             }
             {

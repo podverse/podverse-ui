@@ -29,7 +29,13 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let titleLink
 
   if (episode) {
-    console.log('episode')
+    bottomText = readableDate(episode.pubDate)
+    bottomTextSide = ''
+    imgUrl = episode.podcast.imageUrl
+    subTitle = episode.title
+    subTitleLink = getEpisodeUrl(episode.id)
+    title = episode.podcast.title
+    titleLink = getPodcastUrl(episode.podcast.id)
   } else if (mediaRef) {
     const { episodeId, episodePubDate, episodeTitle, podcastId, podcastImageUrl,
       podcastTitle } = mediaRef

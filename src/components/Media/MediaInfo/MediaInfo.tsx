@@ -7,6 +7,7 @@ const sanitizeHtml = require('sanitize-html')
 
 type Props = {
   episode?: any
+  handlePauseItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -48,7 +49,7 @@ export class MediaInfo extends React.Component<Props, State> {
   }
 
   render () {
-    const { episode, handlePlayItem, loggedInUserId, mediaRef, nowPlayingItem,
+    const { episode, handlePauseItem, handlePlayItem, loggedInUserId, mediaRef, nowPlayingItem,
       playing, podcast, handleToggleAddToModal, handleToggleMakeClipModal } = this.props
     const { showDescription } = this.state
 
@@ -59,7 +60,11 @@ export class MediaInfo extends React.Component<Props, State> {
     let currentItem: any = {}
 
     if (episode) {
-      console.log('episode')
+      title = episode.title
+      time = 'Full Episode'
+      duration = ''
+      description = episode.description
+      currentItem = convertToNowPlayingItem(episode)
     } else if (mediaRef) {
       title = mediaRef.title || 'Untitled clip'
       time = readableClipTime(mediaRef.startTime, mediaRef.endTime)
@@ -104,7 +109,15 @@ export class MediaInfo extends React.Component<Props, State> {
           <div className='media-info__controls'>
             <Button
               className={`media-info-controls__play ${playing ? 'playing' : ''}`}
-              onClick={handlePlayItem}>
+              onClick={event => {
+                if (handlePauseItem && handlePlayItem) {
+                  if (playing) {
+                    handlePauseItem(event)
+                  } else {
+                    handlePlayItem(event)
+                  }
+                }
+              }}>
               {
                 playing ?
                   <FontAwesomeIcon icon={'pause'} />

@@ -220,8 +220,7 @@ export class QueueModal extends React.Component<Props, State> {
                     <MediaListItem
                       dataNowPlayingItem={nowPlayingItem}
                       hasLink
-                      itemType={itemType}
-                      noWrap={true} />
+                      itemType={itemType} />
                   </React.Fragment>
                 }
                 <DragDropContext
