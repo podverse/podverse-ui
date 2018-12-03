@@ -108,26 +108,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     title = podcast.title
   }
 
-  let parsedSubTitle = ''
-  if (subTitle instanceof Array) {
-    for (const item of subTitle) {
-      parsedSubTitle += `${item}, `
-    }
-    parsedSubTitle.replace(/,\s*$/, '')
-  } else if (subTitle) {
-    parsedSubTitle = subTitle
-  }
-
-  let parsedBottomText = ''
-  if (bottomText instanceof Array) {
-    for (const item of bottomText) {
-      parsedBottomText += `${item}, `
-    }
-    parsedBottomText.replace(/,\s*$/, '')
-  } else if (bottomText) {
-    parsedBottomText = bottomText
-  }
-
   return (
     <div className='media-header'>
       <img className='media-header__image' src={imgUrl} />
@@ -158,19 +138,15 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
             </Link>
         }
         {
-          parsedSubTitle &&
-            <Link
-              {...(subTitleHref ? { href: subTitleHref } : {})}
-              {...(subTitleAs ? { as: subTitleAs } : {})}>
-              <a className='media-header__sub-title'>{parsedSubTitle}</a>
-            </Link>
+          subTitle &&
+          <div className='media-header__sub-title'>{subTitle}</div>
         }
         {
           bottomTextSide &&
             <div className='media-header__bottom-text-side'>{bottomTextSide}</div>
         }
         {
-          parsedBottomText &&
+          bottomText &&
             <div className='media-header__bottom-text'>{bottomText}</div>
         }
       </div>

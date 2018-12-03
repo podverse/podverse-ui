@@ -111,7 +111,7 @@ export class MediaInfo extends React.Component<Props, State> {
             </div>
           }
           {
-            episode || mediaRef || nowPlayingItem &&
+            (episode || mediaRef || nowPlayingItem) &&
               <div className='media-info__controls'>
                 <Button
                   className={`media-info-controls__play ${playing ? 'playing' : ''}`}
