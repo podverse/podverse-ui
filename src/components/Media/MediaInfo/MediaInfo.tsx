@@ -82,7 +82,11 @@ export class MediaInfo extends React.Component<Props, State> {
       description = nowPlayingItem.episodeDescription
       currentItem = nowPlayingItem
     } else if (podcast) {
-      console.log('podcast')
+      title = ''
+      time = ''
+      duration = ''
+      description = podcast.description
+      currentItem = null
     }
 
     return (
@@ -106,42 +110,45 @@ export class MediaInfo extends React.Component<Props, State> {
               {time}
             </div>
           }
-          <div className='media-info__controls'>
-            <Button
-              className={`media-info-controls__play ${playing ? 'playing' : ''}`}
-              onClick={event => {
-                if (handlePauseItem && handlePlayItem) {
-                  if (playing) {
-                    handlePauseItem(event)
-                  } else {
-                    handlePlayItem(event)
-                  }
-                }
-              }}>
-              {
-                playing ?
-                  <FontAwesomeIcon icon={'pause'} />
-                  : <FontAwesomeIcon icon={'play'} />
-              }
-            </Button>
-            <Button
-              className='media-info-controls__add-to'
-              onClick={handleToggleAddToModal}>
-              <FontAwesomeIcon icon='plus' />
-            </Button>
-            {
-              (loggedInUserId
-                && currentItem.ownerId
-                && loggedInUserId === currentItem.ownerId) &&
-                <Button
-                  className='media-info-controls__edit'
-                  onClick={handleToggleMakeClipModal}>
-                  <FontAwesomeIcon icon='edit' />
-                </Button>
-            }
-          </div>
           {
-            description &&
+            episode || mediaRef || nowPlayingItem &&
+              <div className='media-info__controls'>
+                <Button
+                  className={`media-info-controls__play ${playing ? 'playing' : ''}`}
+                  onClick={event => {
+                    if (handlePauseItem && handlePlayItem) {
+                      if (playing) {
+                        handlePauseItem(event)
+                      } else {
+                        handlePlayItem(event)
+                      }
+                    }
+                  }}>
+                  {
+                    playing ?
+                      <FontAwesomeIcon icon={'pause'} />
+                      : <FontAwesomeIcon icon={'play'} />
+                  }
+                </Button>
+                <Button
+                  className='media-info-controls__add-to'
+                  onClick={handleToggleAddToModal}>
+                  <FontAwesomeIcon icon='plus' />
+                </Button>
+                {
+                  (loggedInUserId
+                    && currentItem.ownerId
+                    && loggedInUserId === currentItem.ownerId) &&
+                    <Button
+                      className='media-info-controls__edit'
+                      onClick={handleToggleMakeClipModal}>
+                      <FontAwesomeIcon icon='edit' />
+                    </Button>
+                }
+              </div>
+          }
+          {
+            ((episode || mediaRef || nowPlayingItem) && description) &&
               <button
                 className='media-info__show-more'
                 onClick={this.toggleDescription}>
@@ -149,7 +156,7 @@ export class MediaInfo extends React.Component<Props, State> {
               </button>
           }
           {
-            (description && showDescription) &&
+            (podcast || (description && showDescription)) &&
               <div
                 className='media-info__description'
                 dangerouslySetInnerHTML={

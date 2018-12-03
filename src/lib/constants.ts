@@ -24,3 +24,11 @@ export const getLinkPodcastHref = (id) => {
 export const getLinkPodcastAs = (id) => {
   return `/podcast/${id}`
 }
+
+export const getLinkCategoryHref = (id) => {
+  return `/podcast?id=${id}`
+}
+
+export const getLinkCategoryAs = (id) => {
+  return `/podcasts/${id}`
+}

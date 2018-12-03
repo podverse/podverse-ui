@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { getLinkEpisodeHref, getLinkEpisodeAs, getLinkPodcastHref, getLinkPodcastAs
+import { getLinkEpisodeHref, getLinkEpisodeAs, getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref, getLinkCategoryAs
   } from 'lib/constants'
 import { readableDate } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -69,7 +69,43 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
   } else if (podcast) {
-    console.log('podcast')
+    let categoryNodes: any[] = []
+    let categories = podcast.categories || []
+
+    for (let i = 0; i < categories.length; i++) {
+      const category = categories[i]
+      let categoryText = category.title
+      const categoryAs = getLinkCategoryAs(category.id)
+      const categoryHref = getLinkCategoryHref(category.id)
+
+      categoryNodes.push(
+        <React.Fragment>
+          <Link
+            {...(subTitleHref ? { href: categoryHref } : {})}
+            {...(subTitleAs ? { as: categoryAs } : {})}>
+            <a>{categoryText}</a>
+          </Link>
+          {
+            i < categories.length - 1 &&
+              <React.Fragment>,&nbsp;</React.Fragment>
+          }
+        </React.Fragment>
+      )
+    }
+
+    let authorText = ''
+    let authors = podcast.authors
+
+    for (let i = 0; i < authors.length; i++) {
+      const author = authors[i]
+      authorText += `${author.name}${i < authors.length - 1 ? ', ' : ''}`
+    }
+
+    bottomText = categoryNodes
+    bottomTextSide = ''
+    imgUrl = podcast.imageUrl
+    subTitle = authorText
+    title = podcast.title
   }
 
   let parsedSubTitle = ''
