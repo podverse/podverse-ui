@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { getEpisodeUrl, getPodcastUrl } from 'lib/constants'
+import Link from 'next/link'
+import { getLinkEpisodeHref, getLinkEpisodeAs, getLinkPodcastHref, getLinkPodcastAs
+  } from 'lib/constants'
 import { readableDate } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
@@ -24,18 +26,22 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let bottomTextSide
   let imgUrl
   let subTitle
-  let subTitleLink
+  let subTitleAs
+  let subTitleHref
   let title
-  let titleLink
+  let titleAs
+  let titleHref
 
   if (episode) {
     bottomText = readableDate(episode.pubDate)
     bottomTextSide = ''
     imgUrl = episode.podcast.imageUrl
     subTitle = episode.title
-    subTitleLink = getEpisodeUrl(episode.id)
+    subTitleAs = getLinkEpisodeAs(episode.id)
+    subTitleHref = getLinkEpisodeHref(episode.id)
     title = episode.podcast.title
-    titleLink = getPodcastUrl(episode.podcast.id)
+    titleAs = getLinkPodcastAs(episode.podcast.id)
+    titleHref = getLinkPodcastHref(episode.podcast.id)
   } else if (mediaRef) {
     const { episodeId, episodePubDate, episodeTitle, podcastId, podcastImageUrl,
       podcastTitle } = mediaRef
@@ -44,9 +50,11 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     bottomTextSide = ''
     imgUrl = podcastImageUrl
     subTitle = episodeTitle
-    subTitleLink = getEpisodeUrl(episodeId)
+    subTitleAs = getLinkEpisodeAs(episodeId)
+    subTitleHref = getLinkEpisodeHref(episodeId)
     title = podcastTitle
-    titleLink = getPodcastUrl(podcastId)
+    titleAs = getLinkPodcastAs(podcastId)
+    titleHref = getLinkPodcastHref(podcastId)
   } else if (nowPlayingItem) {
     const { episodeId, episodePubDate, episodeTitle, podcastImageUrl, podcastId,
       podcastTitle } = nowPlayingItem
@@ -55,9 +63,11 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     bottomTextSide = ''
     imgUrl = podcastImageUrl
     subTitle = episodeTitle
-    subTitleLink = getEpisodeUrl(episodeId)
+    subTitleAs = getLinkEpisodeAs(episodeId)
+    subTitleHref = getLinkEpisodeHref(episodeId)
     title = podcastTitle
-    titleLink = getPodcastUrl(podcastId)
+    titleAs = getLinkPodcastAs(podcastId)
+    titleHref = getLinkPodcastHref(podcastId)
   } else if (podcast) {
     console.log('podcast')
   }
@@ -105,11 +115,19 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
         </button>
         {
           title &&
-            <a className='media-header__title' href={titleLink}>{title}</a>
+            <Link
+              {...(titleHref ? { href: titleHref } : {})}
+              {...(titleAs ? { as: titleAs } : {})}>
+              <a className='media-header__title'>{title}</a>
+            </Link>
         }
         {
           parsedSubTitle &&
-            <a className='media-header__sub-title' href={subTitleLink}>{parsedSubTitle}</a>
+            <Link
+              {...(subTitleHref ? { href: subTitleHref } : {})}
+              {...(subTitleAs ? { as: subTitleAs } : {})}>
+              <a className='media-header__sub-title'>{parsedSubTitle}</a>
+            </Link>
         }
         {
           bottomTextSide &&

@@ -1,14 +1,26 @@
 export const keyLeftArrow = 37
 export const keyRightArrow = 39
 
-export const getClipUrl = (id) => {
+export const getLinkClipHref = (id) => {
+  return `/clip?id=${id}`
+}
+
+export const getLinkClipAs = (id) => {
   return `/clip/${id}`
 }
 
-export const getEpisodeUrl = (id) => {
+export const getLinkEpisodeHref = (id) => {
+  return `/episode?id=${id}`
+}
+
+export const getLinkEpisodeAs = (id) => {
   return `/episode/${id}`
 }
 
-export const getPodcastUrl = (id) => {
+export const getLinkPodcastHref = (id) => {
+  return `/podcast?id=${id}`
+}
+
+export const getLinkPodcastAs = (id) => {
   return `/podcast/${id}`
 }
