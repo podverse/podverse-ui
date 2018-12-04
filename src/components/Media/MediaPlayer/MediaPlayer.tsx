@@ -141,10 +141,10 @@ export class MediaPlayer extends React.Component<Props, State> {
     document.body.addEventListener('keydown', (event) => {
       if (typeof window !== 'undefined' && window.player) {
         if (event.keyCode === keyLeftArrow) {
-          window.player.seekTo(window.player.getCurrentTime() - 5)
+          window.player.seekTo(Math.floor(window.player.getCurrentTime()) - 5)
           this.forceUpdate() // Force update so the time updates immediately
         } else if (event.keyCode === keyRightArrow) {
-          window.player.seekTo(window.player.getCurrentTime() + 5)
+          window.player.seekTo(Math.floor(window.player.getCurrentTime()) + 5)
           this.forceUpdate() // Force update so the time updates immediately
         }
       }
@@ -197,7 +197,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   timeJumpForward = () => {
     if (typeof window !== 'undefined' && window.player) {
-      window.player.seekTo(window.player.getCurrentTime() + 15)
+      window.player.seekTo(Math.floor(window.player.getCurrentTime()) + 15)
       this.forceUpdate()
     }
   }
