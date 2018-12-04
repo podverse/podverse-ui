@@ -37,34 +37,34 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
 
   if (hasLink) {
     if (itemType === 'clip' || itemType === 'episode-clip' || itemType === 'podcast-clip') {
-      anchorHref = `/clip?id=${dataClip.id}`
+      anchorHref = `/clip?id=${dataClip.id}&scrollToTop=true`
       anchorAs = `/clip/${dataClip.id}`
     } else if (itemType === 'episode' || itemType === 'podcast-episode') {
-      anchorHref = `/episode?id=${dataEpisode.id}`
+      anchorHref = `/episode?id=${dataEpisode.id}&scrollToTop=true`
       anchorAs = `/episode/${dataEpisode.id}`
     } else if (itemType === 'playlist') {
-      anchorHref = `/playlist?id=${dataPlaylist.id}`
+      anchorHref = `/playlist?id=${dataPlaylist.id}&scrollToTop=true`
       anchorAs = `/playlist/${dataPlaylist.id}`
     } else if (itemType === 'podcast') {
-      anchorHref = `/podcast/${dataPodcast.id}`
+      anchorHref = `/podcast?id=${dataPodcast.id}&scrollToTop=true`
       anchorAs = `/podcast/${dataPodcast.id}`
     } else if (itemType === 'now-playing-item' && (dataNowPlayingItem && dataNowPlayingItem.clipStartTime)) {
-      anchorHref = `/clip?id=${dataNowPlayingItem.clipId}`
+      anchorHref = `/clip?id=${dataNowPlayingItem.clipId}&scrollToTop=true`
       anchorAs = `/clip/${dataNowPlayingItem.clipId}`
     } else if (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime)) {
-      anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}`
+      anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}&scrollToTop=true`
       anchorAs = `/episode/${dataNowPlayingItem.episodeId}`
     } else if (itemType === 'now-playing-item-clip-from-episode' || itemType === 'now-playing-item-clip-from-podcast') {
-      anchorHref = `/clip?id=${dataNowPlayingItem.clipId}`
+      anchorHref = `/clip?id=${dataNowPlayingItem.clipId}&scrollToTop=true`
       anchorAs = `/clip/${dataNowPlayingItem.clipId}`
     } else if (itemType === 'now-playing-item-episode-from-podcast' || itemType === 'now-playing-item-episode-from-all-podcasts') {
-      anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}`
+      anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}&scrollToTop=true`
       anchorAs = `/episode/${dataNowPlayingItem.episodeId}`
     } else if (itemType === 'now-playing-item-queue-clip') {
-      anchorHref = `/clip?id=${dataNowPlayingItem.clipId}`
+      anchorHref = `/clip?id=${dataNowPlayingItem.clipId}&scrollToTop=true`
       anchorAs = `/clip/${dataNowPlayingItem.clipId}`
     } else if (itemType === 'now-playing-item-queue-episode') {
-      anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}`
+      anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}&scrollToTop=true`
       anchorAs = `/episode/${dataNowPlayingItem.episodeId}`
     }
   }
