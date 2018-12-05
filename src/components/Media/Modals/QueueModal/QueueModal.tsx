@@ -88,8 +88,8 @@ export class QueueModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { historyItems = [], isLoggedIn, isOpen, nowPlayingItem = {},
-      priorityItems = [], secondaryItems = [] } = this.props
+    const { handleAnchorOnClick, historyItems = [], isLoggedIn, isOpen,
+      nowPlayingItem = {}, priorityItems = [], secondaryItems = [] } = this.props
     const { dropdownMenuOpen, showHistory } = this.state
 
     const dropdownNode = (
@@ -108,11 +108,11 @@ export class QueueModal extends React.Component<Props, State> {
                     !showHistory ?
                       <React.Fragment>
                         <FontAwesomeIcon icon='list-ul' /> &nbsp;Queue
-                </React.Fragment>
+                      </React.Fragment>
                       :
                       <React.Fragment>
                         <FontAwesomeIcon icon='history' /> &nbsp;History
-                </React.Fragment>
+                      </React.Fragment>
                   }
                 </DropdownToggle>
                 <DropdownMenu>
@@ -121,14 +121,14 @@ export class QueueModal extends React.Component<Props, State> {
                     <DropdownItem
                       onClick={() => this.setState({ showHistory: true })}>
                       <FontAwesomeIcon icon='history' /> &nbsp;History
-                </DropdownItem>
+                    </DropdownItem>
                   }
                   {
                     showHistory &&
                     <DropdownItem
                       onClick={() => this.setState({ showHistory: false })}>
                       <FontAwesomeIcon icon='list-ul' /> &nbsp;Queue
-                </DropdownItem>
+                    </DropdownItem>
                   }
                 </DropdownMenu>
               </Dropdown>
@@ -157,6 +157,7 @@ export class QueueModal extends React.Component<Props, State> {
               {...provided.dragHandleProps}>
               <MediaListItem
                 dataNowPlayingItem={x}
+                handleAnchorOnClick={handleAnchorOnClick}
                 hasLink
                 itemType='now-playing-item' />
             </div>
@@ -173,6 +174,7 @@ export class QueueModal extends React.Component<Props, State> {
               {...provided.dragHandleProps}>
               <MediaListItem
                 dataNowPlayingItem={x}
+                handleAnchorOnClick={handleAnchorOnClick}
                 hasLink
                 itemType='now-playing-item' />
             </div>
