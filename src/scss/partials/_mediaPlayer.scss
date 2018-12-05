@@ -7,6 +7,10 @@
 
   button {
     height: 36px;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
   
   .mp-header__inner, .mp-player__inner {
@@ -212,6 +216,10 @@
         &.active {
           color: $blue;
         }
+
+        &:disabled {
+          color: $gray;
+        }
       }
 
       .progress {
@@ -243,6 +251,10 @@
   
       button {
         color: $white;
+
+        &:disabled {
+          color: $gray;
+        }
       }
   
       .active {

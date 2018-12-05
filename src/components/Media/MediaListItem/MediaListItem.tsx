@@ -6,7 +6,6 @@ import { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/Me
 import { MediaListItemC } from 'components/Media/MediaListItem/MediaListItemC/MediaListItemC'
 import { MediaListItemD } from 'components/Media/MediaListItem/MediaListItemD/MediaListItemD'
 import { readableDate, readableClipTime, secondsToReadableDuration, calcDuration } from 'lib/utility'
-
 const striptags = require('striptags')
 
 type Props = {
@@ -22,6 +21,7 @@ type Props = {
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasLink?: boolean
+  isActive?: boolean
   itemType?: string
   noWrap?: boolean
   showMoreMenu?: boolean
@@ -30,7 +30,8 @@ type Props = {
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast,
     handleAnchorOnClick, handlePlayItem, handleAddToQueueLast, handleAddToQueueNext,
-    handleToggleAddToPlaylist, hasLink, itemType, noWrap, showMoreMenu } = props
+    handleToggleAddToPlaylist, hasLink, isActive, itemType, noWrap, showMoreMenu
+    } = props
 
   let anchorHref = ''
   let anchorAs = ''
@@ -97,7 +98,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   ]
 
   return (
-    <div className='media-list__container'>
+    <div className={`media-list__container ${isActive ? 'is-active' : ''}`}>
       <div className='media-list__left'>
         <Link
           {...(anchorHref ? { href: anchorHref } : {})}

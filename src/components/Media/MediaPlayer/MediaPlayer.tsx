@@ -29,6 +29,7 @@ type Props = {
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleQueueModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  hasItemInQueue?: boolean
   isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
   playbackRate: number
@@ -161,7 +162,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     const offsetX = e.nativeEvent.offsetX
     const width = e.currentTarget.offsetWidth
     if (typeof window !== 'undefined' && window.player) {
-      window.player.seekTo(offsetX / width)
+      window.player.seekTo(Math.floor(offsetX / width))
     }
   }
 
@@ -205,8 +206,8 @@ export class MediaPlayer extends React.Component<Props, State> {
   clipRestart = () => {
     const { nowPlayingItem } = this.props
     const { clipStartTime } = nowPlayingItem
-    if (typeof window !== 'undefined' && window.player) {
-      window.player.seekTo(clipStartTime)
+    if (typeof window !== 'undefined' && window.player && clipStartTime) {
+      window.player.seekTo(Math.floor(clipStartTime))
     }
     this.forceUpdate()
   }
@@ -232,7 +233,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     })
 
     if (typeof window !== 'undefined' && window.player && clipStartTime && clipStartTime > 0) {
-      window.player.seekTo(clipStartTime)
+      window.player.seekTo(Math.floor(clipStartTime))
     }
 
     this.forceUpdate()
@@ -305,10 +306,9 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { autoplay,
-      handleOnEpisodeEnd, handlePlaybackRateClick,
-      handleToggleAutoplay, handleToggleAddToModal, handleToggleMakeClipModal, handleToggleQueueModal,
-      handleToggleShareModal, handleTogglePlay, nowPlayingItem,
+    const { autoplay, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
+      handleToggleAddToModal, handleToggleMakeClipModal, handleToggleQueueModal,
+      handleToggleShareModal, handleTogglePlay, hasItemInQueue, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
       playerEpisodeLinkOnClick, playing,
@@ -323,13 +323,14 @@ export class MediaPlayer extends React.Component<Props, State> {
     let isLoadingOverride = isLoading
     // If the new NowPlayingItem is the same episode as the last one, but it is a
     // different clip, then make the player seek to the new clipStartTime
-    if (lastNowPlayingItem.episodeMediaUrl === episodeMediaUrl &&
+    if (clipStartTime &&
+        lastNowPlayingItem.episodeMediaUrl === episodeMediaUrl &&
         (lastNowPlayingItem.clipEndTime !== clipEndTime ||
         lastNowPlayingItem.clipStartTime !== clipStartTime ||
         lastNowPlayingItem.clipTitle !== clipTitle ||
         lastNowPlayingItem.clipId !== clipId) &&
         typeof window !== 'undefined' && window.player) {
-      window.player.seekTo(clipStartTime)
+      window.player.seekTo(Math.floor(clipStartTime))
     } else if (lastNowPlayingItem === nowPlayingItem) {
       isLoadingOverride = false
     }
@@ -499,6 +500,7 @@ export class MediaPlayer extends React.Component<Props, State> {
               }
               <button
                 className='mp-player__skip'
+                disabled={!hasItemInQueue}
                 onClick={this.itemSkip}>
                 <FontAwesomeIcon icon='step-forward' />
               </button>
