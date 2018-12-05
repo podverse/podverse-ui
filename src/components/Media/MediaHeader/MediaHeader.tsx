@@ -139,7 +139,11 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
         }
         {
           subTitle &&
-          <div className='media-header__sub-title'>{subTitle}</div>
+            <Link
+              {...(subTitleHref ? { href: subTitleHref } : {})}
+              {...(subTitleAs ? { as: subTitleAs } : {})}>
+              <a className='media-header__sub-title'>{subTitle}</a>
+            </Link>
         }
         {
           bottomTextSide &&
