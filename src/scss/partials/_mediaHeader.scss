@@ -18,6 +18,17 @@
     width: 22px;
   }
 
+  .media-header__edit {
+    float: right;
+    height: 22px;
+    line-height: 22px;
+    margin-left: 1.5rem;
+    margin-right: -0.75rem;
+    margin-top: 3px;
+    padding: 0;
+    width: 22px;
+  }
+
   .media-header__title {
     @include ellipsis;
     display: block;
@@ -71,7 +82,7 @@ html[theme=light] {
       color: $gray;
     }
   
-    .media-header__subscribe {
+    .media-header__subscribe, .media-header__edit {
       color: $gray;
     }
   }
@@ -89,7 +100,7 @@ html[theme=dark] {
       color: $gray-light;
     }
   
-    .media-header__subscribe {
+    .media-header__subscribe, .media-header__edit {
       color: $gray-light;
     }
   }

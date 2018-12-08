@@ -8,12 +8,12 @@
     margin-top: 0.25rem;
   }
 
-  .media-info__duration {
+  .media-info__duration, .media-info__last-updated {
     float: right;
     margin-top: 0.5rem;
   }
 
-  .media-info__time {
+  .media-info__time, .media-info__item-count {
     margin-top: 0.5rem;
   }
 
@@ -59,7 +59,8 @@ html[theme=light] {
       color: $black;
     }
 
-    .media-info__time, .media-info__duration {
+    .media-info__time, .media-info__duration,
+    .media-info__item-count, .media-info__last-updated {
       color: $gray;
     }
 
@@ -94,7 +95,8 @@ html[theme=dark] {
       color: $white;
     }
 
-    .media-info__time, .media-info__duration {
+    .media-info__time, .media-info__duration,
+    .media-info__item-count, .media-info__last-updated {
       color: $gray;
     }
 
