@@ -28,6 +28,7 @@ type Props = {
   itemType?: string
   noWrap?: boolean
   showMoreMenu?: boolean
+  showOwner?: boolean
   showRemove?: boolean
 }
 
@@ -35,7 +36,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast,
     handleAnchorOnClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
     handleRemoveItem, handleToggleAddToPlaylist, hasLink, isActive, itemType, noWrap,
-    showMoreMenu, showRemove } = props
+    showMoreMenu, showOwner, showRemove } = props
 
   let anchorHref = ''
   let anchorAs = ''
@@ -224,9 +225,10 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             {
               (itemType === 'playlist' && dataPlaylist) &&
                 <MediaListItemD
-                  subTitle={dataPlaylist.lastUpdated ? readableDate(dataPlaylist.lastUpdated) : ''}
-                  subTitleSide={`${dataPlaylist.itemCount || dataPlaylist.itemCount === 0 ? `items: ${dataPlaylist.itemCount}` : ''}`}
-                  title={dataPlaylist.title} />
+                  subTitleSide={showOwner ? readableDate(dataPlaylist.updatedAt) : ''}
+                  subTitle={showOwner && dataPlaylist.owner ? `By: ${dataPlaylist.owner.name}` : ''}
+                  title={dataPlaylist.title}
+                  titleSide={`${dataPlaylist.itemCount || dataPlaylist.itemCount === 0 ? `items: ${dataPlaylist.itemCount}` : ''}`} />
             }
             {
               (itemType === 'podcast' && dataPodcast) &&

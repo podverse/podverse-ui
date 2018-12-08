@@ -162,7 +162,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     const offsetX = e.nativeEvent.offsetX
     const width = e.currentTarget.offsetWidth
     if (typeof window !== 'undefined' && window.player) {
-      window.player.seekTo(Math.floor(offsetX / width))
+      window.player.seekTo((offsetX / width).toFixed(5))
     }
   }
 

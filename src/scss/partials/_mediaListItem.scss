@@ -153,6 +153,14 @@
   margin: -0.25em 0;
   padding: 0.75em 0;
 
+  .media-list-item-d__title-side {
+    float: right;
+    font-size: $text-sm-em;
+    line-height: 20px;
+    margin-left: 1em;
+    text-align: right;
+  }
+
   @supports (-webkit-line-clamp: 2) {
     .media-list-item-d__title {
       display: -webkit-box;

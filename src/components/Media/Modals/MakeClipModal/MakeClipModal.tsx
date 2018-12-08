@@ -8,13 +8,15 @@ import { convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/utility'
 
 type Props = {
   endTime?: number
+  handleDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleEndTimePreview?: Function
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleSave: Function
   handleStartTimePreview?: Function
   initialIsPublic?: boolean
+  isDeleting?: boolean
   isEditing?: boolean
-  isLoading?: boolean
+  isSaving?: boolean
   isOpen?: boolean
   player?: any
   startTime: number
@@ -26,7 +28,6 @@ type State = {
   errorStartTime?: string
   isPublic: boolean
   isPublicIsOpen: boolean
-  isSaving: boolean
 }
 
 interface MakeClipModal {
@@ -65,8 +66,7 @@ class MakeClipModal extends React.Component<Props, State> {
       errorEndTime: undefined,
       errorStartTime: undefined,
       isPublic: props.initialIsPublic,
-      isPublicIsOpen: false,
-      isSaving: false
+      isPublicIsOpen: false
     }
 
     this.inputStartTime = React.createRef()
@@ -88,7 +88,8 @@ class MakeClipModal extends React.Component<Props, State> {
     this.setState({ isPublicIsOpen: !this.state.isPublicIsOpen })
   }
 
-  async handleSave () {
+  async handleSave (event) {
+    event.preventDefault()
     const { isEditing } = this.props
     const { isPublic } = this.state
     const { value: startTime } = this.inputStartTime.current
@@ -140,10 +141,9 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { endTime, handleHideModal, isEditing, isLoading, isOpen, startTime,
-      title } = this.props
-    const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen,
-      isSaving } = this.state
+    const { endTime, handleDelete, handleHideModal, isDeleting, isEditing, isOpen, isSaving,
+      startTime, title } = this.props
+    const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen } = this.state
 
     let appEl
     // @ts-ignore
@@ -264,14 +264,26 @@ class MakeClipModal extends React.Component<Props, State> {
               type='textarea' />
           </FormGroup>
           <div className='text-right'>
+            {
+              isEditing &&
+                <Button
+                  className='make-clip-modal__delete'
+                  disabled={isDeleting || isSaving}
+                  color='danger'
+                  isLoading={isDeleting}
+                  onClick={handleDelete}
+                  text='Delete' />
+            }
             <Button
               className='make-clip-modal__cancel'
+              disabled={isDeleting || isSaving}
               onClick={handleHideModal}
               text='Cancel' />
             <Button
-              className={`make-clip-modal__save ${isSaving ? 'is-loading' : ''}`}
+              className='make-clip-modal__save'
               color='primary'
-              isLoading={isLoading}
+              disabled={isDeleting || isSaving}
+              isLoading={isSaving}
               onClick={this.handleSave}
               text='Save' />
           </div>
