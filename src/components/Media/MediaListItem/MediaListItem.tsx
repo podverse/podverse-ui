@@ -1,5 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { PVButton as Button } from 'components/Button/Button'
 import { MoreDropdown } from 'components/MoreDropdown/MoreDropdown'
 import { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/MediaListItemA'
 import { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'
@@ -19,19 +21,21 @@ type Props = {
   handleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleRemoveItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasLink?: boolean
   isActive?: boolean
   itemType?: string
   noWrap?: boolean
   showMoreMenu?: boolean
+  showRemove?: boolean
 }
 
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast,
-    handleAnchorOnClick, handlePlayItem, handleAddToQueueLast, handleAddToQueueNext,
-    handleToggleAddToPlaylist, hasLink, isActive, itemType, noWrap, showMoreMenu
-    } = props
+    handleAnchorOnClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
+    handleRemoveItem, handleToggleAddToPlaylist, hasLink, isActive, itemType, noWrap,
+    showMoreMenu, showRemove } = props
 
   let anchorHref = ''
   let anchorAs = ''
@@ -254,9 +258,20 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
         </Link>
       </div>
       {
-        showMoreMenu &&
+        (showMoreMenu || showRemove) &&
           <div className='media-list__right'>
-            <MoreDropdown items={moreMenuItems} />
+            {
+              showMoreMenu &&
+                <MoreDropdown items={moreMenuItems} />
+            }
+            {
+              showRemove &&
+                <Button
+                  className='media-list-right__remove'
+                  onClick={handleRemoveItem}>
+                  <FontAwesomeIcon icon='times' />
+                </Button>
+            }
           </div>
       }
     </div>

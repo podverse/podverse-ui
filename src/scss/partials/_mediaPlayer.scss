@@ -213,6 +213,10 @@
       button {
         color: $black;
 
+        &:hover {
+          color: $gray-darker;
+        }
+
         &.active {
           color: $blue;
         }
@@ -245,12 +249,16 @@
         text-decoration: none;
   
         &:hover {
-          color: $gray-light;
+          color: $gray-lighter;
         }
       }
   
       button {
         color: $white;
+
+        &:hover {
+          color: $gray-lighter;
+        }
 
         &:disabled {
           color: $gray;
