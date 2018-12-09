@@ -8,9 +8,12 @@ export interface Props {
   className?: string
   color?: string
   disabled?: boolean
+  isActive?: boolean
   isOnlyIcon?: boolean
   isLoading?: boolean
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  outline?: boolean
+  tag?: string
   text?: string
 }
 
@@ -24,16 +27,20 @@ const getButtonClassName = (props) => {
 }
 
 export const PVButton: React.StatelessComponent<Props> = props => {
-  const { children, color, disabled, isLoading, onClick, text } = props
+  const { children, color, disabled, isActive, isLoading, onClick, outline,
+    tag, text } = props
 
   const buttonClass = getButtonClassName(props)
 
   return (
     <Button
+      active={isActive}
       className={buttonClass}
       color={color}
       disabled={disabled}
-      onClick={onClick}>
+      onClick={onClick}
+      outline={outline}
+      tag={tag}>
       {
         isLoading ?
           <FontAwesomeIcon
