@@ -14,7 +14,7 @@ export interface Props {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   outline?: boolean
   tag?: string
-  text?: string
+  text?: any
 }
 
 const getButtonClassName = (props) => {
