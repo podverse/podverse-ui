@@ -11,11 +11,12 @@ form {
     font-size: $text-xs-rem;
   }
 
+  .form-check {
+    margin-bottom: 1rem;
+  }
+
   .checkbox-label {
-    clear: both;
     cursor: pointer;
-    float: left;
-    margin-top: 1rem;
 
     input {
       cursor: pointer;

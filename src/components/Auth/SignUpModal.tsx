@@ -13,6 +13,7 @@ type Props = {
   isLoading: boolean
   isOpen: boolean
   showSignUpModal: (event: React.MouseEvent<HTMLButtonElement>) => void
+  topText?: string
 }
 
 type State = {
@@ -28,7 +29,7 @@ const customStyles = {
   content: {
     bottom: 'unset',
     left: '50%',
-    maxWidth: '360px',
+    maxWidth: '380px',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -150,7 +151,7 @@ export class SignUpModal extends React.Component<Props, State> {
 
   render () {
 
-    const { errorResponse, hideModal, isLoading, isOpen } = this.props
+    const { errorResponse, hideModal, isLoading, isOpen, topText } = this.props
     const { email, errorEmail, errorPassword, errorPasswordConfirm,
       password, passwordConfirm } = this.state
 
@@ -178,6 +179,7 @@ export class SignUpModal extends React.Component<Props, State> {
               {errorResponse}
             </Alert>
           }
+          {topText}
           <FormGroup>
             <Label for='sign-up-modal__email'>Email</Label>
             <Input
