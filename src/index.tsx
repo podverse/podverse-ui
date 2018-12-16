@@ -8,6 +8,7 @@ export { LoginModal } from 'components/Auth/LoginModal'
 export { SignUpModal } from 'components/Auth/SignUpModal'
 
 export { PVButton } from 'components/Button/Button'
+export { CloseButton } from 'components/CloseButton/CloseButton'
 
 export { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 
