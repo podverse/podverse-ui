@@ -6,6 +6,7 @@ import { readableDate } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
+import { convertToNowPlayingItem } from 'lib/nowPlayingItem';
 
 type Props = {
   episode?: any
@@ -43,9 +44,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     titleAs = getLinkPodcastAs(episode.podcast.id)
     titleHref = getLinkPodcastHref(episode.podcast.id)
   } else if (mediaRef) {
-    const { episodeId, episodePubDate, episodeTitle, podcastId, podcastImageUrl,
-      podcastTitle } = mediaRef
-
+    const item = convertToNowPlayingItem(mediaRef)
+    const { episodeId, episodePubDate, episodeTitle, podcastImageUrl, podcastId,
+      podcastTitle } = item
     bottomText = readableDate(episodePubDate)
     bottomTextSide = ''
     imgUrl = podcastImageUrl
