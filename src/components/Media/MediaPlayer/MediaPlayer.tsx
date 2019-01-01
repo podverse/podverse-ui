@@ -15,6 +15,7 @@ declare global {
 type Props = {
   autoplay?: boolean
   clipFinished?: boolean
+  duration: number | null
   handleClipRestart?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleOnEpisodeEnd?: Function
@@ -98,6 +99,7 @@ const hasMediaUrlChanged = (newUrl) => {
 export class MediaPlayer extends React.Component<Props, State> {
 
   static defaultProps: Props = {
+    duration: null,
     nowPlayingItem: {},
     queuePriorityItems: [],
     queueSecondaryItems: [],
@@ -136,6 +138,34 @@ export class MediaPlayer extends React.Component<Props, State> {
   componentDidMount () {
     this.setKeyboardEventListeners()
     this.setState({ isClientSide: true })
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const lastItem = this.props.nowPlayingItem || {}
+    const nextItem = nextProps.nowPlayingItem || {}
+
+    // If still the same episode, don't wait for the onDuration method
+    if (lastItem.episodeId !== nextItem.episodeId) {
+      this.setState({ duration: null })
+    }
+
+    // If the same clip is played back-to-back after an item skip,
+    // force refresh of the player to the clipStartTime
+    if (typeof window !== 'undefined'
+        && window.player
+        && lastItem !== nextItem
+        && lastItem.clipId === nextItem.clipId) {
+      window.player.seekTo(nextItem.clipStartTime)
+    }
+
+    // If the same episode is played back-to-back after an item skip,
+    // force refresh of the player to the beginning.
+    if (typeof window !== 'undefined'
+      && window.player
+      && lastItem !== nextItem
+      && lastItem.episodeId === nextItem.episodeId) {
+      window.player.seekTo(0)
+    }
   }
 
   setKeyboardEventListeners () {
