@@ -44,6 +44,7 @@ export class LoginModal extends React.Component<Props, State> {
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleOnKeyPress = this.handleOnKeyPress.bind(this)
   }
 
   handleInputChange (event) {
@@ -56,6 +57,13 @@ export class LoginModal extends React.Component<Props, State> {
   handleLogin () {
     const { email, password } = this.state
     this.props.handleLogin(email, password)
+  }
+
+  handleOnKeyPress (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      this.handleLogin()
+    }
   }
 
   render () {
@@ -93,6 +101,7 @@ export class LoginModal extends React.Component<Props, State> {
               data-state-key='email'
               name='login-modal__email'
               onChange={this.handleInputChange}
+              onKeyPress={this.handleOnKeyPress}
               placeholder='hello@podverse.fm'
               type='text'
               value={email} />
@@ -103,6 +112,7 @@ export class LoginModal extends React.Component<Props, State> {
               data-state-key='password'
               name='login-modal__password'
               onChange={this.handleInputChange}
+              onKeyPress={this.handleOnKeyPress}
               placeholder='********'
               type='password'
               value={password} />
