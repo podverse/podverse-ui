@@ -1,12 +1,12 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { getLinkEpisodeHref, getLinkEpisodeAs, getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref, getLinkCategoryAs
-  } from 'lib/constants'
+import { getLinkEpisodeHref, getLinkEpisodeAs, getLinkPodcastHref, getLinkPodcastAs,
+  getLinkCategoryHref, getLinkCategoryAs } from 'lib/constants'
+import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 import { readableDate } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
-import { convertToNowPlayingItem } from 'lib/nowPlayingItem';
 
 type Props = {
   episode?: any
@@ -16,7 +16,6 @@ type Props = {
   mediaRef?: any
   nowPlayingItem?: any
   podcast?: any
-  subscribedIds?: any[]
 }
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
@@ -88,7 +87,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
           </Link>
           {
             i < categories.length - 1 &&
-              <React.Fragment>,&nbsp;</React.Fragment>
+            <React.Fragment>,&nbsp;</React.Fragment>
           }
         </React.Fragment>
       )
@@ -132,27 +131,27 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
         </button>
         {
           title &&
-            <Link
-              {...(titleHref ? { href: titleHref } : {})}
-              {...(titleAs ? { as: titleAs } : {})}>
-              <a className='media-header__title'>{title}</a>
-            </Link>
+          <Link
+            {...(titleHref ? { href: titleHref } : {})}
+            {...(titleAs ? { as: titleAs } : {})}>
+            <a className='media-header__title'>{title}</a>
+          </Link>
         }
         {
           subTitle &&
-            <Link
-              {...(subTitleHref ? { href: subTitleHref } : {})}
-              {...(subTitleAs ? { as: subTitleAs } : {})}>
-              <a className='media-header__sub-title'>{subTitle}</a>
-            </Link>
+          <Link
+            {...(subTitleHref ? { href: subTitleHref } : {})}
+            {...(subTitleAs ? { as: subTitleAs } : {})}>
+            <a className='media-header__sub-title'>{subTitle}</a>
+          </Link>
         }
         {
           bottomTextSide &&
-            <div className='media-header__bottom-text-side'>{bottomTextSide}</div>
+          <div className='media-header__bottom-text-side'>{bottomTextSide}</div>
         }
         {
           bottomText &&
-            <div className='media-header__bottom-text'>{bottomText}</div>
+          <div className='media-header__bottom-text'>{bottomText}</div>
         }
       </div>
     </div>

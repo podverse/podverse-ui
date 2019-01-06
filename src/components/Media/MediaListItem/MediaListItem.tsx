@@ -156,7 +156,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                   title={dataNowPlayingItem.clipTitle} />
             }
             {
-              (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime)) &&
+              (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId)) &&
                 <MediaListItemA
                   imageUrl={dataNowPlayingItem.podcastImageUrl}
                   subTitleBottom='Full Episode'
@@ -188,7 +188,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
                 <MediaListItemA
                   subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                  subTitleTop={'Full Episode'}
+                  subTitleTop='Full Episode'
                   title={dataNowPlayingItem.episodeTitle} />
             }
             {
