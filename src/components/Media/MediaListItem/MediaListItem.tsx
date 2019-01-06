@@ -16,6 +16,7 @@ type Props = {
   dataNowPlayingItem?: any
   dataPlaylist?: any
   dataPodcast?: any
+  dataUser?: any
   handleAddToQueueLast?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleAddToQueueNext?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -25,6 +26,7 @@ type Props = {
   handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasLink?: boolean
   isActive?: boolean
+  isSlim?: boolean
   itemType?: string
   noWrap?: boolean
   showMoreMenu?: boolean
@@ -33,10 +35,10 @@ type Props = {
 }
 
 export const MediaListItem: React.StatelessComponent<Props> = props => {
-  const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast,
+  const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleAnchorOnClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
-    handleRemoveItem, handleToggleAddToPlaylist, hasLink, isActive, itemType, noWrap,
-    showMoreMenu, showOwner, showRemove } = props
+    handleRemoveItem, handleToggleAddToPlaylist, hasLink, isActive, isSlim, itemType,
+    noWrap, showMoreMenu, showOwner, showRemove } = props
 
   let anchorHref = ''
   let anchorAs = ''
@@ -72,6 +74,9 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     } else if (itemType === 'now-playing-item-queue-episode') {
       anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}&scrollToTop=true`
       anchorAs = `/episode/${dataNowPlayingItem.episodeId}`
+    } else if (itemType === 'user') {
+      anchorHref = `/profile?id=${dataUser.id}&scrollToTop=true`
+      anchorAs = `/profile/${dataUser.id}`
     }
   }
 
@@ -103,7 +108,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   ]
 
   return (
-    <div className={`media-list__container ${isActive ? 'is-active' : ''}`}>
+    <div className={`media-list__container ${isActive ? 'is-active' : ''} ${isSlim ? 'is-slim' : ''}`}>
       <div className='media-list__left'>
         <Link
           {...(anchorHref ? { href: anchorHref } : {})}
@@ -255,6 +260,10 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                   date={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
                   description={striptags(dataEpisode.description)}
                   title={dataClip.episodeTitle} />
+            }
+            {
+              (itemType === 'user' && dataUser) &&
+              <MediaListItemD title={dataUser.name || 'anonymous'} />
             }
           </a>
         </Link>
