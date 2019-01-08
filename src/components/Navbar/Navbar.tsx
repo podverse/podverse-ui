@@ -21,6 +21,7 @@ type Props = {
   brandUrl?: string
   dropdownItems?: any
   dropdownText?: any
+  handleLinkClick: any
   navItems?: any
 }
 
@@ -51,15 +52,15 @@ export class Navbar extends React.Component<Props, State> {
   }
 
   render () {
-    const { brandHideText, brandText, brandUrl, dropdownItems,
-      dropdownText, navItems } = this.props
+    const { brandHideText, brandText, brandUrl, dropdownItems, dropdownText,
+      handleLinkClick, navItems } = this.props
 
     const navItemsEls = navItems.map(x =>
       <Link
         {...(x.href ? { href: x.href } : {})}
         {...(x.as ? { as: x.as } : {})}>
         <NavItem>
-          <NavLink>
+          <NavLink onClick={handleLinkClick}>
             {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
           </NavLink>
         </NavItem>
@@ -71,7 +72,8 @@ export class Navbar extends React.Component<Props, State> {
         {...(x.href ? { href: x.href } : {})}
         {...(x.as ? { as: x.as } : {})}>
         <DropdownItem
-          onClick={() => {
+          onClick={event => {
+            handleLinkClick(event)
             x.onClick()
             this.setState({ dropdownIsOpen: false })
           }}>
@@ -85,7 +87,7 @@ export class Navbar extends React.Component<Props, State> {
         <BSNavbar color='light' light expand='sm'>
           <Link
             {...(brandUrl ? { href: brandUrl } : {})}>
-            <NavbarBrand>{
+            <NavbarBrand onClick={handleLinkClick}>{
               brandHideText ? null : brandText
             }</NavbarBrand>
           </Link>

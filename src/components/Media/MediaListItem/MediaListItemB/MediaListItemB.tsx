@@ -17,17 +17,29 @@ export const MediaListItemB: React.StatelessComponent<Props> = props => {
 
   return (
     <div className='media-list-item__b'>
-      <img className='media-list-item-b__image' src={imageUrl} />
+      {
+        imageUrl &&
+          <img className='media-list-item-b__image' src={imageUrl} />
+      }
       <div className='text-wrapper'>
-        <div className='media-list-item-b__title'>
-          {title}
-        </div>
-        <div className='media-list-item-b__sub-side'>
-          {subTitleSide}
-        </div>
-        <div className='media-list-item-b__sub'>
-          {subTitle}
-        </div>
+        {
+          title &&
+            <div className='media-list-item-b__title'>
+              {title}
+            </div>
+        }
+        {
+          subTitleSide &&
+            <div className='media-list-item-b__sub-side'>
+              {subTitleSide}
+            </div>
+        }
+        {
+          subTitle &&
+            <div className='media-list-item-b__sub'>
+              {subTitle}
+            </div>
+        }
       </div>
     </div>
   )

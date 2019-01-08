@@ -10,6 +10,7 @@ import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
   episode?: any
+  handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleSubscribe?: any
   isSubscribed?: boolean
   isSubscribing?: boolean
@@ -19,8 +20,8 @@ type Props = {
 }
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
-  const { episode, handleToggleSubscribe, isSubscribed, isSubscribing, mediaRef,
-    nowPlayingItem, podcast } = props
+  const { episode, handleLinkClick, handleToggleSubscribe, isSubscribed, isSubscribing,
+    mediaRef, nowPlayingItem, podcast } = props
 
   let bottomText
   let bottomTextSide
@@ -83,7 +84,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
           <Link
             {...(subTitleHref ? { href: categoryHref } : {})}
             {...(subTitleAs ? { as: categoryAs } : {})}>
-            <a>{categoryText}</a>
+            <a onClick={handleLinkClick}>{categoryText}</a>
           </Link>
           {
             i < categories.length - 1 &&
@@ -134,7 +135,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
           <Link
             {...(titleHref ? { href: titleHref } : {})}
             {...(titleAs ? { as: titleAs } : {})}>
-            <a className='media-header__title'>{title}</a>
+            <a
+              className='media-header__title'
+              onClick={handleLinkClick}>{title}</a>
           </Link>
         }
         {
@@ -142,7 +145,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
           <Link
             {...(subTitleHref ? { href: subTitleHref } : {})}
             {...(subTitleAs ? { as: subTitleAs } : {})}>
-            <a className='media-header__sub-title'>{subTitle}</a>
+            <a
+              className='media-header__sub-title'
+              onClick={handleLinkClick}>{subTitle}</a>
           </Link>
         }
         {

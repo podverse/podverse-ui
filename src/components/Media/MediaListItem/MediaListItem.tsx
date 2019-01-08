@@ -20,7 +20,7 @@ type Props = {
   handleAddToQueueLast?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleAddToQueueNext?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleRemoveItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -36,7 +36,7 @@ type Props = {
 
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
-    handleAnchorOnClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
+    handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
     handleRemoveItem, handleToggleAddToPlaylist, hasLink, isActive, isSlim, itemType,
     noWrap, showMoreMenu, showOwner, showRemove } = props
 
@@ -116,7 +116,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
           <a
             className={`media-list__item ${noWrap ? 'no-wrap' : ''}`}
             {...(dataPlaylist ? { 'data-id': dataPlaylist.id } : {})}
-            onClick={handleAnchorOnClick}>
+            onClick={handleLinkClick}>
             {
               (itemType === 'clip' && dataClip) &&
                 <MediaListItemA

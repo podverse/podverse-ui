@@ -45,6 +45,7 @@ export class LoginModal extends React.Component<Props, State> {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
     this.handleOnKeyPress = this.handleOnKeyPress.bind(this)
+    this.hideModal = this.hideModal.bind(this)
   }
 
   handleInputChange (event) {
@@ -66,8 +67,17 @@ export class LoginModal extends React.Component<Props, State> {
     }
   }
 
+  hideModal (event) {
+    const { hideModal } = this.props
+    this.setState({
+      email: '',
+      password: ''
+    })
+    hideModal(event)
+  }
+
   render () {
-    const { errorResponse, hideModal, isLoading, isOpen, showForgotPasswordModal,
+    const { errorResponse, isLoading, isOpen, showForgotPasswordModal,
       showSignUpModal } = this.props
     const { email, password } = this.state
 
@@ -82,13 +92,13 @@ export class LoginModal extends React.Component<Props, State> {
         appElement={appEl}
         contentLabel='Login'
         isOpen={isOpen}
-        onRequestClose={hideModal}
+        onRequestClose={this.hideModal}
         portalClassName='login-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
           <h4>Login</h4>
-          <CloseButton onClick={hideModal} />
+          <CloseButton onClick={this.hideModal} />
           {
             (errorResponse && !isLoading) &&
               <Alert color='danger'>
@@ -132,7 +142,7 @@ export class LoginModal extends React.Component<Props, State> {
               <React.Fragment>
                 <Button
                   className='login-modal-btns-right__cancel'
-                  onClick={hideModal}
+                  onClick={this.hideModal}
                   text='Cancel' />
                 <Button
                   className='login-modal-btns-right__login'

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 
 export interface Props {
-  handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleDragEnd?: any
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleRemoveItem: Function
@@ -91,12 +91,15 @@ export class QueueModal extends React.Component<Props, State> {
 
     if (handleHideModal) {
       handleHideModal(event)
-      this.setState({ showHistory: false })
+      this.setState({
+        isEditing: false,
+        showHistory: false
+      })
     }
   }
 
   render () {
-    const { handleAnchorOnClick, handleRemoveItem, historyItems = [], isLoggedIn, isOpen,
+    const { handleLinkClick, handleRemoveItem, historyItems = [], isLoggedIn, isOpen,
       nowPlayingItem = {}, priorityItems = [], secondaryItems = [] } = this.props
     const { dropdownMenuOpen, isEditing, showHistory } = this.state
 
@@ -149,15 +152,18 @@ export class QueueModal extends React.Component<Props, State> {
               <h4><FontAwesomeIcon icon='list-ul' /> &nbsp;Queue</h4>
             </React.Fragment>
         }
-        <Button
-          className='mp-queue-modal-header__edit'
-          onClick={this.toggleEditMode}>
-          {
-            isEditing ?
-              <React.Fragment><FontAwesomeIcon icon='check' /> Done</React.Fragment>
-              : <React.Fragment><FontAwesomeIcon icon='edit' /> Edit</React.Fragment>
-          }
-        </Button>
+        {
+          !showHistory &&
+            <Button
+              className='mp-queue-modal-header__edit'
+              onClick={this.toggleEditMode}>
+              {
+                isEditing ?
+                  <React.Fragment><FontAwesomeIcon icon='check' /> Done</React.Fragment>
+                  : <React.Fragment><FontAwesomeIcon icon='edit' /> Edit</React.Fragment>
+              }
+            </Button>
+        }
       </div>
     )
 
@@ -175,7 +181,7 @@ export class QueueModal extends React.Component<Props, State> {
               {...provided.dragHandleProps}>
               <MediaListItem
                 dataNowPlayingItem={x}
-                handleAnchorOnClick={handleAnchorOnClick}
+                handleLinkClick={handleLinkClick}
                 handleRemoveItem={() => handleRemoveItem(x.clipId, x.episodeId, true)}
                 hasLink
                 itemType='now-playing-item'
@@ -194,7 +200,7 @@ export class QueueModal extends React.Component<Props, State> {
               {...provided.dragHandleProps}>
               <MediaListItem
                 dataNowPlayingItem={x}
-                handleAnchorOnClick={handleAnchorOnClick}
+                handleLinkClick={handleLinkClick}
                 handleRemoveItem={() => handleRemoveItem(x.clipId, x.episodeId, false)}
                 hasLink
                 itemType='now-playing-item'
