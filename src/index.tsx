@@ -29,6 +29,6 @@ export { Navbar } from 'components/Navbar/Navbar'
 export { addItemToPriorityQueueStorage, updatePriorityQueueStorage,
   addItemsToSecondaryQueueStorage, clearItemsFromSecondaryQueueStorage,
   getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage, popNextFromPriorityQueueStorage,
-  popNextFromQueueStorage, popNextFromSecondaryQueueStorage, removeItemFromPriorityQueueStorage
-  } from 'lib/mediaPlayerQueue'
+  popNextFromQueueStorage, popNextFromSecondaryQueueStorage, removeItemFromPriorityQueueStorage,
+  removeItemFromSecondaryQueueStorage } from 'lib/mediaPlayerQueue'
 export { convertToNowPlayingItem } from 'lib/nowPlayingItem'

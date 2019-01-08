@@ -2,14 +2,15 @@ import * as React from 'react'
 import * as Modal from 'react-modal'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
+import { PVButton as Button } from 'components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { CloseButton } from 'components/CloseButton/CloseButton'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 
 export interface Props {
   handleAnchorOnClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleDragEnd?: any
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleRemoveItem: Function
   historyItems?: any[]
   isLoggedIn?: boolean
   isOpen: boolean
@@ -20,6 +21,7 @@ export interface Props {
 
 type State = {
   dropdownMenuOpen?: boolean
+  isEditing?: boolean
   showHistory?: boolean
 }
 
@@ -45,6 +47,7 @@ export class QueueModal extends React.Component<Props, State> {
 
     this.hideModal = this.hideModal.bind(this)
     this.toggleDropdownMenu = this.toggleDropdownMenu.bind(this)
+    this.toggleEditMode = this.toggleEditMode.bind(this)
   }
 
   onDragEnd = (data) => {
@@ -78,6 +81,11 @@ export class QueueModal extends React.Component<Props, State> {
     })
   }
 
+  toggleEditMode () {
+    const { isEditing } = this.state
+    this.setState({ isEditing: !isEditing })
+  }
+
   hideModal (event) {
     const { handleHideModal } = this.props
 
@@ -88,16 +96,17 @@ export class QueueModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { handleAnchorOnClick, historyItems = [], isLoggedIn, isOpen,
+    const { handleAnchorOnClick, handleRemoveItem, historyItems = [], isLoggedIn, isOpen,
       nowPlayingItem = {}, priorityItems = [], secondaryItems = [] } = this.props
-    const { dropdownMenuOpen, showHistory } = this.state
+    const { dropdownMenuOpen, isEditing, showHistory } = this.state
 
-    const dropdownNode = (
-      <React.Fragment>
+    const header = (
+      <div className='mp-queue-modal__header'>
         {
           isLoggedIn &&
             <React.Fragment>
               <Dropdown
+                className='mp-queue-modal-header__dropdown'
                 direction='down'
                 isOpen={dropdownMenuOpen}
                 toggle={this.toggleDropdownMenu}>
@@ -140,7 +149,16 @@ export class QueueModal extends React.Component<Props, State> {
               <h4><FontAwesomeIcon icon='list-ul' /> &nbsp;Queue</h4>
             </React.Fragment>
         }
-      </React.Fragment>
+        <Button
+          className='mp-queue-modal-header__edit'
+          onClick={this.toggleEditMode}>
+          {
+            isEditing ?
+              <React.Fragment><FontAwesomeIcon icon='check' /> Done</React.Fragment>
+              : <React.Fragment><FontAwesomeIcon icon='edit' /> Edit</React.Fragment>
+          }
+        </Button>
+      </div>
     )
 
     let priorityItemNodes: any = []
@@ -158,8 +176,10 @@ export class QueueModal extends React.Component<Props, State> {
               <MediaListItem
                 dataNowPlayingItem={x}
                 handleAnchorOnClick={handleAnchorOnClick}
+                handleRemoveItem={() => handleRemoveItem(x.clipId, x.episodeId, true)}
                 hasLink
-                itemType='now-playing-item' />
+                itemType='now-playing-item'
+                showRemove={isEditing} />
             </div>
           )}
         </Draggable>
@@ -175,8 +195,10 @@ export class QueueModal extends React.Component<Props, State> {
               <MediaListItem
                 dataNowPlayingItem={x}
                 handleAnchorOnClick={handleAnchorOnClick}
+                handleRemoveItem={() => handleRemoveItem(x.clipId, x.episodeId, false)}
                 hasLink
-                itemType='now-playing-item' />
+                itemType='now-playing-item'
+                showRemove={isEditing} />
             </div>
           )}
         </Draggable>
@@ -209,8 +231,7 @@ export class QueueModal extends React.Component<Props, State> {
         portalClassName='mp-queue-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
-        {dropdownNode}
-        <CloseButton onClick={this.hideModal} />
+        {header}
         <div className='scrollable-area'>
           {
             !showHistory &&

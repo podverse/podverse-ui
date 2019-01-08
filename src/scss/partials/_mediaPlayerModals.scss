@@ -107,6 +107,23 @@
 }
 
 .mp-queue-modal {
+  .mp-queue-modal__header {
+    display: flex;
+
+    .mp-queue-modal-header__dropdown {
+      flex: 1 1 auto;
+    }
+
+    .mp-queue-modal-header__edit {
+      background-color: transparent;
+      border-color: transparent;
+      flex: 0 0 auto;
+      height: 42px;
+      margin-right: -0.75rem;
+      margin-top: -0.375rem;
+      width: 80px;
+    }
+  }
   .scrollable-area {
     overflow: auto;
     height: calc(100% - 3.125em);

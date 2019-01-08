@@ -60,13 +60,19 @@ export const popNextFromPriorityQueueStorage = () => {
   }
 }
 
-export const removeItemFromPriorityQueueStorage = (item) => {
+export const removeItemFromPriorityQueueStorage = (clipId, episodeId) => {
   const queueItems = localStorage.getItem(kPriorityQueue)
 
   if (queueItems) {
     const items = JSON.parse(queueItems)
-    const newItems = items.filter(obj => obj.id !== item.id)
-    localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
+
+    if (clipId) {
+      const newItems = items.filter(obj => obj.clipId !== clipId)
+      localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
+    } else if (episodeId) {
+      const newItems = items.filter(obj => obj.episodeId !== episodeId)
+      localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
+    }
   }
 }
 
@@ -111,6 +117,22 @@ export const popNextFromSecondaryQueueStorage = () => {
     const nextItem = items.shift()
     localStorage.setItem(kSecondaryQueue, JSON.stringify(items))
     return nextItem
+  }
+}
+
+export const removeItemFromSecondaryQueueStorage = (clipId, episodeId) => {
+  const queueItems = localStorage.getItem(kSecondaryQueue)
+
+  if (queueItems) {
+    const items = JSON.parse(queueItems)
+
+    if (clipId) {
+      const newItems = items.filter(obj => obj.clipId !== clipId)
+      localStorage.setItem(kSecondaryQueue, JSON.stringify(newItems))
+    } else if (episodeId) {
+      const newItems = items.filter(obj => obj.episodeId !== episodeId)
+      localStorage.setItem(kSecondaryQueue, JSON.stringify(newItems))
+    }
   }
 }
 
