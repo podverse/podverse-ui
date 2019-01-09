@@ -218,10 +218,10 @@ html[theme=light] {
 
     &:hover {
       [class*=__title], [class$=__description] {
-        color: $gray-darker;
+        color: $gray;
       }
       [class*=__sub], [class$=__date] {
-        color: $gray-lighter;
+        color: $gray-light;
       }
     }
   }

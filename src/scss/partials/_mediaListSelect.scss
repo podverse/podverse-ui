@@ -6,12 +6,12 @@
   // The Reactstrap Dropdown direction='down' appears to be buggy,
   // so manually force the dropdown-menu to load below the dropdown.
   .dropdown-menu {
-    transform: translate3d(-12px, 36px, 0px) !important;
+    transform: translate3d(-16px, 36px, 0px) !important;
   }
 
   &.align-right {
     .dropdown-menu {
-      transform: translate3d(-50px, 36px, 0px) !important;
+      transform: translate3d(-29px, 36px, 0px) !important;
     }
   }
 
