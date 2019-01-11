@@ -73,7 +73,6 @@ export class Navbar extends React.Component<Props, State> {
         {...(x.as ? { as: x.as } : {})}>
         <DropdownItem
           onClick={event => {
-            handleLinkClick(event)
             x.onClick()
             this.setState({ dropdownIsOpen: false })
           }}>
