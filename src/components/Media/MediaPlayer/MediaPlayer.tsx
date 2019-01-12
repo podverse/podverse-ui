@@ -155,7 +155,7 @@ export class MediaPlayer extends React.Component<Props, State> {
         && window.player
         && lastItem !== nextItem
         && lastItem.clipId === nextItem.clipId) {
-      window.player.seekTo(nextItem.clipStartTime)
+      window.player.seekTo(nextItem && nextItem.clipStartTime && Math.floor(nextItem.clipStartTime))
     }
 
     // If the same episode is played back-to-back after an item skip,
@@ -189,10 +189,10 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   setCurrentTime = e => {
-    const offsetX = e.nativeEvent.offsetX
-    const width = e.currentTarget.offsetWidth
+    const offsetX = parseFloat(e.nativeEvent.offsetX)
+    const width = parseFloat(e.currentTarget.offsetWidth)
     if (typeof window !== 'undefined' && window.player) {
-      window.player.seekTo((offsetX / width).toFixed(5))
+      window.player.seekTo((offsetX / width).toFixed(2))
     }
   }
 
@@ -409,6 +409,9 @@ export class MediaPlayer extends React.Component<Props, State> {
       </Link>
     )
 
+    console.log('asdf ', reactPlayerKey)
+    console.log('derrrr ', window.player && window.player.getCurrentTime())
+
     return (
       nowPlayingItem.episodeMediaUrl ?
         <div className='mp'>
@@ -500,7 +503,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                   className='mp-player__progress-bar'
                   onClick={this.setCurrentTime}
                   onMouseMove={this.onMouseOverProgress}
-                  value={duration && typeof window !== 'undefined' && window.player ? (window.player.getCurrentTime() / duration) * 100 : 0} />
+                  value={duration && typeof window !== 'undefined' && window.player ? ((window.player.getCurrentTime() / duration) * 100).toFixed(5) : 0} />
                 <span
                   className={`mp-player__duration`}
                   ref={this.durationNode}>

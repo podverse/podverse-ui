@@ -34,6 +34,8 @@ type Props = {
   showRemove?: boolean
 }
 
+// This is absolute chaos. Sorry :(
+
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
