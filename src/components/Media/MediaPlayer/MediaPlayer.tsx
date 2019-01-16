@@ -409,9 +409,6 @@ export class MediaPlayer extends React.Component<Props, State> {
       </Link>
     )
 
-    console.log('asdf ', reactPlayerKey)
-    console.log('derrrr ', window.player && window.player.getCurrentTime())
-
     return (
       nowPlayingItem.episodeMediaUrl ?
         <div className='mp'>
