@@ -1,12 +1,15 @@
 import * as React from 'react'
 import { Button } from 'reactstrap'
+import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { calcDuration, readableClipTime, secondsToReadableDuration } from 'lib/utility'
-import { convertToNowPlayingItem } from 'lib/nowPlayingItem';
+import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
+import { getLinkUserAs, getLinkUserHref } from 'lib/constants'
 const sanitizeHtml = require('sanitize-html')
 
 type Props = {
   episode?: any
+  handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePauseItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -49,13 +52,17 @@ export class MediaInfo extends React.Component<Props, State> {
   }
 
   render () {
-    const { episode, handlePauseItem, handlePlayItem, loggedInUserId, mediaRef, nowPlayingItem,
-      playing, podcast, handleToggleAddToModal, handleToggleMakeClipModal } = this.props
+    const {episode, handleLinkClick, handlePauseItem, handlePlayItem, loggedInUserId,
+      mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
+      handleToggleMakeClipModal } = this.props
     const { showDescription } = this.state
 
     let title
     let time
     let duration
+    let createdById
+    let createdByName
+    let createdByIsPublic
     let description
     let currentItem: any = {}
 
@@ -71,6 +78,9 @@ export class MediaInfo extends React.Component<Props, State> {
       duration = secondsToReadableDuration(
         calcDuration(mediaRef.startTime, mediaRef.endTime)
       )
+      createdById = mediaRef.owner.id
+      createdByIsPublic = mediaRef.owner.isPublic
+      createdByName = mediaRef.owner.name
       description = mediaRef.episodeDescription
       currentItem = convertToNowPlayingItem(mediaRef)
     } else if (nowPlayingItem) {
@@ -79,12 +89,18 @@ export class MediaInfo extends React.Component<Props, State> {
       duration = secondsToReadableDuration(
         calcDuration(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
       )
+      createdById = nowPlayingItem.ownerId
+      createdByIsPublic = nowPlayingItem.ownerIsPublic
+      createdByName = mediaRef.owner.name
       description = nowPlayingItem.episodeDescription
       currentItem = nowPlayingItem
     } else if (podcast) {
       title = ''
       time = ''
       duration = ''
+      createdById = ''
+      createdByIsPublic = ''
+      createdByName = ''
       description = podcast.description
       currentItem = null
     }
@@ -108,6 +124,20 @@ export class MediaInfo extends React.Component<Props, State> {
             time &&
             <div className='media-info__time'>
               {time}
+            </div>
+          }
+          {
+            createdById &&
+            <div className='media-info__created-by'>
+              Clip by:
+              {
+                createdByIsPublic ?
+                  <Link
+                    as={getLinkUserAs(createdById)}
+                    href={getLinkUserHref(createdById)}>
+                    <a onClick={handleLinkClick}>{createdByName}</a>
+                  </Link> : createdByName
+              }
             </div>
           }
           {

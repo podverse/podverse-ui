@@ -32,3 +32,11 @@ export const getLinkCategoryHref = (id) => {
 export const getLinkCategoryAs = (id) => {
   return `/podcasts/${id}`
 }
+
+export const getLinkUserHref = (id) => {
+  return `/profile?id=${id}`
+}
+
+export const getLinkUserAs = (id) => {
+  return `/profile/${id}`
+}
