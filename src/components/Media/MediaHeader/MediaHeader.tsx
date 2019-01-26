@@ -132,23 +132,33 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
         </button>
         {
           title &&
-          <Link
-            {...(titleHref ? { href: titleHref } : {})}
-            {...(titleAs ? { as: titleAs } : {})}>
-            <a
-              className='media-header__title'
-              onClick={handleLinkClick}>{title}</a>
-          </Link>
+            <React.Fragment>
+              {
+                titleHref ?
+                  <Link
+                    {...(titleHref ? { href: titleHref } : {})}
+                    {...(titleAs ? { as: titleAs } : {})}>
+                    <a
+                      className='media-header__title'
+                      onClick={handleLinkClick}>{subTitle}</a>
+                  </Link> : <span className='media-header__title'>{title}</span>
+              }
+            </React.Fragment>
         }
         {
           subTitle &&
-          <Link
-            {...(subTitleHref ? { href: subTitleHref } : {})}
-            {...(subTitleAs ? { as: subTitleAs } : {})}>
-            <a
-              className='media-header__sub-title'
-              onClick={handleLinkClick}>{subTitle}</a>
-          </Link>
+            <React.Fragment>
+              {
+                subTitleHref ?
+                  <Link
+                    {...(subTitleHref ? { href: subTitleHref } : {})}
+                    {...(subTitleAs ? { as: subTitleAs } : {})}>
+                    <a
+                      className='media-header__sub-title'
+                      onClick={handleLinkClick}>{subTitle}</a>
+                  </Link> : <span className='media-header__sub-title'>{subTitle}</span>
+              }
+            </React.Fragment>
         }
         {
           bottomTextSide &&

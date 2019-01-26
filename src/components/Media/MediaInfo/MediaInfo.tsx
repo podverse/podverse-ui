@@ -80,7 +80,7 @@ export class MediaInfo extends React.Component<Props, State> {
       )
       createdById = mediaRef.owner.id
       createdByIsPublic = mediaRef.owner.isPublic
-      createdByName = mediaRef.owner.name
+      createdByName = mediaRef.owner.name || 'anonymous'
       description = mediaRef.episodeDescription
       currentItem = convertToNowPlayingItem(mediaRef)
     } else if (nowPlayingItem) {
@@ -91,7 +91,7 @@ export class MediaInfo extends React.Component<Props, State> {
       )
       createdById = nowPlayingItem.ownerId
       createdByIsPublic = nowPlayingItem.ownerIsPublic
-      createdByName = mediaRef.owner.name
+      createdByName = mediaRef.owner.name || 'anonymous'
       description = nowPlayingItem.episodeDescription
       currentItem = nowPlayingItem
     } else if (podcast) {
@@ -129,7 +129,7 @@ export class MediaInfo extends React.Component<Props, State> {
           {
             createdById &&
             <div className='media-info__created-by'>
-              Clip by:
+              Clip by:&nbsp;
               {
                 createdByIsPublic ?
                   <Link

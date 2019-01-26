@@ -17,9 +17,13 @@
     margin-top: 0.5rem;
   }
 
+  .media-info__created-by {
+    margin-top: 0.5rem;
+  }
+
   .media-info__controls {
     display: flex;
-    margin: 1rem 0 0.5rem 0;
+    margin: 1.25rem 0 0.5rem 0;
 
     .media-info-controls__play svg {
       margin-left: 2px;
@@ -60,7 +64,8 @@ html[theme=light] {
     }
 
     .media-info__time, .media-info__duration,
-    .media-info__item-count, .media-info__last-updated {
+    .media-info__item-count, .media-info__last-updated,
+    .media-info__created-by, .media-info__created-by a {
       color: $gray;
     }
 
@@ -96,7 +101,8 @@ html[theme=dark] {
     }
 
     .media-info__time, .media-info__duration,
-    .media-info__item-count, .media-info__last-updated {
+    .media-info__item-count, .media-info__last-updated,
+    .media-info__created-by, .media-info__created-by a {
       color: $gray;
     }
 
