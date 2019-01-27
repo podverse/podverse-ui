@@ -140,7 +140,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                     {...(titleAs ? { as: titleAs } : {})}>
                     <a
                       className='media-header__title'
-                      onClick={handleLinkClick}>{subTitle}</a>
+                      onClick={handleLinkClick}>{title}</a>
                   </Link> : <span className='media-header__title'>{title}</span>
               }
             </React.Fragment>

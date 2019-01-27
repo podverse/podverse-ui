@@ -48,6 +48,11 @@
     cursor: pointer;
     display: inline-block;
     margin-top: 0.5rem;
+
+    div {
+      display: inline-block;
+      width: 10px;
+    }
   }
 
   .media-info__description {

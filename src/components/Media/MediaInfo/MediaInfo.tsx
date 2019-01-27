@@ -182,7 +182,14 @@ export class MediaInfo extends React.Component<Props, State> {
               <button
                 className='media-info__show-more'
                 onClick={this.toggleDescription}>
-                {this.state.showDescription ? 'Hide Notes' : 'Show Notes'}
+                {this.state.showDescription ?
+                  <React.Fragment>
+                    <div><FontAwesomeIcon icon='caret-down' /></div>&nbsp;More Info
+                  </React.Fragment> :
+                  <React.Fragment>
+                    <div><FontAwesomeIcon icon='caret-right' /></div>&nbsp;More Info
+                  </React.Fragment>
+                }
               </button>
           }
           {
