@@ -81,7 +81,7 @@ export class MediaInfo extends React.Component<Props, State> {
       createdById = mediaRef.owner.id
       createdByIsPublic = mediaRef.owner.isPublic
       createdByName = mediaRef.owner.name || 'anonymous'
-      description = mediaRef.episodeDescription
+      description = mediaRef.episode.description
       currentItem = convertToNowPlayingItem(mediaRef)
     } else if (nowPlayingItem) {
       title = nowPlayingItem.clipTitle
