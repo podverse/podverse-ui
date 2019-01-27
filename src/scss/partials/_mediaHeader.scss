@@ -7,19 +7,23 @@
     width: 4.75rem;
   }
 
+  .media-header__top, .media-header__middle, .media-header__bottom {
+    display: flex;
+  }
+
   .media-header__subscribe {
-    float: right;
+    flex: 0 0 auto;
     height: 22px;
     line-height: 22px;
     margin-left: 1.5rem;
-    margin-right: 3px;
     margin-top: 3px;
     padding: 0;
+    text-align: center;
     width: 22px;
   }
 
   .media-header__edit {
-    float: right;
+    flex: 0 0 auto;
     height: 22px;
     line-height: 22px;
     margin-left: 1.5rem;
@@ -30,8 +34,7 @@
 
   .media-header__title {
     @include ellipsis;
-    display: block;
-    float: left;
+    flex: 1 0 auto;
     font-size: $text-lg-rem;
     margin-bottom: 0.25rem;
     max-width: calc(100% - 44px); // 100% minus the width of the subscribe button area

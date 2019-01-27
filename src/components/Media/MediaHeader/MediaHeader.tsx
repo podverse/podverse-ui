@@ -113,61 +113,67 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     <div className='media-header'>
       <img className='media-header__image' src={imgUrl} />
       <div className='text-wrapper'>
-        <button
-          className='media-header__subscribe'
-          onClick={handleToggleSubscribe}>
+        <div className='media-header__top'>
           {
-            isSubscribing ?
-              <FontAwesomeIcon icon='spinner' spin />
-              :
+            title &&
               <React.Fragment>
                 {
-                  isSubscribed ?
-                    <FontAwesomeIcon icon={fasStar} />
-                    // @ts-ignore
-                    : <FontAwesomeIcon icon={farStar} />
+                  titleHref ?
+                    <Link
+                      {...(titleHref ? { href: titleHref } : {})}
+                      {...(titleAs ? { as: titleAs } : {})}>
+                      <a
+                        className='media-header__title'
+                        onClick={handleLinkClick}>{title}</a>
+                    </Link> : <span className='media-header__title'>{title}</span>
                 }
               </React.Fragment>
           }
-        </button>
-        {
-          title &&
-            <React.Fragment>
-              {
-                titleHref ?
-                  <Link
-                    {...(titleHref ? { href: titleHref } : {})}
-                    {...(titleAs ? { as: titleAs } : {})}>
-                    <a
-                      className='media-header__title'
-                      onClick={handleLinkClick}>{title}</a>
-                  </Link> : <span className='media-header__title'>{title}</span>
-              }
-            </React.Fragment>
-        }
-        {
-          subTitle &&
-            <React.Fragment>
-              {
-                subTitleHref ?
-                  <Link
-                    {...(subTitleHref ? { href: subTitleHref } : {})}
-                    {...(subTitleAs ? { as: subTitleAs } : {})}>
-                    <a
-                      className='media-header__sub-title'
-                      onClick={handleLinkClick}>{subTitle}</a>
-                  </Link> : <span className='media-header__sub-title'>{subTitle}</span>
-              }
-            </React.Fragment>
-        }
-        {
-          bottomTextSide &&
-          <div className='media-header__bottom-text-side'>{bottomTextSide}</div>
-        }
-        {
-          bottomText &&
-          <div className='media-header__bottom-text'>{bottomText}</div>
-        }
+          <button
+            className='media-header__subscribe'
+            onClick={handleToggleSubscribe}>
+            {
+              isSubscribing ?
+                <FontAwesomeIcon icon='spinner' spin />
+                :
+                <React.Fragment>
+                  {
+                    isSubscribed ?
+                      <FontAwesomeIcon icon={fasStar} />
+                      // @ts-ignore
+                      : <FontAwesomeIcon icon={farStar} />
+                  }
+                </React.Fragment>
+            }
+          </button>
+        </div>
+        <div className='media-header__middle'>
+          {
+            subTitle &&
+              <React.Fragment>
+                {
+                  subTitleHref ?
+                    <Link
+                      {...(subTitleHref ? { href: subTitleHref } : {})}
+                      {...(subTitleAs ? { as: subTitleAs } : {})}>
+                      <a
+                        className='media-header__sub-title'
+                        onClick={handleLinkClick}>{subTitle}</a>
+                    </Link> : <span className='media-header__sub-title'>{subTitle}</span>
+                }
+              </React.Fragment>
+          }
+        </div>
+        <div className='media-header__bottom'>
+          {
+            bottomTextSide &&
+            <div className='media-header__bottom-text-side'>{bottomTextSide}</div>
+          }
+          {
+            bottomText &&
+            <div className='media-header__bottom-text'>{bottomText}</div>
+          }
+        </div>
       </div>
     </div>
   )
