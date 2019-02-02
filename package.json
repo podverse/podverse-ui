@@ -1,5 +1,5 @@
 {
-  "name": "podverse_ui",
+  "name": "podverse-ui",
   "version": "1.0.3",
   "description": "React / Typescript component library for Podverse web applications",
   "license": "MIT",
