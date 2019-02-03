@@ -1,5 +1,5 @@
 # podverse-ui
-React / Typescript component library for Podverse web applications
+React / Typescript UI component library for Podverse web applications
 
 ## Use npm link for local development
 
@@ -9,7 +9,7 @@ npm link
 
 Then from inside another repo you want to link to the local podverse-ui
 module (for example, [podverse-web](https://github.com/podverse/podverse-web)),
-run the following:
+run the following command:
 
 ```
 npm link podverse-ui
