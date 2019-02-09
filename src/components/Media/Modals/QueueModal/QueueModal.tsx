@@ -5,6 +5,7 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap
 import { PVButton as Button } from 'components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
+import { CloseButton } from 'components/CloseButton/CloseButton';
 
 export interface Props {
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
@@ -154,16 +155,20 @@ export class QueueModal extends React.Component<Props, State> {
         }
         {
           !showHistory &&
-            <Button
-              className='mp-queue-modal-header__edit'
-              onClick={this.toggleEditMode}>
-              {
-                isEditing ?
-                  <React.Fragment><FontAwesomeIcon icon='check' /> Done</React.Fragment>
-                  : <React.Fragment><FontAwesomeIcon icon='edit' /> Edit</React.Fragment>
-              }
-            </Button>
+            <div className='mp-queue-modal-header__edit'>
+              <Button
+                onClick={this.toggleEditMode}>
+                {
+                  isEditing ?
+                    <React.Fragment><FontAwesomeIcon icon='check' /> Done</React.Fragment>
+                    : <React.Fragment><FontAwesomeIcon icon='edit' /> Edit</React.Fragment>
+                }
+              </Button>
+            </div>
         }
+        <div className='mp-queue-modal-header__close'>
+          <CloseButton onClick={this.hideModal} />
+        </div>
       </div>
     )
 

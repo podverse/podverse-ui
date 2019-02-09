@@ -111,17 +111,26 @@
     display: flex;
 
     .mp-queue-modal-header__dropdown {
-      flex: 1 1 auto;
+      flex: 1;
     }
 
     .mp-queue-modal-header__edit {
       background-color: transparent;
       border-color: transparent;
-      flex: 0 0 auto;
-      height: 42px;
-      margin-right: -0.75rem;
-      margin-top: -0.375rem;
-      width: 80px;
+      flex: 1;
+      text-align: center;
+
+      button {
+        background-color: transparent;
+        border-color: transparent;
+        height: 42px;
+        margin-top: -0.375rem;
+        width: 100px;
+      }
+    }
+
+    .mp-queue-modal-header__close {
+      flex: 1;
     }
   }
   .scrollable-area {
