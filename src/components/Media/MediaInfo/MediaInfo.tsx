@@ -41,11 +41,9 @@ export class MediaInfo extends React.Component<Props, State> {
       showAddToModal: false,
       showDescription: true
     }
-
-    this.toggleDescription = this.toggleDescription.bind(this)
   }
 
-  toggleDescription () {
+  toggleDescription = () => {
     this.setState(prevState => ({
       showDescription: !prevState.showDescription
     }))
@@ -182,14 +180,10 @@ export class MediaInfo extends React.Component<Props, State> {
               <button
                 className='media-info__show-more'
                 onClick={this.toggleDescription}>
-                {this.state.showDescription ?
-                  <React.Fragment>
-                    <div><FontAwesomeIcon icon='caret-down' /></div>&nbsp;More Info
-                  </React.Fragment> :
-                  <React.Fragment>
-                    <div><FontAwesomeIcon icon='caret-right' /></div>&nbsp;More Info
-                  </React.Fragment>
-                }
+                <span>
+                  <FontAwesomeIcon icon={showDescription ? 'caret-down' : 'caret-right'} />
+                  &nbsp;More Info
+                </span>
               </button>
           }
           {
