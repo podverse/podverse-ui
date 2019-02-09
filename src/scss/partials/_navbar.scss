@@ -26,6 +26,12 @@
       padding: 0.25rem 1rem;
     }
   }
+  
+  @media(min-width: 576px) {    
+    .mobile-nav-item {
+      display: none;
+    }
+  }
 
   @media(max-width: 575px) {
     .navbar-nav {
@@ -35,6 +41,9 @@
         padding: 0.75rem 0;
         text-align: right;
       }
+    }
+    .dropdown {
+      display: none;
     }
   }
 }

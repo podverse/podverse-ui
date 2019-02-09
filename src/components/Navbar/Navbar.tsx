@@ -14,6 +14,7 @@ import {
 } from 'reactstrap'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { clone } from 'lib/utility'
 
 type Props = {
   brandHideText?: boolean
@@ -81,6 +82,19 @@ export class Navbar extends React.Component<Props, State> {
       </Link>
     )
 
+    const mobileNavItems = clone(dropdownItems)
+    const mobileNavItemsEls = mobileNavItems.map(x =>
+      <Link
+        {...(x.href ? { href: x.href } : {})}
+        {...(x.as ? { as: x.as } : {})}>
+        <NavItem className='mobile-nav-item'>
+          <NavLink onClick={x.onClick}>
+            {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+          </NavLink>
+        </NavItem>
+      </Link>
+    )
+
     return (
       <div className='navbar__bg'>
         <BSNavbar color='light' light expand='sm'>
@@ -94,6 +108,7 @@ export class Navbar extends React.Component<Props, State> {
           <Collapse isOpen={this.state.navBarIsOpen} navbar>
             <Nav className='ml-auto' navbar>
               {navItemsEls}
+              {mobileNavItemsEls}
               <Dropdown
                 inNavbar
                 isOpen={this.state.dropdownIsOpen}
