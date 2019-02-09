@@ -39,7 +39,7 @@ export class MediaInfo extends React.Component<Props, State> {
 
     this.state = {
       showAddToModal: false,
-      showDescription: false
+      showDescription: true
     }
 
     this.toggleDescription = this.toggleDescription.bind(this)
