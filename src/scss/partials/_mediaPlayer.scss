@@ -6,7 +6,7 @@
   }
 
   button {
-    height: 36px;
+    height: 42px;
 
     &:disabled {
       cursor: not-allowed;
@@ -23,21 +23,23 @@
       margin-left: 0.5rem;
     }
   }
+
+  button {
+    flex: 0 0 44px;
+    font-size: 18px;
+    margin: 3px 0;
+  }
   
   .mp__header {
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-top-style: solid;
     border-top-width: 1px;
-    height: 42px;
-
-    button {
-      margin: 3px 0;
-    }
+    height: 50px;
   
     .mp-header__inner {
       display: flex;
-      height: 40px;
+      height: 44px;
     }
   
     .mp-header__link {
@@ -47,22 +49,24 @@
     }
   
     .mp-header__image {
-      flex: 0 0 40px;
-      height: 40px;
-      margin-right: 0.5rem;
-      width: 40px;
+      flex: 0 0 48px;
+      height: 48px;
+      margin-right: 0.75rem;
+      width: 48px;
     }
   
     .mp-header__wrap {
       flex: 1 1 auto;
-      height: 44px;
+      font-size: 16px;
+      height: 48px;
       min-width: 0;
       text-align: left;
   
       .mp-header-wrap__top {
         font-weight: 500;
-        height: 20px;
-        line-height: 20px;
+        height: 22px;
+        line-height: 22px;
+        margin-top: 1px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -70,40 +74,23 @@
     
       .mp-header-wrap__bottom {
         font-weight: 500;
-        height: 20px;
-        line-height: 20px;
+        height: 24px;
+        line-height: 24px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
     }
   
-    .mp-header__queue {
-      flex: 0 0 40px;
-    }
-  
-    .mp-header__add {
-      flex: 0 0 40px;
-    }
-    
-    .mp-header__clip {
-      flex: 0 0 40px;
-    }
-    
     .mp-header__share {
-      flex: 0 0 40px;
       margin-right: -0.625rem;
     }
   }
   
   .mp__player {
     display: flex;
-    height: 41px;
+    height: 50px;
     position: relative;
-
-    button {
-      margin: 2px 0;
-    }
   
     .mp-player__inner {
       display: flex;
@@ -111,18 +98,18 @@
     }
   
     .mp-player__play-pause {
-      flex: 0 0 44px;
+      flex: 0 0 50px;
     }
   
     .mp-player__current-time {
       margin: auto;
       text-align: left;
       position: absolute;
-      top: 0px;
+      top: 1px;
       left: 4px;
       color: #eee;
       z-index: 1;
-      font-size: 12px;
+      font-size: 13px;
       pointer-events: none;
     }
   
@@ -147,6 +134,7 @@
     .mp-player__progress-bar {
       cursor: pointer;
       flex: 1 1 auto;
+      height: 18px;
       margin: 0;
       
       .progress-bar {
@@ -158,32 +146,15 @@
       margin: auto;
       text-align: right;
       position: absolute;
-      top: 0px;
+      top: 1px;
       right: 4px;
       color: #eee;
       z-index: 1;
-      font-size: 12px;
+      font-size: 13px;
       pointer-events: none;
     }
   
-    .mp-player__mute {
-      flex: 0 0 40px;
-    }
-  
-    .mp-player__time-jump-forward {
-      flex: 0 0 40px;
-    }
-  
-    .mp-player__playback-rate {
-      flex: 0 0 40px;
-    }
-  
-    .mp-player__autoplay {
-      flex: 0 0 40px;
-    }
-  
     .mp-player__skip {
-      flex: 0 0 40px;
       margin-right: -0.625rem;
     }
   }
