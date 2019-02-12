@@ -36,19 +36,17 @@ export class Navbar extends React.Component<Props, State> {
   constructor (props) {
     super(props)
 
-    this.toggleDropdown = this.toggleDropdown.bind(this)
-    this.toggleNavBar = this.toggleNavBar.bind(this)
     this.state = {
       dropdownIsOpen: false,
       navBarIsOpen: false
     }
   }
 
-  toggleDropdown () {
+  toggleDropdown = () => {
     this.setState({ dropdownIsOpen: !this.state.dropdownIsOpen })
   }
 
-  toggleNavBar () {
+  toggleNavBar = () => {
     this.setState({ navBarIsOpen: !this.state.navBarIsOpen })
   }
 
@@ -99,6 +97,7 @@ export class Navbar extends React.Component<Props, State> {
       <div className='navbar__bg'>
         <BSNavbar color='light' light expand='sm'>
           <Link
+            {...(brandUrl ? { as: brandUrl } : {})}
             {...(brandUrl ? { href: brandUrl } : {})}>
             <NavbarBrand onClick={handleLinkClick}>{
               brandHideText ? null : brandText

@@ -82,8 +82,8 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       categoryNodes.push(
         <React.Fragment>
           <Link
-            {...(subTitleHref ? { href: categoryHref } : {})}
-            {...(subTitleAs ? { as: categoryAs } : {})}>
+            {...(categoryHref ? { href: categoryHref } : {})}
+            {...(categoryAs ? { as: categoryAs } : {})}>
             <a onClick={handleLinkClick}>{categoryText}</a>
           </Link>
           {
