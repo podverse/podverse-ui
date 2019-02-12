@@ -1,15 +1,19 @@
 import * as React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export interface Props {
+  handleOnClick?: () => void
+  itemId: string
+  loadingItemId?: string
   subTitle?: string
   subTitleSide?: string
-  handleOnClick?: () => void
   title: string
   titleSide?: string
 }
 
 export const MediaListItemD: React.StatelessComponent<Props> = props => {
-  const { handleOnClick, subTitle, subTitleSide, title, titleSide } = props
+  const { handleOnClick, itemId, loadingItemId, subTitle, subTitleSide, title,
+    titleSide } = props
 
   return (
     <div
@@ -18,7 +22,7 @@ export const MediaListItemD: React.StatelessComponent<Props> = props => {
       {
         titleSide &&
           <div className='media-list-item-d__title-side'>
-            {titleSide}
+            {loadingItemId === itemId ? <FontAwesomeIcon icon='spinner' spin /> : titleSide}
           </div>
       }
       <div className='media-list-item-d__title'>

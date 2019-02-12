@@ -28,6 +28,7 @@ type Props = {
   isActive?: boolean
   isSlim?: boolean
   itemType?: string
+  loadingItemId?: string
   noWrap?: boolean
   showMoreMenu?: boolean
   showOwner?: boolean
@@ -40,7 +41,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
     handleRemoveItem, handleToggleAddToPlaylist, hasLink, isActive, isSlim, itemType,
-    noWrap, showMoreMenu, showOwner, showRemove } = props
+    loadingItemId, noWrap, showMoreMenu, showOwner, showRemove } = props
 
   let anchorHref = ''
   let anchorAs = ''
@@ -232,10 +233,13 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             {
               (itemType === 'playlist' && dataPlaylist) &&
                 <MediaListItemD
+                  itemId={dataPlaylist.id}
+                  loadingItemId={loadingItemId}
                   subTitleSide={showOwner ? readableDate(dataPlaylist.updatedAt) : ''}
                   subTitle={showOwner && dataPlaylist.owner ? `By: ${dataPlaylist.owner.name}` : ''}
                   title={dataPlaylist.title}
-                  titleSide={`${dataPlaylist.itemCount || dataPlaylist.itemCount === 0 ? `items: ${dataPlaylist.itemCount}` : ''}`} />
+                  titleSide={`${dataPlaylist.itemCount || dataPlaylist.itemCount === 0
+                    ? `items: ${dataPlaylist.itemCount}` : ''}`} />
             }
             {
               (itemType === 'podcast' && dataPodcast) &&
@@ -265,7 +269,9 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             }
             {
               (itemType === 'user' && dataUser) &&
-              <MediaListItemD title={dataUser.name || 'anonymous'} />
+              <MediaListItemD
+                itemId={dataUser.id}
+                title={dataUser.name || 'anonymous'} />
             }
           </a>
         </Link>

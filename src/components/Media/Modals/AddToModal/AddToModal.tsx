@@ -25,6 +25,7 @@ export interface Props {
   isAddingToPlayLast?: boolean
   isAddingToPlayNext?: boolean
   isOpen: boolean
+  loadingItemId?: string
   mediaRef?: any
   nowPlayingItem?: any
   playlists: any[]
@@ -58,14 +59,15 @@ const AddToModal: React.StatelessComponent<Props> = props => {
   const { createPlaylistError, createPlaylistIsSaving, createPlaylistShow, episode, handleAddToQueueLast,
     handleAddToQueueNext, handleCreatePlaylistHide, handleCreatePlaylistSave, handleHideModal,
     handleLoginClick, handlePlaylistItemAdd, handleToggleCreatePlaylist, isAddedToPlayLast,
-    isAddedToPlayNext, isAddingToPlayLast, isAddingToPlayNext, isOpen, mediaRef,
-    nowPlayingItem, playlists, showPlaylists, showQueue } = props
+    isAddedToPlayNext, isAddingToPlayLast, isAddingToPlayNext, isOpen, loadingItemId,
+    mediaRef, nowPlayingItem, playlists, showPlaylists, showQueue } = props
 
   const playlistMediaListItems = playlists.map(x =>
     <MediaListItem
       dataPlaylist={x}
       handleLinkClick={handlePlaylistItemAdd}
-      itemType='playlist' />
+      itemType='playlist'
+      loadingItemId={loadingItemId} />
   )
 
   if (!showPlaylists && showQueue) {
