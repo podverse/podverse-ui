@@ -1,5 +1,8 @@
+// import { convertToNowPlayingItem } from "./nowPlayingItem";
+
 const kPriorityQueue = 'mediaPlayerPriorityQueue'
 const kSecondaryQueue = 'mediaPlayerSecondaryQueue'
+const kNowPlayingItem = 'nowPlayingItem'
 
 export const popNextFromQueueStorage = () => {
   let nextItem
@@ -136,6 +139,42 @@ export const removeItemFromSecondaryQueueStorage = (clipId, episodeId) => {
   }
 }
 
-export const clearItemsFromSecondaryQueueStorage = (item) => {
+export const clearItemsFromSecondaryQueueStorage = item => {
   localStorage.setItem(kSecondaryQueue, JSON.stringify([]))
+}
+
+export const getNowPlayingItemFromStorage = () => {
+  const json = localStorage.getItem(kNowPlayingItem)
+
+  try {
+    return json ? JSON.parse(json) : null
+  } catch (error) {
+    return
+  }
+}
+
+export const setNowPlayingItemInStorage = nowPlayingItem => {
+  if (nowPlayingItem) {
+    localStorage.setItem(kNowPlayingItem, JSON.stringify(nowPlayingItem))
+  } else {
+    localStorage.setItem(kNowPlayingItem, JSON.stringify(''))
+  }
+}
+
+export const getNowPlayingOrNextFromStorage = () => {
+  const nowPlayingItem = getNowPlayingItemFromStorage()
+
+  if (nowPlayingItem) {
+    return nowPlayingItem
+  } else {
+    const result = popNextFromQueueStorage()
+
+    if (result.nextItem) {
+      localStorage.setItem(kNowPlayingItem, JSON.stringify(result.nextItem))
+      return result.nextItem
+    } else {
+      localStorage.setItem(kNowPlayingItem, '')
+      return
+    }
+  }
 }

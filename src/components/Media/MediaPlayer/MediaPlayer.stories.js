@@ -9,7 +9,7 @@ import { sampleMediaRef1, sampleNowPlayingItem1, sampleNowPlayingItem2, sampleNo
 import { addItemToPriorityQueueStorage, addItemsToSecondaryQueueStorage,
   clearItemsFromPriorityQueueStorage, clearItemsFromSecondaryQueueStorage,
   getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage,
-  popNextFromQueueStorage } from 'lib/mediaPlayerQueue'
+  popNextFromQueueStorage } from 'lib/mediaPlayerStorage'
 
 const { endTime, episodeMediaUrl, episodePubDate, episodeTitle, podcastImageUrl, 
   podcastTitle, startTime, title } = sampleMediaRef1

@@ -39,13 +39,9 @@ export class ShareModal extends React.Component<Props, State> {
     this.state = {
       lastCopied: undefined
     }
-
-    this.handleClipCopy = this.handleClipCopy.bind(this)
-    this.handleEpisodeCopy = this.handleEpisodeCopy.bind(this)
-    this.handlePodcastCopy = this.handlePodcastCopy.bind(this)
   }
 
-  handleClipCopy () {
+  handleClipCopy = () => {
     copyToClipboard(this.props.playerClipLinkHref)
     this.setState({ lastCopied: 'clip' })
     setTimeout(() => {
@@ -53,7 +49,7 @@ export class ShareModal extends React.Component<Props, State> {
     }, 3000)
   }
 
-  handleEpisodeCopy () {
+  handleEpisodeCopy = () => {
     copyToClipboard(this.props.playerEpisodeLinkHref)
     this.setState({ lastCopied: 'episode' })
     setTimeout(() => {
@@ -61,7 +57,7 @@ export class ShareModal extends React.Component<Props, State> {
     }, 3000)
   }
 
-  handlePodcastCopy () {
+  handlePodcastCopy = () => {
     copyToClipboard(this.props.playerPodcastLinkHref)
     this.setState({ lastCopied: 'podcast' })
     setTimeout(() => {

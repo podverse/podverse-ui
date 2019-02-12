@@ -5,7 +5,7 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap
 import { PVButton as Button } from 'components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
-import { CloseButton } from 'components/CloseButton/CloseButton';
+import { CloseButton } from 'components/CloseButton/CloseButton'
 
 export interface Props {
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
