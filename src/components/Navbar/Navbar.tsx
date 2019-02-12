@@ -98,7 +98,7 @@ export class Navbar extends React.Component<Props, State> {
         <BSNavbar color='light' light expand='sm'>
           <Link
             {...(brandUrl ? { as: brandUrl } : {})}
-            {...(brandUrl ? { href: brandUrl } : {})}>
+            {...(brandUrl ? { href: brandUrl + '?refresh=true' } : {})}>
             <NavbarBrand onClick={handleLinkClick}>{
               brandHideText ? null : brandText
             }</NavbarBrand>
