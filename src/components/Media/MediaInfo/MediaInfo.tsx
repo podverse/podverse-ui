@@ -76,9 +76,9 @@ export class MediaInfo extends React.Component<Props, State> {
       duration = secondsToReadableDuration(
         calcDuration(mediaRef.startTime, mediaRef.endTime)
       )
-      createdById = mediaRef.owner.id
-      createdByIsPublic = mediaRef.owner.isPublic
-      createdByName = mediaRef.owner.name || 'anonymous'
+      createdById = mediaRef.owner ? mediaRef.owner.id : ''
+      createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false
+      createdByName = mediaRef.owner ? mediaRef.owner.name : 'anonymous'
       description = mediaRef.episode.description
       currentItem = convertToNowPlayingItem(mediaRef)
     } else if (nowPlayingItem) {
