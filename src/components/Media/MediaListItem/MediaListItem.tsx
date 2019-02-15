@@ -137,7 +137,8 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               (itemType === 'episode' && dataEpisode) &&
                 <MediaListItemA
                   imageUrl={dataEpisode.podcast.imageUrl}
-                  subTitleBottom='Full Episode'
+                  subTitleBottom={dataEpisode.description}
+                  subTitleBottomShouldTruncate={true}
                   subTitleBottomSide={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
                   subTitleTop={dataEpisode.podcast.title}
                   title={dataEpisode.title} />
@@ -195,15 +196,17 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             {
               (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
                 <MediaListItemA
+                  subTitleTop={dataNowPlayingItem.episodeDescription}
+                  subTitleTopShouldTruncate={true}
                   subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                  subTitleTop='Full Episode'
                   title={dataNowPlayingItem.episodeTitle} />
             }
             {
               (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem) &&
                 <MediaListItemA
                   imageUrl={dataNowPlayingItem.podcastImageUrl}
-                  subTitleBottom='Full Episode'
+                  subTitleBottom={dataNowPlayingItem.episodeDescription}
+                  subTitleBottomShouldTruncate={true}
                   subTitleBottomSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   subTitleTop={dataNowPlayingItem.podcastTitle}
                   title={dataNowPlayingItem.episodeTitle} />

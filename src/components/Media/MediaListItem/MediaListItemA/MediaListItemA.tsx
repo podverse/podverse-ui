@@ -5,17 +5,21 @@ export interface Props {
   moreMenuItems?: any
   showImage?: boolean
   subTitleBottom?: string
+  subTitleBottomShouldTruncate?: boolean
   subTitleBottomSide?: string
   subTitleMiddle?: string
+  subTitleMiddleShouldTruncate?: boolean
   subTitleMiddleSide?: string
   subTitleTop?: string
+  subTitleTopShouldTruncate?: boolean
   subTitleTopSide?: string
   title: string
 }
 
 export const MediaListItemA: React.StatelessComponent<Props> = props => {
-  const { imageUrl, showImage, subTitleBottom, subTitleBottomSide,
-    subTitleMiddle, subTitleMiddleSide, subTitleTop, subTitleTopSide,
+  const { imageUrl, showImage, subTitleBottom, subTitleBottomShouldTruncate,
+    subTitleBottomSide, subTitleMiddle, subTitleMiddleShouldTruncate,
+    subTitleMiddleSide, subTitleTop, subTitleTopShouldTruncate, subTitleTopSide,
     title } = props
 
   return (
@@ -31,19 +35,19 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
         <div className='media-list-item-a__sub-top-side'>
           {subTitleTopSide}
         </div>
-        <div className='media-list-item-a__sub-top'>
+        <div className={`media-list-item-a__sub-top ${subTitleTopShouldTruncate ? 'truncate-lines' : ''}`}>
           {subTitleTop}
         </div>
         <div className='media-list-item-a__sub-middle-side'>
           {subTitleMiddleSide}
         </div>
-        <div className='media-list-item-a__sub-middle'>
+        <div className={`media-list-item-a__sub-middle ${subTitleMiddleShouldTruncate ? 'truncate-lines' : ''}`}>
           {subTitleMiddle}
         </div>
         <div className='media-list-item-a__sub-bottom-side'>
           {subTitleBottomSide}
         </div>
-        <div className='media-list-item-a__sub-bottom'>
+        <div className={`media-list-item-a__sub-bottom ${subTitleBottomShouldTruncate ? 'truncate-lines' : ''}`}>
           {subTitleBottom}
         </div>
       </div>
