@@ -111,6 +111,11 @@ html body {
     position: absolute;
     z-index: 11;
   }
+
+  .pv-divider {
+    border-style: dotted;
+    margin: 1rem 0;
+  }
 }
 
 [theme=light] {
@@ -174,7 +179,6 @@ html body {
       }
     }
   }
-
 }
 
 [theme=dark] {

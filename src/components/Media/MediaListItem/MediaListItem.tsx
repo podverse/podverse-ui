@@ -110,35 +110,88 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   ]
 
   return (
-    <div className={`media-list__container ${isActive ? 'is-active' : ''} ${isSlim ? 'is-slim' : ''}`}>
-      <div className='media-list__left'>
-        <Link
-          {...(anchorHref ? { href: anchorHref } : {})}
-          {...(anchorAs ? { as: anchorAs } : {})}>
-          <a
-            className={`media-list__item ${noWrap ? 'no-wrap' : ''}`}
-            {...(dataPlaylist ? { 'data-id': dataPlaylist.id } : {})}
-            onClick={handleLinkClick}>
-            {
-              (itemType === 'clip' && dataClip) &&
-                <MediaListItemA
-                  imageUrl={dataClip.podcastImageUrl}
-                  subTitleMiddle={dataClip.episodeTitle}
-                  subTitleMiddleSide={readableClipTime(dataClip.startTime, dataClip.endTime)}
-                  subTitleTop={dataClip.podcastTitle}
-                  subTitleTopSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
-                  title={dataClip.title} />
-            }
-            {
-              (itemType === 'episode-clip' && dataClip) &&
-                <MediaListItemA
-                  showImage={false}
-                  subTitleTop={dataClip.startTime}
-                  subTitleTopSide='duration'
-                  title={dataClip.title} />
-            }
-            {
-              (itemType === 'now-playing-item' && (dataNowPlayingItem && dataNowPlayingItem.clipStartTime)) &&
+    <React.Fragment>
+      <div className={`media-list__container ${isActive ? 'is-active' : ''} ${isSlim ? 'is-slim' : ''}`}>
+        <div className='media-list__left'>
+          <Link
+            {...(anchorHref ? { href: anchorHref } : {})}
+            {...(anchorAs ? { as: anchorAs } : {})}>
+            <a
+              className={`media-list__item ${noWrap ? 'no-wrap' : ''}`}
+              {...(dataPlaylist ? { 'data-id': dataPlaylist.id } : {})}
+              onClick={handleLinkClick}>
+              {
+                (itemType === 'clip' && dataClip) &&
+                  <MediaListItemA
+                    imageUrl={dataClip.podcastImageUrl}
+                    subTitleMiddle={dataClip.episodeTitle}
+                    subTitleMiddleSide={readableClipTime(dataClip.startTime, dataClip.endTime)}
+                    subTitleTop={dataClip.podcastTitle}
+                    subTitleTopSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
+                    title={dataClip.title} />
+              }
+              {
+                (itemType === 'episode-clip' && dataClip) &&
+                  <MediaListItemA
+                    showImage={false}
+                    subTitleTop={dataClip.startTime}
+                    subTitleTopSide='duration'
+                    title={dataClip.title} />
+              }
+              {
+                (itemType === 'now-playing-item' && (dataNowPlayingItem && dataNowPlayingItem.clipStartTime)) &&
+                  <MediaListItemA
+                    imageUrl={dataNowPlayingItem.podcastImageUrl}
+                    subTitleMiddle={dataNowPlayingItem.episodeTitle}
+                    subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
+                    subTitleTop={dataNowPlayingItem.podcastTitle}
+                    subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                    title={dataNowPlayingItem.clipTitle} />
+              }
+              {
+                (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId)) &&
+                  <MediaListItemA
+                    imageUrl={dataNowPlayingItem.podcastImageUrl}
+                    subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                    subTitleTop={dataNowPlayingItem.podcastTitle}
+                    title={dataNowPlayingItem.episodeTitle} />
+              }
+              {
+                (itemType === 'now-playing-item-clip-from-episode' && dataNowPlayingItem) &&
+                  <MediaListItemA
+                    subTitleBottom={secondsToReadableDuration(
+                      calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
+                    )}
+                    subTitleBottomSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
+                    title={dataNowPlayingItem.clipTitle} />
+              }
+              {
+                (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
+                  <MediaListItemA
+                    subTitleBottom={secondsToReadableDuration(
+                      calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
+                    )}
+                    subTitleBottomSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
+                    subTitleTop={dataNowPlayingItem.episodeTitle}
+                    subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                    title={dataNowPlayingItem.clipTitle} />
+              }
+              {
+                (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
+                  <MediaListItemA
+                    subTitleTop={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                    title={dataNowPlayingItem.episodeTitle} />
+              }
+              {
+                (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem) &&
+                  <MediaListItemA
+                    imageUrl={dataNowPlayingItem.podcastImageUrl}
+                    subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                    subTitleTop={dataNowPlayingItem.podcastTitle}
+                    title={dataNowPlayingItem.episodeTitle} />
+              }
+              {
+                (itemType === 'now-playing-item-queue-clip' && dataNowPlayingItem) &&
                 <MediaListItemA
                   imageUrl={dataNowPlayingItem.podcastImageUrl}
                   subTitleMiddle={dataNowPlayingItem.episodeTitle}
@@ -146,131 +199,81 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                   subTitleTop={dataNowPlayingItem.podcastTitle}
                   subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   title={dataNowPlayingItem.clipTitle} />
-            }
-            {
-              (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId)) &&
+              }
+              {
+                (itemType === 'now-playing-item-queue-episode' && dataNowPlayingItem) &&
                 <MediaListItemA
                   imageUrl={dataNowPlayingItem.podcastImageUrl}
                   subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   subTitleTop={dataNowPlayingItem.podcastTitle}
                   title={dataNowPlayingItem.episodeTitle} />
-            }
-            {
-              (itemType === 'now-playing-item-clip-from-episode' && dataNowPlayingItem) &&
-                <MediaListItemA
-                  subTitleBottom={secondsToReadableDuration(
-                    calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
-                  )}
-                  subTitleBottomSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
-                  title={dataNowPlayingItem.clipTitle} />
-            }
-            {
-              (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
-                <MediaListItemA
-                  subTitleBottom={secondsToReadableDuration(
-                    calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
-                  )}
-                  subTitleBottomSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
-                  subTitleTop={dataNowPlayingItem.episodeTitle}
-                  subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                  title={dataNowPlayingItem.clipTitle} />
-            }
-            {
-              (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
-                <MediaListItemA
-                  subTitleTop={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                  title={dataNowPlayingItem.episodeTitle} />
-            }
-            {
-              (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem) &&
-                <MediaListItemA
-                  imageUrl={dataNowPlayingItem.podcastImageUrl}
-                  subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                  subTitleTop={dataNowPlayingItem.podcastTitle}
-                  title={dataNowPlayingItem.episodeTitle} />
-            }
-            {
-              (itemType === 'now-playing-item-queue-clip' && dataNowPlayingItem) &&
-              <MediaListItemA
-                imageUrl={dataNowPlayingItem.podcastImageUrl}
-                subTitleMiddle={dataNowPlayingItem.episodeTitle}
-                subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
-                subTitleTop={dataNowPlayingItem.podcastTitle}
-                subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                title={dataNowPlayingItem.clipTitle} />
-            }
-            {
-              (itemType === 'now-playing-item-queue-episode' && dataNowPlayingItem) &&
-              <MediaListItemA
-                imageUrl={dataNowPlayingItem.podcastImageUrl}
-                subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                subTitleTop={dataNowPlayingItem.podcastTitle}
-                title={dataNowPlayingItem.episodeTitle} />
-            }
-            {
-              (itemType === 'playlist' && dataPlaylist) &&
+              }
+              {
+                (itemType === 'playlist' && dataPlaylist) &&
+                  <MediaListItemD
+                    itemId={dataPlaylist.id}
+                    loadingItemId={loadingItemId}
+                    subTitleSide={showOwner ? readableDate(dataPlaylist.updatedAt) : ''}
+                    subTitle={showOwner && dataPlaylist.owner ? `By: ${dataPlaylist.owner.name}` : ''}
+                    title={dataPlaylist.title}
+                    titleSide={`${dataPlaylist.itemCount || dataPlaylist.itemCount === 0
+                      ? `items: ${dataPlaylist.itemCount}` : ''}`} />
+              }
+              {
+                (itemType === 'podcast' && dataPodcast) &&
+                  <MediaListItemB
+                    imageUrl={dataPodcast.imageUrl}
+                    subTitle={dataPodcast.lastEpisodeTitle}
+                    subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
+                    title={dataPodcast.title} />
+              }
+              {
+                (itemType === 'podcast-clip' && dataClip) &&
+                  <MediaListItemA
+                    imageUrl={dataClip.podcastImageUrl}
+                    moreMenuItems={moreMenuItems}
+                    subTitleBottom={dataClip.startTime}
+                    subTitleBottomSide={dataClip.endTime}
+                    subTitleTop={dataClip.episodeTitle}
+                    subTitleTopSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
+                    title={dataClip.title} />
+              }
+              {
+                (itemType === 'user' && dataUser) &&
                 <MediaListItemD
-                  itemId={dataPlaylist.id}
-                  loadingItemId={loadingItemId}
-                  subTitleSide={showOwner ? readableDate(dataPlaylist.updatedAt) : ''}
-                  subTitle={showOwner && dataPlaylist.owner ? `By: ${dataPlaylist.owner.name}` : ''}
-                  title={dataPlaylist.title}
-                  titleSide={`${dataPlaylist.itemCount || dataPlaylist.itemCount === 0
-                    ? `items: ${dataPlaylist.itemCount}` : ''}`} />
-            }
-            {
-              (itemType === 'podcast' && dataPodcast) &&
-                <MediaListItemB
-                  imageUrl={dataPodcast.imageUrl}
-                  subTitle={dataPodcast.lastEpisodeTitle}
-                  subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
-                  title={dataPodcast.title} />
-            }
-            {
-              (itemType === 'podcast-clip' && dataClip) &&
-                <MediaListItemA
-                  imageUrl={dataClip.podcastImageUrl}
-                  moreMenuItems={moreMenuItems}
-                  subTitleBottom={dataClip.startTime}
-                  subTitleBottomSide={dataClip.endTime}
-                  subTitleTop={dataClip.episodeTitle}
-                  subTitleTopSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
-                  title={dataClip.title} />
-            }
-            {
-              (itemType === 'user' && dataUser) &&
-              <MediaListItemD
-                itemId={dataUser.id}
-                title={dataUser.name || 'anonymous'} />
-            }
-          </a>
-        </Link>
+                  itemId={dataUser.id}
+                  title={dataUser.name || 'anonymous'} />
+              }
+            </a>
+          </Link>
+        </div>
+        {
+          (showMoreMenu || showRemove) &&
+            <div className='media-list__right'>
+              {
+                showMoreMenu &&
+                  <MoreDropdown items={moreMenuItems} />
+              }
+              {
+                showRemove &&
+                  <Button
+                    className='media-list-right__remove'
+                    onClick={handleRemoveItem}>
+                    <FontAwesomeIcon icon='times' />
+                  </Button>
+              }
+            </div>
+        }
+        {
+          ((itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId))
+          || (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem)
+          || (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem)) &&
+            <div className='media-list__bottom'>
+              {striptags(dataNowPlayingItem.episodeDescription)}
+            </div>
+        }
       </div>
-      {
-        (showMoreMenu || showRemove) &&
-          <div className='media-list__right'>
-            {
-              showMoreMenu &&
-                <MoreDropdown items={moreMenuItems} />
-            }
-            {
-              showRemove &&
-                <Button
-                  className='media-list-right__remove'
-                  onClick={handleRemoveItem}>
-                  <FontAwesomeIcon icon='times' />
-                </Button>
-            }
-          </div>
-      }
-      {
-        ((itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId))
-        || (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem)
-        || (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem)) &&
-          <div className='media-list__bottom'>
-            {striptags(dataNowPlayingItem.episodeDescription)}
-          </div>
-      }
-    </div>
+      <hr className='pv-divider' />
+    </React.Fragment>
   )
 }
