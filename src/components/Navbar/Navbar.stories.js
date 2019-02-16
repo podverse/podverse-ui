@@ -21,7 +21,7 @@ storiesOf('Navbar', module)
     () => (
       <Navbar
         brandText='Podverse'
-        brandUrl='#'
+        brandHref='#'
         dropdownItems={dropdownItems} 
         dropdownText={dropdownText}
         navItems={navItems} />

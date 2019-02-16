@@ -17,9 +17,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { clone } from 'lib/utility'
 
 type Props = {
+  brandAs?: string
   brandHideText?: boolean
   brandText?: string
-  brandUrl?: string
+  brandHref?: string
   dropdownItems?: any
   dropdownMenuIsOpen?: boolean
   dropdownText?: any
@@ -35,9 +36,9 @@ type State = {}
 export class Navbar extends React.Component<Props, State> {
 
   render () {
-    const { brandHideText, brandText, brandUrl, dropdownItems, dropdownMenuIsOpen,
-      dropdownText, handleLinkClick, handleToggleDropdownMenu, handleToggleMobileMenu,
-      mobileMenuIsOpen, navItems } = this.props
+    const { brandAs, brandHideText, brandText, brandHref, dropdownItems,
+      dropdownMenuIsOpen, dropdownText, handleLinkClick, handleToggleDropdownMenu,
+      handleToggleMobileMenu, mobileMenuIsOpen, navItems } = this.props
 
     const navItemsEls = navItems.map(x =>
       <Link
@@ -82,8 +83,8 @@ export class Navbar extends React.Component<Props, State> {
       <div className='navbar__bg'>
         <BSNavbar color='light' light expand='sm'>
           <Link
-            {...(brandUrl ? { as: brandUrl } : {})}
-            {...(brandUrl ? { href: brandUrl + '?refresh=true' } : {})}>
+            {...(brandAs ? { as: brandAs } : {})}
+            {...(brandHref ? { href: brandHref } : {})}>
             <NavbarBrand onClick={handleLinkClick}>{
               brandHideText ? null : brandText
             }</NavbarBrand>
