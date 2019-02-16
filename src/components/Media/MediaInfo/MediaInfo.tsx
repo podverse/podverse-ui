@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Button } from 'reactstrap'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { calcDuration, readableClipTime, secondsToReadableDuration } from 'lib/utility'
+import { readableClipTime } from 'lib/utility'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 import { getLinkUserAs, getLinkUserHref } from 'lib/constants'
 const sanitizeHtml = require('sanitize-html')
@@ -57,7 +57,6 @@ export class MediaInfo extends React.Component<Props, State> {
 
     let title
     let time
-    let duration
     let createdById
     let createdByName
     let createdByIsPublic
@@ -65,17 +64,14 @@ export class MediaInfo extends React.Component<Props, State> {
     let currentItem: any = {}
 
     if (episode) {
-      title = episode.title
-      time = 'Full Episode'
-      duration = ''
-      description = episode.description
+      // title = episode.title
+      // time = 'Full Episode'
+      description = `<p><i>${episode.title}</i></p>`
+      description += episode.description
       currentItem = convertToNowPlayingItem(episode)
     } else if (mediaRef) {
       title = mediaRef.title || 'Untitled clip'
       time = readableClipTime(mediaRef.startTime, mediaRef.endTime)
-      duration = secondsToReadableDuration(
-        calcDuration(mediaRef.startTime, mediaRef.endTime)
-      )
       createdById = mediaRef.owner ? mediaRef.owner.id : ''
       createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false
       createdByName = mediaRef.owner ? mediaRef.owner.name : 'anonymous'
@@ -84,9 +80,6 @@ export class MediaInfo extends React.Component<Props, State> {
     } else if (nowPlayingItem) {
       title = nowPlayingItem.clipTitle
       time = readableClipTime(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
-      duration = secondsToReadableDuration(
-        calcDuration(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
-      )
       createdById = nowPlayingItem.ownerId
       createdByIsPublic = nowPlayingItem.ownerIsPublic
       createdByName = mediaRef.owner.name || 'anonymous'
@@ -95,7 +88,6 @@ export class MediaInfo extends React.Component<Props, State> {
     } else if (podcast) {
       title = ''
       time = ''
-      duration = ''
       createdById = ''
       createdByIsPublic = ''
       createdByName = ''
@@ -110,12 +102,6 @@ export class MediaInfo extends React.Component<Props, State> {
             title &&
             <div className='media-info__title'>
               {title}
-            </div>
-          }
-          {
-            duration &&
-            <div className='media-info__duration'>
-              {duration}
             </div>
           }
           {
