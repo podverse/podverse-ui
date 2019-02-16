@@ -7,7 +7,6 @@ import { sampleEpisode, sampleMediaRef1, sampleNowPlayingItem1, samplePlaylist1,
 
 const itemTypes = [
   'clip', 
-  'episode', 
   'episode-clip',
   'now-playing-item',
   'playlist',

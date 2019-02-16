@@ -111,16 +111,6 @@ html body {
     position: absolute;
     z-index: 11;
   }
-
-  .truncate-lines {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    display: -webkit-box;
-    line-clamp: 4;
-    max-height: 68px;
-    overflow: hidden;
-    white-space: normal !important;
-  }
 }
 
 [theme=light] {

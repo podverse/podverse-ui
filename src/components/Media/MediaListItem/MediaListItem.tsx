@@ -5,7 +5,6 @@ import { PVButton as Button } from 'components/Button/Button'
 import { MoreDropdown } from 'components/MoreDropdown/MoreDropdown'
 import { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/MediaListItemA'
 import { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'
-import { MediaListItemC } from 'components/Media/MediaListItem/MediaListItemC/MediaListItemC'
 import { MediaListItemD } from 'components/Media/MediaListItem/MediaListItemD/MediaListItemD'
 import { readableDate, readableClipTime, secondsToReadableDuration, calcDuration } from 'lib/utility'
 const striptags = require('striptags')
@@ -50,7 +49,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     if (itemType === 'clip' || itemType === 'episode-clip' || itemType === 'podcast-clip') {
       anchorHref = `/clip?id=${dataClip.id}&scrollToTop=true`
       anchorAs = `/clip/${dataClip.id}`
-    } else if (itemType === 'episode' || itemType === 'podcast-episode') {
+    } else if (itemType === 'podcast-episode') {
       anchorHref = `/episode?id=${dataEpisode.id}&scrollToTop=true`
       anchorAs = `/episode/${dataEpisode.id}`
     } else if (itemType === 'playlist') {
@@ -131,16 +130,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                   title={dataClip.title} />
             }
             {
-              (itemType === 'episode' && dataEpisode) &&
-                <MediaListItemA
-                  imageUrl={dataEpisode.podcast.imageUrl}
-                  subTitleBottom={striptags(dataEpisode.description)}
-                  subTitleBottomShouldTruncate={true}
-                  subTitleTop={dataEpisode.podcast.title}
-                  subTitleTopSide={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
-                  title={dataEpisode.title} />
-            }
-            {
               (itemType === 'episode-clip' && dataClip) &&
                 <MediaListItemA
                   showImage={false}
@@ -162,7 +151,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId)) &&
                 <MediaListItemA
                   imageUrl={dataNowPlayingItem.podcastImageUrl}
-                  subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
+                  subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   subTitleTop={dataNowPlayingItem.podcastTitle}
                   title={dataNowPlayingItem.episodeTitle} />
             }
@@ -189,8 +178,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             {
               (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
                 <MediaListItemA
-                  subTitleMiddle={striptags(dataNowPlayingItem.episodeDescription)}
-                  subTitleMiddleShouldTruncate={true}
                   subTitleTop={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   title={dataNowPlayingItem.episodeTitle} />
             }
@@ -198,10 +185,8 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem) &&
                 <MediaListItemA
                   imageUrl={dataNowPlayingItem.podcastImageUrl}
-                  subTitleBottom={striptags(dataNowPlayingItem.episodeDescription)}
-                  subTitleBottomShouldTruncate={true}
+                  subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   subTitleTop={dataNowPlayingItem.podcastTitle}
-                  subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                   title={dataNowPlayingItem.episodeTitle} />
             }
             {
@@ -218,8 +203,8 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               (itemType === 'now-playing-item-queue-episode' && dataNowPlayingItem) &&
               <MediaListItemA
                 imageUrl={dataNowPlayingItem.podcastImageUrl}
+                subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                 subTitleTop={dataNowPlayingItem.podcastTitle}
-                subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                 title={dataNowPlayingItem.episodeTitle} />
             }
             {
@@ -253,13 +238,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                   title={dataClip.title} />
             }
             {
-              (itemType === 'podcast-episode' && dataEpisode) &&
-                <MediaListItemC
-                  date={dataEpisode.pubDate ? readableDate(dataEpisode.pubDate) : ''}
-                  description={striptags(dataEpisode.description)}
-                  title={dataClip.episodeTitle} />
-            }
-            {
               (itemType === 'user' && dataUser) &&
               <MediaListItemD
                 itemId={dataUser.id}
@@ -283,6 +261,14 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                   <FontAwesomeIcon icon='times' />
                 </Button>
             }
+          </div>
+      }
+      {
+        ((itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId))
+        || (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem)
+        || (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem)) &&
+          <div className='media-list__bottom'>
+            {striptags(dataNowPlayingItem.episodeDescription)}
           </div>
       }
     </div>

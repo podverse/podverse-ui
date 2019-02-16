@@ -29,27 +29,48 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
           <img className='media-list-item-a__image' src={imageUrl} />
       }
       <div className='text-wrapper'>
-        <div className='media-list-item-a__title'>
-          {title}
-        </div>
-        <div className='media-list-item-a__sub-top-side'>
-          {subTitleTopSide}
-        </div>
-        <div className={`media-list-item-a__sub-top ${subTitleTopShouldTruncate ? 'truncate-lines' : ''}`}>
-          {subTitleTop}
-        </div>
-        <div className='media-list-item-a__sub-middle-side'>
-          {subTitleMiddleSide}
-        </div>
-        <div className={`media-list-item-a__sub-middle ${subTitleMiddleShouldTruncate ? 'truncate-lines' : ''}`}>
-          {subTitleMiddle}
-        </div>
-        <div className='media-list-item-a__sub-bottom-side'>
-          {subTitleBottomSide}
-        </div>
-        <div className={`media-list-item-a__sub-bottom ${subTitleBottomShouldTruncate ? 'truncate-lines' : ''}`}>
-          {subTitleBottom}
-        </div>
+        {
+          title &&
+          <div className='media-list-item-a__title'>
+            {title}
+          </div>
+        }
+        {
+          subTitleTopSide &&
+            <div className='media-list-item-a__sub-top-side'>
+              {subTitleTopSide}
+            </div>
+        }
+        {
+          subTitleTop &&
+            <div className={`media-list-item-a__sub-top ${subTitleTopShouldTruncate ? 'truncate-lines' : ''}`}>
+              {subTitleTop}
+            </div>
+        }
+        {
+          subTitleMiddleSide &&
+            <div className='media-list-item-a__sub-middle-side'>
+              {subTitleMiddleSide}
+            </div>
+        }
+        {
+          subTitleMiddle &&
+            <div className={`media-list-item-a__sub-middle ${subTitleMiddleShouldTruncate ? 'truncate-lines' : ''}`}>
+              {subTitleMiddle}
+            </div>
+        }
+        {
+          subTitleBottomSide &&
+            <div className='media-list-item-a__sub-bottom-side'>
+              {subTitleBottomSide}
+            </div>
+        }
+        {
+          subTitleBottom &&
+            <div className={`media-list-item-a__sub-bottom ${subTitleBottomShouldTruncate ? 'truncate-lines' : ''}`}>
+              {subTitleBottom}
+            </div>
+        }
       </div>
     </div>
   )
