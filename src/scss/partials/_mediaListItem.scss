@@ -65,7 +65,7 @@
   display: block;
 }
 
-.media-list-item-a__image, .media-list-item-b__image, .media-list-item-c__image {
+.media-list-item-a__image, .media-list-item-c__image {
   height: 4em;  
   width: 4em;
 }
@@ -136,7 +136,9 @@
 .media-list-item__b {
   .media-list-item-b__image {
     float: left;
+    height: 3.5em;
     margin-right: 1em;
+    width: 3.5em;
   }
 
   [class^=media-list-item-b__sub] {
@@ -154,7 +156,7 @@
   }
 
   .media-list-item-b__title {
-    margin: .5em 0;
+    margin: .375em 0 .5em 0;
   }
 }
 
