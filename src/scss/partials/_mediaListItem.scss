@@ -31,7 +31,7 @@
     align-items: center;
     display: flex;
     flex: 0 0 44px;
-    margin-left: 1.25rem;
+    margin-left: 1rem;
 
     .media-list-right__remove {
       border-radius: 44px;
@@ -50,6 +50,13 @@
 .media-list-item-a__image, .media-list-item-b__image, .media-list-item-c__image {
   height: 4em;  
   width: 4em;
+}
+
+@media(max-width: 520px) {
+  .media-list-item-a__image, .media-list-item-b__image, .media-list-item-c__image {
+    height: 3em;
+    width: 3em;
+  }
 }
 
 .media-list-item__a {

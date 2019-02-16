@@ -21,38 +21,23 @@ type Props = {
   brandText?: string
   brandUrl?: string
   dropdownItems?: any
+  dropdownMenuIsOpen?: boolean
   dropdownText?: any
   handleLinkClick: any
+  handleToggleDropdownMenu: any
+  handleToggleMobileMenu: any
+  mobileMenuIsOpen?: boolean
   navItems?: any
 }
 
-type State = {
-  dropdownIsOpen: boolean
-  navBarIsOpen: boolean
-}
+type State = {}
 
 export class Navbar extends React.Component<Props, State> {
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      dropdownIsOpen: false,
-      navBarIsOpen: false
-    }
-  }
-
-  toggleDropdown = () => {
-    this.setState({ dropdownIsOpen: !this.state.dropdownIsOpen })
-  }
-
-  toggleNavBar = () => {
-    this.setState({ navBarIsOpen: !this.state.navBarIsOpen })
-  }
-
   render () {
-    const { brandHideText, brandText, brandUrl, dropdownItems, dropdownText,
-      handleLinkClick, navItems } = this.props
+    const { brandHideText, brandText, brandUrl, dropdownItems, dropdownMenuIsOpen,
+      dropdownText, handleLinkClick, handleToggleDropdownMenu, handleToggleMobileMenu,
+      mobileMenuIsOpen, navItems } = this.props
 
     const navItemsEls = navItems.map(x =>
       <Link
@@ -103,16 +88,16 @@ export class Navbar extends React.Component<Props, State> {
               brandHideText ? null : brandText
             }</NavbarBrand>
           </Link>
-          <NavbarToggler onClick={this.toggleNavBar} />
-          <Collapse isOpen={this.state.navBarIsOpen} navbar>
+          <NavbarToggler onClick={handleToggleMobileMenu} />
+          <Collapse isOpen={mobileMenuIsOpen} navbar>
             <Nav className='ml-auto' navbar>
               {navItemsEls}
               {mobileNavItemsEls}
               <Dropdown
                 inNavbar
-                isOpen={this.state.dropdownIsOpen}
+                isOpen={dropdownMenuIsOpen}
                 nav
-                toggle={this.toggleDropdown}>
+                toggle={handleToggleDropdownMenu}>
                 <DropdownToggle nav caret>
                   {dropdownText}
                 </DropdownToggle>

@@ -81,6 +81,10 @@
         white-space: nowrap;
       }
     }
+
+    @media(max-width: 400px) {
+      font-size: 14px;
+    }
   
     .mp-header__share {
       margin-right: -0.625rem;
