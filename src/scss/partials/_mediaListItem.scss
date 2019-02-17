@@ -188,7 +188,6 @@
 }
 
 .media-list-item__d {
-  margin: -0.25em 0;
   padding: 0.75em 0;
 
   .media-list-item-d__title-side {
@@ -196,6 +195,7 @@
     font-size: $text-sm-em;
     line-height: 20px;
     margin-left: 1em;
+    margin-right: 0.125rem;
     text-align: right;
   }
 

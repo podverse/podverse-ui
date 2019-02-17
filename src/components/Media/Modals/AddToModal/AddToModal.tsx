@@ -110,6 +110,8 @@ const AddToModal: React.StatelessComponent<Props> = props => {
           playingItem &&
             <MediaListItem
               dataNowPlayingItem={playingItem}
+              hideDescription={true}
+              hideDivider={true}
               itemType='now-playing-item' />
         }
         {
@@ -120,6 +122,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
               </h6>
               <a
                 className='mp-add-to-modal__play-next'
+                tabIndex={0}
                 onClick={handleAddToQueueNext}>
                 {
                   isAddingToPlayNext &&
@@ -142,7 +145,8 @@ const AddToModal: React.StatelessComponent<Props> = props => {
               </a>
               <a
                 className='mp-add-to-modal__play-last'
-                onClick={handleAddToQueueLast}>
+                onClick={handleAddToQueueLast}
+                tabIndex={0}>
                 {
                   isAddingToPlayLast &&
                   <React.Fragment>

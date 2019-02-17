@@ -180,18 +180,23 @@ export class QueueModal extends React.Component<Props, State> {
       priorityItemNodes = priorityItems.map((x, index) => (
         <Draggable draggableId={`priority-item-${index}`} index={index}>
           {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}>
-              <MediaListItem
-                dataNowPlayingItem={x}
-                handleLinkClick={handleLinkClick}
-                handleRemoveItem={() => handleRemoveItem(x.clipId, x.episodeId, true)}
-                hasLink
-                itemType='now-playing-item'
-                showRemove={isEditing} />
-            </div>
+            <React.Fragment>
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}>
+                <MediaListItem
+                  dataNowPlayingItem={x}
+                  handleLinkClick={handleLinkClick}
+                  handleRemoveItem={() => handleRemoveItem(x.clipId, x.episodeId, true)}
+                  hasLink
+                  hideDescription={true}
+                  hideDivider={true}
+                  itemType='now-playing-item'
+                  showRemove={isEditing} />
+              </div>
+              <hr className='pv-divider' />
+            </React.Fragment>
           )}
         </Draggable>
       ))
@@ -199,18 +204,23 @@ export class QueueModal extends React.Component<Props, State> {
       secondaryItemNodes = secondaryItems.map((x, index) => (
         <Draggable draggableId={`secondary-item-${index}`} index={index}>
           {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}>
-              <MediaListItem
-                dataNowPlayingItem={x}
-                handleLinkClick={handleLinkClick}
-                handleRemoveItem={() => handleRemoveItem(x.clipId, x.episodeId, false)}
-                hasLink
-                itemType='now-playing-item'
-                showRemove={isEditing} />
-            </div>
+            <React.Fragment>
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}>
+                <MediaListItem
+                  dataNowPlayingItem={x}
+                  handleLinkClick={handleLinkClick}
+                  handleRemoveItem={() => handleRemoveItem(x.clipId, x.episodeId, false)}
+                  hasLink
+                  hideDescription={true}
+                  hideDivider={true}
+                  itemType='now-playing-item'
+                  showRemove={isEditing} />
+              </div>
+              <hr className='pv-divider' />
+            </React.Fragment>
           )}
         </Draggable>
       ))
@@ -219,6 +229,7 @@ export class QueueModal extends React.Component<Props, State> {
         <MediaListItem
           dataNowPlayingItem={x}
           hasLink
+          hideDescription={true}
           itemType='now-playing-item' />
       ))
       historyItemNodes.reverse()
@@ -254,6 +265,8 @@ export class QueueModal extends React.Component<Props, State> {
                     <MediaListItem
                       dataNowPlayingItem={nowPlayingItem}
                       hasLink
+                      hideDescription={true}
+                      hideDivider={true}
                       itemType={itemType} />
                   </React.Fragment>
                 }

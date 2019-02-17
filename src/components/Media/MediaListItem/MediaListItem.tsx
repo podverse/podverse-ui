@@ -24,6 +24,8 @@ type Props = {
   handleRemoveItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasLink?: boolean
+  hideDescription?: boolean
+  hideDivider?: boolean
   isActive?: boolean
   isSlim?: boolean
   itemType?: string
@@ -39,8 +41,9 @@ type Props = {
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
-    handleRemoveItem, handleToggleAddToPlaylist, hasLink, isActive, isSlim, itemType,
-    loadingItemId, noWrap, showMoreMenu, showOwner, showRemove } = props
+    handleRemoveItem, handleToggleAddToPlaylist, hasLink, hideDescription, hideDivider,
+    isActive, isSlim, itemType, loadingItemId, noWrap, showMoreMenu, showOwner,
+    showRemove } = props
 
   let anchorHref = ''
   let anchorAs = ''
@@ -119,7 +122,8 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             <a
               className={`media-list__item ${noWrap ? 'no-wrap' : ''}`}
               {...(dataPlaylist ? { 'data-id': dataPlaylist.id } : {})}
-              onClick={handleLinkClick}>
+              onClick={handleLinkClick}
+              tabIndex={0}>
               {
                 (itemType === 'clip' && dataClip) &&
                   <MediaListItemA
@@ -265,15 +269,20 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             </div>
         }
         {
-          ((itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId))
-          || (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem)
-          || (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem)) &&
+          (
+            !hideDescription
+            && ((itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime && dataNowPlayingItem.episodeId))
+            || (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem)
+            || (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem))) &&
             <div className='media-list__bottom'>
               {striptags(dataNowPlayingItem.episodeDescription)}
             </div>
         }
       </div>
-      <hr className='pv-divider' />
+      {
+        !hideDivider &&
+          <hr className='pv-divider' />
+      }
     </React.Fragment>
   )
 }

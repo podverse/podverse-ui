@@ -9,11 +9,19 @@
     margin-bottom: 0;
   }
 
+  .media-list__container:not(:first-of-type) {
+    margin: 0.25rem 0;
+  }
+
+  hr.pv-divider {
+    margin: 0.25rem 0;
+  }
+
   .scrollable-area {
     overflow: auto;
-    height: calc(100% - 2.25em);
-    margin-right: -1em;
-    padding-right: 1em;
+    height: calc(100% - 2.25rem);
+    margin: 0 -1rem;
+    padding: 0 1rem;
   }
 
   .mp-add-to-modal__play-next {
@@ -25,15 +33,15 @@
     display: inline-block;
     height: 51px;
     line-height: 49px;
-    margin: 0.5em 0;
-    padding: 0 0.25em;
+    margin: -0.75rem 0;
+    padding: 0 0.25rem;
     text-align: center;
     text-decoration: none;
     width: 50%;
   }
 
   .mp-add-to-modal__create-playlist {
-    margin-top: 1.125rem;
+    margin: 1rem 0;
 
     .mp-add-to-modal-create-playlist__create {
       display: block;
@@ -107,6 +115,11 @@
 }
 
 .mp-queue-modal {
+  
+  h6:first-of-type {
+    margin-top: 0;
+  }
+
   .mp-queue-modal__header {
     display: flex;
 
@@ -135,9 +148,13 @@
   }
   .scrollable-area {
     overflow: auto;
-    height: calc(100% - 3.125em);
-    margin-right: -1em;
-    padding-right: 1em;
+    height: calc(100% - 3.125rem);
+    margin-right: -1rem;
+    padding-right: 1rem;
+
+    [data-react-beautiful-dnd-droppable] hr:last-of-type {
+      display: none;
+    }
   }
 }
 
