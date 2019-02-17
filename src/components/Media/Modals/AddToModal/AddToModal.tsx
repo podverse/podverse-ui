@@ -105,7 +105,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       style={customStyles}>
       <h4><FontAwesomeIcon icon='plus-circle' /> &nbsp; Add To</h4>
       <CloseButton onClick={handleHideModal} />
-      <div className='scrollable-area'>
+      <div className='scrollable-area reduced-margin'>
         {
           playingItem &&
             <MediaListItem

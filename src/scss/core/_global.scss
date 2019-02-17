@@ -120,6 +120,15 @@ html body {
   .ReactModal__Overlay {
     z-index: 99;
   }
+
+  .reduced-margin {
+    .media-list__container {
+      margin: 0.25rem 0;
+    }
+    hr.pv-divider {
+      margin: 0.25rem 0;
+    }
+  }
 }
 
 [theme=light] {
