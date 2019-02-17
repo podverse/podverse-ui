@@ -29,7 +29,7 @@ type State = {
 const customStyles = {
   content: {
     bottom: 'unset',
-    height: 'calc(100% - 72px)',
+    height: '100%',
     left: '50%',
     maxWidth: '480px',
     right: 'unset',

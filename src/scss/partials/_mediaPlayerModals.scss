@@ -155,6 +155,10 @@
     [data-react-beautiful-dnd-droppable] hr:last-of-type {
       display: none;
     }
+
+    [data-react-beautiful-dnd-draggable] {
+      left: 20px !important;
+    }
   }
 }
 
