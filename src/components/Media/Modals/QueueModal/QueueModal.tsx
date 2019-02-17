@@ -45,13 +45,9 @@ export class QueueModal extends React.Component<Props, State> {
     super(props)
 
     this.state = {}
-
-    this.hideModal = this.hideModal.bind(this)
-    this.toggleDropdownMenu = this.toggleDropdownMenu.bind(this)
-    this.toggleEditMode = this.toggleEditMode.bind(this)
   }
 
-  onDragEnd = (data) => {
+  onDragEnd = data => {
     let { handleDragEnd, priorityItems, secondaryItems } = this.props
     const { destination, source } = data
 
@@ -76,18 +72,18 @@ export class QueueModal extends React.Component<Props, State> {
     handleDragEnd(priorityItems, secondaryItems)
   }
 
-  toggleDropdownMenu () {
+  toggleDropdownMenu = () => {
     this.setState({
       dropdownMenuOpen: !this.state.dropdownMenuOpen
     })
   }
 
-  toggleEditMode () {
+  toggleEditMode = () => {
     const { isEditing } = this.state
     this.setState({ isEditing: !isEditing })
   }
 
-  hideModal (event) {
+  hideModal = event => {
     const { handleHideModal } = this.props
 
     if (handleHideModal) {

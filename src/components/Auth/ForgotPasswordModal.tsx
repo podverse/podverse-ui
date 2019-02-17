@@ -40,13 +40,9 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
       email: '',
       errorEmail: undefined
     }
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleEmailInputBlur = this.handleEmailInputBlur.bind(this)
-    this.handleEmailInputChange = this.handleEmailInputChange.bind(this)
   }
 
-  handleEmailInputBlur (event) {
+  handleEmailInputBlur = (event) => {
     const { value: email } = event.target
     const newState: any = {}
     newState.email = email
@@ -58,7 +54,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
-  handleEmailInputChange (event) {
+  handleEmailInputChange = (event) => {
     const { value: email } = event.target
     const newState: any = {}
     newState.email = email
@@ -70,7 +66,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
-  handleSubmit () {
+  handleSubmit = () => {
     const { email } = this.state
     this.props.handleSubmit(email)
   }

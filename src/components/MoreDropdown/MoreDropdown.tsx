@@ -25,11 +25,9 @@ export class MoreDropdown extends React.Component<Props, State> {
     this.state = {
       isOpen: false
     }
-
-    this.toggleMenu = this.toggleMenu.bind(this)
   }
 
-  toggleMenu () {
+  toggleMenu = () => {
     this.setState({ isOpen: !this.state.isOpen })
   }
 

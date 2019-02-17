@@ -41,33 +41,28 @@ export class LoginModal extends React.Component<Props, State> {
       email: '',
       password: ''
     }
-
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleLogin = this.handleLogin.bind(this)
-    this.handleOnKeyPress = this.handleOnKeyPress.bind(this)
-    this.hideModal = this.hideModal.bind(this)
   }
 
-  handleInputChange (event) {
+  handleInputChange = event => {
     const { stateKey } = event.target.dataset
     const newState = {}
     newState[stateKey] = event.target.value
     this.setState(newState)
   }
 
-  handleLogin () {
+  handleLogin = () => {
     const { email, password } = this.state
     this.props.handleLogin(email, password)
   }
 
-  handleOnKeyPress (event) {
+  handleOnKeyPress = event => {
     if (event.key === 'Enter') {
       event.preventDefault()
       this.handleLogin()
     }
   }
 
-  hideModal (event) {
+  hideModal = event => {
     const { hideModal } = this.props
     this.setState({
       email: '',

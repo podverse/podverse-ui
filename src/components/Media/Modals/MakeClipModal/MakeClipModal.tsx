@@ -72,23 +72,18 @@ class MakeClipModal extends React.Component<Props, State> {
     this.inputStartTime = React.createRef()
     this.inputEndTime = React.createRef()
     this.inputTitle = React.createRef()
-    this.selectIsPublic = this.selectIsPublic.bind(this)
-    this.toggleIsPublic = this.toggleIsPublic.bind(this)
-    this.handleSave = this.handleSave.bind(this)
-    this.endTimePreview = this.endTimePreview.bind(this)
-    this.startTimePreview = this.startTimePreview.bind(this)
   }
 
-  selectIsPublic (e) {
+  selectIsPublic = e => {
     const { value } = e.currentTarget.dataset
     this.setState({ isPublic: value === 'public' })
   }
 
-  toggleIsPublic () {
+  toggleIsPublic = () => {
     this.setState({ isPublicIsOpen: !this.state.isPublicIsOpen })
   }
 
-  async handleSave (event) {
+  handleSave = async event => {
     event.preventDefault()
     const { isEditing } = this.props
     const { isPublic } = this.state
@@ -113,14 +108,14 @@ class MakeClipModal extends React.Component<Props, State> {
     }
   }
 
-  clearErrors () {
+  clearErrors = () => {
     return this.setState({
       errorEndTime: undefined,
       errorStartTime: undefined
     })
   }
 
-  endTimePreview () {
+  endTimePreview = () => {
     const { handleEndTimePreview, player } = this.props
     const endTime = convertHHMMSSToSeconds(this.inputEndTime.current.value)
 
@@ -130,7 +125,7 @@ class MakeClipModal extends React.Component<Props, State> {
     }
   }
 
-  startTimePreview () {
+  startTimePreview = () => {
     const { handleStartTimePreview, player } = this.props
     const startTime = convertHHMMSSToSeconds(this.inputStartTime.current.value)
 

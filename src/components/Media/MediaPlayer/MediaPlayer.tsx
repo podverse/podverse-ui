@@ -131,8 +131,6 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     this.durationNode = React.createRef()
     this.progressBarWidth = React.createRef()
-
-    this.timeJumpForward = this.timeJumpForward.bind(this)
   }
 
   componentDidMount () {

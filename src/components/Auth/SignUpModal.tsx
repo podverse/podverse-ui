@@ -50,18 +50,9 @@ export class SignUpModal extends React.Component<Props, State> {
       password: '',
       passwordConfirm: ''
     }
-
-    this.handleSignUp = this.handleSignUp.bind(this)
-    this.handleEmailInputBlur = this.handleEmailInputBlur.bind(this)
-    this.handleEmailInputChange = this.handleEmailInputChange.bind(this)
-    this.handlePasswordInputBlur = this.handlePasswordInputBlur.bind(this)
-    this.handlePasswordInputChange = this.handlePasswordInputChange.bind(this)
-    this.handlePasswordConfirmInputBlur = this.handlePasswordConfirmInputBlur.bind(this)
-    this.handlePasswordConfirmInputChange = this.handlePasswordConfirmInputChange.bind(this)
-    this.hasEmailAndConfirmedValidPassword = this.hasEmailAndConfirmedValidPassword.bind(this)
   }
 
-  handleEmailInputBlur (event) {
+  handleEmailInputBlur = event => {
     const { value: email } = event.target
     const newState: any = {}
     newState.email = email
@@ -73,7 +64,7 @@ export class SignUpModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
-  handleEmailInputChange (event) {
+  handleEmailInputChange = event => {
     const { value: email } = event.target
     const newState: any = {}
     newState.email = email
@@ -85,7 +76,7 @@ export class SignUpModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
-  handlePasswordInputBlur (event) {
+  handlePasswordInputBlur = event => {
     const { value: password } = event.target
     const newState: any = {}
 
@@ -98,7 +89,7 @@ export class SignUpModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
-  handlePasswordInputChange (event) {
+  handlePasswordInputChange = event => {
     const { value: password } = event.target
     const newState: any = {}
     newState.password = password
@@ -110,7 +101,7 @@ export class SignUpModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
-  handlePasswordConfirmInputBlur (event) {
+  handlePasswordConfirmInputBlur = event => {
     const { errorPassword, password } = this.state
     const { value: passwordConfirm } = event.target
     const newState: any = {}
@@ -122,7 +113,7 @@ export class SignUpModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
-  handlePasswordConfirmInputChange (event) {
+  handlePasswordConfirmInputChange = event => {
     const { errorPassword, password } = this.state
     const { value: passwordConfirm } = event.target
     const newState: any = {}
@@ -135,12 +126,12 @@ export class SignUpModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
-  handleSignUp () {
+  handleSignUp = () => {
     const { email, passwordConfirm } = this.state
     this.props.handleSignUp(email, passwordConfirm)
   }
 
-  hasEmailAndConfirmedValidPassword () {
+  hasEmailAndConfirmedValidPassword = () => {
     const { email, password, passwordConfirm } = this.state
 
     return validateEmail(email)

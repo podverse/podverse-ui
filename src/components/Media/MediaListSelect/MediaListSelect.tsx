@@ -25,11 +25,9 @@ export class MediaListSelect extends React.Component<Props, State> {
     this.state = {
       dropdownOpen: false
     }
-
-    this.toggle = this.toggle.bind(this)
   }
 
-  toggle () {
+  toggle = () => {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }))

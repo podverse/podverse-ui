@@ -36,11 +36,9 @@ class ClipCreatedModal extends React.Component<Props, State> {
     this.state = {
       wasCopied: undefined
     }
-
-    this.copyLink = this.copyLink.bind(this)
   }
 
-  copyLink () {
+  copyLink = () => {
     const { linkHref } = this.props
     copyToClipboard(linkHref)
     this.setState({ wasCopied: true })

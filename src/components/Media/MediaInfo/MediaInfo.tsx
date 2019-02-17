@@ -74,7 +74,7 @@ export class MediaInfo extends React.Component<Props, State> {
       time = readableClipTime(mediaRef.startTime, mediaRef.endTime)
       createdById = mediaRef.owner ? mediaRef.owner.id : ''
       createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false
-      createdByName = mediaRef.owner ? mediaRef.owner.name : 'anonymous'
+      createdByName = mediaRef.owner && mediaRef.owner.name ? mediaRef.owner.name : 'anonymous'
       description = mediaRef.episode.description
       currentItem = convertToNowPlayingItem(mediaRef)
     } else if (nowPlayingItem) {
@@ -82,7 +82,7 @@ export class MediaInfo extends React.Component<Props, State> {
       time = readableClipTime(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
       createdById = nowPlayingItem.ownerId
       createdByIsPublic = nowPlayingItem.ownerIsPublic
-      createdByName = mediaRef.owner.name || 'anonymous'
+      createdByName = (mediaRef.owner && mediaRef.owner.name) || 'anonymous'
       description = nowPlayingItem.episodeDescription
       currentItem = nowPlayingItem
     } else if (podcast) {
