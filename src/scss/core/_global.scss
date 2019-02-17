@@ -55,7 +55,7 @@ html body {
   }
 
   hr {
-    margin: 1.5rem 0 1.25rem 0;
+    margin: 1.25rem 0;
   }
 
   .text-wrapper {
@@ -109,12 +109,16 @@ html body {
 
   .over-media-player {
     position: absolute;
-    z-index: 11;
+    z-index: 101;
   }
 
   .pv-divider {
     border-style: dotted;
-    margin: 1.5rem 0;
+    margin: 1.25rem 0;
+  }
+
+  .ReactModal__Overlay {
+    z-index: 99;
   }
 }
 

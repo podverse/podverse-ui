@@ -6,7 +6,7 @@ import { MoreDropdown } from 'components/MoreDropdown/MoreDropdown'
 import { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/MediaListItemA'
 import { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'
 import { MediaListItemD } from 'components/Media/MediaListItem/MediaListItemD/MediaListItemD'
-import { readableDate, readableClipTime, secondsToReadableDuration, calcDuration } from 'lib/utility'
+import { readableDate, readableClipTime } from 'lib/utility'
 const striptags = require('striptags')
 
 type Props = {
@@ -163,19 +163,13 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-clip-from-episode' && dataNowPlayingItem) &&
                   <MediaListItemA
-                    subTitleBottom={secondsToReadableDuration(
-                      calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
-                    )}
-                    subTitleBottomSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
+                    subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
                     title={dataNowPlayingItem.clipTitle} />
               }
               {
                 (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
                   <MediaListItemA
-                    subTitleBottom={secondsToReadableDuration(
-                      calcDuration(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)
-                    )}
-                    subTitleBottomSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
+                    subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
                     subTitleTop={dataNowPlayingItem.episodeTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                     title={dataNowPlayingItem.clipTitle} />
