@@ -32,6 +32,7 @@ type Props = {
   loadingItemId?: string
   noWrap?: boolean
   showMoreMenu?: boolean
+  showMove?: boolean
   showOwner?: boolean
   showRemove?: boolean
 }
@@ -42,7 +43,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
     handleRemoveItem, handleToggleAddToPlaylist, hasLink, hideDescription, hideDivider,
-    isActive, isSlim, itemType, loadingItemId, noWrap, showMoreMenu, showOwner,
+    isActive, isSlim, itemType, loadingItemId, noWrap, showMoreMenu, showMove, showOwner,
     showRemove } = props
 
   let anchorHref = ''
@@ -246,7 +247,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
           </Link>
         </div>
         {
-          (showMoreMenu || showRemove) &&
+          (showMoreMenu || showRemove || showMove) &&
             <div className='media-list__right'>
               {
                 showMoreMenu &&
@@ -258,6 +259,12 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     className='media-list-right__remove'
                     onClick={handleRemoveItem}>
                     <FontAwesomeIcon icon='times' />
+                  </Button>
+              }
+              {
+                showMove &&
+                  <Button className='media-list-right__move'>
+                    <FontAwesomeIcon icon='bars' />
                   </Button>
               }
             </div>

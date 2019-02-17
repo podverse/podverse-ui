@@ -189,6 +189,7 @@ export class QueueModal extends React.Component<Props, State> {
                   hideDescription={true}
                   hideDivider={true}
                   itemType='now-playing-item'
+                  showMove={!isEditing}
                   showRemove={isEditing} />
               </div>
               <hr className='pv-divider' />
@@ -213,6 +214,7 @@ export class QueueModal extends React.Component<Props, State> {
                   hideDescription={true}
                   hideDivider={true}
                   itemType='now-playing-item'
+                  showMove={!isEditing}
                   showRemove={isEditing} />
               </div>
               <hr className='pv-divider' />

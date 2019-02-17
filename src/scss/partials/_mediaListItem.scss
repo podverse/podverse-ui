@@ -32,7 +32,12 @@
     flex: 0 0 44px;
     margin-left: 1rem;
 
-    .media-list-right__remove {
+    .media-list-right__move {
+      cursor: pointer;
+      pointer-events: none;
+    }
+
+    .media-list-right__move, .media-list-right__remove {
       border-radius: 44px;
       border-style: solid;
       border-width: 1px;
@@ -229,7 +234,7 @@ html[theme=light] {
     }
 
     .media-list__right {
-      .media-list-right__remove {
+      .media-list-right__move, .media-list-right__remove {
         background-color: $white;
         border-color: $black;
         color: $black;
@@ -272,7 +277,7 @@ html[theme=dark] {
     }
 
     .media-list__right {
-      .media-list-right__remove {
+      .media-list-right__move, .media-list-right__remove {
         background-color: $black;
         border-color: $white;
         color: $white;
