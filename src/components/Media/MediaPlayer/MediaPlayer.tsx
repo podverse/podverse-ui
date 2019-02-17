@@ -185,6 +185,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   playerRef = player => {
     if (typeof window !== 'undefined') {
       window.player = player
+      return player
     }
   }
 
@@ -242,7 +243,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.forceUpdate()
   }
 
-  itemSkip = (evt) => {
+  itemSkip = evt => {
     if (this.props.handleItemSkip) {
       this.setState({
         isLoading: true,
@@ -253,7 +254,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
-  onDuration = (duration) => {
+  onDuration = duration => {
     const { nowPlayingItem } = this.props
     const { clipStartTime } = nowPlayingItem
 
