@@ -55,8 +55,8 @@ export class PVPagination extends React.Component<Props, State> {
     )
 
     return (
-      <React.Fragment>
-        <Pagination className='pv-pagination'>
+      <div className='pv-pagination'>
+        <Pagination>
           {
             totalPages > pageRange * 2 + 1 &&
               <PaginationItem disabled={currentPage === 1}>
@@ -89,7 +89,7 @@ export class PVPagination extends React.Component<Props, State> {
             }
           }}
           tabIndex={0}>Skip to page</a>
-      </React.Fragment>
+      </div>
     )
   }
 }
