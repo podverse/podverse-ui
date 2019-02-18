@@ -126,6 +126,13 @@ export class SignUpModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
+  handleOnKeyPress = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      this.handleSignUp()
+    }
+  }
+
   handleSignUp = () => {
     const { email, passwordConfirm } = this.state
     this.props.handleSignUp(email, passwordConfirm)
@@ -179,6 +186,7 @@ export class SignUpModal extends React.Component<Props, State> {
               name='sign-up-modal__email'
               onBlur={this.handleEmailInputBlur}
               onChange={this.handleEmailInputChange}
+              onKeyPress={this.handleOnKeyPress}
               placeholder='hello@podverse.fm'
               type='text'
               value={email} />
@@ -197,6 +205,7 @@ export class SignUpModal extends React.Component<Props, State> {
               name='sign-up-modal__password'
               onBlur={this.handlePasswordInputBlur}
               onChange={this.handlePasswordInputChange}
+              onKeyPress={this.handleOnKeyPress}
               placeholder='********'
               type='password'
               value={password} />
@@ -215,6 +224,7 @@ export class SignUpModal extends React.Component<Props, State> {
               name='sign-up-modal__password-confirm'
               onBlur={this.handlePasswordConfirmInputBlur}
               onChange={this.handlePasswordConfirmInputChange}
+              onKeyPress={this.handleOnKeyPress}
               placeholder='********'
               type='password'
               value={passwordConfirm} />
