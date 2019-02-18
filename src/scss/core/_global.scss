@@ -131,6 +131,8 @@ html body {
   }
 
   .pv-pagination {
+    text-align: center;
+
     ul.pagination {
       justify-content: center;
 
@@ -139,6 +141,13 @@ html body {
           min-width: 42px;
         }
       }
+    }
+
+    .pv-pagination__skip-to {
+      display: inline-block;
+      font-size: 14px;
+      margin-top: 1.5rem;
+      text-decoration: none;
     }
   }
 }
@@ -222,6 +231,10 @@ html body {
         }
       }
     }
+
+    .pv-pagination__skip-to {
+      color: $gray-dark;
+    }
   }
 }
 
@@ -303,6 +316,10 @@ html body {
           }
         }
       }
+    }
+
+    .pv-pagination__skip-to {
+      color: $gray-light;
     }
   }
 }

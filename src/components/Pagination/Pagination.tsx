@@ -55,25 +55,41 @@ export class PVPagination extends React.Component<Props, State> {
     )
 
     return (
-      <Pagination className='pv-pagination'>
-        {
-          totalPages > pageRange * 2 + 1 &&
-            <PaginationItem disabled={currentPage === 1}>
-              <PaginationLink onClick={() => handleQueryPage(1)}>
-                {'<<'}
-              </PaginationLink>
-            </PaginationItem>
-        }
-        {paginationItems}
-        {
-          totalPages > pageRange * 2 + 1 &&
-            <PaginationItem disabled={currentPage === totalPages}>
-              <PaginationLink onClick={() => handleQueryPage(totalPages)}>
-                {'>>'}
-              </PaginationLink>
-            </PaginationItem>
-        }
-      </Pagination>
+      <React.Fragment>
+        <Pagination className='pv-pagination'>
+          {
+            totalPages > pageRange * 2 + 1 &&
+              <PaginationItem disabled={currentPage === 1}>
+                <PaginationLink onClick={() => handleQueryPage(1)}>
+                  {'<<'}
+                </PaginationLink>
+              </PaginationItem>
+          }
+          {paginationItems}
+          {
+            totalPages > pageRange * 2 + 1 &&
+              <PaginationItem disabled={currentPage === totalPages}>
+                <PaginationLink onClick={() => handleQueryPage(totalPages)}>
+                  {'>>'}
+                </PaginationLink>
+              </PaginationItem>
+          }
+        </Pagination>
+        <a
+          className='pv-pagination__skip-to'
+          onClick={() => {
+            const pageNumber = prompt('Type a page number:')
+            const page = pageNumber && parseInt(pageNumber, 10)
+            if ((page && page <= 0) || page === 0) {
+              alert('Must be a number larger than 1.')
+            } else if (page && page > totalPages) {
+              alert(`Page out of range. Must be a number smaller than ${totalPages}.`)
+            } else if (page) {
+              handleQueryPage(page)
+            }
+          }}
+          tabIndex={0}>Skip to page</a>
+      </React.Fragment>
     )
   }
 }
