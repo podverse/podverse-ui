@@ -66,7 +66,7 @@ class ClipCreatedModal extends React.Component<Props, State> {
         portalClassName='make-clip-modal'
         shouldCloseOnOverlayClick
         style={customStyles}>
-        <h4><FontAwesomeIcon icon='share' /> &nbsp;Share Clip</h4>
+        <h3><FontAwesomeIcon icon='share' /> &nbsp;Share Clip</h3>
         <CloseButton onClick={handleHideModal} />
         <Form>
           <FormGroup>

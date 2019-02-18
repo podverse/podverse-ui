@@ -91,7 +91,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h4>Forgot Password</h4>
+          <h3>Forgot Password</h3>
           <CloseButton onClick={hideModal} />
           {
             (errorResponse && !isLoading) &&

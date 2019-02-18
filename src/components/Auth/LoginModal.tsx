@@ -92,7 +92,7 @@ export class LoginModal extends React.Component<Props, State> {
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h4>Login</h4>
+          <h3>Login</h3>
           <CloseButton onClick={this.hideModal} />
           {
             (errorResponse && !isLoading) &&

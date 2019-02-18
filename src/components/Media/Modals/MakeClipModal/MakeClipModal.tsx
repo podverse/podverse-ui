@@ -158,8 +158,8 @@ class MakeClipModal extends React.Component<Props, State> {
         <Form>
           {
             isEditing ?
-              <h4><FontAwesomeIcon icon='edit' /> &nbsp;Edit Clip</h4> :
-              <h4><FontAwesomeIcon icon='cut' /> &nbsp;Make Clip</h4>
+              <h3><FontAwesomeIcon icon='edit' /> &nbsp;Edit Clip</h3> :
+              <h3><FontAwesomeIcon icon='cut' /> &nbsp;Make Clip</h3>
           }
           <Dropdown
             className='make-clip-modal__is-public transparent-btn'

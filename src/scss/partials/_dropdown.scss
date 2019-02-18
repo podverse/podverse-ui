@@ -7,7 +7,7 @@ body {
     }
 
     &.header-dropdown {
-      font-size: $text-lg-rem;
+      font-size: $text-xl-rem;
       margin: -0.375rem -0.75rem 0.875rem -0.75rem;
     }
   }
@@ -41,8 +41,8 @@ body {
       }
 
       &.header-dropdown {
-        background-color: $gray-lightest;
-        color: $gray-darker;
+        background-color: $gray-lighter;
+        color: $black;
       }
     }
 

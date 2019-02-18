@@ -28,9 +28,10 @@
   }
   
   .media-list__right {
-    align-self: baseline;
+    align-self: center;
     flex: 0 0 44px;
     margin-left: 1rem;
+    margin-top: -2px;
 
     .media-list-right__move {
       cursor: pointer;
@@ -56,7 +57,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     display: -webkit-box;
-    font-size: 14px;
+    font-size: $text-sm-rem;
     line-clamp: 4;
     line-height: 18px;
     margin-top: 0.75rem;
@@ -128,6 +129,7 @@
   }
 
   .media-list-item-a__title {
+    font-size: $text-lg-rem;
     margin-bottom: .5em;
   }
 
@@ -146,10 +148,6 @@
     width: 3.5em;
   }
 
-  [class^=media-list-item-b__sub] {
-    font-size: $text-sm-em;
-  }
-
   .media-list-item-b__sub {
     @include ellipsis;
   }
@@ -161,7 +159,8 @@
   }
 
   .media-list-item-b__title {
-    margin: .375em 0 .5em 0;
+    font-size: $text-lg-rem;
+    margin: 3px 0 4px 0;
   }
 }
 
@@ -245,10 +244,6 @@ html[theme=light] {
         }
       }
     }
-
-    .media-list__bottom {
-      color: $gray-darker;
-    }
   }
 
   [class^=media-list-item__] {
@@ -256,7 +251,7 @@ html[theme=light] {
       color: $black;
     }
     [class*=__sub], [class$=__date] {
-      color: $gray;
+      color: $gray-dark;
     }
 
     &:hover {
@@ -287,10 +282,6 @@ html[theme=dark] {
           color: $gray-lighter;
         }
       }
-    }
-
-    .media-list__bottom {
-      color: $gray-lighter;
     }
   }
 

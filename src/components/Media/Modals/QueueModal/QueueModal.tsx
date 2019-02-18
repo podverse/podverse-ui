@@ -32,6 +32,7 @@ const customStyles = {
     height: '100%',
     left: '50%',
     maxWidth: '480px',
+    padding: '20px 20px 0 20px',
     right: 'unset',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -146,7 +147,7 @@ export class QueueModal extends React.Component<Props, State> {
         {
           !isLoggedIn &&
             <React.Fragment>
-              <h4><FontAwesomeIcon icon='list-ul' /> &nbsp;Queue</h4>
+              <h3><FontAwesomeIcon icon='list-ul' /> &nbsp;Queue</h3>
             </React.Fragment>
         }
         {
