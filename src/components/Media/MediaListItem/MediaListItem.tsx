@@ -118,7 +118,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       <div className={`media-list__container ${isActive ? 'is-active' : ''} ${isSlim ? 'is-slim' : ''}`}>
         <div className='media-list__left'>
           <Link
-            {...(anchorHref ? { href: anchorHref } : {})}
+            {...(anchorHref ? { href: anchorHref } : { href: '' })}
             {...(anchorAs ? { as: anchorAs } : {})}>
             <a
               className={`media-list__item ${noWrap ? 'no-wrap' : ''}`}
