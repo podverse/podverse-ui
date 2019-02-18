@@ -7,6 +7,7 @@ import { readableDate } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
+const uuidv4 = require('uuid/v4')
 
 type Props = {
   episode?: any
@@ -80,15 +81,18 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       const categoryHref = getLinkCategoryHref(category.id)
 
       categoryNodes.push(
-        <React.Fragment>
+        <React.Fragment key={uuidv4()}>
           <Link
             {...(categoryHref ? { href: categoryHref } : {})}
-            {...(categoryAs ? { as: categoryAs } : {})}>
-            <a onClick={handleLinkClick}>{categoryText}</a>
+            {...(categoryAs ? { as: categoryAs } : {})}
+            key={uuidv4()}>
+            <a
+              key={uuidv4()}
+              onClick={handleLinkClick}>{categoryText}</a>
           </Link>
           {
             i < categories.length - 1 &&
-            <React.Fragment>,&nbsp;</React.Fragment>
+                  <React.Fragment key={uuidv4()}>,&nbsp;</React.Fragment>
           }
         </React.Fragment>
       )

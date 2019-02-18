@@ -173,11 +173,16 @@ export class QueueModal extends React.Component<Props, State> {
     let historyItemNodes: any = []
 
     if (!showHistory) {
+      let queueModalPriorityItemKey = 'queueModalPriorityItemKey'
       priorityItemNodes = priorityItems.map((x, index) => (
-        <Draggable draggableId={`priority-item-${index}`} index={index}>
+        <Draggable
+          draggableId={`priority-item-${index}`}
+          index={index}
+          key={`${queueModalPriorityItemKey}${index}`}>
           {(provided, snapshot) => (
             <React.Fragment>
               <div
+                key={`${queueModalPriorityItemKey}b${index}`}
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}>
@@ -189,6 +194,7 @@ export class QueueModal extends React.Component<Props, State> {
                   hideDescription={true}
                   hideDivider={true}
                   itemType='now-playing-item'
+                  key={`${queueModalPriorityItemKey}c${index}`}
                   showMove={!isEditing}
                   showRemove={isEditing} />
               </div>
@@ -198,11 +204,16 @@ export class QueueModal extends React.Component<Props, State> {
         </Draggable>
       ))
 
+      let queueModalSecondaryItemKey = 'queueModalSecondaryItemKey'
       secondaryItemNodes = secondaryItems.map((x, index) => (
-        <Draggable draggableId={`secondary-item-${index}`} index={index}>
+        <Draggable
+          draggableId={`secondary-item-${index}`}
+          index={index}
+          key={`${queueModalSecondaryItemKey}${index}`}>
           {(provided, snapshot) => (
             <React.Fragment>
               <div
+                key={`${queueModalSecondaryItemKey}b${index}`}
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}>
@@ -214,6 +225,7 @@ export class QueueModal extends React.Component<Props, State> {
                   hideDescription={true}
                   hideDivider={true}
                   itemType='now-playing-item'
+                  key={`${queueModalSecondaryItemKey}c${index}`}
                   showMove={!isEditing}
                   showRemove={isEditing} />
               </div>
@@ -223,11 +235,13 @@ export class QueueModal extends React.Component<Props, State> {
         </Draggable>
       ))
     } else {
+      let queueModalHistoryItemKey = 'queueModalHistoryItemKey'
       historyItemNodes = historyItems.map((x, index) => (
         <MediaListItem
           dataNowPlayingItem={x}
           hasLink
           hideDescription={true}
+          key={`${queueModalHistoryItemKey}${index}`}
           itemType='now-playing-item' />
       ))
       historyItemNodes.reverse()

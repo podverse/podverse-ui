@@ -6,6 +6,7 @@ import { PVButton as Button } from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
+const uuidv4 = require('uuid/v4')
 
 export interface Props {
   createPlaylistIsSaving?: boolean
@@ -67,11 +68,12 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       dataPlaylist={x}
       handleLinkClick={handlePlaylistItemAdd}
       itemType='playlist'
+      key={uuidv4()}
       loadingItemId={loadingItemId} />
   )
 
   if (!showPlaylists && showQueue) {
-    customStyles.content.maxHeight = '350px'
+    customStyles.content.maxHeight = '370px'
   } else if (!showPlaylists) {
     customStyles.content.maxHeight = '280px'
   } else {
@@ -110,6 +112,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
           playingItem &&
             <MediaListItem
               dataNowPlayingItem={playingItem}
+              hasLink
               hideDescription={true}
               hideDivider={true}
               itemType='now-playing-item' />

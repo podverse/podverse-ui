@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
+const uuidv4 = require('uuid/v4')
 
 type Props = {
   className?: string
   direction?: string
   items: any
+  uniqueItemKey: string
 }
 
 type State = {
@@ -16,7 +18,8 @@ export class MoreDropdown extends React.Component<Props, State> {
 
   static defaultProps: Props = {
     direction: 'left',
-    items: []
+    items: [],
+    uniqueItemKey: uuidv4()
   }
 
   constructor (props) {
@@ -32,12 +35,13 @@ export class MoreDropdown extends React.Component<Props, State> {
   }
 
   render () {
-    const { className, direction, items } = this.props
+    const { className, direction, items, uniqueItemKey } = this.props
     const { isOpen } = this.state
 
-    const dropdownItemNodes = items.map(x =>
+    const dropdownItemNodes = items.map((x, index) =>
       <DropdownItem
         data-value={x.value}
+        key={`${uniqueItemKey}${index}`}
         onClick={x.onClick}>
         <FontAwesomeIcon icon={x.icon} />
         &nbsp; {x.text}
@@ -59,5 +63,4 @@ export class MoreDropdown extends React.Component<Props, State> {
       </Dropdown>
     )
   }
-
 }

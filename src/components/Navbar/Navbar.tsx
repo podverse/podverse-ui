@@ -40,11 +40,13 @@ export class Navbar extends React.Component<Props, State> {
       dropdownMenuIsOpen, dropdownText, handleLinkClick, handleToggleDropdownMenu,
       handleToggleMobileMenu, mobileMenuIsOpen, navItems } = this.props
 
-    const navItemsEls = navItems.map(x =>
+    let navItemKey = 'navItemKey'
+    const navItemsEls = navItems.map((x, index) =>
       <Link
+        key={`${navItemKey}${index}`}
         {...(x.href ? { href: x.href } : {})}
         {...(x.as ? { as: x.as } : {})}>
-        <NavItem>
+        <NavItem key={`${navItemKey}b${index}`}>
           <NavLink onClick={handleLinkClick}>
             {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
           </NavLink>
@@ -52,32 +54,67 @@ export class Navbar extends React.Component<Props, State> {
       </Link>
     )
 
-    const dropdownItemsEls = dropdownItems.map(x =>
-      <Link
-        {...(x.href ? { href: x.href } : {})}
-        {...(x.as ? { as: x.as } : {})}>
-        <DropdownItem
-          onClick={event => {
-            x.onClick()
-            this.setState({ dropdownIsOpen: false })
-          }}>
-          {x.label}
-        </DropdownItem>
-      </Link>
-    )
+    let navbarDropdownItemKey = 'navbarDropdownItemKey'
+    const dropdownItemsEls = dropdownItems.map((x, index) => {
+      if (x.href) {
+        return (
+          <Link
+            key={`${navbarDropdownItemKey}${index}`}
+            {...(x.href ? { href: x.href } : {})}
+            {...(x.as ? { as: x.as } : {})}>
+            <DropdownItem
+              onClick={event => {
+                x.onClick()
+                this.setState({ dropdownIsOpen: false })
+              }}>
+              {x.label}
+            </DropdownItem>
+          </Link>
+        )
+      } else {
+        return (
+          <DropdownItem
+            key={`${navbarDropdownItemKey}${index}`}
+            onClick={event => {
+              x.onClick()
+              this.setState({ dropdownIsOpen: false })
+            }}>
+            {x.label}
+          </DropdownItem>
+        )
+      }
+    })
 
+    let mobileNavItemKey = 'mobileNavItemKey'
     const mobileNavItems = clone(dropdownItems)
-    const mobileNavItemsEls = mobileNavItems.map(x =>
-      <Link
-        {...(x.href ? { href: x.href } : {})}
-        {...(x.as ? { as: x.as } : {})}>
-        <NavItem className='mobile-nav-item'>
-          <NavLink onClick={x.onClick}>
-            {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
-          </NavLink>
-        </NavItem>
-      </Link>
-    )
+    const mobileNavItemsEls = mobileNavItems.map((x, index) => {
+      if (x.href) {
+        return (
+          <Link
+            key={`${mobileNavItemKey}${index}`}
+            {...(x.href ? { href: x.href } : {})}
+            {...(x.as ? { as: x.as } : {})}>
+            <NavItem
+              className='mobile-nav-item'
+              key={`${mobileNavItemKey}b${index}`}>
+              <NavLink onClick={x.onClick}>
+                {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+              </NavLink>
+            </NavItem>
+          </Link>
+        )
+      } else {
+        return (
+          <NavItem
+            className='mobile-nav-item'
+            key={`${mobileNavItemKey}b${index}`}>
+            <NavLink onClick={x.onClick}>
+              {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+            </NavLink>
+          </NavItem>
+        )
+      }
+    })
 
     return (
       <div className='navbar__bg'>
