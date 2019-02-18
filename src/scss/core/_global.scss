@@ -129,6 +129,18 @@ html body {
       margin: 0.25rem 0;
     }
   }
+
+  .pv-pagination {
+    ul.pagination {
+      justify-content: center;
+
+      li.page-item {
+        button.page-link {
+          min-width: 42px;
+        }
+      }
+    }
+  }
 }
 
 [theme=light] {
@@ -192,6 +204,25 @@ html body {
       }
     }
   }
+
+  .pv-pagination {
+    ul {
+      li.page-item {
+        button.page-link {
+          background-color: $white;
+          border-color: $gray-lighter;
+          color: $gray-dark;
+        }
+  
+        &.active {
+          button.page-link {
+            background-color: $gray-lighter;
+            color: $gray-darkest;
+          }
+        }
+      }
+    }
+  }
 }
 
 [theme=dark] {
@@ -252,6 +283,25 @@ html body {
 
       h5 {
         color: $white;
+      }
+    }
+  }
+
+  .pv-pagination {
+    ul {
+      li.page-item {
+        button.page-link {
+          background-color: $black;
+          border-color: $gray-light;
+          color: $gray-light;
+        }
+  
+        &.active {
+          button.page-link {
+            background-color: $gray-darker;
+            color: $gray-lightest;
+          }
+        }
       }
     }
   }

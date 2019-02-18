@@ -7,7 +7,7 @@ export { ForgotPasswordModal } from 'components/Auth/ForgotPasswordModal'
 export { LoginModal } from 'components/Auth/LoginModal'
 export { SignUpModal } from 'components/Auth/SignUpModal'
 
-export { PVButton } from 'components/Button/Button'
+export { PVButton as Button } from 'components/Button/Button'
 export { CloseButton } from 'components/CloseButton/CloseButton'
 
 export { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
@@ -25,6 +25,7 @@ export { QueueModal } from 'components/Media/Modals/QueueModal/QueueModal'
 export { ShareModal } from 'components/Media/Modals/ShareModal/ShareModal'
 
 export { Navbar } from 'components/Navbar/Navbar'
+export { PVPagination as Pagination } from 'components/Pagination/Pagination'
 
 export { addItemToPriorityQueueStorage, updatePriorityQueueStorage,
   addItemsToSecondaryQueueStorage, clearItemsFromSecondaryQueueStorage,
