@@ -52,8 +52,8 @@ type Props = {
 }
 
 type State = {
-  clipEndFlagPositionX?: number
-  clipStartFlagPositionX?: number
+  clipEndFlagPositionX: number
+  clipStartFlagPositionX: number
   duration: number | null
   isClientSide: boolean
   isLoading: boolean
@@ -68,8 +68,8 @@ type State = {
 }
 
 type ClipFlagPositions = {
-  clipEndFlagPositionX?: number
-  clipStartFlagPositionX?: number
+  clipEndFlagPositionX: number
+  clipStartFlagPositionX: number
 }
 
 export interface MediaPlayer {
@@ -152,6 +152,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     if (typeof window !== 'undefined'
         && window.player
         && lastItem !== nextItem
+        && lastItem.clipId && nextItem.clipId
         && lastItem.clipId === nextItem.clipId) {
       window.player.seekTo(nextItem && nextItem.clipStartTime && Math.floor(nextItem.clipStartTime))
     }
