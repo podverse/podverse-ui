@@ -163,11 +163,11 @@ export class MediaInfo extends React.Component<Props, State> {
           {
             ((episode || mediaRef || nowPlayingItem) && description) &&
               <button
-                className='media-info__show-more'
+                className='media-info__show-notes'
                 onClick={this.toggleDescription}>
                 <span>
                   <FontAwesomeIcon icon={showDescription ? 'caret-down' : 'caret-right'} />
-                  &nbsp;More Info
+                  &nbsp;Episode Info
                 </span>
               </button>
           }

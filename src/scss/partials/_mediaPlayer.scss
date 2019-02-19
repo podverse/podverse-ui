@@ -63,6 +63,7 @@
       text-align: left;
   
       .mp-header-wrap__top {
+        font-size: $text-sm-rem;
         height: 22px;
         line-height: 22px;
         margin-top: 2px;
@@ -72,8 +73,9 @@
       }
     
       .mp-header-wrap__bottom {
-        height: 24px;
-        line-height: 24px;
+        font-size: $text-sm-rem;
+        height: 22px;
+        line-height: 22px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

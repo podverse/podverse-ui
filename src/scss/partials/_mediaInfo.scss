@@ -48,7 +48,7 @@
     }
   }
 
-  .media-info__show-more {
+  .media-info__show-notes {
     cursor: pointer;
     display: inline-block;
 
@@ -60,7 +60,8 @@
 
   .media-info__description {
     font-size: $text-sm-rem;
-    line-height: 20px;
+    font-weight: 300;
+    line-height: 21px;
     margin-top: 1rem;
   }
 }
@@ -88,7 +89,7 @@ html[theme=light] {
       }
     }
 
-    .media-info__show-more {
+    .media-info__show-notes {
       color: $blue;
     }
 
@@ -121,7 +122,7 @@ html[theme=dark] {
       }
     }
 
-    .media-info__show-more {
+    .media-info__show-notes {
       color: $blue;
     }
 

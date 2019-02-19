@@ -280,7 +280,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
 
     if (clipEndTime && clipFinished && typeof window !== 'undefined' && window.player.getCurrentTime() > clipEndTime && handleSetPlayedAfterClipFinished) {
-      handleSetPlayedAfterClipFinished()
+      handleSetPlayedAfterClipFinished(true)
     }
   }
 
@@ -312,18 +312,14 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   onProgress = state => {
-    const { autoplay, handleOnPastClipTime, handlePause, handleSetPlayedAfterClipFinished,
-      nowPlayingItem, playedAfterClipFinished, playing } = this.props
+    const { autoplay, handleOnPastClipTime, handlePause, nowPlayingItem,
+      playedAfterClipFinished, playing } = this.props
     const { clipEndTime } = nowPlayingItem
     const { seeking } = this.state
 
     if (clipEndTime && !playedAfterClipFinished && typeof window !== 'undefined' && window.player.getCurrentTime() > clipEndTime && playing) {
       if (handleOnPastClipTime) {
         handleOnPastClipTime()
-
-        if (autoplay && handleSetPlayedAfterClipFinished) {
-          handleSetPlayedAfterClipFinished()
-        }
       }
 
       if (!autoplay && handlePause && !playedAfterClipFinished) {
@@ -482,13 +478,13 @@ export class MediaPlayer extends React.Component<Props, State> {
                       <div
                         className='mp-progress-bar__clip-start'
                         style={{
-                          display: `${clipStartFlagPositionX! > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
+                          display: `${clipStartFlagPositionX > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
                           left: `${clipStartFlagPositionX}px`
                         }} />
                       <div
                         className='mp-progress-bar__clip-end'
                         style={{
-                          display: `${clipEndFlagPositionX! > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
+                          display: `${clipEndFlagPositionX > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
                           left: `${clipEndFlagPositionX}px`
                         }} />
                     </React.Fragment>

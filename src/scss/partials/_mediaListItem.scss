@@ -58,10 +58,11 @@
     -webkit-line-clamp: 4;
     display: -webkit-box;
     font-size: $text-sm-rem;
+    font-weight: 300;
     line-clamp: 4;
-    line-height: 20px;
+    line-height: 21px;
     margin-top: 0.75rem;
-    max-height: 78px;
+    max-height: 81px;
     overflow: hidden;
     white-space: normal !important;
   }
@@ -129,9 +130,8 @@
   }
 
   .media-list-item-a__title {
-    font-weight: 500;
     margin-bottom: 5px;
-    margin-top: 1px;
+    margin-top: 2px;
   }
 
   @media(max-width: 520px) {
@@ -151,17 +151,19 @@
 
   .media-list-item-b__sub {
     @include ellipsis;
+    font-size: $text-sm-rem;
   }
 
   .media-list-item-b__sub-side {
     float: right;
+    font-size: $text-sm-rem;
     margin-left: 1em;
     text-align: right;
   }
 
   .media-list-item-b__title {
     font-weight: 500;
-    margin: 5px 0 4px 0;
+    margin: 6px 0 7px 0;
   }
 }
 

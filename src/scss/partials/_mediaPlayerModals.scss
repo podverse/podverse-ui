@@ -19,7 +19,7 @@
 
   .scrollable-area {
     overflow: auto;
-    height: calc(100% - 2.3rem);
+    height: calc(100% - 2.75rem);
     margin: 0 -1rem;
     padding: 0 1rem;
   }
@@ -60,6 +60,10 @@
     a {
       cursor: pointer;
     }
+  }
+
+  .close-btn {
+    top: 12px;
   }
 }
 
@@ -122,6 +126,7 @@
 
   .mp-queue-modal__header {
     display: flex;
+    margin-bottom: 1rem;
 
     .mp-queue-modal-header__dropdown {
       flex: 1;
