@@ -10,12 +10,12 @@
 
   .media-info__duration, .media-info__last-updated {
     float: right;
+    font-size: $text-sm-rem;
     margin-top: 0.375rem;
   }
 
   .media-info__time, .media-info__item-count {
     font-size: $text-sm-rem;
-    margin-bottom: 1.25rem;
     margin-top: 0.375rem;
   }
 
