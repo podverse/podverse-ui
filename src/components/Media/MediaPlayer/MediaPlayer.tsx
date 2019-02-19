@@ -326,7 +326,7 @@ export class MediaPlayer extends React.Component<Props, State> {
         }
       }
 
-      if (!autoplay && handlePause) {
+      if (!autoplay && handlePause && !playedAfterClipFinished) {
         handlePause()
       }
     }
