@@ -28,7 +28,7 @@ setOptions({
 
 const styles = {
   backgroundColor: themeMode === 'dark' ? 'black' : 'white',
-  fontFamily: '"Source Sans Pro", sans-serif'
+  fontFamily: '"Roboto", sans-serif'
 };
 const ThemeDecorator = (storyFn) => (
   <div style={styles}>

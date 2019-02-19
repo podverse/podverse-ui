@@ -6,7 +6,6 @@
 
   .media-info__title {
     font-size: $text-lg-rem;
-    font-weight: 600;
   }
 
   .media-info__duration, .media-info__last-updated {
@@ -15,6 +14,7 @@
   }
 
   .media-info__time, .media-info__item-count {
+    font-size: $text-sm-rem;
     margin-bottom: 1.25rem;
     margin-top: 0.375rem;
   }
@@ -27,7 +27,7 @@
 
   .media-info__controls {
     display: flex;
-    margin: 0 0 0.5rem 0;
+    margin: 1rem 0 1.25rem 0;
 
     .media-info-controls__play svg {
       margin-left: 2px;
@@ -51,12 +51,17 @@
   .media-info__show-more {
     cursor: pointer;
     display: inline-block;
-    margin: 0.5rem 0 1rem 0;
 
     div {
       display: inline-block;
       width: 10px;
     }
+  }
+
+  .media-info__description {
+    font-size: $text-sm-rem;
+    line-height: 20px;
+    margin-top: 1rem;
   }
 }
 
@@ -100,7 +105,7 @@ html[theme=dark] {
     .media-info__time, .media-info__duration,
     .media-info__item-count, .media-info__last-updated,
     .media-info__created-by, .media-info__created-by a {
-      color: $gray;
+      color: $gray-light;
     }
 
     .media-info__controls {

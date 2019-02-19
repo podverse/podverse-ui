@@ -7,37 +7,31 @@ html body {
 
   h1 {
     font-size: $text-3x-rem;
-    font-weight: 600;
     margin-bottom: 1rem;
   }
 
   h2 {
     font-size: $text-2x-rem;
-    font-weight: 600;
     margin-bottom: 1rem;
   }
 
   h3 {
     font-size: $text-xl-rem;
-    font-weight: 600;
     margin-bottom: 1rem;
   }
 
   h4 {
     font-size: $text-lg-rem;
-    font-weight: 600;
     margin-bottom: 1.25rem;
   }
 
   h5 {
     font-size: $text-md-rem;
-    font-weight: 600;
     margin-bottom: 1rem;
   }
 
   h6 {
     font-size: $text-lg-rem;
-    font-weight: 600;
     line-height: $text-lg-rem;
     margin: 1.25rem 0;
     padding: 0.25rem 0.5rem;
@@ -53,7 +47,6 @@ html body {
   }
 
   label {
-    font-weight: 600;
     margin-bottom: 0.75rem;
   }
 
@@ -187,7 +180,7 @@ html body {
   }
 
   .btn-secondary {
-    color: $black;
+    color: $white;
   }
 
   .btn-outline-secondary {

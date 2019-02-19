@@ -37,7 +37,6 @@
     @include ellipsis;
     flex: 1 0 auto;
     font-size: $text-xl-rem;
-    font-weight: 600;
     margin-bottom: 0.25rem;
     max-width: calc(100% - 44px); // 100% minus the width of the subscribe button area
 
@@ -65,7 +64,6 @@
     @include ellipsis;
     clear: left;
     display: block;
-    
   }
 
   .media-header__bottom-text-side {

@@ -64,10 +64,9 @@ export class MediaInfo extends React.Component<Props, State> {
     let currentItem: any = {}
 
     if (episode) {
-      // title = episode.title
+      title = episode.title
       // time = 'Full Episode'
-      description = `<p><i>${episode.title}</i></p>`
-      description += episode.description
+      description = episode.description
       currentItem = convertToNowPlayingItem(episode)
     } else if (mediaRef) {
       title = mediaRef.title || 'Untitled clip'
