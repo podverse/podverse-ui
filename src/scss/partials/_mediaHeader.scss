@@ -7,8 +7,13 @@
     width: 4.75rem;
   }
 
+  .media-header__top {
+    margin-top: .125rem;
+  }
+
   .media-header__top, .media-header__middle, .media-header__bottom {
     display: flex;
+    justify-content: space-between;
   }
 
   .media-header__subscribe {
@@ -36,7 +41,7 @@
 
   .media-header__title {
     @include ellipsis;
-    flex: 1 0 auto;
+    flex: 0 0 auto;
     font-size: $text-xl-rem;
     font-weight: 500;
     margin-bottom: 0.25rem;

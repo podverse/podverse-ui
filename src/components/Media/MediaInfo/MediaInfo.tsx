@@ -2,9 +2,9 @@ import * as React from 'react'
 import { Button } from 'reactstrap'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { readableClipTime } from 'lib/utility'
+import { readableClipTime, readableDate } from 'lib/utility'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
-import { getLinkUserAs, getLinkUserHref } from 'lib/constants'
+import { getLinkUserAs, getLinkUserHref, getLinkEpisodeAs, getLinkEpisodeHref } from 'lib/constants'
 const sanitizeHtml = require('sanitize-html')
 
 type Props = {
@@ -39,7 +39,7 @@ export class MediaInfo extends React.Component<Props, State> {
 
     this.state = {
       showAddToModal: false,
-      showDescription: true
+      showDescription: props.episode || (props.nowPlayingItem && !props.nowPlayingItem.clipId)
     }
   }
 
@@ -55,64 +55,90 @@ export class MediaInfo extends React.Component<Props, State> {
       handleToggleMakeClipModal } = this.props
     const { showDescription } = this.state
 
-    let title
-    let time
+    let episodeTitle
+    let episodeAs
+    let episodeHref
+    let episodePubDate
+    let clipTitle
+    let clipTime
     let createdById
     let createdByName
     let createdByIsPublic
-    let description
+    let moreInfo
     let currentItem: any = {}
 
     if (episode) {
-      title = episode.title
-      // time = 'Full Episode'
-      description = episode.description
+      episodeTitle = episode.title
+      episodeAs = getLinkEpisodeAs(episode.id)
+      episodeHref = getLinkEpisodeHref(episode.id)
+      episodePubDate = readableDate(episode.pubDate)
+      moreInfo = episode.description
       currentItem = convertToNowPlayingItem(episode)
     } else if (mediaRef) {
-      title = mediaRef.title || 'Untitled clip'
-      time = readableClipTime(mediaRef.startTime, mediaRef.endTime)
+      episodeTitle = mediaRef.episode.title || 'Untitled episode'
+      episodeAs = getLinkEpisodeAs(mediaRef.episode.id)
+      episodeHref = getLinkEpisodeHref(mediaRef.episode.id)
+      episodePubDate = readableDate(mediaRef.episode.pubDate)
+      clipTitle = mediaRef.title || 'Untitled clip'
+      clipTime = readableClipTime(mediaRef.startTime, mediaRef.endTime)
       createdById = mediaRef.owner ? mediaRef.owner.id : ''
       createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false
       createdByName = mediaRef.owner && mediaRef.owner.name ? mediaRef.owner.name : 'anonymous'
-      description = mediaRef.episode.description
+      moreInfo = mediaRef.episode.description
       currentItem = convertToNowPlayingItem(mediaRef)
     } else if (nowPlayingItem) {
-      title = nowPlayingItem.clipTitle
-      time = readableClipTime(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
+      episodeTitle = nowPlayingItem.episodeTitle
+      episodeAs = getLinkEpisodeAs(nowPlayingItem.episodeId)
+      episodeHref = getLinkEpisodeHref(nowPlayingItem.episodeId)
+      episodePubDate = readableDate(episodePubDate)
+      clipTitle = nowPlayingItem.clipTitle
+      clipTime = readableClipTime(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
       createdById = nowPlayingItem.ownerId
       createdByIsPublic = nowPlayingItem.ownerIsPublic
       createdByName = (mediaRef.owner && mediaRef.owner.name) || 'anonymous'
-      description = nowPlayingItem.episodeDescription
+      moreInfo = nowPlayingItem.episodeDescription
       currentItem = nowPlayingItem
     } else if (podcast) {
-      title = ''
-      time = ''
-      createdById = ''
-      createdByIsPublic = ''
-      createdByName = ''
-      description = podcast.description
-      currentItem = null
+      moreInfo = podcast.description
     }
 
     return (
       <React.Fragment>
         <div className='media-info'>
           {
-            title &&
-            <div className='media-info__title'>
-              {title}
+            episodeTitle &&
+            <Link
+              {...(episodeAs ? { as: episodeAs } : {})}
+              {...(episodeHref ? { href: episodeHref } : {})}>
+              <a
+                className='media-info__episode-title'
+                onClick={handleLinkClick}>
+                {episodeTitle}
+              </a>
+            </Link>
+          }
+          {
+            episodePubDate &&
+            <div className='media-info__episode-pub-date'>
+              {episodePubDate}
             </div>
           }
           {
-            time &&
-            <div className='media-info__time'>
-              {time}
+            clipTitle &&
+            <div className='media-info__clip-title'>
+              Clip: {clipTitle}
             </div>
           }
           {
-            createdById &&
-            <div className='media-info__created-by'>
-              Clip by:&nbsp;
+            clipTime &&
+            <div className='media-info__clip-time'>
+              {clipTime}
+            </div>
+          }
+          {
+            currentItem.clipId &&
+            <div className='media-info__clip-created-by'>
+              By:&nbsp;
               {
                 createdByIsPublic ?
                   <Link
@@ -161,7 +187,7 @@ export class MediaInfo extends React.Component<Props, State> {
               </div>
           }
           {
-            ((episode || mediaRef || nowPlayingItem) && description) &&
+            ((episode || mediaRef || nowPlayingItem) && moreInfo) &&
               <button
                 className='media-info__show-notes'
                 onClick={this.toggleDescription}>
@@ -172,12 +198,12 @@ export class MediaInfo extends React.Component<Props, State> {
               </button>
           }
           {
-            (podcast || (description && showDescription)) &&
+            (podcast || (moreInfo && showDescription)) &&
               <div
                 className='media-info__description'
                 dangerouslySetInnerHTML={
                   {
-                    __html: sanitizeHtml(description, {
+                    __html: sanitizeHtml(moreInfo, {
                       allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
                     })
                   }} />

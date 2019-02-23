@@ -4,30 +4,48 @@
   clear: both;
   padding: 1.25rem 0 1.5rem 0;
 
-  .media-info__title {
-    font-weight: 500;
+  .media-info__episode-title {
+    font-size: $text-lg-rem;
+    font-weight: 300;
   }
 
-  .media-info__duration, .media-info__last-updated {
+  .media-info__episode-pub-date {
+    font-size: $text-sm-rem;
+    margin-top: 0.25rem;
+  }
+
+  .media-info__clip-title {
+    font-weight: 300;
+    margin-top: 1rem;
+  }
+
+  .media-info__clip-time {
+    font-size: $text-sm-rem;
+    font-weight: 300;
+    margin-top: 0.25rem;
+  }
+
+  .media-info__clip-created-by {
+    font-size: $text-sm-rem;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+    margin-top: 0.25rem;
+  }
+
+  .media-info__last-updated {
     float: right;
     font-size: $text-sm-rem;
-    margin-top: 0.375rem;
+    margin-top: 0.25rem;
   }
 
-  .media-info__time, .media-info__item-count {
+  .media-info__item-count {
     font-size: $text-sm-rem;
-    margin-top: 0.375rem;
-  }
-
-  .media-info__created-by {
-    font-size: $text-sm-rem;
-    margin-top: 0.375rem;
-    margin-bottom: 1.125rem;
+    margin-top: 0.25rem;
   }
 
   .media-info__controls {
     display: flex;
-    margin: 1rem 0 1.25rem 0;
+    margin: 1.25rem 0;
 
     .media-info-controls__play svg {
       margin-left: 2px;
@@ -70,9 +88,27 @@ html[theme=light] {
   .media-info {
     border-color: $gray-lighter;
 
-    .media-info__time, .media-info__duration,
-    .media-info__item-count, .media-info__last-updated,
-    .media-info__created-by, .media-info__created-by a {
+    .media-info__episode-title {
+      color: $black;
+    }
+
+    .media-info__episode-pub-date {
+      color: $gray-dark;
+    }
+
+    .media-info__clip-title {
+      color: $black;
+    }
+
+    .media-info__clip-time {
+      color: $gray-dark;
+    }
+
+    .media-info__clip-created-by {
+      color: $gray-dark;
+    }
+
+    .media-info__item-count, .media-info__last-updated {
       color: $gray-dark;
     }
 
@@ -103,9 +139,27 @@ html[theme=dark] {
   .media-info {
     border-color: $gray-darker;
 
-    .media-info__time, .media-info__duration,
-    .media-info__item-count, .media-info__last-updated,
-    .media-info__created-by, .media-info__created-by a {
+    .media-info__episode-title {
+      color: $white;
+    }
+
+    .media-info__episode-pub-date {
+      color: $gray-light;
+    }
+
+    .media-info__clip-title {
+      color: $white;
+    }
+
+    .media-info__clip-time {
+      color: $gray-light;
+    }
+
+    .media-info__clip-created-by {
+      color: $gray-light;
+    }
+
+    .media-info__item-count, .media-info__last-updated {
       color: $gray-light;
     }
 

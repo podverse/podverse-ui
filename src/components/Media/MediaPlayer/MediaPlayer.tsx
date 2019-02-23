@@ -49,6 +49,8 @@ type Props = {
   queuePriorityItems: NowPlayingItem[]
   queueSecondaryItems: NowPlayingItem[]
   showAutoplay?: boolean
+  showPlaybackSpeed?: boolean
+  showTimeJumpBackward?: boolean
 }
 
 type State = {
@@ -152,16 +154,15 @@ export class MediaPlayer extends React.Component<Props, State> {
     if (typeof window !== 'undefined'
         && window.player
         && lastItem !== nextItem
-        && lastItem.clipId && nextItem.clipId
+        && lastItem.clipId
         && lastItem.clipId === nextItem.clipId) {
       window.player.seekTo(nextItem && nextItem.clipStartTime && Math.floor(nextItem.clipStartTime))
-    }
-
     // If the same episode is played back-to-back after an item skip,
     // force refresh of the player to the beginning.
-    if (typeof window !== 'undefined'
+    } else if (typeof window !== 'undefined'
       && window.player
       && lastItem !== nextItem
+      && lastItem.episodeId && !nextItem.clipId
       && lastItem.episodeId === nextItem.episodeId) {
       window.player.seekTo(0)
     }
@@ -225,6 +226,13 @@ export class MediaPlayer extends React.Component<Props, State> {
     return {
       clipEndFlagPositionX,
       clipStartFlagPositionX
+    }
+  }
+
+  timeJumpBackward = () => {
+    if (typeof window !== 'undefined' && window.player) {
+      window.player.seekTo(Math.floor(window.player.getCurrentTime()) - 15)
+      this.forceUpdate()
     }
   }
 
@@ -339,8 +347,8 @@ export class MediaPlayer extends React.Component<Props, State> {
       handleToggleShareModal, handleTogglePlay, hasItemInQueue, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
-      playerEpisodeLinkOnClick, playing,
-      showAutoplay } = this.props
+      playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed,
+      showTimeJumpBackward } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, progressPreviewTime } = this.state
@@ -508,18 +516,29 @@ export class MediaPlayer extends React.Component<Props, State> {
                   }
                 </span>
               </div>
+              {
+                showTimeJumpBackward &&
+                  <button
+                    className='mp-player__time-jump-backward'
+                    onClick={this.timeJumpBackward}>
+                    <FontAwesomeIcon icon='undo-alt' />
+                  </button>
+              }
               <button
                 className='mp-player__time-jump-forward'
                 onClick={this.timeJumpForward}>
                 <FontAwesomeIcon icon='redo-alt' />
               </button>
-              <button
-                className='mp-player__playback-rate'
-                onClick={handlePlaybackRateClick}>
-                {playbackRateText}
-              </button>
               {
-                (showAutoplay) &&
+                showPlaybackSpeed &&
+                  <button
+                    className='mp-player__playback-rate'
+                    onClick={handlePlaybackRateClick}>
+                    {playbackRateText}
+                  </button>
+              }
+              {
+                showAutoplay &&
                 <button
                 className={`mp-player__autoplay ${autoplay ? 'active' : ''}`}
                 onClick={handleToggleAutoplay}>

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { getLinkEpisodeHref, getLinkEpisodeAs, getLinkPodcastHref, getLinkPodcastAs,
-  getLinkCategoryHref, getLinkCategoryAs } from 'lib/constants'
+import { getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref,
+  getLinkCategoryAs } from 'lib/constants'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 import { readableDate } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,6 +20,46 @@ type Props = {
   podcast?: any
 }
 
+const generateAuthorText = authors => {
+  let authorText = ''
+  for (let i = 0; i < authors.length; i++) {
+    const author = authors[i]
+    authorText += `${author.name}${i < authors.length - 1 ? ', ' : ''}`
+  }
+
+  return authorText
+}
+
+const generateCategoryNodes = (categories, handleLinkClick) => {
+  let categoryNodes: any[] = []
+
+  for (let i = 0; i < categories.length; i++) {
+    const category = categories[i]
+    let categoryText = category.title
+    const categoryAs = getLinkCategoryAs(category.id)
+    const categoryHref = getLinkCategoryHref(category.id)
+
+    categoryNodes.push(
+      <React.Fragment key={uuidv4()}>
+        <Link
+          {...(categoryHref ? { href: categoryHref } : {})}
+          {...(categoryAs ? { as: categoryAs } : {})}
+          key={uuidv4()}>
+          <a
+            key={uuidv4()}
+            onClick={handleLinkClick}>{categoryText}</a>
+        </Link>
+        {
+          i < categories.length - 1 &&
+          <React.Fragment key={uuidv4()}>,&nbsp;</React.Fragment>
+        }
+      </React.Fragment>
+    )
+  }
+
+  return categoryNodes
+}
+
 export const MediaHeader: React.StatelessComponent<Props> = props => {
   const { episode, handleLinkClick, handleToggleSubscribe, isSubscribed, isSubscribing,
     mediaRef, nowPlayingItem, podcast } = props
@@ -28,88 +68,40 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let bottomTextSide
   let imgUrl
   let subTitle
-  let subTitleAs
-  let subTitleHref
   let title
   let titleAs
   let titleHref
 
   if (episode) {
-    bottomText = readableDate(episode.pubDate)
-    bottomTextSide = ''
     imgUrl = episode.podcast.imageUrl
-    subTitle = episode.title
-    subTitleAs = getLinkEpisodeAs(episode.id)
-    subTitleHref = getLinkEpisodeHref(episode.id)
     title = episode.podcast.title
     titleAs = getLinkPodcastAs(episode.podcast.id)
     titleHref = getLinkPodcastHref(episode.podcast.id)
+    subTitle = episode.title
+    bottomText = readableDate(episode.pubDate)
   } else if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef)
-    const { episodeId, episodePubDate, episodeTitle, podcastImageUrl, podcastId,
-      podcastTitle } = item
-    bottomText = readableDate(episodePubDate)
-    bottomTextSide = ''
+    const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId, podcastTitle
+      } = item
     imgUrl = podcastImageUrl
-    subTitle = episodeTitle
-    subTitleAs = getLinkEpisodeAs(episodeId)
-    subTitleHref = getLinkEpisodeHref(episodeId)
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
+    subTitle = generateAuthorText(podcastAuthors)
+    bottomText = generateCategoryNodes(podcastCategories, handleLinkClick)
   } else if (nowPlayingItem) {
-    const { episodeId, episodePubDate, episodeTitle, podcastImageUrl, podcastId,
-      podcastTitle } = nowPlayingItem
-
-    bottomText = readableDate(episodePubDate)
-    bottomTextSide = ''
+    const { episodePubDate, episodeTitle, podcastImageUrl, podcastId, podcastTitle
+      } = nowPlayingItem
     imgUrl = podcastImageUrl
-    subTitle = episodeTitle
-    subTitleAs = getLinkEpisodeAs(episodeId)
-    subTitleHref = getLinkEpisodeHref(episodeId)
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
+    subTitle = episodeTitle
+    bottomText = readableDate(episodePubDate)
   } else if (podcast) {
-    let categoryNodes: any[] = []
-    let categories = podcast.categories || []
-
-    for (let i = 0; i < categories.length; i++) {
-      const category = categories[i]
-      let categoryText = category.title
-      const categoryAs = getLinkCategoryAs(category.id)
-      const categoryHref = getLinkCategoryHref(category.id)
-
-      categoryNodes.push(
-        <React.Fragment key={uuidv4()}>
-          <Link
-            {...(categoryHref ? { href: categoryHref } : {})}
-            {...(categoryAs ? { as: categoryAs } : {})}
-            key={uuidv4()}>
-            <a
-              key={uuidv4()}
-              onClick={handleLinkClick}>{categoryText}</a>
-          </Link>
-          {
-            i < categories.length - 1 &&
-                  <React.Fragment key={uuidv4()}>,&nbsp;</React.Fragment>
-          }
-        </React.Fragment>
-      )
-    }
-
-    let authorText = ''
-    let authors = podcast.authors
-
-    for (let i = 0; i < authors.length; i++) {
-      const author = authors[i]
-      authorText += `${author.name}${i < authors.length - 1 ? ', ' : ''}`
-    }
-
-    bottomText = categoryNodes
-    bottomTextSide = ''
+    subTitle = generateAuthorText(podcast.authors)
+    bottomText = generateCategoryNodes(podcast.categories, handleLinkClick)
     imgUrl = podcast.imageUrl
-    subTitle = authorText
     title = podcast.title
   }
 
@@ -154,28 +146,17 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
         <div className='media-header__middle'>
           {
             subTitle &&
-              <React.Fragment>
-                {
-                  subTitleHref ?
-                    <Link
-                      {...(subTitleHref ? { href: subTitleHref } : {})}
-                      {...(subTitleAs ? { as: subTitleAs } : {})}>
-                      <a
-                        className='media-header__sub-title'
-                        onClick={handleLinkClick}>{subTitle}</a>
-                    </Link> : <span className='media-header__sub-title'>{subTitle}</span>
-                }
-              </React.Fragment>
+              <div className='media-header__sub-title'>{subTitle}</div>
           }
         </div>
         <div className='media-header__bottom'>
           {
             bottomTextSide &&
-            <div className='media-header__bottom-text-side'>{bottomTextSide}</div>
+              <div className='media-header__bottom-text-side'>{bottomTextSide}</div>
           }
           {
             bottomText &&
-            <div className='media-header__bottom-text'>{bottomText}</div>
+              <div className='media-header__bottom-text'>{bottomText}</div>
           }
         </div>
       </div>
