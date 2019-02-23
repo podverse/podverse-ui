@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
+import { Badge } from 'reactstrap'
 import { getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref,
   getLinkCategoryAs } from 'lib/constants'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
@@ -71,6 +72,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let title
   let titleAs
   let titleHref
+  let isExplicit
 
   if (episode) {
     imgUrl = episode.podcast.imageUrl
@@ -79,30 +81,34 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     titleHref = getLinkPodcastHref(episode.podcast.id)
     subTitle = episode.title
     bottomText = readableDate(episode.pubDate)
+    isExplicit = episode.podcast.isExplicit
   } else if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef)
-    const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId, podcastTitle
-      } = item
+    const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId,
+      podcastIsExplicit, podcastTitle } = item
     imgUrl = podcastImageUrl
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
     subTitle = generateAuthorText(podcastAuthors)
     bottomText = generateCategoryNodes(podcastCategories, handleLinkClick)
+    isExplicit = podcastIsExplicit
   } else if (nowPlayingItem) {
-    const { episodePubDate, episodeTitle, podcastImageUrl, podcastId, podcastTitle
-      } = nowPlayingItem
+    const { episodePubDate, episodeTitle, podcastImageUrl, podcastId, podcastIsExplicit,
+      podcastTitle } = nowPlayingItem
     imgUrl = podcastImageUrl
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
     subTitle = episodeTitle
     bottomText = readableDate(episodePubDate)
+    isExplicit = podcastIsExplicit
   } else if (podcast) {
     subTitle = generateAuthorText(podcast.authors)
     bottomText = generateCategoryNodes(podcast.categories, handleLinkClick)
     imgUrl = podcast.imageUrl
     title = podcast.title
+    isExplicit = podcast.isExplicit
   }
 
   return (
@@ -146,7 +152,15 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
         <div className='media-header__middle'>
           {
             subTitle &&
-              <div className='media-header__sub-title'>{subTitle}</div>
+              <div className='media-header__sub-title'>
+                {subTitle}
+              </div>
+          }
+          {
+            isExplicit &&
+              <div className='media-header__is-explicit'>
+                <Badge pill>NSFW</Badge>
+              </div>
           }
         </div>
         <div className='media-header__bottom'>
