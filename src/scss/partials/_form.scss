@@ -18,13 +18,14 @@ form {
 
   .checkbox-label {
     cursor: pointer;
+    font-weight: 300;
 
     input {
       cursor: pointer;
     }
 
     .form-check-input { 
-      margin-top: 0.1875rem;
+      margin-top: 1px;
     }
   }
 }

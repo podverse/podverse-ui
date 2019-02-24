@@ -14,6 +14,7 @@ type Props = {
   episode?: any
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleSubscribe?: any
+  hideNSFWLabels?: boolean
   isSubscribed?: boolean
   isSubscribing?: boolean
   mediaRef?: any
@@ -62,8 +63,8 @@ const generateCategoryNodes = (categories, handleLinkClick) => {
 }
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
-  const { episode, handleLinkClick, handleToggleSubscribe, isSubscribed, isSubscribing,
-    mediaRef, nowPlayingItem, podcast } = props
+  const { episode, handleLinkClick, handleToggleSubscribe, hideNSFWLabels, isSubscribed,
+    isSubscribing, mediaRef, nowPlayingItem, podcast } = props
 
   let bottomText
   let bottomTextSide
@@ -157,7 +158,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
               </div>
           }
           {
-            isExplicit &&
+            isExplicit && !hideNSFWLabels &&
               <div className='media-header__is-explicit'>
                 <Badge pill>NSFW</Badge>
               </div>
