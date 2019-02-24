@@ -65,7 +65,7 @@ class MakeClipModal extends React.Component<Props, State> {
     this.state = {
       errorEndTime: undefined,
       errorStartTime: undefined,
-      isPublic: props.initialIsPublic,
+      isPublic: props.initialIsPublic || props.initialIsPublic === null,
       isPublicIsOpen: false
     }
 
