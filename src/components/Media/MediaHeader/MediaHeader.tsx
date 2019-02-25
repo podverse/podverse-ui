@@ -4,7 +4,6 @@ import { Badge } from 'reactstrap'
 import { getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref,
   getLinkCategoryAs } from 'lib/constants'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
-import { readableDate } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
@@ -64,7 +63,7 @@ const generateCategoryNodes = (categories, handleLinkClick) => {
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
   const { episode, handleLinkClick, handleToggleSubscribe, hideNSFWLabels, isSubscribed,
-    isSubscribing, mediaRef, nowPlayingItem, podcast } = props
+    isSubscribing, mediaRef, podcast } = props
 
   let bottomText
   let bottomTextSide
@@ -80,8 +79,8 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     title = episode.podcast.title
     titleAs = getLinkPodcastAs(episode.podcast.id)
     titleHref = getLinkPodcastHref(episode.podcast.id)
-    subTitle = episode.title
-    bottomText = readableDate(episode.pubDate)
+    subTitle = generateAuthorText(episode.podcast.authors)
+    bottomText = generateCategoryNodes(episode.podcast.categories, handleLinkClick)
     isExplicit = episode.podcast.isExplicit
   } else if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef)
@@ -93,16 +92,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     titleHref = getLinkPodcastHref(podcastId)
     subTitle = generateAuthorText(podcastAuthors)
     bottomText = generateCategoryNodes(podcastCategories, handleLinkClick)
-    isExplicit = podcastIsExplicit
-  } else if (nowPlayingItem) {
-    const { episodePubDate, episodeTitle, podcastImageUrl, podcastId, podcastIsExplicit,
-      podcastTitle } = nowPlayingItem
-    imgUrl = podcastImageUrl
-    title = podcastTitle
-    titleAs = getLinkPodcastAs(podcastId)
-    titleHref = getLinkPodcastHref(podcastId)
-    subTitle = episodeTitle
-    bottomText = readableDate(episodePubDate)
     isExplicit = podcastIsExplicit
   } else if (podcast) {
     subTitle = generateAuthorText(podcast.authors)
