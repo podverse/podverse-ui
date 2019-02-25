@@ -119,7 +119,7 @@
 }
 
 .mp-queue-modal {
-  
+
   h6:first-of-type {
     margin-top: 0;
   }
@@ -128,6 +128,10 @@
     display: flex;
     margin-bottom: 1rem;
 
+    h3 {
+      flex: 0 0 33%;
+    }
+
     .mp-queue-modal-header__dropdown {
       flex: 1;
     }
@@ -135,7 +139,7 @@
     .mp-queue-modal-header__edit {
       background-color: transparent;
       border-color: transparent;
-      flex: 1;
+      flex: 0 0 34%;
       text-align: center;
 
       button {
@@ -148,7 +152,7 @@
     }
 
     .mp-queue-modal-header__close {
-      flex: 1;
+      flex: 0 0 33%;
     }
   }
   .scrollable-area {
