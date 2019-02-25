@@ -190,6 +190,12 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                         <Input
                           innerRef={el => inputTitle = el}
                           name='mp-add-to-modal-create-playlist__title'
+                          onKeyPress={event => {
+                            if (event.key === 'Enter' && handleCreatePlaylistSave) {
+                              event.preventDefault()
+                              handleCreatePlaylistSave(inputTitle.value)
+                            }
+                          }}
                           placeholder='title of playlist'
                           type='text' />
                         <InputGroupAddon addonType='append'>
