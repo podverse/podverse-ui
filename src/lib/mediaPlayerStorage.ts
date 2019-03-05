@@ -29,6 +29,9 @@ export const popNextFromQueueStorage = () => {
 }
 
 export const addItemToPriorityQueueStorage = (newItem, isLast) => {
+
+  if (!newItem) return
+
   const jsonItems = localStorage.getItem(kPriorityQueue)
 
   if (jsonItems) {

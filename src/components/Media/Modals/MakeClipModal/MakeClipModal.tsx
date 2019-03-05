@@ -202,7 +202,7 @@ class MakeClipModal extends React.Component<Props, State> {
           <Row>
             <Col xs='6'>
               <FormGroup>
-                <Label for='make-clip-modal__start-time'>Start Time</Label>
+                <Label for='make-clip-modal__start-time'>Start</Label>
                 <button
                   className='make-clip-modal__start-time-preview'
                   onClick={this.startTimePreview}
@@ -226,7 +226,7 @@ class MakeClipModal extends React.Component<Props, State> {
             </Col>
             <Col xs='6'>
               <FormGroup>
-                <Label for='make-clip-modal__end-time'>End Time</Label>
+                <Label for='make-clip-modal__end-time'>End</Label>
                 <button
                   className='make-clip-modal__end-time-preview'
                   onClick={this.endTimePreview}
@@ -238,7 +238,7 @@ class MakeClipModal extends React.Component<Props, State> {
                   innerRef={this.inputEndTime}
                   invalid={!!errorEndTime}
                   name='make-clip-modal__end-time'
-                  placeholder='optional'
+                  placeholder='hh:mm:ss'
                   type='text' />
                 {
                   !!errorEndTime &&

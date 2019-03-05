@@ -44,13 +44,11 @@ html body {
   }
 
   p {
-    font-size: $text-sm-rem;
     font-weight: 300;
     margin: 0 0 1rem 0;
   }
 
   li {
-    font-size: $text-sm-rem;
     font-weight: 300;
   }
 
@@ -83,6 +81,12 @@ html body {
 
   .hide {
     display: none;
+  }
+
+  @media (max-width: 399px) {
+    .hide-tiny {  
+      display: none;
+    }
   }
 
   .italic {
