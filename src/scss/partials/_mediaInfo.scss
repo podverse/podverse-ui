@@ -47,6 +47,10 @@
     display: flex;
     margin: 1.25rem 0;
 
+    button {
+      padding-top: 8px;
+    }
+
     .media-info-controls__play svg {
       margin-left: 2px;
     }
