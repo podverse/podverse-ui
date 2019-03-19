@@ -167,8 +167,12 @@
       display: none;
     }
 
-    [data-react-beautiful-dnd-draggable]:last-of-type hr {
-      display: none;
+    [data-react-beautiful-dnd-draggable]:last-of-type {
+      margin-bottom: 76px;
+
+      hr {
+        display: none;
+      }
     }
 
     [data-react-beautiful-dnd-draggable] {
