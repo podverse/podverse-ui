@@ -198,8 +198,8 @@ export class QueueModal extends React.Component<Props, State> {
                   key={`${queueModalPriorityItemKey}c${index}`}
                   showMove={!isEditing}
                   showRemove={isEditing} />
+                <hr className='pv-divider' />
               </div>
-              <hr className='pv-divider' />
             </React.Fragment>
           )}
         </Draggable>
@@ -229,8 +229,8 @@ export class QueueModal extends React.Component<Props, State> {
                   key={`${queueModalSecondaryItemKey}c${index}`}
                   showMove={!isEditing}
                   showRemove={isEditing} />
+                <hr className='pv-divider' />
               </div>
-              <hr className='pv-divider' />
             </React.Fragment>
           )}
         </Draggable>

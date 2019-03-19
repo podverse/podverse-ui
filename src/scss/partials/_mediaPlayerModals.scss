@@ -157,7 +157,17 @@
     margin-right: -1rem;
     padding-right: 1rem;
 
-    [data-react-beautiful-dnd-droppable] hr:last-of-type {
+    .media-list-item-a__title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    [data-react-beautiful-dnd-draggable][style*="fixed"] hr {
+      display: none;
+    }
+
+    [data-react-beautiful-dnd-draggable]:last-of-type hr {
       display: none;
     }
 
