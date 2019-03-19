@@ -125,9 +125,12 @@ export class MediaInfo extends React.Component<Props, State> {
           }
           {
             clipTitle &&
-            <div className='media-info__clip-title'>
-              Clip: {clipTitle}
-            </div>
+            <React.Fragment>
+              <hr />
+              <div className='media-info__clip-title'>
+                Clip: {clipTitle}
+              </div>
+            </React.Fragment>
           }
           {
             clipTime &&
