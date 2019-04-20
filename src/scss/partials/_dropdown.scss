@@ -1,4 +1,10 @@
 body {
+  .one-option-only {
+    background-color: transparent;
+    border: none;
+    padding: 6px 0;
+  }
+
   .btn-secondary.dropdown-toggle {
     margin: 0 -0.75rem;
 
@@ -23,11 +29,13 @@ body {
 
 [theme=light] {
   body {
+    .btn.one-option-only {
+      color: $black;
+    }
     .btn-secondary.dropdown-toggle {
       background-color: $gray-lightest;
       border: none !important;
       color: $black;
-      margin: 0 -0.75rem;
       
       &:hover {
         background-color: $gray-lightest;
@@ -68,6 +76,9 @@ body {
 
 [theme=dark] {
   body {
+    .btn.one-option-only {
+      color: $white;
+    }
     .btn-secondary.dropdown-toggle {
       background-color: transparent;
       border: none !important;

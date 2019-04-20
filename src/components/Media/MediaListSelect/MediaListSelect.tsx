@@ -56,20 +56,24 @@ export class MediaListSelect extends React.Component<Props, State> {
     const selectClass = isSubSelect ? 'media-list__select' : 'media-list__sub-select'
 
     return (
-      <Dropdown
-        className={`${selectClass} ${className}`}
-        direction='down'
-        isOpen={this.state.dropdownOpen}
-        toggle={this.toggle}>
-        <DropdownToggle
-          caret
-          className='transparent' >
-          {selectedText}
-        </DropdownToggle>
-        <DropdownMenu>
-          {itemNodes}
-        </DropdownMenu>
-      </Dropdown>
+      items.length > 1 ?
+        <Dropdown
+          className={`${selectClass} ${className}`}
+          direction='down'
+          isOpen={this.state.dropdownOpen}
+          toggle={this.toggle}>
+          <DropdownToggle
+            caret
+            className='transparent' >
+            {selectedText}
+          </DropdownToggle>
+          <DropdownMenu>
+            {itemNodes}
+          </DropdownMenu>
+        </Dropdown> :
+        <div className={`${selectClass} dropdown`}>
+          <div className={`btn one-option-only`}>{selectedText}</div>
+        </div>
     )
   }
 }
