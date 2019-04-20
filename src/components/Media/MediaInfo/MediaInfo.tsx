@@ -73,7 +73,7 @@ export class MediaInfo extends React.Component<Props, State> {
       episodeHref = getLinkEpisodeHref(episode.id)
       episodePubDate = readableDate(episode.pubDate)
       moreInfo = episode.description
-      currentItem = convertToNowPlayingItem(episode)
+      currentItem = convertToNowPlayingItem(episode, null, null)
     } else if (mediaRef) {
       episodeTitle = mediaRef.episode.title || 'Untitled episode'
       episodeAs = getLinkEpisodeAs(mediaRef.episode.id)
@@ -85,7 +85,7 @@ export class MediaInfo extends React.Component<Props, State> {
       createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false
       createdByName = mediaRef.owner && mediaRef.owner.name ? mediaRef.owner.name : 'anonymous'
       moreInfo = mediaRef.episode.description
-      currentItem = convertToNowPlayingItem(mediaRef)
+      currentItem = convertToNowPlayingItem(mediaRef, null, null)
     } else if (nowPlayingItem) {
       episodeTitle = nowPlayingItem.episodeTitle
       episodeAs = getLinkEpisodeAs(nowPlayingItem.episodeId)

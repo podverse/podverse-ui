@@ -83,9 +83,9 @@ const AddToModal: React.StatelessComponent<Props> = props => {
   let playingItem
 
   if (episode) {
-    playingItem = convertToNowPlayingItem(episode)
+    playingItem = convertToNowPlayingItem(episode, null, null)
   } else if (mediaRef) {
-    playingItem = convertToNowPlayingItem(mediaRef)
+    playingItem = convertToNowPlayingItem(mediaRef, null, null)
   } else if (nowPlayingItem) {
     playingItem = nowPlayingItem
   }

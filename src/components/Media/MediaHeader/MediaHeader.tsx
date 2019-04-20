@@ -83,7 +83,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     bottomText = generateCategoryNodes(episode.podcast.categories, handleLinkClick)
     isExplicit = episode.podcast.isExplicit
   } else if (mediaRef) {
-    const item = convertToNowPlayingItem(mediaRef)
+    const item = convertToNowPlayingItem(mediaRef, null, null)
     const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId,
       podcastIsExplicit, podcastTitle } = item
     imgUrl = podcastImageUrl
