@@ -245,7 +245,6 @@ export class QueueModal extends React.Component<Props, State> {
           key={`${queueModalHistoryItemKey}${index}`}
           itemType='now-playing-item' />
       ))
-      historyItemNodes.reverse()
     }
 
     let appEl
