@@ -17,6 +17,7 @@ type Props = {
   clipFinished?: boolean
   duration: number | null
   handleClipRestart?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  handleGetPlaybackPositionFromHistory?: Function
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleOnEpisodeEnd?: Function
   handleOnPastClipTime?: Function
@@ -264,7 +265,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   onDuration = duration => {
-    const { nowPlayingItem } = this.props
+    const { handleGetPlaybackPositionFromHistory, nowPlayingItem } = this.props
     const { clipStartTime } = nowPlayingItem
 
     this.setState({
@@ -272,8 +273,22 @@ export class MediaPlayer extends React.Component<Props, State> {
       isLoading: false
     })
 
+    let shouldCheckHistoryForPlaybackPosition =
+      (typeof window !== 'undefined' && window.player) &&
+      !(clipStartTime && clipStartTime > 0) &&
+      (nowPlayingItem && nowPlayingItem.userPlaybackPosition && nowPlayingItem.userPlaybackPosition > 0)
+    let playbackPosition = 0
+
+    if (shouldCheckHistoryForPlaybackPosition && handleGetPlaybackPositionFromHistory) {
+      playbackPosition = handleGetPlaybackPositionFromHistory()
+    } else if (nowPlayingItem && nowPlayingItem.userPlaybackPosition && nowPlayingItem.userPlaybackPosition > 0) {
+      playbackPosition = nowPlayingItem.userPlaybackPosition || 0
+    }
+
     if (typeof window !== 'undefined' && window.player && clipStartTime && clipStartTime > 0) {
       window.player.seekTo(Math.floor(clipStartTime))
+    } else if (typeof window !== 'undefined' && window.player) {
+      window.player.seekTo(playbackPosition)
     }
 
     this.forceUpdate()
