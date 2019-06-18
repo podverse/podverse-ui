@@ -86,13 +86,18 @@
     line-height: 21px;
     margin-top: 1rem;
 
-    h1, h2, h3 {
+    h1, h2 {
       font-size: $text-lg-rem;
       margin: 1rem 0;
     }
 
-    h4, h5, h6, p {
+    h3, h4 {
       font-size: $text-md-rem;
+      margin: 1rem 0;
+    }
+
+    h5, h6, p {
+      font-size: $text-sm-rem;
       margin: 1rem 0;
     }
 
