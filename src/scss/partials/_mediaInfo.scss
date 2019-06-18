@@ -85,6 +85,16 @@
     font-weight: 300;
     line-height: 21px;
     margin-top: 1rem;
+
+    h1, h2, h3 {
+      font-size: $text-lg-rem;
+      margin-bottom: 1rem;
+    }
+
+    h4, h5, h6 {
+      font-size: $text-md-rem;
+      margin-bottom: 1rem;
+    }
   }
 }
 
