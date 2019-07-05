@@ -16,6 +16,7 @@ type Props = {
   initialIsPublic?: boolean
   isDeleting?: boolean
   isEditing?: boolean
+  isLoggedIn?: boolean
   isSaving?: boolean
   isOpen?: boolean
   player?: any
@@ -136,7 +137,7 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { endTime, handleDelete, handleHideModal, isDeleting, isEditing, isOpen, isSaving,
+    const { endTime, handleDelete, handleHideModal, isDeleting, isEditing, isLoggedIn, isOpen, isSaving,
       startTime, title } = this.props
     const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen } = this.state
 
@@ -161,43 +162,54 @@ class MakeClipModal extends React.Component<Props, State> {
               <h3><FontAwesomeIcon icon='edit' /> &nbsp;Edit Clip</h3> :
               <h3><FontAwesomeIcon icon='cut' /> &nbsp;Make Clip</h3>
           }
-          <Dropdown
-            className='make-clip-modal__is-public transparent-btn'
-            isOpen={isPublicIsOpen}
-            toggle={this.toggleIsPublic}>
-            <DropdownToggle caret>
-              {
-                isPublic &&
-                  <React.Fragment>
-                    <FontAwesomeIcon icon='globe-americas' /> Public
-                  </React.Fragment>
-              }
-              {
-                !isPublic &&
-                  <React.Fragment>
-                    <FontAwesomeIcon icon='link' /> Only with link
-                  </React.Fragment>
-              }
-            </DropdownToggle>
-            <DropdownMenu>
-              {
-                !isPublic &&
-                  <DropdownItem
-                    data-value='public'
-                    onClick={this.selectIsPublic}>
-                    <FontAwesomeIcon icon='globe-americas' /> Public
-                  </DropdownItem>
-              }
-              {
-                isPublic &&
-                  <DropdownItem
-                    data-value='only-with-link'
-                    onClick={this.selectIsPublic}>
-                    <FontAwesomeIcon icon='link' /> Only with link
-                  </DropdownItem>
-              }
-            </DropdownMenu>
-          </Dropdown>
+          {
+            !isLoggedIn &&
+              <div className='dropdown make-clip-modal__is-public'>
+                <div className='btn one-option-only'>
+                  <FontAwesomeIcon icon='link' /> Only with Link
+                </div>
+              </div>
+          }
+          {
+            isLoggedIn &&
+              <Dropdown
+                className='make-clip-modal__is-public transparent-btn'
+                isOpen={isPublicIsOpen}
+                toggle={this.toggleIsPublic}>
+                <DropdownToggle caret>
+                  {
+                    isPublic &&
+                      <React.Fragment>
+                        <FontAwesomeIcon icon='globe-americas' /> Public
+                      </React.Fragment>
+                  }
+                  {
+                    !isPublic &&
+                      <React.Fragment>
+                        <FontAwesomeIcon icon='link' /> Only with link
+                      </React.Fragment>
+                  }
+                </DropdownToggle>
+                <DropdownMenu>
+                  {
+                    !isPublic &&
+                      <DropdownItem
+                        data-value='public'
+                        onClick={this.selectIsPublic}>
+                        <FontAwesomeIcon icon='globe-americas' /> Public
+                      </DropdownItem>
+                  }
+                  {
+                    isPublic &&
+                      <DropdownItem
+                        data-value='only-with-link'
+                        onClick={this.selectIsPublic}>
+                        <FontAwesomeIcon icon='link' /> Only with link
+                      </DropdownItem>
+                  }
+                </DropdownMenu>
+              </Dropdown>
+          }
           <div className='clearfix'></div>
           <Row>
             <Col xs='6'>
