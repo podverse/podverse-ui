@@ -1,8 +1,8 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
-import { Alert, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap'
-import { PVButton as Button } from 'components/Button/Button'
-import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
+import { Alert, Form /*, FormFeedback, FormGroup, Input, Label */ } from 'reactstrap'
+// import { PVButton as Button } from 'components/Button/Button'
+// import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { validateEmail, validatePassword } from 'lib/utility/validation'
 
@@ -150,8 +150,8 @@ export class SignUpModal extends React.Component<Props, State> {
   render () {
 
     const { errorResponse, hideModal, isLoading, isOpen, topText } = this.props
-    const { email, errorEmail, errorPassword, errorPasswordConfirm,
-      password, passwordConfirm } = this.state
+    // const { email, errorEmail, errorPassword, errorPasswordConfirm,
+    //   password, passwordConfirm } = this.state
 
     let appEl
     // @ts-ignore
@@ -178,7 +178,7 @@ export class SignUpModal extends React.Component<Props, State> {
             </Alert>
           }
           {topText}
-          <FormGroup>
+          {/* <FormGroup>
             <Label for='sign-up-modal__email'>Email</Label>
             <Input
               data-state-key='email'
@@ -249,7 +249,7 @@ export class SignUpModal extends React.Component<Props, State> {
                   onClick={this.handleSignUp}
                   text='Submit' />
               </React.Fragment>
-            } />
+            } /> */}
         </Form>
       </Modal>
     )
