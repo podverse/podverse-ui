@@ -128,7 +128,7 @@ export class MediaInfo extends React.Component<Props, State> {
             <React.Fragment>
               <hr />
               <div className='media-info__clip-title'>
-                Clip: {clipTitle}
+                {clipTitle}
               </div>
             </React.Fragment>
           }

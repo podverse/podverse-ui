@@ -32,6 +32,13 @@
     margin-top: 0.375rem;
   }
 
+  .media-info__clip-status {
+    font-size: $text-sm-rem;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+    margin-top: 0.375rem;
+  }
+
   .media-info__last-updated {
     float: right;
     font-size: $text-sm-rem;
@@ -139,6 +146,11 @@ html[theme=light] {
       color: $gray-dark;
     }
 
+
+    .media-info__clip-status {
+      color: $gray-dark;
+    }
+
     .media-info__item-count, .media-info__last-updated {
       color: $gray-dark;
     }
@@ -187,6 +199,10 @@ html[theme=dark] {
     }
 
     .media-info__clip-created-by {
+      color: $gray-light;
+    }
+
+    .media-info__clip-status {
       color: $gray-light;
     }
 
