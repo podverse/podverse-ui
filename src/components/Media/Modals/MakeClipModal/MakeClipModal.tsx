@@ -58,6 +58,12 @@ const startTimeErrors = {
   required: 'Start time is required'
 }
 
+const onlyWithClipAlertText = `Only with Link means only people who have your clip's link can play it.
+
+These clips are not private, but they will not show up automatically in lists on Podverse.
+
+A premium account is required to create Public clips.`
+
 class MakeClipModal extends React.Component<Props, State> {
 
   constructor (props) {
@@ -165,7 +171,7 @@ class MakeClipModal extends React.Component<Props, State> {
           {
             !isLoggedIn &&
               <div className='dropdown make-clip-modal__is-public'>
-                <div className='btn one-option-only'>
+                <div className='btn one-option-only' onClick={() => window.alert(onlyWithClipAlertText)}>
                   <FontAwesomeIcon icon='link' /> Only with Link
                 </div>
               </div>
