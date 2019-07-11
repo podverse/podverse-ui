@@ -66,6 +66,14 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
     this.setState(newState)
   }
 
+  handleOnKeyPress = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      const { email } = this.state
+      this.props.handleSubmit(email)
+    }
+  }
+
   handleSubmit = () => {
     const { email } = this.state
     this.props.handleSubmit(email)
@@ -107,6 +115,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
               name='forgot-password-modal__email'
               onBlur={this.handleEmailInputBlur}
               onChange={this.handleEmailInputChange}
+              onKeyPress={this.handleOnKeyPress}
               placeholder='hello@podverse.fm'
               type='text'
               value={email} />
