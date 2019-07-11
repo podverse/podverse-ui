@@ -19,6 +19,13 @@
 
     .nav-item {
       margin-left: 0.75rem;
+
+      button.dropdown-toggle {
+        margin-right: 4px;
+        padding-right: 15px;
+        border: none !important;
+        box-shadow: none !important;
+      }
     }
   }
 
