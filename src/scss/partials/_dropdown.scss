@@ -33,27 +33,27 @@ body {
       color: $black;
     }
     .btn-secondary.dropdown-toggle {
-      background-color: $gray-lightest;
+      background-color: transparent;
       border: none !important;
       color: $black;
       
       &:hover {
-        background-color: $gray-lightest;
+        background-color: transparent;
         color: $gray-darker;
       }
   
       &:focus {
-        background-color: $gray-lightest;
+        background-color: transparent;
         color: $gray-darker;
       }
 
       &:active {
-        background-color: $gray-lightest;
+        background-color: transparent;
         color: $gray-darker;
       }
 
       &.header-dropdown {
-        background-color: $gray-lighter;
+        background-color: transparent;
         color: $black;
       }
     }
