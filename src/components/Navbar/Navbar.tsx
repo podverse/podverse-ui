@@ -47,7 +47,8 @@ export class Navbar extends React.Component<Props, State> {
         {...(x.href ? { href: x.href } : {})}
         {...(x.as ? { as: x.as } : {})}>
         <NavItem key={`${navItemKey}b${index}`}>
-          <NavLink onClick={handleLinkClick}>
+          <NavLink
+            {...(x.href ? { href: x.href } : {})}>
             {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
           </NavLink>
         </NavItem>
@@ -63,6 +64,7 @@ export class Navbar extends React.Component<Props, State> {
             {...(x.href ? { href: x.href } : {})}
             {...(x.as ? { as: x.as } : {})}>
             <DropdownItem
+              {...(x.href ? { href: x.href } : {})}
               onClick={event => {
                 x.onClick()
                 this.setState({ dropdownIsOpen: false })
@@ -75,6 +77,7 @@ export class Navbar extends React.Component<Props, State> {
         return (
           <DropdownItem
             key={`${navbarDropdownItemKey}${index}`}
+            {...(x.href ? { href: x.href } : {})}
             onClick={event => {
               x.onClick()
               this.setState({ dropdownIsOpen: false })
@@ -97,7 +100,9 @@ export class Navbar extends React.Component<Props, State> {
             <NavItem
               className='mobile-nav-item'
               key={`${mobileNavItemKey}b${index}`}>
-              <NavLink onClick={x.onClick}>
+              <NavLink
+                {...(x.href ? { href: x.href } : {})}
+                onClick={x.onClick}>
                 {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
               </NavLink>
             </NavItem>
@@ -108,7 +113,8 @@ export class Navbar extends React.Component<Props, State> {
           <NavItem
             className='mobile-nav-item'
             key={`${mobileNavItemKey}b${index}`}>
-            <NavLink onClick={x.onClick}>
+            <NavLink
+              onClick={x.onClick}>
               {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
             </NavLink>
           </NavItem>
@@ -122,7 +128,9 @@ export class Navbar extends React.Component<Props, State> {
           <Link
             {...(brandAs ? { as: brandAs } : {})}
             {...(brandHref ? { href: brandHref } : {})}>
-            <NavbarBrand onClick={handleLinkClick}>{
+            <NavbarBrand
+              {...(brandHref ? { href: brandHref } : {})}
+              onClick={handleLinkClick}>{
               brandHideText ? null : brandText
             }</NavbarBrand>
           </Link>
@@ -136,7 +144,7 @@ export class Navbar extends React.Component<Props, State> {
                 isOpen={dropdownMenuIsOpen}
                 nav
                 toggle={handleToggleDropdownMenu}>
-                <DropdownToggle nav caret>
+                <DropdownToggle caret>
                   {dropdownText}
                 </DropdownToggle>
                 <DropdownMenu right>
