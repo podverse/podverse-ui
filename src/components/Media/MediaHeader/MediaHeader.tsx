@@ -106,21 +106,18 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       <img className='media-header__image' src={imgUrl} />
       <div className='text-wrapper'>
         <div className='media-header__top'>
-          {
-            title &&
-              <React.Fragment>
-                {
-                  titleHref ?
-                    <Link
-                      {...(titleHref ? { href: titleHref } : {})}
-                      {...(titleAs ? { as: titleAs } : {})}>
-                      <a
-                        className='media-header__title'
-                        onClick={handleLinkClick}>{title}</a>
-                    </Link> : <span className='media-header__title'>{title}</span>
-                }
-              </React.Fragment>
-          }
+          <React.Fragment>
+            {
+              titleHref ?
+                <Link
+                  {...(titleHref ? { href: titleHref } : {})}
+                  {...(titleAs ? { as: titleAs } : {})}>
+                  <a
+                    className='media-header__title'
+                    onClick={handleLinkClick}>{title}</a>
+                </Link> : <span className='media-header__title'>{title || 'Untitled podcast'}</span>
+            }
+          </React.Fragment>
           <button
             className='media-header__subscribe'
             onClick={handleToggleSubscribe}>
