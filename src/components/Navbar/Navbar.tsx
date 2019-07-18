@@ -48,7 +48,8 @@ export class Navbar extends React.Component<Props, State> {
         {...(x.as ? { as: x.as } : {})}>
         <NavItem key={`${navItemKey}b${index}`}>
           <NavLink
-            {...(x.href ? { href: x.href } : {})}>
+            {...(x.href ? { href: x.href } : {})}
+            onClick={x.onClick}>
             {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
           </NavLink>
         </NavItem>
