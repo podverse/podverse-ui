@@ -1,17 +1,6 @@
 import * as React from 'react'
-import {
-  Collapse,
-  Navbar as BSNavbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap'
+import { Collapse, Navbar as BSNavbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Dropdown,
+  DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { clone } from 'lib/utility'
@@ -27,6 +16,7 @@ type Props = {
   handleLinkClick: any
   handleToggleDropdownMenu: any
   handleToggleMobileMenu: any
+  isDarkMode?: boolean
   mobileMenuIsOpen?: boolean
   navItems?: any
 }
@@ -38,7 +28,7 @@ export class Navbar extends React.Component<Props, State> {
   render () {
     const { brandAs, brandHideText, brandText, brandHref, dropdownItems,
       dropdownMenuIsOpen, dropdownText, handleLinkClick, handleToggleDropdownMenu,
-      handleToggleMobileMenu, mobileMenuIsOpen, navItems } = this.props
+      handleToggleMobileMenu, isDarkMode, mobileMenuIsOpen, navItems } = this.props
 
     let navItemKey = 'navItemKey'
     const navItemsEls = navItems.map((x, index) =>
@@ -125,7 +115,10 @@ export class Navbar extends React.Component<Props, State> {
 
     return (
       <div className='navbar__bg'>
-        <BSNavbar color='light' light expand='sm'>
+        <BSNavbar
+          color={isDarkMode ? 'dark' : 'light'}
+          {...(isDarkMode ? { dark: true } : { light: true })}
+          expand='sm'>
           <Link
             {...(brandAs ? { as: brandAs } : {})}
             {...(brandHref ? { href: brandHref } : {})}>
