@@ -7,6 +7,7 @@ export interface Props {
   children?: any
   className?: string
   color?: string
+  dataclipboardtarget?: string
   disabled?: boolean
   isActive?: boolean
   isOnlyIcon?: boolean
@@ -27,7 +28,7 @@ const getButtonClassName = (props) => {
 }
 
 export const PVButton: React.StatelessComponent<Props> = props => {
-  const { children, color, disabled, isActive, isLoading, onClick, outline,
+  const { children, color, dataclipboardtarget, disabled, isActive, isLoading, onClick, outline,
     tag, text } = props
 
   const buttonClass = getButtonClassName(props)
@@ -37,6 +38,7 @@ export const PVButton: React.StatelessComponent<Props> = props => {
       active={isActive}
       className={buttonClass}
       color={color}
+      data-clipboard-target={dataclipboardtarget}
       disabled={disabled}
       onClick={onClick}
       outline={outline}

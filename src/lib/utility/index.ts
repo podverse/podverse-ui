@@ -156,18 +156,6 @@ export function secondsToReadableDuration (sec) {
   return fullDisplay
 }
 
-export const copyToClipboard = (text) => {
-  const el = document.createElement('textarea')
-  el.value = text
-  el.setAttribute('readonly', '')
-  el.style.position = 'absolute'
-  el.style.left = '-9999px'
-  document.body.appendChild(el)
-  el.select()
-  document.execCommand('copy')
-  document.body.removeChild(el)
-}
-
 export const clone = obj => {
   if (null == obj || "object" != typeof obj) return obj
   var copy = obj.constructor()

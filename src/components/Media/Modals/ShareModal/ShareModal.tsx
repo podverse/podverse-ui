@@ -1,10 +1,10 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
-import { Button, FormGroup, Input, InputGroup, InputGroupAddon,
-  Label } from 'reactstrap'
+import { Form, FormGroup, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { PVButton as Button } from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
-import { copyToClipboard } from 'lib/utility'
+const ClipboardJS = require('clipboard')
 
 type Props = {
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -41,8 +41,11 @@ export class ShareModal extends React.Component<Props, State> {
     }
   }
 
+  _onAfterOpen = () => {
+    new ClipboardJS('.mp-share-modal .btn-primary')
+  }
+
   handleClipCopy = () => {
-    copyToClipboard(this.props.playerClipLinkHref)
     this.setState({ lastCopied: 'clip' })
     setTimeout(() => {
       this.setState({ lastCopied: undefined })
@@ -50,7 +53,6 @@ export class ShareModal extends React.Component<Props, State> {
   }
 
   handleEpisodeCopy = () => {
-    copyToClipboard(this.props.playerEpisodeLinkHref)
     this.setState({ lastCopied: 'episode' })
     setTimeout(() => {
       this.setState({ lastCopied: undefined })
@@ -58,7 +60,6 @@ export class ShareModal extends React.Component<Props, State> {
   }
 
   handlePodcastCopy = () => {
-    copyToClipboard(this.props.playerPodcastLinkHref)
     this.setState({ lastCopied: 'podcast' })
     setTimeout(() => {
       this.setState({ lastCopied: undefined })
@@ -81,75 +82,84 @@ export class ShareModal extends React.Component<Props, State> {
         appElement={appEl}
         contentLabel='Share links'
         isOpen={isOpen}
+        onAfterOpen={this._onAfterOpen}
         onRequestClose={handleHideModal}
         portalClassName='mp-share-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <h3><FontAwesomeIcon icon='share' /> &nbsp;Share</h3>
         <CloseButton onClick={handleHideModal} />
-        {
-          playerClipLinkHref &&
-          <FormGroup>
-            <Label for='share-copy-clip'>Clip</Label>
-            <InputGroup id='share-copy-clip'>
-              <Input
-                readOnly={true}
-                value={playerClipLinkHref} />
-              <InputGroupAddon
-                addonType='append'>
-                <Button
-                  color='primary'
-                  onClick={this.handleClipCopy}>
-                  {
-                    lastCopied === 'clip' ? 'Copied!' : 'Copy'
-                  }
-                </Button>
-              </InputGroupAddon>
-            </InputGroup>
-          </FormGroup>
-        }
-        {
-          playerEpisodeLinkHref &&
-          <FormGroup>
-            <Label for='share-copy-episode'>Episode</Label>
-            <InputGroup id='share-copy-episode'>
-              <Input
-                readOnly={true}
-                value={playerEpisodeLinkHref} />
-              <InputGroupAddon
-                addonType='append'>
-                <Button
-                  color='primary'
-                  onClick={this.handleEpisodeCopy}>
-                  {
-                    lastCopied === 'episode' ? 'Copied!' : 'Copy'
-                  }
-                </Button>
-              </InputGroupAddon>
-            </InputGroup>
-          </FormGroup>
-        }
-        {
-          playerPodcastLinkHref &&
-          <FormGroup>
-            <Label for='share-copy-podcast'>Podcast</Label>
-            <InputGroup id='share-copy-podcast'>
-              <Input
-                readOnly={true}
-                value={playerPodcastLinkHref} />
-              <InputGroupAddon
-                addonType='append'>
-                <Button
-                  color='primary'
-                  onClick={this.handlePodcastCopy}>
-                  {
-                    lastCopied === 'podcast' ? 'Copied!' : 'Copy'
-                  }
-                </Button>
-              </InputGroupAddon>
-            </InputGroup>
-          </FormGroup>
-        }
+        <Form>
+          {
+            playerClipLinkHref &&
+              <FormGroup>
+                <Label for='share-copy-clip'>Clip</Label>
+                <InputGroup id='share-copy-clip'>
+                  <Input
+                    id='share-copy-clip-input'
+                    readOnly={true}
+                    value={playerClipLinkHref} />
+                  <InputGroupAddon
+                    addonType='append'>
+                    <Button
+                      color='primary'
+                      dataclipboardtarget='#share-copy-clip-input'
+                      onClick={this.handleClipCopy}>
+                      {
+                        lastCopied === 'clip' ? 'Copied!' : 'Copy'
+                      }
+                    </Button>
+                  </InputGroupAddon>
+                </InputGroup>
+              </FormGroup>
+          }
+          {
+            playerEpisodeLinkHref &&
+              <FormGroup>
+                <Label for='share-copy-episode'>Episode</Label>
+                <InputGroup id='share-copy-episode'>
+                  <Input
+                    id='share-copy-episode-input'
+                    readOnly={true}
+                    value={playerEpisodeLinkHref} />
+                  <InputGroupAddon
+                    addonType='append'>
+                    <Button
+                      color='primary'
+                      dataclipboardtarget='#share-copy-episode-input'
+                      onClick={this.handleEpisodeCopy}>
+                      {
+                        lastCopied === 'episode' ? 'Copied!' : 'Copy'
+                      }
+                    </Button>
+                  </InputGroupAddon>
+                </InputGroup>
+              </FormGroup>
+          }
+          {
+            playerPodcastLinkHref &&
+              <FormGroup>
+                <Label for='share-copy-podcast'>Podcast</Label>
+                <InputGroup id='share-copy-podcast'>
+                  <Input
+                    id='share-copy-podcast-input'
+                    readOnly={true}
+                    value={playerPodcastLinkHref} />
+                  <InputGroupAddon
+                    addonType='append'>
+                    <Button
+                      color='primary'
+                      dataclipboardtarget='#share-copy-podcast-input'
+                      onClick={this.handlePodcastCopy}>
+                      {
+                        lastCopied === 'podcast' ? 'Copied!' : 'Copy'
+                      }
+                    </Button>
+                  </InputGroupAddon>
+                </InputGroup>
+              </FormGroup>
+          }
+        </Form>
       </Modal>
     )
   }

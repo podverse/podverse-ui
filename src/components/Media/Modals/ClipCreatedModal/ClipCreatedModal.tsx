@@ -4,7 +4,7 @@ import { Form, FormGroup, Input, InputGroup, InputGroupAddon, Label } from 'reac
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PVButton as Button } from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
-import { copyToClipboard } from 'lib/utility'
+const ClipboardJS = require('clipboard')
 
 type Props = {
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -38,9 +38,11 @@ class ClipCreatedModal extends React.Component<Props, State> {
     }
   }
 
-  copyLink = () => {
-    const { linkHref } = this.props
-    copyToClipboard(linkHref)
+  componentDidMount() {
+    new ClipboardJS('#clip-created-copy-link .btn')
+  }
+
+  _copyLink = () => {
     this.setState({ wasCopied: true })
     setTimeout(() => {
       this.setState({ wasCopied: false })
@@ -73,13 +75,15 @@ class ClipCreatedModal extends React.Component<Props, State> {
             <Label for='clip-created-copy-link'>Clip</Label>
             <InputGroup id='clip-created-copy-link'>
               <Input
+                id='clip-created-copy-link-input'
                 readOnly={true}
                 value={linkHref} />
               <InputGroupAddon
                 addonType='append'>
                 <Button
                   color='primary'
-                  onClick={this.copyLink}
+                  dataclipboardtarget='#clip-created-copy-link-input'
+                  onClick={this._copyLink}
                   text={wasCopied ? 'Copied!' : 'Copy'} />
               </InputGroupAddon>
             </InputGroup>
