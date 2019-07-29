@@ -126,9 +126,11 @@ export class LoginModal extends React.Component<Props, State> {
             childrenLeft={
               <React.Fragment>
                 <Button
+                  className='btn-text'
                   onClick={showForgotPasswordModal}
                   text='Forgot?' />
                 <Button
+                  className='btn-text'
                   onClick={showSignUpModal}
                   text='Sign Up' />
               </React.Fragment>
