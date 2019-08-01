@@ -27,7 +27,7 @@ type Props = {
 type State = {
   errorEndTime?: string
   errorStartTime?: string
-  isPublic: boolean
+  isPublic?: boolean
   isPublicIsOpen: boolean
 }
 
@@ -72,13 +72,22 @@ class MakeClipModal extends React.Component<Props, State> {
     this.state = {
       errorEndTime: undefined,
       errorStartTime: undefined,
-      isPublic: props.initialIsPublic || props.initialIsPublic === null,
+      isPublic: undefined,
       isPublicIsOpen: false
     }
 
     this.inputStartTime = React.createRef()
     this.inputEndTime = React.createRef()
     this.inputTitle = React.createRef()
+  }
+
+  static getDerivedStateFromProps(props, currentState) {
+    if (typeof props.isEditing !== 'undefined' && typeof currentState.isPublic === 'undefined') {
+      return {
+        isPublic: props.initialIsPublic
+      }
+    }
+    return {}
   }
 
   selectIsPublic = e => {
