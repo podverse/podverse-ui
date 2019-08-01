@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
-import { Alert, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap'
+import { Alert, Form, FormFeedback, FormGroup, FormText, Input, Label } from 'reactstrap'
 import { PVButton as Button } from 'components/Button/Button'
 import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
@@ -12,6 +12,7 @@ type Props = {
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void,
   isLoading: boolean
   isOpen: boolean
+  isResetPassword?: boolean
 }
 
 type State = {
@@ -80,7 +81,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { errorResponse, hideModal, isLoading, isOpen } = this.props
+    const { errorResponse, hideModal, isLoading, isOpen, isResetPassword } = this.props
     const { email, errorEmail } = this.state
 
     let appEl
@@ -92,14 +93,14 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
     return (
       <Modal
         appElement={appEl}
-        contentLabel='Forgot Password'
+        contentLabel={isResetPassword ? 'Reset Password' : 'Forgot Password'}
         isOpen={isOpen}
         onRequestClose={hideModal}
         portalClassName='forgot-password-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h3>Forgot Password</h3>
+          <h3>{isResetPassword ? 'Reset Password' : 'Forgot Password'}</h3>
           <CloseButton onClick={hideModal} />
           {
             (errorResponse && !isLoading) &&
@@ -118,12 +119,19 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
               onKeyPress={this.handleOnKeyPress}
               placeholder='hello@podverse.fm'
               type='text'
+              tooltip={!errorEmail}
               value={email} />
             {
               errorEmail &&
-              <FormFeedback invalid='true'>
-                {errorEmail}
-              </FormFeedback>
+                <FormFeedback invalid={true}>
+                  {errorEmail}
+                </FormFeedback>
+            }
+            {
+              !errorEmail &&
+                <FormText>
+                  Check your email after pressing Submit
+                </FormText>
             }
           </FormGroup>
           <ButtonGroup
