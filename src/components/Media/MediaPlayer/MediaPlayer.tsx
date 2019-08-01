@@ -437,7 +437,6 @@ export class MediaPlayer extends React.Component<Props, State> {
             isClientSide &&
               <FilePlayer
                 key={reactPlayerKey}
-                alwaysPauseOnInterruption={true}
                 muted={false}
                 onDuration={this.onDuration}
                 onEnded={handleOnEpisodeEnd}
