@@ -232,14 +232,14 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   timeJumpBackward = () => {
     if (typeof window !== 'undefined' && window.player) {
-      window.player.seekTo(Math.floor(window.player.getCurrentTime()) - 15)
+      window.player.seekTo(Math.floor(window.player.getCurrentTime()) - 30)
       this.forceUpdate()
     }
   }
 
   timeJumpForward = () => {
     if (typeof window !== 'undefined' && window.player) {
-      window.player.seekTo(Math.floor(window.player.getCurrentTime()) + 15)
+      window.player.seekTo(Math.floor(window.player.getCurrentTime()) + 30)
       this.forceUpdate()
     }
   }
