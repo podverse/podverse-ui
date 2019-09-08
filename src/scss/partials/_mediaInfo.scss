@@ -58,6 +58,10 @@
       background-color: transparent;
       padding-top: 8px;
       transition: none;
+
+      svg {
+        @include preventFontAwesomeSizeFOUC;
+      }
     }
 
     .media-info-controls__play svg {
@@ -86,6 +90,12 @@
     div {
       display: inline-block;
       width: 10px;
+    }
+
+    svg {
+      height: 1rem;
+      vertical-align: -0.125rem;
+      width: 0.7rem;
     }
   }
 

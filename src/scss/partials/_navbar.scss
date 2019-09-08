@@ -21,9 +21,7 @@
       margin-left: 0.75rem;
 
       button svg {
-        height: 1rem;
-        vertical-align: -0.125rem;
-        width: 1rem;
+        @include preventFontAwesomeSizeFOUC;
       }
 
       button.dropdown-toggle {

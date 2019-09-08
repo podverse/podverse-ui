@@ -1,5 +1,6 @@
 
 .media-header {
+
   .media-header__image {
     float: left;
     height: 4.75rem;
@@ -26,6 +27,12 @@
     padding: 0;
     text-align: center;
     width: 22px;
+
+    svg {
+      height: 18px;
+      vertical-align: -0.125rem;
+      width: 21px;
+    }
   }
 
   .media-header__edit {
@@ -37,6 +44,12 @@
     margin-top: 3px;
     padding: 0;
     width: 22px;
+
+    svg {
+      height: 18px;
+      vertical-align: -0.125rem;
+      width: 21px;
+    }
   }
 
   .media-header__title {

@@ -1,5 +1,9 @@
 .comparison-table {
   max-width: 460px;
+
+  svg {
+    @include preventFontAwesomeSizeFOUC;
+  }
   
   .comparison-table__header {
     border-style: solid;

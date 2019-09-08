@@ -39,7 +39,7 @@ export class MediaInfo extends React.Component<Props, State> {
 
     this.state = {
       showAddToModal: false,
-      showDescription: props.episode || (props.nowPlayingItem && !props.nowPlayingItem.clipId)
+      showDescription: false
     }
   }
 

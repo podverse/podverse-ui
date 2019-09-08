@@ -3,3 +3,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@mixin preventFontAwesomeSizeFOUC() {
+  height: 1rem;
+  vertical-align: -0.125rem;
+  width: 1rem;
+}
