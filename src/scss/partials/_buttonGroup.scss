@@ -1,56 +1,44 @@
-  .form-btn-group {
+.btn-group {
+  button {
+    background-color: transparent;
+    transition: none;
+  }
+}
+
+.form-btn-group {
+  background-color: transparent;
+  border-color: transparent;
+  display: flex;
+  margin-top: 1.75rem;
+  transition: none;
+
+  .form-btn-group__left {
     display: flex;
-    margin-top: 1.75rem;
+    flex: 1 1 auto;
+    justify-content: flex-start;
 
-    .form-btn-group__left {
-      display: flex;
-      flex: 1 1 auto;
-      justify-content: flex-start;
+    button {
+      font-size: $text-md-rem;
+      line-height: 26px;
+      padding: .375rem 0.25rem;
+      min-width: 52px;
 
-      button {
-        font-size: $text-md-rem;
-        line-height: 26px;
-        padding: .375rem 0.25rem;
-        min-width: 52px;
-
-        &:first-child {
-          margin-right: 0.75rem;
-        }
-      }
-    }
-
-    .form-btn-group__right {
-      display: flex;
-      flex: 1 1 auto;
-      justify-content: flex-end;
-
-      button {
-        &:last-child {
-          margin-left: 1rem;
-        }
+      &:first-child {
+        margin-right: 0.75rem;
       }
     }
   }
 
-  [theme=light] {
-    .form-btn-group {
-      .form-btn-group__left {
-        button {
-          background-color: transparent;
-          border-color: transparent;
-        }
+  .form-btn-group__right {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+
+    button {
+      &:last-child {
+        margin-left: 1rem;
       }
     }
   }
-  
-  [theme=dark] {
-    .form-btn-group {
-      .form-btn-group__left {
-        button {
-          background-color: transparent;
-          border-color: transparent;
-        }
-      }
-    }
-  }
+}
   

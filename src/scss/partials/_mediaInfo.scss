@@ -53,9 +53,11 @@
   .media-info__controls {
     display: flex;
     margin: 1.25rem 0;
-
+    
     button {
+      background-color: transparent;
       padding-top: 8px;
+      transition: none;
     }
 
     .media-info-controls__play svg {
