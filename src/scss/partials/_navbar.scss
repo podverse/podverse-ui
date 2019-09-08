@@ -20,6 +20,12 @@
     .nav-item {
       margin-left: 0.75rem;
 
+      button svg {
+        height: 1rem;
+        vertical-align: -0.125rem;
+        width: 1rem;
+      }
+
       button.dropdown-toggle {
         margin-right: 4px;
         padding-right: 15px;
