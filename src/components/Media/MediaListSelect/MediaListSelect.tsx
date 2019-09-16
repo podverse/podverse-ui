@@ -37,7 +37,7 @@ export class MediaListSelect extends React.Component<Props, State> {
     const { className, isSubSelect, items, name, selected } = this.props
 
     let selectedText
-    const itemNodes = items.map((x, index) => {
+    const itemNodes = Array.isArray(items) && items.map((x, index) => {
       if (!selected && index === 0 || selected === x.value) {
         selectedText = x.label
         return
