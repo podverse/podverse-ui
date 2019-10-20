@@ -21,7 +21,7 @@
     flex: 0 0 auto;
     height: 22px;
     line-height: 22px;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     margin-right: 4px;
     margin-top: 3px;
     padding: 0;
@@ -39,7 +39,7 @@
     flex: 0 0 auto;
     height: 22px;
     line-height: 22px;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     margin-right: 4px;
     margin-top: 3px;
     padding: 0;
@@ -52,9 +52,27 @@
     }
   }
 
+  .media-header__link, .media-header__link {
+    flex: 0 0 auto;
+    height: 22px;
+    line-height: 22px;
+    margin-left: 1.5rem;
+    margin-right: 4px;
+    margin-top: 3px;
+    padding: 0;
+    text-align: center;
+    width: 22px;
+
+    svg {
+      height: 18px;
+      vertical-align: -0.125rem;
+      width: 21px;
+    }
+  }
+
   .media-header__title {
     @include ellipsis;
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     font-size: $text-xl-rem;
     font-weight: 500;
     margin-bottom: 0.25rem;
