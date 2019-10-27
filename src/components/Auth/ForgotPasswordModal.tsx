@@ -13,6 +13,7 @@ type Props = {
   isLoading: boolean
   isOpen: boolean
   isResetPassword?: boolean
+  isSendVerificationEmail?: boolean
 }
 
 type State = {
@@ -81,7 +82,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { errorResponse, hideModal, isLoading, isOpen, isResetPassword } = this.props
+    const { errorResponse, hideModal, isLoading, isOpen, isResetPassword, isSendVerificationEmail } = this.props
     const { email, errorEmail } = this.state
 
     let appEl
@@ -90,17 +91,24 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
       appEl = document.querySelector('body')
     }
 
+    let label = 'Forgot Password'
+    if (isResetPassword) {
+      label = 'Reset Password'
+    } else if (isSendVerificationEmail) {
+      label = 'Send Verification Email'
+    }
+
     return (
       <Modal
         appElement={appEl}
-        contentLabel={isResetPassword ? 'Reset Password' : 'Forgot Password'}
+        contentLabel={label}
         isOpen={isOpen}
         onRequestClose={hideModal}
         portalClassName='forgot-password-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h3>{isResetPassword ? 'Reset Password' : 'Forgot Password'}</h3>
+          <h3>{label}</h3>
           <CloseButton onClick={hideModal} />
           {
             (errorResponse && !isLoading) &&
@@ -130,7 +138,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
             {
               !errorEmail &&
                 <FormText>
-                  Check your email after pressing Submit
+                  Check your email after pressing Submit.
                 </FormText>
             }
           </FormGroup>
