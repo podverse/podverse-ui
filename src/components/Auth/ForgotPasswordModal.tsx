@@ -59,7 +59,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
   handleEmailInputChange = (event) => {
     const { value: email } = event.target
     const newState: any = {}
-    newState.email = email
+    newState.email = email.trim()
 
     if (validateEmail(email)) {
       newState.errorEmail = null
