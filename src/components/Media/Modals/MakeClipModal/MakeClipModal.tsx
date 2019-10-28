@@ -269,9 +269,9 @@ class MakeClipModal extends React.Component<Props, State> {
                   type='text' />
                 {
                   !!errorEndTime &&
-                  <FormFeedback invalid>
-                    {endTimeErrors[errorEndTime]}
-                  </FormFeedback>
+                    <FormFeedback invalid>
+                      {endTimeErrors[errorEndTime]}
+                    </FormFeedback>
                 }
               </FormGroup>
             </Col>
