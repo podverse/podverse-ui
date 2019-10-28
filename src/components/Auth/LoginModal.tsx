@@ -33,10 +33,10 @@ const customStyles = {
 }
 
 export class LoginModal extends React.Component<Props, State> {
-  myEl: any
 
-  constructor(props) {
+  constructor (props) {
     super(props)
+
     this.state = {
       email: '',
       password: ''
@@ -71,7 +71,7 @@ export class LoginModal extends React.Component<Props, State> {
     hideModal(event)
   }
 
-  render() {
+  render () {
     const { errorResponse, isLoading, isOpen, showForgotPasswordModal,
       showSignUpModal } = this.props
     const { email, password } = this.state
@@ -87,74 +87,69 @@ export class LoginModal extends React.Component<Props, State> {
         appElement={appEl}
         contentLabel='Login'
         isOpen={isOpen}
-        onAfterOpen={() => this.myEl && this.myEl.focus()} // Focus on the div with key handlers
         onRequestClose={this.hideModal}
         portalClassName='login-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
-        <div
-          tabIndex={-1} // Enables key handlers on div
-          ref={el => { this.myEl = el }}>
-          <Form>
-            <h3>Login</h3>
-            <CloseButton onClick={this.hideModal} />
-            {
-              (errorResponse && !isLoading) &&
-                <Alert color='danger'>
-                  {errorResponse}
-                </Alert>
+        <Form>
+          <h3>Login</h3>
+          <CloseButton onClick={this.hideModal} />
+          {
+            (errorResponse && !isLoading) &&
+              <Alert color='danger'>
+                {errorResponse}
+              </Alert>
+          }
+          <FormGroup>
+            <Label for='login-modal__email'>Email</Label>
+            <Input
+              data-state-key='email'
+              name='login-modal__email'
+              onChange={this.handleInputChange}
+              onKeyPress={this.handleOnKeyPress}
+              placeholder='hello@podverse.fm'
+              type='text'
+              value={email} />
+          </FormGroup>
+          <FormGroup>
+            <Label for='login-modal__password'>Password</Label>
+            <Input
+              data-state-key='password'
+              name='login-modal__password'
+              onChange={this.handleInputChange}
+              onKeyPress={this.handleOnKeyPress}
+              placeholder='********'
+              type='password'
+              value={password} />
+          </FormGroup>
+          <ButtonGroup
+            childrenLeft={
+              <React.Fragment>
+                <Button
+                  className='btn-text'
+                  onClick={showForgotPasswordModal}
+                  text='Forgot?' />
+                <Button
+                  className='btn-text'
+                  onClick={showSignUpModal}
+                  text='Sign Up' />
+              </React.Fragment>
             }
-            <FormGroup>
-              <Label for='login-modal__email'>Email</Label>
-              <Input
-                data-state-key='email'
-                name='login-modal__email'
-                onChange={this.handleInputChange}
-                onKeyPress={this.handleOnKeyPress}
-                placeholder='hello@podverse.fm'
-                type='text'
-                value={email} />
-            </FormGroup>
-            <FormGroup>
-              <Label for='login-modal__password'>Password</Label>
-              <Input
-                data-state-key='password'
-                name='login-modal__password'
-                onChange={this.handleInputChange}
-                onKeyPress={this.handleOnKeyPress}
-                placeholder='********'
-                type='password'
-                value={password} />
-            </FormGroup>
-            <ButtonGroup
-              childrenLeft={
-                <React.Fragment>
-                  <Button
-                    className='btn-text'
-                    onClick={showForgotPasswordModal}
-                    text='Forgot?' />
-                  <Button
-                    className='btn-text'
-                    onClick={showSignUpModal}
-                    text='Sign Up' />
-                </React.Fragment>
-              }
-              childrenRight={
-                <React.Fragment>
-                  <Button
-                    className='login-modal-btns-right__cancel'
-                    onClick={this.hideModal}
-                    text='Cancel' />
-                  <Button
-                    className='login-modal-btns-right__login'
-                    color='primary'
-                    isLoading={isLoading}
-                    onClick={this.handleLogin}
-                    text='Login' />
-                </React.Fragment>
-              } />
-          </Form>
-        </div>
+            childrenRight={
+              <React.Fragment>
+                <Button
+                  className='login-modal-btns-right__cancel'
+                  onClick={this.hideModal}
+                  text='Cancel' />
+                <Button
+                  className='login-modal-btns-right__login'
+                  color='primary'
+                  isLoading={isLoading}
+                  onClick={this.handleLogin}
+                  text='Login' />
+              </React.Fragment>
+            } />
+        </Form>
       </Modal>
     )
   }
