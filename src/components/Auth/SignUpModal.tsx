@@ -247,7 +247,7 @@ export class SignUpModal extends React.Component<Props, State> {
                   disabled={!this.hasEmailAndConfirmedValidPassword()}
                   isLoading={isLoading}
                   onClick={this.handleSignUp}
-                  text='Submit' />
+                  text='Sign Up' />
               </React.Fragment>
             } />
         </Form>
