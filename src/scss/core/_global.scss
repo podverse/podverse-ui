@@ -143,6 +143,11 @@ html body {
     z-index: 99;
   }
 
+  // This rule prevents the cursor from disappearing in inputs on iOS Safari
+  .ReactModal__Content.ReactModal__Content--after-open {
+    overflow: initial !important;
+  }
+
   .reduced-margin {
     .media-list__container {
       margin: 0.25rem 0;
