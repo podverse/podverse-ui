@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { convertHHMMSSToAnchorTags, readableClipTime, readableDate } from 'lib/utility'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 import { getLinkUserAs, getLinkUserHref, getLinkEpisodeAs, getLinkEpisodeHref } from 'lib/constants'
+const linkifyHtml = require('linkifyjs/html')
 const sanitizeHtml = require('sanitize-html')
 
 type Props = {
@@ -117,7 +118,10 @@ export class MediaInfo extends React.Component<Props, State> {
       moreInfo = podcast.description
     }
 
-    moreInfo = convertHHMMSSToAnchorTags(moreInfo)
+    if (moreInfo) {
+      moreInfo = linkifyHtml(moreInfo)
+      moreInfo = convertHHMMSSToAnchorTags(moreInfo)
+    }
 
     return (
       <React.Fragment>
