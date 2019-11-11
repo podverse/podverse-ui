@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Button } from 'reactstrap'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { readableClipTime, readableDate } from 'lib/utility'
+import { convertHHMMSSToAnchorTags, readableClipTime, readableDate } from 'lib/utility'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 import { getLinkUserAs, getLinkUserHref, getLinkEpisodeAs, getLinkEpisodeHref } from 'lib/constants'
 const sanitizeHtml = require('sanitize-html')
@@ -46,7 +46,22 @@ export class MediaInfo extends React.Component<Props, State> {
   toggleDescription = () => {
     this.setState(prevState => ({
       showDescription: !prevState.showDescription
-    }))
+    }), () => {
+      if (this.state.showDescription) {
+        const elements = document.querySelectorAll('[data-start-time]')
+        for (let i = 0; i < elements.length; i++) {
+          let startTime = elements[i].getAttribute('data-start-time') as any
+          elements[i].addEventListener('click', () => {
+            if (startTime) {
+              startTime = parseInt(startTime, 10)
+              if (startTime || startTime === 0) {
+                window.player.seekTo(startTime)
+              }
+            }
+          })
+        }
+      }
+    })
   }
 
   render () {
@@ -101,6 +116,8 @@ export class MediaInfo extends React.Component<Props, State> {
     } else if (podcast) {
       moreInfo = podcast.description
     }
+
+    moreInfo = convertHHMMSSToAnchorTags(moreInfo)
 
     return (
       <React.Fragment>
@@ -207,7 +224,10 @@ export class MediaInfo extends React.Component<Props, State> {
                 dangerouslySetInnerHTML={
                   {
                     __html: sanitizeHtml(moreInfo, {
-                      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+                      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+                      allowedAttributes: {
+                        'a': ['data-start-time', 'href']
+                      }
                     })
                   }} />
           }

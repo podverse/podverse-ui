@@ -56,6 +56,33 @@ export const convertSecToHHMMSS = (sec: number) => {
   return result
 }
 
+export const getHHMMSSMatchesInString = (str: string) => {
+  const regex = /(?:2[0-3]|[01]?[0-9]):[0-5][0-9]:[0-5][0-9]/g
+  return str.match(regex)
+}
+
+const createHHMMSSAnchorTag = (hhmmss: string) => {
+  const sec = convertHHMMSSToSeconds(hhmmss) || 0
+  if (sec || sec === 0) {
+    return `<a data-start-time='${sec}'>${hhmmss}</a>`
+  } else {
+    return ''
+  }
+}
+
+export const convertHHMMSSToAnchorTags = (html: string) => {
+  const matches = getHHMMSSMatchesInString(html) || []
+  let formattedHtml = html
+  for (const match of matches) {
+    const replace = match
+    const regex = new RegExp(replace, 'g')
+    const anchorTag = createHHMMSSAnchorTag(match)
+    formattedHtml = formattedHtml.replace(regex, anchorTag)
+  }
+
+  return formattedHtml
+}
+
 export function validateHHMMSSString (hhmmss) {
   const regex = new RegExp('^(([0-9][0-9]):([0-5][0-9]):([0-5][0-9]))$|(([0-9]):([0-5][0-9]):([0-5][0-9]))$|^(([0-5][0-9]):([0-5][0-9]))$|^(([0-9]):([0-5][0-9]))$|^([0-5][0-9])$|^([0-9])')
   return regex.test(hhmmss)
