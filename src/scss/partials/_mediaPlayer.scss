@@ -176,20 +176,24 @@
 [theme=light] {
   .mp {
     .mp__headline, .mp__header, .mp__player {
-      background-color: $gray-lighter;
-      border-color: $gray-light;
-      color: $black;
-
+      background-color: $gray-dark;
+      border-color: $gray;
+      color: $white;
+  
       a {
-        color: $black;
+        color: $white;
         text-decoration: none;
+  
+        &:hover {
+          color: $gray-lighter;
+        }
       }
-
+  
       button {
-        color: $black;
+        color: $white;
 
         &:hover {
-          color: $gray-darker;
+          color: $gray-lighter;
         }
 
         &:disabled {
@@ -200,11 +204,12 @@
           color: $blue;
         }
       }
-
+  
+  
       .progress {
-        background-color: $gray-light;
+        background-color: $gray;
       }
-
+  
       .progress .progress-bar {
         background-color: $blue;
       }
