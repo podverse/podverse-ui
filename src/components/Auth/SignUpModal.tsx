@@ -188,7 +188,7 @@ export class SignUpModal extends React.Component<Props, State> {
               onChange={this.handleEmailInputChange}
               onKeyPress={this.handleOnKeyPress}
               placeholder='hello@podverse.fm'
-              type='text'
+              type='email'
               value={email} />
             {
               errorEmail &&

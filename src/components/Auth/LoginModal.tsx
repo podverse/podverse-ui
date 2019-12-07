@@ -108,7 +108,7 @@ export class LoginModal extends React.Component<Props, State> {
               onChange={this.handleInputChange}
               onKeyPress={this.handleOnKeyPress}
               placeholder='hello@podverse.fm'
-              type='text'
+              type='email'
               value={email} />
           </FormGroup>
           <FormGroup>

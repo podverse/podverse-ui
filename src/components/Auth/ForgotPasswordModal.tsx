@@ -126,7 +126,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
               onChange={this.handleEmailInputChange}
               onKeyPress={this.handleOnKeyPress}
               placeholder='hello@podverse.fm'
-              type='text'
+              type='email'
               tooltip={!errorEmail}
               value={email} />
             {
