@@ -14,8 +14,23 @@
     "build-lib": "nodemon --exec webpack --ext ts,tsx,scss --ignore ./build",
     "build-storybook": "build-storybook",
     "lint:scss": "stylelint src/scss/**/*.scss",
-    "lint:ts": "eslint src/**/*.ts",
+    "lint:ts": "eslint src/**/*.ts src/**/*.tsx src/**/*.js",
     "storybook": "start-storybook -p 6006 -c .storybook -s ./.storybook/public"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint .",
+      "git add"
+    ],
+    "src/**/*.scss": [
+      "stylelint",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.25",

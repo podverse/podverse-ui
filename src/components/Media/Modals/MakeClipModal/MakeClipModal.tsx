@@ -157,7 +157,6 @@ class MakeClipModal extends React.Component<Props, State> {
     const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen } = this.state
 
     let appEl
-    // @ts-ignore
     if (process.browser) {
       appEl = document.querySelector('body')
     }

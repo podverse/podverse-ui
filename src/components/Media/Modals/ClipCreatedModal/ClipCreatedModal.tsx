@@ -54,7 +54,6 @@ class ClipCreatedModal extends React.Component<Props, State> {
     const { wasCopied } = this.state
 
     let appEl
-    // @ts-ignore
     if (process.browser) {
       appEl = document.querySelector('body')
     }

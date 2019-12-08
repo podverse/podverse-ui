@@ -32,11 +32,11 @@ const generateAuthorText = authors => {
 }
 
 const generateCategoryNodes = (categories, handleLinkClick) => {
-  let categoryNodes: any[] = []
+  const categoryNodes: any[] = []
 
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i]
-    let categoryText = category.title
+    const categoryText = category.title
     const categoryAs = getLinkCategoryAs(category.id)
     const categoryHref = getLinkCategoryHref(category.id)
 
@@ -129,7 +129,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                   {
                     isSubscribed ?
                       <FontAwesomeIcon icon={fasStar} />
-                      // @ts-ignore
                       : <FontAwesomeIcon icon={farStar} />
                   }
                 </React.Fragment>

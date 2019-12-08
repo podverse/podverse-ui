@@ -72,7 +72,6 @@ export class ShareModal extends React.Component<Props, State> {
     const { lastCopied } = this.state
 
     let appEl
-    // @ts-ignore
     if (process.browser) {
       appEl = document.querySelector('body')
     }

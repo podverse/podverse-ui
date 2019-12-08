@@ -154,7 +154,6 @@ export class SignUpModal extends React.Component<Props, State> {
       password, passwordConfirm } = this.state
 
     let appEl
-    // @ts-ignore
     if (process.browser) {
       appEl = document.querySelector('body')
     }

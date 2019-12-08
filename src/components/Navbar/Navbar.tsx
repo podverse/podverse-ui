@@ -30,7 +30,7 @@ export class Navbar extends React.Component<Props, State> {
       dropdownMenuIsOpen, dropdownText, handleLinkClick, handleToggleDropdownMenu,
       handleToggleMobileMenu, isDarkMode, mobileMenuIsOpen, navItems } = this.props
 
-    let navItemKey = 'navItemKey'
+    const navItemKey = 'navItemKey'
     const navItemsEls = navItems.map((x, index) =>
       <Link
         key={`${navItemKey}${index}`}
@@ -46,7 +46,7 @@ export class Navbar extends React.Component<Props, State> {
       </Link>
     )
 
-    let navbarDropdownItemKey = 'navbarDropdownItemKey'
+    const navbarDropdownItemKey = 'navbarDropdownItemKey'
     const dropdownItemsEls = dropdownItems.map((x, index) => {
       if (x.href) {
         return (
@@ -79,7 +79,7 @@ export class Navbar extends React.Component<Props, State> {
       }
     })
 
-    let mobileNavItemKey = 'mobileNavItemKey'
+    const mobileNavItemKey = 'mobileNavItemKey'
     const mobileNavItems = clone(dropdownItems)
     const mobileNavItemsEls = mobileNavItems.map((x, index) => {
       if (x.href) {

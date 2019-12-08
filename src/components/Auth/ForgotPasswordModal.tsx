@@ -37,7 +37,6 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
 
   constructor (props) {
     super(props)
-
     this.state = {
       email: '',
       errorEmail: undefined
@@ -86,7 +85,6 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
     const { email, errorEmail } = this.state
 
     let appEl
-    // @ts-ignore
     if (process.browser) {
       appEl = document.querySelector('body')
     }

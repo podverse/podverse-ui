@@ -49,7 +49,7 @@ export class QueueModal extends React.Component<Props, State> {
   }
 
   onDragEnd = data => {
-    let { handleDragEnd, priorityItems, secondaryItems } = this.props
+    const { handleDragEnd, priorityItems, secondaryItems } = this.props
     const { destination, source } = data
 
     let itemToMove: any = []
@@ -174,7 +174,7 @@ export class QueueModal extends React.Component<Props, State> {
     let historyItemNodes: any = []
 
     if (!showHistory) {
-      let queueModalPriorityItemKey = 'queueModalPriorityItemKey'
+      const queueModalPriorityItemKey = 'queueModalPriorityItemKey'
       priorityItemNodes = Array.isArray(priorityItems) ? priorityItems.map((x, index) => (
         <Draggable
           draggableId={`priority-item-${index}`}
@@ -205,7 +205,7 @@ export class QueueModal extends React.Component<Props, State> {
         </Draggable>
       )) : []
 
-      let queueModalSecondaryItemKey = 'queueModalSecondaryItemKey'
+      const queueModalSecondaryItemKey = 'queueModalSecondaryItemKey'
       secondaryItemNodes = Array.isArray(secondaryItems) ? secondaryItems.map((x, index) => (
         <Draggable
           draggableId={`secondary-item-${index}`}
@@ -236,7 +236,7 @@ export class QueueModal extends React.Component<Props, State> {
         </Draggable>
       )) : []
     } else {
-      let queueModalHistoryItemKey = 'queueModalHistoryItemKey'
+      const queueModalHistoryItemKey = 'queueModalHistoryItemKey'
       historyItemNodes = Array.isArray(priorityItems) ? historyItems.map((x, index) => (
         <MediaListItem
           dataNowPlayingItem={x}
@@ -248,7 +248,6 @@ export class QueueModal extends React.Component<Props, State> {
     }
 
     let appEl
-    // @ts-ignore
     if (process.browser) {
       appEl = document.querySelector('body')
     }

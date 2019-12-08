@@ -25,20 +25,20 @@ export class PVPagination extends React.Component<Props, State> {
 
     let range = []
     if (totalPages < pageRange * 2 + 1) {
-      let start = 1
-      let end = totalPages + 1
+      const start = 1
+      const end = totalPages + 1
       range = generateArrayWithRangeOfIntegers(start, end) as never
     } else if (currentPage <= pageRange) { // beginning pages
-      let start = 1
-      let end = (pageRange * 2) + 2
+      const start = 1
+      const end = (pageRange * 2) + 2
       range = generateArrayWithRangeOfIntegers(start, end) as never
     } else if (currentPage > totalPages - pageRange) { // end pages
-      let start = totalPages - (pageRange * 2)
-      let end = totalPages + 1
+      const start = totalPages - (pageRange * 2)
+      const end = totalPages + 1
       range = generateArrayWithRangeOfIntegers(start, end) as never
     } else { // middle pages
-      let start = currentPage - pageRange
-      let end = currentPage + pageRange + 1
+      const start = currentPage - pageRange
+      const end = currentPage + pageRange + 1
       range = generateArrayWithRangeOfIntegers(start, end) as never
     }
 

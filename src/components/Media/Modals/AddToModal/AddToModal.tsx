@@ -40,7 +40,7 @@ const defaultProps: Props = {
   playlists: []
 }
 
-let customStyles = {
+const customStyles = {
   content: {
     bottom: 'unset',
     height: 'calc(100% - 72px)',
@@ -91,7 +91,6 @@ const AddToModal: React.StatelessComponent<Props> = props => {
   }
 
   let appEl
-  // @ts-ignore
   if (process.browser) {
     appEl = document.querySelector('body')
   }

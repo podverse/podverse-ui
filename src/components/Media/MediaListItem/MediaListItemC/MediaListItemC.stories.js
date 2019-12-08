@@ -4,7 +4,7 @@ import { MediaListItemC } from './MediaListItemC'
 import { text } from '@storybook/addon-knobs'
 import { sampleEpisode } from 'storybook/constants'
 
-const { description, pubDate, title } = sampleEpisode
+const { description, title } = sampleEpisode
 
 storiesOf('Media', module)
   .addWithJSX(

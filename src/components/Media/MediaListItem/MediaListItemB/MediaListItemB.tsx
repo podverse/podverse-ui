@@ -19,7 +19,9 @@ export const MediaListItemB: React.StatelessComponent<Props> = props => {
     <div className='media-list-item__b'>
       {
         imageUrl &&
-          <img className='media-list-item-b__image' src={imageUrl} />
+          <img
+            className='media-list-item-b__image'
+            src={imageUrl} />
       }
       <div className='text-wrapper'>
         {

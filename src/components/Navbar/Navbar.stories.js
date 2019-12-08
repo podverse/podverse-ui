@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import Navbar from './Navbar'
-import { object } from '@storybook/addon-knobs'
 
 const dropdownItems = [
   { href: '#', label: 'Settings' },

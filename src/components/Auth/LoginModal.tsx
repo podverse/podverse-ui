@@ -72,12 +72,10 @@ export class LoginModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { errorResponse, isLoading, isOpen, showForgotPasswordModal,
-      showSignUpModal } = this.props
+    const { errorResponse, isLoading, isOpen, showForgotPasswordModal, showSignUpModal } = this.props
     const { email, password } = this.state
 
     let appEl
-    // @ts-ignore
     if (process.browser) {
       appEl = document.querySelector('body')
     }
