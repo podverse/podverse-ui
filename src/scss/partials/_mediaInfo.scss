@@ -58,6 +58,13 @@
       background-color: transparent;
       padding-top: 8px;
       transition: none;
+      border-radius: 44px;
+      border-style: solid;
+      border-width: 1px;
+      flex: 0 0 auto;
+      height: 44px;
+      margin-right: 1rem;
+      width: 44px;
 
       svg {
         @include preventFontAwesomeSizeFOUC;
@@ -70,16 +77,6 @@
 
     .media-info-controls__play.playing svg {
       margin-left: 0;
-    }
-
-    button {
-      border-radius: 44px;
-      border-style: solid;
-      border-width: 1px;
-      flex: 0 0 auto;
-      height: 44px;
-      margin-right: 1rem;
-      width: 44px;
     }
   }
 
