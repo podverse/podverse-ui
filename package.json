@@ -18,7 +18,7 @@
     "storybook": "start-storybook -p 6006 -c .storybook -s ./.storybook/public"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
+    "src/**/*.{ts,tsx,js}": [
       "eslint .",
       "git add"
     ],

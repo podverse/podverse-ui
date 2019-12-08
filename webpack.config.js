@@ -1,5 +1,4 @@
 const { resolve } = require('path')
-const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
