@@ -3,7 +3,6 @@ storybook-static/
 src/
 
 tsconfig.json
-tslint.json
 webpack.config.js
 yarn-error.log
 yarn.lock
