@@ -187,7 +187,7 @@
   }
 }
 
-[theme=light] {
+[data-theme=light] {
   .mp-add-to-modal {
     a {
       border-color: $gray-light;
@@ -215,7 +215,7 @@
   }
 }
 
-[theme=dark] {
+[data-theme=dark] {
   .mp-add-to-modal {
     a {
       border-color: $gray-darker;

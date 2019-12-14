@@ -119,7 +119,7 @@
   }
 }
 
-html[theme=light] {
+html[data-theme=light] {
   .media-header {
     .media-header__title {
       color: $black;
@@ -142,7 +142,7 @@ html[theme=light] {
   }
 }
 
-html[theme=dark] {
+html[data-theme=dark] {
   .media-header {
     .media-header__title {
       color: $white;

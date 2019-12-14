@@ -50,7 +50,7 @@
   }
 }
 
-[theme=dark] {
+[data-theme=dark] {
   body {
     .comparison-table, .comparison-table__header, .comparison-table__row, .comparison-table-header__icon,
     .comparison-table-row__icon {
@@ -59,7 +59,7 @@
   }
 }
 
-[theme=light] {
+[data-theme=light] {
   body {
     .comparison-table, .comparison-table__header, .comparison-table__row, .comparison-table-header__icon,
     .comparison-table-row__icon {

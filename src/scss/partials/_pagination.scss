@@ -21,7 +21,7 @@ html body {
   }
 }
 
-[theme=light] {
+[data-theme=light] {
   .pv-pagination {
     ul {
       li.page-item {
@@ -46,7 +46,7 @@ html body {
   }
 }
 
-[theme=dark] {
+[data-theme=dark] {
   .pv-pagination {
     ul {
       li.page-item {

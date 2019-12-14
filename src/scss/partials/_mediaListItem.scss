@@ -227,7 +227,7 @@
   }
 }
 
-html[theme=light] {
+html[data-theme=light] {
   .media-list__container {
     &.is-active .media-list__left {
       border-color: $gray;
@@ -266,7 +266,7 @@ html[theme=light] {
   }
 }
 
-html[theme=dark] {
+html[data-theme=dark] {
   .media-list__container {
     &.is-active .media-list__left {
       border-color: $gray;

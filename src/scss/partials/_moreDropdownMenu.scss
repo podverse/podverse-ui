@@ -21,7 +21,7 @@
   }
 }
 
-[theme=light] {
+[data-theme=light] {
   .more-dropdown-menu {
     .btn {
       border-color: $black;
@@ -35,7 +35,7 @@
   }
 }
 
-[theme=dark] {
+[data-theme=dark] {
   .more-dropdown-menu {
     .btn {
       border-color: $white;

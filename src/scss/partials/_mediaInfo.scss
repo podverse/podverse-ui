@@ -131,7 +131,7 @@
   }
 }
 
-html[theme=light] {
+html[data-theme=light] {
   .media-info {
     border-color: $gray-lighter;
 
@@ -187,7 +187,7 @@ html[theme=light] {
   }
 }
 
-html[theme=dark] {
+html[data-theme=dark] {
   .media-info {
     border-color: $gray-darker;
 

@@ -170,7 +170,7 @@
   }
 }
 
-[theme=light] {
+[data-theme=light] {
   .mp {
     .mp__headline, .mp__header, .mp__player {
       background-color: $gray-dark;
@@ -214,7 +214,7 @@
   }
 }
 
-[theme=dark] {
+[data-theme=dark] {
   .mp {
     .mp__headline, .mp__header, .mp__player {
       background-color: $gray-darker;
