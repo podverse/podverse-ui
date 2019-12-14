@@ -4,6 +4,7 @@ import { Alert, Form, FormGroup, Input, Label } from 'reactstrap'
 import { PVButton as Button } from 'components/Button/Button'
 import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
+import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 
 type Props = {
   errorResponse?: string
@@ -76,7 +77,7 @@ export class LoginModal extends React.Component<Props, State> {
     const { email, password } = this.state
 
     let appEl
-    if (process.browser) {
+    if (checkIfLoadingOnFrontEnd()) {
       appEl = document.querySelector('body')
     }
 

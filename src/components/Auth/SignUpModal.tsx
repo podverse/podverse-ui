@@ -4,6 +4,7 @@ import { Alert, Form , FormFeedback, FormGroup, Input, Label } from 'reactstrap'
 import { PVButton as Button } from 'components/Button/Button'
 import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
+import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 import { validateEmail, validatePassword } from 'lib/utility/validation'
 
 type Props = {
@@ -154,7 +155,7 @@ export class SignUpModal extends React.Component<Props, State> {
       password, passwordConfirm } = this.state
 
     let appEl
-    if (process.browser) {
+    if (checkIfLoadingOnFrontEnd()) {
       appEl = document.querySelector('body')
     }
 

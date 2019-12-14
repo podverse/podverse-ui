@@ -4,6 +4,7 @@ import { Form, FormGroup, Input, InputGroup, InputGroupAddon, Label } from 'reac
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PVButton as Button } from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
+import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 const ClipboardJS = require('clipboard')
 
 type Props = {
@@ -72,7 +73,7 @@ export class ShareModal extends React.Component<Props, State> {
     const { lastCopied } = this.state
 
     let appEl
-    if (process.browser) {
+    if (checkIfLoadingOnFrontEnd()) {
       appEl = document.querySelector('body')
     }
 

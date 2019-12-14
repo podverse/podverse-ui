@@ -4,7 +4,7 @@ import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
   Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PVButton as Button } from 'components/Button/Button'
-import { convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/utility'
+import { checkIfLoadingOnFrontEnd, convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/utility'
 
 type Props = {
   endTime?: number
@@ -157,7 +157,7 @@ class MakeClipModal extends React.Component<Props, State> {
     const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen } = this.state
 
     let appEl
-    if (process.browser) {
+    if (checkIfLoadingOnFrontEnd()) {
       appEl = document.querySelector('body')
     }
 

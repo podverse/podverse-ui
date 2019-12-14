@@ -6,6 +6,7 @@ import { PVButton as Button } from 'components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 import { CloseButton } from 'components/CloseButton/CloseButton'
+import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 
 export interface Props {
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
@@ -248,7 +249,7 @@ export class QueueModal extends React.Component<Props, State> {
     }
 
     let appEl
-    if (process.browser) {
+    if (checkIfLoadingOnFrontEnd()) {
       appEl = document.querySelector('body')
     }
 

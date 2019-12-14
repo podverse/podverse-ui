@@ -5,6 +5,7 @@ import { PVButton as Button } from 'components/Button/Button'
 import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { validateEmail } from 'lib/utility/validation'
+import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 
 type Props = {
   errorResponse?: string
@@ -85,7 +86,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
     const { email, errorEmail } = this.state
 
     let appEl
-    if (process.browser) {
+    if (checkIfLoadingOnFrontEnd()) {
       appEl = document.querySelector('body')
     }
 

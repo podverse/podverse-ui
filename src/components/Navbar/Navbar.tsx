@@ -34,8 +34,8 @@ export class Navbar extends React.Component<Props, State> {
     const navItemsEls = navItems.map((x, index) =>
       <Link
         key={`${navItemKey}${index}`}
-        {...(x.href ? { href: x.href } : {})}
-        {...(x.as ? { as: x.as } : {})}>
+        href={x.href}
+        as={x.as}>
         <NavItem key={`${navItemKey}b${index}`}>
           <NavLink
             {...(x.href ? { href: x.href } : {})}
@@ -52,8 +52,8 @@ export class Navbar extends React.Component<Props, State> {
         return (
           <Link
             key={`${navbarDropdownItemKey}${index}`}
-            {...(x.href ? { href: x.href } : {})}
-            {...(x.as ? { as: x.as } : {})}>
+            href={x.href}
+            as={x.as}>
             <DropdownItem
               {...(x.href ? { href: x.href } : {})}
               onClick={event => {
@@ -86,8 +86,8 @@ export class Navbar extends React.Component<Props, State> {
         return (
           <Link
             key={`${mobileNavItemKey}${index}`}
-            {...(x.href ? { href: x.href } : {})}
-            {...(x.as ? { as: x.as } : {})}>
+            href={x.href}
+            as={x.as}>
             <NavItem
               className='mobile-nav-item'
               key={`${mobileNavItemKey}b${index}`}>
@@ -120,8 +120,8 @@ export class Navbar extends React.Component<Props, State> {
           {...(isDarkMode ? { dark: true } : { light: true })}
           expand='sm'>
           <Link
-            {...(brandAs ? { as: brandAs } : {})}
-            {...(brandHref ? { href: brandHref } : {})}>
+            as={brandAs || ''}
+            href={brandHref || ''}>
             <NavbarBrand
               {...(brandHref ? { href: brandHref } : {})}
               onClick={handleLinkClick}>{

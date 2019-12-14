@@ -6,6 +6,7 @@ import { PVButton as Button } from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
+import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 const uuidv4 = require('uuid/v4')
 
 export interface Props {
@@ -91,7 +92,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
   }
 
   let appEl
-  if (process.browser) {
+  if (checkIfLoadingOnFrontEnd()) {
     appEl = document.querySelector('body')
   }
 

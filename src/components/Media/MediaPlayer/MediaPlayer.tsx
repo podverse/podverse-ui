@@ -397,13 +397,13 @@ export class MediaPlayer extends React.Component<Props, State> {
     lastNowPlayingItem = nowPlayingItem
 
     const isClip = clipId && !playedAfterClipFinished ? true : false
+    const linkHref = isClip ? playerClipLinkHref : playerEpisodeLinkHref
+    const linkAs = isClip ? playerClipLinkAs : playerEpisodeLinkAs
 
     const headerLink = (
       <Link
-        {...(isClip && playerClipLinkAs ? { as: playerClipLinkAs } : {})}
-        {...(isClip && playerClipLinkHref ? { href: playerClipLinkHref } : {})}
-        {...(!isClip && playerEpisodeLinkAs ? { as: playerEpisodeLinkAs } : {})}
-        {...(!isClip && playerEpisodeLinkHref ? { href: playerEpisodeLinkHref } : {})}>
+        as={linkAs || ''}
+        href={linkHref || ''}>
         <a
           className='mp-header__link'
           {

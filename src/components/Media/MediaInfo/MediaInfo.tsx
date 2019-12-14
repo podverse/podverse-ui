@@ -129,8 +129,8 @@ export class MediaInfo extends React.Component<Props, State> {
           {
             episodeTitle &&
             <Link
-              {...(episodeAs ? { as: episodeAs } : {})}
-              {...(episodeHref ? { href: episodeHref } : {})}>
+              as={episodeAs}
+              href={episodeHref}>
               <a
                 className='media-info__episode-title'
                 onClick={handleLinkClick}>

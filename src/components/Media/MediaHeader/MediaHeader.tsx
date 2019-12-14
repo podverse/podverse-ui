@@ -43,8 +43,8 @@ const generateCategoryNodes = (categories, handleLinkClick) => {
     categoryNodes.push(
       <React.Fragment key={uuidv4()}>
         <Link
-          {...(categoryHref ? { href: categoryHref } : {})}
-          {...(categoryAs ? { as: categoryAs } : {})}
+          href={categoryHref}
+          as={categoryAs}
           key={uuidv4()}>
           <a
             key={uuidv4()}
@@ -110,8 +110,8 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
             {
               titleHref ?
                 <Link
-                  {...(titleHref ? { href: titleHref } : {})}
-                  {...(titleAs ? { as: titleAs } : {})}>
+                  href={titleHref}
+                  as={titleAs}>
                   <a
                     className='media-header__title'
                     onClick={handleLinkClick}>{title}</a>
