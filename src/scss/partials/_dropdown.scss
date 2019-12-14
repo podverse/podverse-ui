@@ -30,7 +30,7 @@ body {
   }
 }
 
-[data-theme=light] {
+html[data-theme=light] {
   body {
     .btn.one-option-only {
       color: $black;
@@ -75,7 +75,7 @@ body {
   }
 }
 
-[data-theme=dark] {
+html[data-theme=dark] {
   body {
     .btn.one-option-only {
       color: $white;

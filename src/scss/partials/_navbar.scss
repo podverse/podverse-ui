@@ -60,7 +60,7 @@
   }
 }
 
-[data-theme=light] {
+html[data-theme=light] {
   .navbar__bg {
     background-color: $gray-dark;
 
@@ -111,7 +111,7 @@
   }
 }
 
-[data-theme=dark] {
+html[data-theme=dark] {
   .navbar__bg {
     background-color: $gray-darker;
 
