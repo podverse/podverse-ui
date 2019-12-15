@@ -135,7 +135,7 @@ html body {
   }
 
   .pv-divider {
-    border: 1px dotted transparent;
+    border: 1px solid transparent;
     margin: 1.25rem 0;
   }
 
@@ -238,7 +238,7 @@ html[data-theme=light] body {
 
     .ReactModal__Content {
       background-color: $white !important;
-      border-color: $gray-light !important;
+      border-color: $gray-dark !important;
 
       h5 {
         color: $black;
@@ -322,7 +322,7 @@ html[data-theme=dark] body {
 
     .ReactModal__Content {
       background-color: $black !important;
-      border-color: $gray-darker !important;
+      border-color: $gray-light !important;
 
       h5 {
         color: $white;
