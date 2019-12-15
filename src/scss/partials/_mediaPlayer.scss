@@ -149,7 +149,6 @@
       position: absolute;
       top: 2px;
       right: 5px;
-      color: #eee;
       z-index: 100;
       font-size: 12px;
       pointer-events: none;
@@ -173,42 +172,45 @@
 html[data-theme=light] {
   .mp {
     .mp__headline, .mp__header, .mp__player {
-      background-color: $gray-dark;
-      border-color: $gray;
-      color: $white;
+      background-color: $gray-lightest;
+      border-color: $gray-light;
+      color: $black;
   
       a {
-        color: $white;
+        color: $black;
         text-decoration: none;
   
         &:hover {
-          color: $gray-lighter;
+          color: $gray-darker;
         }
       }
   
       button {
-        color: $white;
+        color: $black;
 
         &:hover {
-          color: $gray-lighter;
+          color: $gray-darker;
         }
 
         &:disabled {
-          color: $gray;
+          color: $gray-lighter;
         }
 
         &.active {
           color: $blue;
         }
       }
-  
+
+      .mp-player__current-time, .mp-player__duration {
+        color: $black;
+      }
   
       .progress {
-        background-color: $gray;
+        background-color: $gray-lighter;
       }
   
       .progress .progress-bar {
-        background-color: $blue;
+        background-color: $blue-lighter;
       }
     }
   }

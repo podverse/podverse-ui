@@ -13,8 +13,8 @@
     .navbar-brand {
       background-size: cover;
       margin: 4px 0 2px 0;
-      height: 24px;    
-      width: 132px;
+      height: 23px;    
+      width: 126px;
     }
 
     .nav-item {
@@ -31,6 +31,11 @@
         box-shadow: none !important;
       }
     }
+  }
+
+  .navbar-toggler-icon {
+    width: 1.25em;
+    height: 1.5em;
   }
 
   @media(max-width: ($player-max-width + 16px)) {
@@ -62,17 +67,18 @@
 
 html[data-theme=light] {
   .navbar__bg {
-    background-color: $gray-dark;
+    background-color: $gray-lightest;
+    border-bottom: 1px solid $gray-light;
 
     .navbar {
-      background-color: $gray-dark !important;
+      background-color: $gray-lightest !important;
   
       a, .nav-item a.nav-link {
-        color: $white;
+        color: $black;
         text-decoration: none;
 
         &:hover {
-          color: $gray-lighter !important;
+          color: $gray-darker !important;
         }
       }
 
@@ -87,23 +93,23 @@ html[data-theme=light] {
       }
 
       .navbar-brand {
-        background-image: url('/images/podverse-logo-header-white.svg');
+        background-image: url('/images/podverse-logo-header-black.svg');
       }
 
       .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
       }
 
       .navbar-toggler {
-        border-color: $gray-lighter !important;
+        border-color: $gray-darker !important;
       }
 
       .nav-item {
         .dropdown-toggle {
-          color: $white;
+          color: $black;
 
           &:hover {
-            color: $gray-lighter;
+            color: $gray-darker;
           }
         }
       }
