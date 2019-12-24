@@ -135,7 +135,11 @@ html body {
   }
 
   .pv-divider {
-    border: 1px solid transparent;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-top-width: 1px;
+    border-top-style: solid; 
     margin: 1.25rem 0;
   }
 
@@ -286,7 +290,7 @@ html[data-theme=dark] body {
   }
 
   hr {
-    border-color: $gray-darker;
+    border-color: $gray-dark;
   }
 
   .close-btn {
