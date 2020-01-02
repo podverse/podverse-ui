@@ -6,28 +6,29 @@
 
   .media-info__episode-title {
     font-size: $text-lg-rem;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .media-info__episode-pub-date {
     font-size: $text-sm-rem;
     margin-top: 0.375rem;
+    font-weight: 400;
   }
 
   .media-info__clip-title {
-    font-weight: 300;
+    font-weight: 400;
     margin-top: 1rem;
   }
 
   .media-info__clip-time {
     font-size: $text-sm-rem;
-    font-weight: 300;
+    font-weight: 400;
     margin-top: 0.375rem;
   }
 
   .media-info__clip-created-by {
     font-size: $text-sm-rem;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 1.25rem;
     margin-top: 0.375rem;
   }

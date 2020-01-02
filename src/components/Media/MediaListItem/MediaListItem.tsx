@@ -10,7 +10,6 @@ import { readableDate, readableClipTime } from 'lib/utility'
 const striptags = require('striptags')
 
 type Props = {
-  dataClip?: any
   dataEpisode?: any
   dataNowPlayingItem?: any
   dataPlaylist?: any
@@ -40,7 +39,7 @@ type Props = {
 // This is absolute chaos. Sorry :(
 
 export const MediaListItem: React.StatelessComponent<Props> = props => {
-  const { dataClip, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
+  const { dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
     handleRemoveItem, handleToggleAddToPlaylist, hasLink, hideDescription, hideDivider,
     isActive, isSlim, itemType, loadingItemId, noWrap, showMoreMenu, showMove, showOwner,
@@ -50,10 +49,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   let anchorAs = ''
 
   if (hasLink) {
-    if (itemType === 'clip' || itemType === 'episode-clip' || itemType === 'podcast-clip') {
-      anchorHref = `/clip?id=${dataClip.id}`
-      anchorAs = `/clip/${dataClip.id}`
-    } else if (itemType === 'podcast-episode') {
+    if (itemType === 'podcast-episode') {
       anchorHref = `/episode?id=${dataEpisode.id}`
       anchorAs = `/episode/${dataEpisode.id}`
     } else if (itemType === 'playlist') {
@@ -125,24 +121,6 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {...(dataPlaylist ? { 'data-id': dataPlaylist.id } : {})}
               onClick={handleLinkClick}
               tabIndex={0}>
-              {
-                (itemType === 'clip' && dataClip) &&
-                  <MediaListItemA
-                    imageUrl={dataClip.podcastImageUrl}
-                    subTitleMiddle={dataClip.episodeTitle}
-                    subTitleMiddleSide={readableClipTime(dataClip.startTime, dataClip.endTime)}
-                    subTitleTop={dataClip.podcastTitle}
-                    subTitleTopSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
-                    title={dataClip.title} />
-              }
-              {
-                (itemType === 'episode-clip' && dataClip) &&
-                  <MediaListItemA
-                    showImage={false}
-                    subTitleTop={dataClip.startTime}
-                    subTitleTopSide='duration'
-                    title={dataClip.title} />
-              }
               {
                 (itemType === 'now-playing-item' && (dataNowPlayingItem && (dataNowPlayingItem.clipStartTime || dataNowPlayingItem.clipStartTime === 0))) &&
                   <MediaListItemA
@@ -221,21 +199,10 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'podcast' && dataPodcast) &&
                   <MediaListItemB
-                    imageUrl={dataPodcast.imageUrl}
+                    imageUrl={dataPodcast.shrunkImageUrl || dataPodcast.imageUrl}
                     subTitle={dataPodcast.lastEpisodeTitle}
                     subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
                     title={dataPodcast.title} />
-              }
-              {
-                (itemType === 'podcast-clip' && dataClip) &&
-                  <MediaListItemA
-                    imageUrl={dataClip.podcastImageUrl}
-                    moreMenuItems={moreMenuItems}
-                    subTitleBottom={dataClip.startTime}
-                    subTitleBottomSide={dataClip.endTime}
-                    subTitleTop={dataClip.episodeTitle}
-                    subTitleTopSide={dataClip.episodePubDate ? readableDate(dataClip.episodePubDate) : ''}
-                    title={dataClip.title} />
               }
               {
                 (itemType === 'user' && dataUser) &&

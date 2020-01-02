@@ -75,7 +75,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let isExplicit
 
   if (episode) {
-    imgUrl = episode.podcast.imageUrl
+    imgUrl = episode.podcast.shrunkImageUrl || episode.podcast.imageUrl
     title = episode.podcast.title
     titleAs = getLinkPodcastAs(episode.podcast.id)
     titleHref = getLinkPodcastHref(episode.podcast.id)
@@ -83,6 +83,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     bottomText = generateCategoryNodes(episode.podcast.categories, handleLinkClick)
     isExplicit = episode.podcast.isExplicit
   } else if (mediaRef) {
+    if (mediaRef && mediaRef.episode && mediaRef.episode.podcast && mediaRef.episode.podcast.shrunkImageUrl) {
+      mediaRef.episode.podcast.imageUrl = mediaRef.episode.podcast.shrunkImageUrl
+    }
     const item = convertToNowPlayingItem(mediaRef, null, null)
     const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId,
       podcastIsExplicit, podcastTitle } = item
@@ -96,7 +99,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   } else if (podcast) {
     subTitle = generateAuthorText(podcast.authors)
     bottomText = generateCategoryNodes(podcast.categories, handleLinkClick)
-    imgUrl = podcast.imageUrl
+    imgUrl = podcast.shrunkImageUrl || podcast.imageUrl
     title = podcast.title
     isExplicit = podcast.isExplicit
   }
