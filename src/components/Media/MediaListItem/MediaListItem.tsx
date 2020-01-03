@@ -7,7 +7,7 @@ import { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/Me
 import { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'
 import { MediaListItemD } from 'components/Media/MediaListItem/MediaListItemD/MediaListItemD'
 import { readableDate, readableClipTime } from 'lib/utility'
-const striptags = require('striptags')
+const sanitizeHtml = require('sanitize-html')
 
 type Props = {
   dataEpisode?: any
@@ -243,7 +243,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             || (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem)
             || (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem))) &&
             <div className='media-list__bottom'>
-              {striptags(dataNowPlayingItem.episodeDescription)}
+              {sanitizeHtml(dataNowPlayingItem.episodeDescription)}
             </div>
         }
       </div>
