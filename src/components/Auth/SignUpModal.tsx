@@ -1,11 +1,14 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Alert, Form , FormFeedback, FormGroup, Input, Label } from 'reactstrap'
+import { PasswordValidationInfo } from 'components/Auth/PasswordValidationInfo'
 import { PVButton as Button } from 'components/Button/Button'
 import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { checkIfLoadingOnFrontEnd } from 'lib/utility'
-import { validateEmail, validatePassword } from 'lib/utility/validation'
+import { hasAtLeastXCharacters as hasAtLeastXCharactersLib, hasLowercase as hasLowercaseLib,
+  hasMatchingStrings, hasNoSpaces as hasNoSpacesLib, hasNumber as hasNumberLib,
+  hasUppercase as hasUppercaseLib, validateEmail, validatePassword } from 'lib/utility/validation'
 
 type Props = {
   errorResponse?: string
@@ -23,6 +26,13 @@ type State = {
   errorEmail?: string
   errorPassword?: string
   errorPasswordConfirm?: string
+  hasAtLeastXCharacters: boolean
+  hasLowercase: boolean
+  hasMatching: boolean
+  hasNoSpaces: boolean
+  hasNumber: boolean
+  hasUppercase: boolean
+  hasValidEmail: boolean
   password?: string
   passwordConfirm?: string
 }
@@ -49,6 +59,13 @@ export class SignUpModal extends React.Component<Props, State> {
       errorEmail: undefined,
       errorPassword: undefined,
       errorPasswordConfirm: undefined,
+      hasAtLeastXCharacters: false,
+      hasLowercase: false,
+      hasMatching: false,
+      hasNoSpaces: false,
+      hasNumber: false,
+      hasUppercase: false,
+      hasValidEmail: false,
       password: '',
       passwordConfirm: ''
     }
@@ -72,6 +89,7 @@ export class SignUpModal extends React.Component<Props, State> {
     newState.email = email.trim()
 
     if (validateEmail(email)) {
+      newState.hasValidEmail = true
       newState.errorEmail = null
     }
 
@@ -88,7 +106,9 @@ export class SignUpModal extends React.Component<Props, State> {
       newState.errorPassword = null
     }
 
-    this.setState(newState)
+    this.setState(newState, () => {
+      this.passwordsValid()
+    })
   }
 
   handlePasswordInputChange = event => {
@@ -100,7 +120,9 @@ export class SignUpModal extends React.Component<Props, State> {
       newState.errorPassword = null
     }
 
-    this.setState(newState)
+    this.setState(newState, () => {
+      this.passwordsValid()
+    })
   }
 
   handlePasswordConfirmInputBlur = event => {
@@ -112,7 +134,9 @@ export class SignUpModal extends React.Component<Props, State> {
       newState.errorPasswordConfirm = 'Passwords do not match.'
     }
 
-    this.setState(newState)
+    this.setState(newState, () => {
+      this.passwordsValid()
+    })
   }
 
   handlePasswordConfirmInputChange = event => {
@@ -125,7 +149,9 @@ export class SignUpModal extends React.Component<Props, State> {
       newState.errorPasswordConfirm = null
     }
 
-    this.setState(newState)
+    this.setState(newState, () => {
+      this.passwordsValid()
+    })
   }
 
   handleOnKeyPress = event => {
@@ -140,20 +166,38 @@ export class SignUpModal extends React.Component<Props, State> {
     this.props.handleSignUp(email, passwordConfirm)
   }
 
-  hasEmailAndConfirmedValidPassword = () => {
-    const { email, password, passwordConfirm } = this.state
+  passwordsValid = () => {
+    const { password, passwordConfirm } = this.state
+    const hasAtLeastXCharacters = hasAtLeastXCharactersLib(password)
+    const hasLowercase = hasLowercaseLib(password)
+    const hasMatching = hasMatchingStrings(password, passwordConfirm)
+    const hasNoSpaces = hasNoSpacesLib(password)
+    const hasNumber = hasNumberLib(password)
+    const hasUppercase = hasUppercaseLib(password)
 
-    return validateEmail(email)
-      && password === passwordConfirm
-      && validatePassword(password)
-      && validatePassword(passwordConfirm)
+    this.setState({
+      hasAtLeastXCharacters,
+      hasLowercase,
+      hasMatching,
+      hasNoSpaces,
+      hasNumber,
+      hasUppercase
+    })
+  }
+
+  submitDisabled = () => {
+    const { hasAtLeastXCharacters, hasLowercase, hasMatching, hasNoSpaces, hasNumber, hasUppercase,
+      hasValidEmail } = this.state
+    return !(hasAtLeastXCharacters && hasLowercase && hasMatching && hasNoSpaces && hasNumber &&
+      hasUppercase && hasValidEmail)
   }
 
   render () {
-
     const { errorResponse, hideModal, isLoading, isOpen, signUpFinished, topText } = this.props
-    const { email, errorEmail, errorPassword, errorPasswordConfirm,
-      password, passwordConfirm } = this.state
+    const { email, errorEmail, errorPassword, errorPasswordConfirm, hasAtLeastXCharacters,
+      hasLowercase, hasNumber, hasUppercase, password, passwordConfirm } = this.state
+    
+    const submitDisabled = this.submitDisabled()
 
     let appEl
     if (checkIfLoadingOnFrontEnd()) {
@@ -198,79 +242,86 @@ export class SignUpModal extends React.Component<Props, State> {
           {
             !signUpFinished &&
               <>
-                {topText}
-                <FormGroup>
-                  <Label for='sign-up-modal__email'>Email</Label>
-                  <Input
-                    data-state-key='email'
-                    invalid={errorEmail}
-                    name='sign-up-modal__email'
-                    onBlur={this.handleEmailInputBlur}
-                    onChange={this.handleEmailInputChange}
-                    onKeyPress={this.handleOnKeyPress}
-                    placeholder='hello@podverse.fm'
-                    type='email'
-                    value={email} />
-                  {
-                    errorEmail &&
-                      <FormFeedback invalid='true'>
-                        {errorEmail}
-                      </FormFeedback>
-                  }
-                </FormGroup>
-                <FormGroup>
-                  <Label for='sign-up-modal__password'>Password</Label>
-                  <Input
-                    data-state-key='password'
-                    invalid={errorPassword}
-                    name='sign-up-modal__password'
-                    onBlur={this.handlePasswordInputBlur}
-                    onChange={this.handlePasswordInputChange}
-                    onKeyPress={this.handleOnKeyPress}
-                    placeholder='********'
-                    type='password'
-                    value={password} />
-                  {
-                    errorPassword &&
-                      <FormFeedback invalid='true'>
-                        {errorPassword}
-                      </FormFeedback>
-                  }
-                </FormGroup>
-                <FormGroup>
-                  <Label for='sign-up-modal__password-confirm'>Confirm Password</Label>
-                  <Input
-                    data-state-key='passwordConfirm'
-                    invalid={errorPasswordConfirm}
-                    name='sign-up-modal__password-confirm'
-                    onBlur={this.handlePasswordConfirmInputBlur}
-                    onChange={this.handlePasswordConfirmInputChange}
-                    onKeyPress={this.handleOnKeyPress}
-                    placeholder='********'
-                    type='password'
-                    value={passwordConfirm} />
-                  {
-                    errorPasswordConfirm &&
-                      <FormFeedback invalid='true'>
-                        {errorPasswordConfirm}
-                      </FormFeedback>
-                  }
-                </FormGroup>
-                <ButtonGroup
-                  childrenLeft
-                  childrenRight={
-                    <React.Fragment>
-                      <Button
-                        onClick={hideModal}
-                        text='Cancel' />
-                      <Button
-                        color='primary'
-                        disabled={!this.hasEmailAndConfirmedValidPassword()}
-                        isLoading={isLoading}
-                        onClick={this.handleSignUp}
-                        text='Sign Up' />
-                    </React.Fragment>
-                  } />
+                <div style={{ overflow: 'hidden' }}>
+                  {topText}
+                  <FormGroup>
+                    <Label for='sign-up-modal__email'>Email</Label>
+                    <Input
+                      data-state-key='email'
+                      invalid={errorEmail}
+                      name='sign-up-modal__email'
+                      onBlur={this.handleEmailInputBlur}
+                      onChange={this.handleEmailInputChange}
+                      onKeyPress={this.handleOnKeyPress}
+                      placeholder='hello@podverse.fm'
+                      type='email'
+                      value={email} />
+                    {
+                      errorEmail &&
+                        <FormFeedback invalid='true'>
+                          {errorEmail}
+                        </FormFeedback>
+                    }
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for='sign-up-modal__password'>Password</Label>
+                    <Input
+                      data-state-key='password'
+                      invalid={errorPassword}
+                      name='sign-up-modal__password'
+                      onBlur={this.handlePasswordInputBlur}
+                      onChange={this.handlePasswordInputChange}
+                      onKeyPress={this.handleOnKeyPress}
+                      placeholder='********'
+                      type='password'
+                      value={password} />
+                    {
+                      errorPassword &&
+                        <FormFeedback invalid='true'>
+                          {errorPassword}
+                        </FormFeedback>
+                    }
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for='sign-up-modal__password-confirm'>Confirm Password</Label>
+                    <Input
+                      data-state-key='passwordConfirm'
+                      invalid={errorPasswordConfirm}
+                      name='sign-up-modal__password-confirm'
+                      onBlur={this.handlePasswordConfirmInputBlur}
+                      onChange={this.handlePasswordConfirmInputChange}
+                      onKeyPress={this.handleOnKeyPress}
+                      placeholder='********'
+                      type='password'
+                      value={passwordConfirm} />
+                    {
+                      errorPasswordConfirm &&
+                        <FormFeedback invalid='true'>
+                          {errorPasswordConfirm}
+                        </FormFeedback>
+                    }
+                  </FormGroup>
+                  <PasswordValidationInfo
+                    hasAtLeastXCharacters={hasAtLeastXCharacters}
+                    hasLowercase={hasLowercase}
+                    hasNumber={hasNumber}
+                    hasUppercase={hasUppercase} />
+                  <ButtonGroup
+                    childrenLeft
+                    childrenRight={
+                      <React.Fragment>
+                        <Button
+                          onClick={hideModal}
+                          text='Cancel' />
+                        <Button
+                          color='primary'
+                          disabled={submitDisabled}
+                          isLoading={isLoading}
+                          onClick={this.handleSignUp}
+                          text='Sign Up' />
+                      </React.Fragment>
+                    } />
+                  </div>
                 </>
           }
         </Form>

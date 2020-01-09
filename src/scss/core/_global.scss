@@ -147,6 +147,13 @@ html body {
     z-index: 99;
   }
 
+  .sign-up-modal {
+    .ReactModal__Content.ReactModal__Content--after-open {
+      max-height: 100vh;
+      overflow: auto !important;
+    }
+  }
+
   // This rule prevents the cursor from disappearing in inputs on iOS Safari
   .ReactModal__Content.ReactModal__Content--after-open {
     overflow: initial !important;
