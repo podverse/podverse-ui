@@ -14,6 +14,7 @@ type Props = {
   isLoading: boolean
   isOpen: boolean
   showSignUpModal: (event: React.MouseEvent<HTMLButtonElement>) => void
+  signUpFinished?: boolean
   topText?: string
 }
 
@@ -150,7 +151,7 @@ export class SignUpModal extends React.Component<Props, State> {
 
   render () {
 
-    const { errorResponse, hideModal, isLoading, isOpen, topText } = this.props
+    const { errorResponse, hideModal, isLoading, isOpen, signUpFinished, topText } = this.props
     const { email, errorEmail, errorPassword, errorPasswordConfirm,
       password, passwordConfirm } = this.state
 
@@ -169,7 +170,7 @@ export class SignUpModal extends React.Component<Props, State> {
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h3>Sign Up</h3>
+          <h3>{signUpFinished ? 'Verify Email' : 'Sign Up'}</h3>
           <CloseButton onClick={hideModal} />
           {
             (errorResponse && !isLoading) &&
@@ -177,79 +178,101 @@ export class SignUpModal extends React.Component<Props, State> {
                 {errorResponse}
               </Alert>
           }
-          {topText}
-          <FormGroup>
-            <Label for='sign-up-modal__email'>Email</Label>
-            <Input
-              data-state-key='email'
-              invalid={errorEmail}
-              name='sign-up-modal__email'
-              onBlur={this.handleEmailInputBlur}
-              onChange={this.handleEmailInputChange}
-              onKeyPress={this.handleOnKeyPress}
-              placeholder='hello@podverse.fm'
-              type='email'
-              value={email} />
-            {
-              errorEmail &&
-                <FormFeedback invalid='true'>
-                  {errorEmail}
-                </FormFeedback>
-            }
-          </FormGroup>
-          <FormGroup>
-            <Label for='sign-up-modal__password'>Password</Label>
-            <Input
-              data-state-key='password'
-              invalid={errorPassword}
-              name='sign-up-modal__password'
-              onBlur={this.handlePasswordInputBlur}
-              onChange={this.handlePasswordInputChange}
-              onKeyPress={this.handleOnKeyPress}
-              placeholder='********'
-              type='password'
-              value={password} />
-            {
-              errorPassword &&
-                <FormFeedback invalid='true'>
-                  {errorPassword}
-                </FormFeedback>
-            }
-          </FormGroup>
-          <FormGroup>
-            <Label for='sign-up-modal__password-confirm'>Confirm Password</Label>
-            <Input
-              data-state-key='passwordConfirm'
-              invalid={errorPasswordConfirm}
-              name='sign-up-modal__password-confirm'
-              onBlur={this.handlePasswordConfirmInputBlur}
-              onChange={this.handlePasswordConfirmInputChange}
-              onKeyPress={this.handleOnKeyPress}
-              placeholder='********'
-              type='password'
-              value={passwordConfirm} />
-            {
-              errorPasswordConfirm &&
-                <FormFeedback invalid='true'>
-                  {errorPasswordConfirm}
-                </FormFeedback>
-            }
-          </FormGroup>
-          <ButtonGroup
-            childrenLeft
-            childrenRight={
-              <React.Fragment>
-                <Button
-                  onClick={hideModal}
-                  text='Cancel' />
-                <Button
-                  color='primary'
-                  disabled={!this.hasEmailAndConfirmedValidPassword()}
-                  isLoading={isLoading}
-                  onClick={this.handleSignUp}
-                  text='Sign Up' />
-              </React.Fragment>
-            } />
+          {
+            signUpFinished &&
+              <>
+                <p style={{ marginTop: '32px', textAlign: 'center' }}>
+                  Please check your inbox and verify your email to login to your account.
+                  You may need to check your Spam folder.
+                </p>
+                <ButtonGroup
+                  childrenLeft
+                  childrenRight={
+                    <Button
+                      color='secondary'
+                      onClick={hideModal}
+                      text='Close' />
+                  } />
+              </>
+          }
+          {
+            !signUpFinished &&
+              <>
+                {topText}
+                <FormGroup>
+                  <Label for='sign-up-modal__email'>Email</Label>
+                  <Input
+                    data-state-key='email'
+                    invalid={errorEmail}
+                    name='sign-up-modal__email'
+                    onBlur={this.handleEmailInputBlur}
+                    onChange={this.handleEmailInputChange}
+                    onKeyPress={this.handleOnKeyPress}
+                    placeholder='hello@podverse.fm'
+                    type='email'
+                    value={email} />
+                  {
+                    errorEmail &&
+                      <FormFeedback invalid='true'>
+                        {errorEmail}
+                      </FormFeedback>
+                  }
+                </FormGroup>
+                <FormGroup>
+                  <Label for='sign-up-modal__password'>Password</Label>
+                  <Input
+                    data-state-key='password'
+                    invalid={errorPassword}
+                    name='sign-up-modal__password'
+                    onBlur={this.handlePasswordInputBlur}
+                    onChange={this.handlePasswordInputChange}
+                    onKeyPress={this.handleOnKeyPress}
+                    placeholder='********'
+                    type='password'
+                    value={password} />
+                  {
+                    errorPassword &&
+                      <FormFeedback invalid='true'>
+                        {errorPassword}
+                      </FormFeedback>
+                  }
+                </FormGroup>
+                <FormGroup>
+                  <Label for='sign-up-modal__password-confirm'>Confirm Password</Label>
+                  <Input
+                    data-state-key='passwordConfirm'
+                    invalid={errorPasswordConfirm}
+                    name='sign-up-modal__password-confirm'
+                    onBlur={this.handlePasswordConfirmInputBlur}
+                    onChange={this.handlePasswordConfirmInputChange}
+                    onKeyPress={this.handleOnKeyPress}
+                    placeholder='********'
+                    type='password'
+                    value={passwordConfirm} />
+                  {
+                    errorPasswordConfirm &&
+                      <FormFeedback invalid='true'>
+                        {errorPasswordConfirm}
+                      </FormFeedback>
+                  }
+                </FormGroup>
+                <ButtonGroup
+                  childrenLeft
+                  childrenRight={
+                    <React.Fragment>
+                      <Button
+                        onClick={hideModal}
+                        text='Cancel' />
+                      <Button
+                        color='primary'
+                        disabled={!this.hasEmailAndConfirmedValidPassword()}
+                        isLoading={isLoading}
+                        onClick={this.handleSignUp}
+                        text='Sign Up' />
+                    </React.Fragment>
+                  } />
+                </>
+          }
         </Form>
       </Modal>
     )
