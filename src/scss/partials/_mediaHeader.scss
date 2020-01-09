@@ -40,7 +40,6 @@
     height: 22px;
     line-height: 22px;
     margin-left: 1rem;
-    margin-right: 4px;
     margin-top: 3px;
     padding: 0;
     width: 22px;
@@ -131,7 +130,7 @@ html[data-theme=light] {
       color: $gray-dark;
     }
   
-    .media-header__subscribe, .media-header__edit {
+    .media-header__subscribe, .media-header__edit, .media-header__link {
       color: $gray-dark;
     }
 
@@ -154,7 +153,7 @@ html[data-theme=dark] {
       color: $gray-light;
     }
   
-    .media-header__subscribe, .media-header__edit {
+    .media-header__subscribe, .media-header__edit, .media-header__link {
       color: $gray-light;
     }
 
