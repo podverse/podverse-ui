@@ -137,7 +137,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
             {
               !errorEmail &&
                 <FormText>
-                  Check your email after pressing Submit.
+                  Check your email after pressing Submit. The email may go to your Spam folder.
                 </FormText>
             }
           </FormGroup>
