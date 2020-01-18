@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
-import { Form, FormGroup, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap'
+import { Form, FormGroup, FormText, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PVButton as Button } from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
@@ -87,6 +87,9 @@ class ClipCreatedModal extends React.Component<Props, State> {
                   text={wasCopied ? 'Copied!' : 'Copy'} />
               </InputGroupAddon>
             </InputGroup>
+            <FormText>
+              Copy this link to share your clip with anyone.
+            </FormText>
           </FormGroup>
         </Form>
       </Modal>
