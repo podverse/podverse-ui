@@ -15,6 +15,8 @@ type Props = {
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleEditClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoggedIn?: boolean
   loggedInUserId?: string
   mediaRef?: any
@@ -68,7 +70,7 @@ export class MediaInfo extends React.Component<Props, State> {
   render () {
     const {episode, handleLinkClick, handlePauseItem, handlePlayItem, loggedInUserId,
       mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
-      handleToggleEditClipModal } = this.props
+      handleToggleEditClipModal, handleToggleMakeClipModal, handleToggleShareModal } = this.props
     const { showDescription } = this.state
 
     let episodeTitle
@@ -198,6 +200,16 @@ export class MediaInfo extends React.Component<Props, State> {
                   onClick={handleToggleAddToModal}>
                   <FontAwesomeIcon icon='plus' />
                 </Button>
+              <Button
+                className='media-info-controls__make-clip'
+                onClick={handleToggleMakeClipModal}>
+                <FontAwesomeIcon icon='cut' />
+              </Button>
+              <Button
+                className='media-info-controls__share'
+                onClick={handleToggleShareModal}>
+                <FontAwesomeIcon icon='share' />
+              </Button>
                 {
                   (loggedInUserId
                     && currentItem.ownerId
