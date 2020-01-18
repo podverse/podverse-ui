@@ -23,9 +23,9 @@ export { ShareModal } from 'components/Media/Modals/ShareModal/ShareModal'
 export { Navbar } from 'components/Navbar/Navbar'
 export { PVPagination as Pagination } from 'components/Pagination/Pagination'
 export { addItemToPriorityQueueStorage, updatePriorityQueueStorage,
-  addItemsToSecondaryQueueStorage, clearItemsFromSecondaryQueueStorage,
+  addItemsToSecondaryQueueStorage, clearItemsFromSecondaryQueueStorage, getLastHistoryItemOrNowPlayingItemFromStorage,
   getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage, popNextFromPriorityQueueStorage,
   popNextFromQueueStorage, popNextFromSecondaryQueueStorage, removeItemFromPriorityQueueStorage,
   removeItemFromSecondaryQueueStorage, getNowPlayingItemFromStorage,
-  setNowPlayingItemInStorage, getNowPlayingOrNextFromStorage } from 'lib/mediaPlayerStorage'
+  setNowPlayingItemInStorage } from 'lib/mediaPlayerStorage'
 export { convertToNowPlayingItem } from 'lib/nowPlayingItem'

@@ -164,20 +164,24 @@ export const setNowPlayingItemInStorage = nowPlayingItem => {
   }
 }
 
-export const getNowPlayingOrNextFromStorage = () => {
-  const nowPlayingItem = getNowPlayingItemFromStorage()
-
-  if (nowPlayingItem) {
-    return nowPlayingItem
+export const getLastHistoryItemOrNowPlayingItemFromStorage = (historyItems: any) => {
+  if (historyItems && historyItems.length > 0) {
+    return historyItems[0]
   } else {
-    const result = popNextFromQueueStorage()
-
-    if (result.nextItem) {
-      localStorage.setItem(kNowPlayingItem, JSON.stringify(result.nextItem))
-      return result.nextItem
+    const nowPlayingItem = getNowPlayingItemFromStorage()
+  
+    if (nowPlayingItem) {
+      return nowPlayingItem
     } else {
-      localStorage.setItem(kNowPlayingItem, '')
-      return
+      const result = popNextFromQueueStorage()
+  
+      if (result.nextItem) {
+        localStorage.setItem(kNowPlayingItem, JSON.stringify(result.nextItem))
+        return result.nextItem
+      } else {
+        localStorage.setItem(kNowPlayingItem, '')
+        return
+      }
     }
   }
 }
