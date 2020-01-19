@@ -12,8 +12,8 @@ type Props = {
   hideModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoading: boolean
   isOpen: boolean
-  showForgotPasswordModal: (event: React.MouseEvent<HTMLButtonElement>) => void
-  showSignUpModal: (event: React.MouseEvent<HTMLButtonElement>) => void
+  showForgotPasswordModal: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  showSignUpModal: (event: React.MouseEvent<HTMLAnchorElement>) => void
 }
 
 type State = {
@@ -124,14 +124,23 @@ export class LoginModal extends React.Component<Props, State> {
           <ButtonGroup
             childrenLeft={
               <React.Fragment>
-                <Button
-                  className='btn-text'
-                  onClick={showForgotPasswordModal}
-                  text='Forgot?' />
-                <Button
-                  className='btn-text'
-                  onClick={showSignUpModal}
-                  text='Sign Up' />
+                <a
+                  className='login-modal__forgot'
+                  href='#'
+                  onClick={(event) => {
+                    event.preventDefault()
+                    showForgotPasswordModal(event)
+                  }}>
+                  Forgot?
+                </a>
+                <a
+                  className='login-modal__sign-up'
+                  href='#'
+                  onClick={(event) => {
+                    showSignUpModal(event)
+                  }}>
+                  Sign Up
+                </a>
               </React.Fragment>
             }
             childrenRight={

@@ -147,6 +147,15 @@ html body {
     z-index: 99;
   }
 
+  .login-modal {
+    .login-modal__forgot, .login-modal__sign-up {
+      font-size: .9rem;
+      line-height: 1.5;
+      margin: 0 0.25rem 0 -0.25rem;
+      padding: .5rem;
+    }
+  }
+
   .sign-up-modal {
     .ReactModal__Content.ReactModal__Content--after-open {
       max-height: 100vh;
