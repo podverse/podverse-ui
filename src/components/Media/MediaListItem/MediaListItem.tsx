@@ -206,6 +206,14 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     title={dataPodcast.title} />
               }
               {
+                (itemType === 'podcast-search-result' && dataPodcast) &&
+                  <MediaListItemB
+                    imageUrl={dataPodcast.shrunkImageUrl || dataPodcast.imageUrl}
+                    subTitle={dataPodcast.categoriesString ||''}
+                    subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
+                    title={dataPodcast.title} />
+              }
+              {
                 (itemType === 'user' && dataUser) &&
                 <MediaListItemD
                   itemId={dataUser.id}
