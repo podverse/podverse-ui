@@ -3,7 +3,7 @@
   .navbar {
     margin: auto;
     max-width: $body-max-width;
-    padding: 0.125rem 0rem;
+    padding: 0.25rem 0rem;
 
     a {
       cursor: pointer;
@@ -13,8 +13,8 @@
     .navbar-brand {
       background-size: cover;
       margin: 4px 0 2px 0;
-      height: 23px;    
-      width: 126px;
+      height: 33px;
+      width: 130px;
     }
 
     .nav-item {
