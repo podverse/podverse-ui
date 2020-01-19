@@ -137,6 +137,7 @@ export class LoginModal extends React.Component<Props, State> {
                   className='login-modal__sign-up'
                   href='#'
                   onClick={(event) => {
+                    event.preventDefault()
                     showSignUpModal(event)
                   }}>
                   Sign Up
