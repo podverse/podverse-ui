@@ -56,7 +56,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     } else if (itemType === 'playlist') {
       anchorHref = `/playlist?id=${dataPlaylist.id}`
       anchorAs = `/playlist/${dataPlaylist.id}`
-    } else if (itemType === 'podcast') {
+    } else if (itemType === 'podcast' || itemType === 'podcast-search-result') {
       anchorHref = `/podcast?id=${dataPodcast.id}`
       anchorAs = `/podcast/${dataPodcast.id}`
     } else if (itemType === 'now-playing-item' && (dataNowPlayingItem && dataNowPlayingItem.clipStartTime)) {
