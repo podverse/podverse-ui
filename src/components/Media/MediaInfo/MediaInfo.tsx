@@ -93,11 +93,11 @@ export class MediaInfo extends React.Component<Props, State> {
       moreInfo = episode.description
       currentItem = convertToNowPlayingItem(episode, null, null)
     } else if (mediaRef) {
-      episodeTitle = mediaRef.episode.title || 'Untitled episode'
+      episodeTitle = mediaRef.episode.title || 'untitled episode'
       episodeAs = getLinkEpisodeAs(mediaRef.episode.id)
       episodeHref = getLinkEpisodeHref(mediaRef.episode.id)
       episodePubDate = readableDate(mediaRef.episode.pubDate)
-      clipTitle = mediaRef.title || 'Untitled clip'
+      clipTitle = mediaRef.title || 'untitled clip'
       clipTime = readableClipTime(mediaRef.startTime, mediaRef.endTime)
       createdById = mediaRef.owner ? mediaRef.owner.id : ''
       createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false

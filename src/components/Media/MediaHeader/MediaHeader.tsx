@@ -123,7 +123,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                   <a
                     className='media-header__title'
                     onClick={handleLinkClick}>{title}</a>
-                </Link> : <span className='media-header__title'>{title || 'Untitled podcast'}</span>
+                </Link> : <span className='media-header__title'>{title || 'untitled podcast'}</span>
             }
           </React.Fragment>
           <button

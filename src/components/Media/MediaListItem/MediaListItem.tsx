@@ -130,7 +130,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
                     subTitleTop={dataNowPlayingItem.podcastTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                    title={dataNowPlayingItem.clipTitle || 'Untitled clip' } />
+                    title={dataNowPlayingItem.clipTitle || 'untitled clip' } />
               }
               {
                 (itemType === 'now-playing-item' && (dataNowPlayingItem && (!dataNowPlayingItem.clipStartTime && dataNowPlayingItem.clipStartTime !== 0) && dataNowPlayingItem.episodeId)) &&
