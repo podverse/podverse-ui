@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { ImageSquare } from 'components/Image/ImageSquare'
 
 export interface Props {
   handleOnClick?: () => void
@@ -17,12 +18,11 @@ export const MediaListItemB: React.StatelessComponent<Props> = props => {
 
   return (
     <div className='media-list-item__b'>
-      {
-        imageUrl &&
-          <img
-            className='media-list-item-b__image'
-            src={imageUrl} />
-      }
+      <div className='media-list-item-b__image'>
+        <ImageSquare
+          imageUrl={imageUrl}
+          size='3.5rem' />
+      </div>        
       <div className='text-wrapper'>
         {
           title &&

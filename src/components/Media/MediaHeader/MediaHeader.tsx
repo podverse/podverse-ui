@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Badge } from 'reactstrap'
+import { ImageSquare } from 'components/Image/ImageSquare'
 import { getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref,
   getLinkCategoryAs } from 'lib/constants'
 import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
@@ -106,7 +107,11 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
 
   return (
     <div className='media-header'>
-      <img className='media-header__image' src={imgUrl} />
+      <div className='media-header__image-wrapper'>
+        <ImageSquare
+          imageUrl={imgUrl}
+          size='4.75rem' />
+      </div>
       <div className='text-wrapper'>
         <div className='media-header__top'>
           <React.Fragment>

@@ -7,6 +7,7 @@ import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { NowPlayingItem } from 'lib/nowPlayingItem'
 import { convertSecToHHMMSS } from 'lib/utility'
+import { ImageSquare } from 'components/Image/ImageSquare'
 
 declare global {
   interface Window { player: any }
@@ -413,11 +414,12 @@ export class MediaPlayer extends React.Component<Props, State> {
           {
             ...playerClipLinkOnClick &&
             { ...(isClip ? { onClick: playerClipLinkOnClick } : {}) }
-          }
-        >
-          <img
-            className='mp-header__image'
-            src={podcastImageUrl} />
+          }>
+          <div className='mp-header__image'>
+            <ImageSquare
+              imageUrl={podcastImageUrl}
+              size='48px' />
+          </div>
           <div className='mp-header__wrap'>
             <div className='mp-header-wrap__top'>
               {podcastTitle}

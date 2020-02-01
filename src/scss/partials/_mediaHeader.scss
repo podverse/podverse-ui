@@ -1,13 +1,6 @@
 
 .media-header {
 
-  .media-header__image {
-    float: left;
-    height: 4.75rem;
-    margin-right: 1rem;
-    width: 4.75rem;
-  }
-
   .media-header__top {
     margin-top: .125rem;
   }
@@ -15,6 +8,11 @@
   .media-header__top, .media-header__middle, .media-header__bottom {
     display: flex;
     justify-content: space-between;
+  }
+
+  .media-header__image-wrapper {
+    float: left;
+    margin-right: 1rem;
   }
 
   .media-header__subscribe, .media-header__link {

@@ -1,0 +1,21 @@
+// The height for the Image component is set via props with an inline style rule.
+.pv-image-square-wrapper {
+  font-size: 44px;
+  text-align: center;
+
+  img {
+    display: block;
+  }
+}
+
+html[data-theme=light] {
+  .pv-image-square-wrapper {
+    color: $gray-light;
+  }
+}
+
+html[data-theme=dark] {
+  .pv-image-square-wrapper {
+    color: $gray-dark;
+  }
+}

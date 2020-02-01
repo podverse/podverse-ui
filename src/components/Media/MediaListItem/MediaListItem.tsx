@@ -143,12 +143,14 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-clip-from-episode' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    showImage={false}
                     subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
                     title={dataNowPlayingItem.clipTitle} />
               }
               {
                 (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    showImage={false}
                     subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
                     subTitleTop={dataNowPlayingItem.episodeTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
@@ -157,6 +159,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    showImage={false}
                     subTitleTop={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                     title={dataNowPlayingItem.episodeTitle} />
               }
@@ -215,9 +218,9 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               }
               {
                 (itemType === 'user' && dataUser) &&
-                <MediaListItemD
-                  itemId={dataUser.id}
-                  title={dataUser.name || 'anonymous'} />
+                  <MediaListItemD
+                    itemId={dataUser.id}
+                    title={dataUser.name || 'anonymous'} />
               }
             </a>
           </Link>

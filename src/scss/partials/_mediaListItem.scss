@@ -72,11 +72,6 @@
   display: block;
 }
 
-.media-list-item-a__image, .media-list-item-c__image {
-  height: 4.125em;  
-  width: 4.125em;
-}
-
 .media-list-item__a {
   .media-list-item-a__image {
     float: left;
@@ -142,9 +137,7 @@
 .media-list-item__b {
   .media-list-item-b__image {
     float: left;
-    height: 3.5em;
     margin-right: 1em;
-    width: 3.5em;
   }
 
   .media-list-item-b__sub {
