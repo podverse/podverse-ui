@@ -17,6 +17,7 @@ type Props = {
   handleToggleEditClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  initialShowDescription?: boolean
   isLoggedIn?: boolean
   loggedInUserId?: string
   mediaRef?: any
@@ -42,7 +43,7 @@ export class MediaInfo extends React.Component<Props, State> {
 
     this.state = {
       showAddToModal: false,
-      showDescription: false
+      showDescription: props.initialShowDescription || false
     }
   }
 
@@ -142,38 +143,38 @@ export class MediaInfo extends React.Component<Props, State> {
           }
           {
             episodePubDate &&
-            <div className='media-info__episode-pub-date'>
-              {episodePubDate}
-            </div>
+              <div className='media-info__episode-pub-date'>
+                {episodePubDate}
+              </div>
           }
           {
             clipTitle &&
-            <React.Fragment>
-              <hr />
-              <div className='media-info__clip-title'>
-                {clipTitle}
-              </div>
-            </React.Fragment>
+              <React.Fragment>
+                <hr />
+                <div className='media-info__clip-title'>
+                  {clipTitle}
+                </div>
+              </React.Fragment>
           }
           {
             clipTime &&
-            <div className='media-info__clip-time'>
-              {clipTime}
-            </div>
+              <div className='media-info__clip-time'>
+                {clipTime}
+              </div>
           }
           {
             currentItem.clipId &&
-            <div className='media-info__clip-created-by'>
-              By:&nbsp;
-              {
-                createdByIsPublic ?
-                  <Link
-                    as={getLinkUserAs(createdById)}
-                    href={getLinkUserHref(createdById)}>
-                    <a onClick={handleLinkClick}>{createdByName}</a>
-                  </Link> : createdByName
-              }
-            </div>
+              <div className='media-info__clip-created-by'>
+                By:&nbsp;
+                {
+                  createdByIsPublic ?
+                    <Link
+                      as={getLinkUserAs(createdById)}
+                      href={getLinkUserHref(createdById)}>
+                      <a onClick={handleLinkClick}>{createdByName}</a>
+                    </Link> : createdByName
+                }
+              </div>
           }
           {
             (episode || mediaRef || nowPlayingItem) &&
