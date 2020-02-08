@@ -1,6 +1,6 @@
 {
   "name": "podverse-ui",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "React / Typescript component library for Podverse web applications",
   "license": "MIT",
   "contributors": [
