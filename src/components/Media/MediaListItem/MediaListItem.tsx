@@ -254,9 +254,13 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
             && ((itemType === 'now-playing-item' && (dataNowPlayingItem && (!dataNowPlayingItem.clipStartTime && dataNowPlayingItem.clipStartTime !== 0) && dataNowPlayingItem.episodeId))
             || (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem)
             || (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem))) &&
-            <div className='media-list__bottom'>
-              {sanitizeHtml(striptags(dataNowPlayingItem.episodeDescription))}
-            </div>
+            <div
+              className='media-list__bottom'
+              dangerouslySetInnerHTML={
+                {
+                  __html: sanitizeHtml(striptags(dataNowPlayingItem.episodeDescription))
+                }
+              } />
         }
       </div>
       {

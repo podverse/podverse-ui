@@ -1,4 +1,5 @@
 import * as React from 'react'
+const sanitizeHtml = require('sanitize-html')
 
 export interface Props {
   date?: string
@@ -25,9 +26,13 @@ export const MediaListItemC: React.StatelessComponent<Props> = props => {
           </div>
           {
             description &&
-            <div className='media-list-item-c__description'>
-              {description}
-            </div>
+            <div
+              className='media-list-item-c__description'
+              dangerouslySetInnerHTML={
+                {
+                  __html: sanitizeHtml(description)
+                }}
+              />
           }
         </div>
       </div>
