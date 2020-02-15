@@ -20,6 +20,7 @@ type Props = {
 type State = {
   email?: string
   errorEmail?: string
+  submitIsDisabled: boolean
 }
 
 const customStyles = {
@@ -40,7 +41,8 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
     super(props)
     this.state = {
       email: '',
-      errorEmail: undefined
+      errorEmail: undefined,
+      submitIsDisabled: true
     }
   }
 
@@ -53,7 +55,9 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
       newState.errorEmail = 'Please provide a valid email address.'
     }
 
-    this.setState(newState)
+    this.setState(newState, () => {
+      this.checkIfSubmitIsDisabled()
+    })
   }
 
   handleEmailInputChange = (event) => {
@@ -65,7 +69,9 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
       newState.errorEmail = null
     }
 
-    this.setState(newState)
+    this.setState(newState, () => {
+      this.checkIfSubmitIsDisabled()
+    })
   }
 
   handleOnKeyPress = event => {
@@ -76,6 +82,11 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
     }
   }
 
+  checkIfSubmitIsDisabled = () => {
+    const submitIsDisabled = !validateEmail(this.state.email)
+    this.setState({ submitIsDisabled })
+  }
+
   handleSubmit = () => {
     const { email } = this.state
     this.props.handleSubmit(email)
@@ -83,7 +94,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
 
   render () {
     const { errorResponse, hideModal, isLoading, isOpen, isResetPassword, isSendVerificationEmail } = this.props
-    const { email, errorEmail } = this.state
+    const { email, errorEmail, submitIsDisabled } = this.state
 
     let appEl
     if (checkIfLoadingOnFrontEnd()) {
@@ -150,7 +161,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
                   text='Cancel' />
                 <Button
                   color='primary'
-                  disabled={!validateEmail(email)}
+                  disabled={submitIsDisabled}
                   isLoading={isLoading}
                   onClick={this.handleSubmit}
                   text='Submit' />

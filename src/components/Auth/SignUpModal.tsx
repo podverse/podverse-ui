@@ -18,6 +18,7 @@ type Props = {
   isOpen: boolean
   showSignUpModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   signUpFinished?: boolean
+  submitIsDisabled?: boolean
   topText?: string
 }
 
@@ -35,6 +36,7 @@ type State = {
   hasValidEmail: boolean
   password?: string
   passwordConfirm?: string
+  submitIsDisabled: boolean
 }
 
 const customStyles = {
@@ -67,7 +69,8 @@ export class SignUpModal extends React.Component<Props, State> {
       hasUppercase: false,
       hasValidEmail: false,
       password: '',
-      passwordConfirm: ''
+      passwordConfirm: '',
+      submitIsDisabled: true
     }
   }
 
@@ -80,7 +83,9 @@ export class SignUpModal extends React.Component<Props, State> {
       newState.errorEmail = 'Please provide a valid email address.'
     }
 
-    this.setState(newState)
+    this.setState(newState, () => {
+      this.checkIfSubmitIsDisabled()
+    })
   }
 
   handleEmailInputChange = event => {
@@ -93,7 +98,9 @@ export class SignUpModal extends React.Component<Props, State> {
       newState.errorEmail = null
     }
 
-    this.setState(newState)
+    this.setState(newState, () => {
+      this.checkIfSubmitIsDisabled()
+    })
   }
 
   handlePasswordInputBlur = event => {
@@ -182,22 +189,23 @@ export class SignUpModal extends React.Component<Props, State> {
       hasNoSpaces,
       hasNumber,
       hasUppercase
+    }, () => {
+      this.checkIfSubmitIsDisabled()
     })
   }
 
-  submitDisabled = () => {
+  checkIfSubmitIsDisabled = () => {
     const { hasAtLeastXCharacters, hasLowercase, hasMatching, hasNoSpaces, hasNumber, hasUppercase,
       hasValidEmail } = this.state
-    return !(hasAtLeastXCharacters && hasLowercase && hasMatching && hasNoSpaces && hasNumber &&
+    const submitIsDisabled = !(hasAtLeastXCharacters && hasLowercase && hasMatching && hasNoSpaces && hasNumber &&
       hasUppercase && hasValidEmail)
+    this.setState({ submitIsDisabled })
   }
 
   render () {
     const { errorResponse, hideModal, isLoading, isOpen, signUpFinished, topText } = this.props
     const { email, errorEmail, errorPassword, errorPasswordConfirm, hasAtLeastXCharacters,
-      hasLowercase, hasNumber, hasUppercase, password, passwordConfirm } = this.state
-    
-    const submitDisabled = this.submitDisabled()
+      hasLowercase, hasNumber, hasUppercase, password, passwordConfirm, submitIsDisabled } = this.state
 
     let appEl
     if (checkIfLoadingOnFrontEnd()) {
@@ -315,7 +323,7 @@ export class SignUpModal extends React.Component<Props, State> {
                           text='Cancel' />
                         <Button
                           color='primary'
-                          disabled={submitDisabled}
+                          disabled={submitIsDisabled}
                           isLoading={isLoading}
                           onClick={this.handleSignUp}
                           text='Sign Up' />
