@@ -52,7 +52,7 @@
   .media-header__link {
     flex: 0 0 auto;
     height: 22px;
-    line-height: 22px;
+    line-height: 23px;
     margin-left: 1.5rem;
     margin-right: 4px;
     margin-top: 3px;
@@ -128,8 +128,13 @@ html[data-theme=light] {
       color: $gray-dark;
     }
   
-    .media-header__subscribe, .media-header__edit, .media-header__link {
-      color: $gray-dark;
+    .media-header__top {
+      > .media-header__subscribe, > .media-header__edit, > .media-header__link {
+        color: $gray-dark;
+        &:hover {
+          color: $gray-dark;
+        }
+      }
     }
 
     .media-header__is-explicit .badge {
@@ -151,8 +156,13 @@ html[data-theme=dark] {
       color: $gray-light;
     }
   
-    .media-header__subscribe, .media-header__edit, .media-header__link {
-      color: $gray-light;
+    .media-header__top {
+      > .media-header__subscribe, > .media-header__edit, > .media-header__link {
+        color: $gray-light;
+        &:hover {
+          color: $gray-light;
+        }
+      }
     }
 
     .media-header__is-explicit .badge {

@@ -181,6 +181,15 @@ html body {
     background-color: $red;
     color: $white;
   }
+
+  .popover {
+    background-color: $white;
+    border-color: $gray-lighter;
+
+    .popover-body {
+      padding: 0.75rem;
+    }
+  }
 }
 
 html[data-theme=light] body {
@@ -265,6 +274,17 @@ html[data-theme=light] body {
       }
     }
   }
+
+  .popover {
+    background-color: $white;
+    border-color: $gray;
+
+    .popover-header {
+      background-color: $gray-lightest;
+      border-color: $gray;
+      color: $gray-darkest;
+    }
+  }
 }
 
 html[data-theme=dark] body {
@@ -347,6 +367,17 @@ html[data-theme=dark] body {
       h5 {
         color: $white;
       }
+    }
+  }
+
+  .popover {
+    background-color: $black;
+    border-color: $gray;
+
+    .popover-header {
+      background-color: $gray-darkest;
+      border-color: $gray;
+      color: $gray-lightest;
     }
   }
 }
