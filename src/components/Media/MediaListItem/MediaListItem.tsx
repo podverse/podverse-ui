@@ -243,7 +243,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 showMove &&
                   <Button className='media-list-right__move'>
-                    <FontAwesomeIcon icon='bars' />
+                    <FontAwesomeIcon icon='arrows-alt-v' />
                   </Button>
               }
             </div>
