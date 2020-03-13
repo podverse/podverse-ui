@@ -7,7 +7,6 @@ const validatePasswordSchema = schema
   .has().uppercase()
   .has().lowercase()
   .has().digits()
-  .has().not().spaces()
 
 export const validatePassword = password => {
   return validatePasswordSchema.validate(password)
@@ -28,10 +27,6 @@ export const hasLowercase = (str?: string) => {
 
 export const hasMatchingStrings = (str1?: string, str2?: string) => {
   return str1 && str1 === str2 ? true : false
-}
-
-export const hasNoSpaces = (str?: string) => {
-  return str && str.match('\s') ? true : false
 }
 
 export const hasNumber = (str?: string) => {

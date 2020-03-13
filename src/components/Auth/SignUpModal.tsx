@@ -7,7 +7,7 @@ import { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 import { hasAtLeastXCharacters as hasAtLeastXCharactersLib, hasLowercase as hasLowercaseLib,
-  hasMatchingStrings, hasNoSpaces as hasNoSpacesLib, hasNumber as hasNumberLib,
+  hasMatchingStrings, hasNumber as hasNumberLib,
   hasUppercase as hasUppercaseLib, validateEmail, validatePassword } from 'lib/utility/validation'
 
 type Props = {
@@ -30,7 +30,6 @@ type State = {
   hasAtLeastXCharacters: boolean
   hasLowercase: boolean
   hasMatching: boolean
-  hasNoSpaces: boolean
   hasNumber: boolean
   hasUppercase: boolean
   hasValidEmail: boolean
@@ -64,7 +63,6 @@ export class SignUpModal extends React.Component<Props, State> {
       hasAtLeastXCharacters: false,
       hasLowercase: false,
       hasMatching: false,
-      hasNoSpaces: false,
       hasNumber: false,
       hasUppercase: false,
       hasValidEmail: false,
@@ -178,7 +176,6 @@ export class SignUpModal extends React.Component<Props, State> {
     const hasAtLeastXCharacters = hasAtLeastXCharactersLib(password)
     const hasLowercase = hasLowercaseLib(password)
     const hasMatching = hasMatchingStrings(password, passwordConfirm)
-    const hasNoSpaces = hasNoSpacesLib(password)
     const hasNumber = hasNumberLib(password)
     const hasUppercase = hasUppercaseLib(password)
 
@@ -186,7 +183,6 @@ export class SignUpModal extends React.Component<Props, State> {
       hasAtLeastXCharacters,
       hasLowercase,
       hasMatching,
-      hasNoSpaces,
       hasNumber,
       hasUppercase
     }, () => {
@@ -195,9 +191,9 @@ export class SignUpModal extends React.Component<Props, State> {
   }
 
   checkIfSubmitIsDisabled = () => {
-    const { hasAtLeastXCharacters, hasLowercase, hasMatching, hasNoSpaces, hasNumber, hasUppercase,
+    const { hasAtLeastXCharacters, hasLowercase, hasMatching, hasNumber, hasUppercase,
       hasValidEmail } = this.state
-    const submitIsDisabled = !(hasAtLeastXCharacters && hasLowercase && hasMatching && hasNoSpaces && hasNumber &&
+    const submitIsDisabled = !(hasAtLeastXCharacters && hasLowercase && hasMatching && hasNumber &&
       hasUppercase && hasValidEmail)
     this.setState({ submitIsDisabled })
   }
