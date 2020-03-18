@@ -90,6 +90,12 @@ html body {
     }
   }
 
+  @media (max-width: 575px) {
+    .hide-mobile {
+      display: none;
+    }
+  }
+
   .italic {
     font-style: italic;
   }

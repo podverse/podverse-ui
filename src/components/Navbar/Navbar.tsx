@@ -18,6 +18,7 @@ type Props = {
   handleToggleMobileMenu: any
   isDarkMode?: boolean
   mobileMenuIsOpen?: boolean
+  mobileNavItems?: any
   navItems?: any
 }
 
@@ -28,7 +29,8 @@ export class Navbar extends React.Component<Props, State> {
   render () {
     const { brandAs, brandHideText, brandText, brandHref, dropdownItems,
       dropdownMenuIsOpen, dropdownText, handleLinkClick, handleToggleDropdownMenu,
-      handleToggleMobileMenu, isDarkMode, mobileMenuIsOpen, navItems } = this.props
+      handleToggleMobileMenu, isDarkMode, mobileMenuIsOpen,
+      mobileNavItems, navItems } = this.props
 
     const navItemKey = 'navItemKey'
     const navItemsEls = navItems.map((x, index) =>
@@ -36,7 +38,9 @@ export class Navbar extends React.Component<Props, State> {
         key={`${navItemKey}${index}`}
         href={x.href}
         as={x.as}>
-        <NavItem key={`${navItemKey}b${index}`}>
+        <NavItem
+          key={`${navItemKey}b${index}`}
+          className={x.hideMobile ? 'hide-mobile' : ''}>
           <NavLink
             {...(x.href ? { href: x.href } : {})}
             onClick={x.onClick}>
@@ -80,8 +84,7 @@ export class Navbar extends React.Component<Props, State> {
     })
 
     const mobileNavItemKey = 'mobileNavItemKey'
-    const mobileNavItems = clone(dropdownItems)
-    const mobileNavItemsEls = mobileNavItems.map((x, index) => {
+    const mobileNavItemEls = mobileNavItems.map((x, index) => {
       if (x.href) {
         return (
           <Link
@@ -113,6 +116,40 @@ export class Navbar extends React.Component<Props, State> {
       }
     })
 
+    const mobileDropdownItemKey = 'mobileDropdownItemKey'
+    const mobileDropdownItems = clone(dropdownItems)
+    const mobileDropdownItemsEls = mobileDropdownItems.map((x, index) => {
+      if (x.href) {
+        return (
+          <Link
+            key={`${mobileDropdownItemKey}${index}`}
+            href={x.href}
+            as={x.as}>
+            <NavItem
+              key={`${mobileDropdownItemKey}b${index}`}
+              className='mobile-nav-item'>
+              <NavLink
+                {...(x.href ? { href: x.href } : {})}
+                onClick={x.onClick}>
+                {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+              </NavLink>
+            </NavItem>
+          </Link>
+        )
+      } else {
+        return (
+          <NavItem
+            key={`${mobileDropdownItemKey}b${index}`}
+            className='mobile-nav-item'>
+            <NavLink
+              onClick={x.onClick}>
+              {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+            </NavLink>
+          </NavItem>
+        )
+      }
+    })
+
     return (
       <div className='navbar__bg'>
         <BSNavbar
@@ -128,11 +165,14 @@ export class Navbar extends React.Component<Props, State> {
               brandHideText ? null : brandText
             }</NavbarBrand>
           </Link>
+          <div className='navbar__mobile-nav-items'>
+            {mobileNavItemEls}
+          </div>
           <NavbarToggler onClick={handleToggleMobileMenu} />
           <Collapse isOpen={mobileMenuIsOpen} navbar>
             <Nav className='ml-auto' navbar>
               {navItemsEls}
-              {mobileNavItemsEls}
+              {mobileDropdownItemsEls}
               <Dropdown
                 inNavbar
                 isOpen={dropdownMenuIsOpen}

@@ -1,6 +1,7 @@
 // Navigation
 .navbar__bg {
   .navbar {
+    justify-content: space-between;
     margin: auto;
     max-width: $body-max-width;
     padding: 0.25rem 0rem;
@@ -31,6 +32,19 @@
         box-shadow: none !important;
       }
     }
+
+    .navbar__mobile-nav-items {
+      display: flex;
+      list-style: none;
+      position: absolute;
+      right: 80px;
+      top: 6px;
+
+      .mobile-nav-item {
+        margin-left: 0.125rem;
+      }
+    }
+
   }
 
   .navbar-toggler-icon {
@@ -46,6 +60,10 @@
   
   @media(min-width: 576px) {    
     .mobile-nav-item {
+      display: none;
+    }
+
+    .mobile-dropdown-item {
       display: none;
     }
   }
