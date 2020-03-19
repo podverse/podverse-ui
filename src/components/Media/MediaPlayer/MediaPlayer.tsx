@@ -50,6 +50,7 @@ type Props = {
   playlists: any[]
   queuePriorityItems: NowPlayingItem[]
   queueSecondaryItems: NowPlayingItem[]
+  shouldWaitToLoad: boolean
   showAutoplay?: boolean
   showPlaybackSpeed?: boolean
   showTimeJumpBackward?: boolean
@@ -111,6 +112,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     playbackRateText: '1x',
     playing: false,
     playlists: [],
+    shouldWaitToLoad: false,
     showAutoplay: true
   }
 
@@ -363,7 +365,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       handleToggleShareModal, handleTogglePlay, hasItemInQueue, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
-      playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed,
+      playerEpisodeLinkOnClick, playing, shouldWaitToLoad, showAutoplay, showPlaybackSpeed,
       showTimeJumpBackward } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
@@ -436,7 +438,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       nowPlayingItem.episodeMediaUrl ?
         <div className='mp'>
           {
-            isClientSide &&
+            isClientSide && !shouldWaitToLoad &&
               <FilePlayer
                 key={reactPlayerKey}
                 muted={false}
