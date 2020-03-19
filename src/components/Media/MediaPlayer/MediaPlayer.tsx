@@ -278,8 +278,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
     const shouldCheckHistoryForPlaybackPosition =
       (typeof window !== 'undefined' && window.player) &&
-      !(clipStartTime && clipStartTime > 0) &&
-      (nowPlayingItem && nowPlayingItem.userPlaybackPosition && nowPlayingItem.userPlaybackPosition > 0)
+      !(clipStartTime && clipStartTime > 0)
     let playbackPosition = 0
 
     if (shouldCheckHistoryForPlaybackPosition && handleGetPlaybackPositionFromHistory) {
