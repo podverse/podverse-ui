@@ -16,6 +16,7 @@ declare global {
 type Props = {
   autoplay?: boolean
   clipFinished?: boolean
+  didWaitToLoad: boolean
   duration: number | null
   handleClipRestart?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleGetPlaybackPositionFromHistory?: Function
@@ -50,7 +51,6 @@ type Props = {
   playlists: any[]
   queuePriorityItems: NowPlayingItem[]
   queueSecondaryItems: NowPlayingItem[]
-  shouldWaitToLoad: boolean
   showAutoplay?: boolean
   showPlaybackSpeed?: boolean
   showTimeJumpBackward?: boolean
@@ -104,6 +104,7 @@ const hasMediaUrlChanged = (newUrl) => {
 export class MediaPlayer extends React.Component<Props, State> {
 
   static defaultProps: Props = {
+    didWaitToLoad: false,
     duration: null,
     nowPlayingItem: {},
     queuePriorityItems: [],
@@ -112,7 +113,6 @@ export class MediaPlayer extends React.Component<Props, State> {
     playbackRateText: '1x',
     playing: false,
     playlists: [],
-    shouldWaitToLoad: false,
     showAutoplay: true
   }
 
@@ -360,12 +360,12 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   render () {
-    const { autoplay, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
+    const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
       handleToggleAddToModal, handleToggleMakeClipModal, handleToggleQueueModal,
       handleToggleShareModal, handleTogglePlay, hasItemInQueue, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
-      playerEpisodeLinkOnClick, playing, shouldWaitToLoad, showAutoplay, showPlaybackSpeed,
+      playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed,
       showTimeJumpBackward } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
@@ -438,7 +438,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       nowPlayingItem.episodeMediaUrl ?
         <div className='mp'>
           {
-            isClientSide && !shouldWaitToLoad &&
+            isClientSide && didWaitToLoad &&
               <FilePlayer
                 key={reactPlayerKey}
                 muted={false}
