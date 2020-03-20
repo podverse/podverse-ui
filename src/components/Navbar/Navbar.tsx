@@ -33,22 +33,37 @@ export class Navbar extends React.Component<Props, State> {
       mobileNavItems, navItems } = this.props
 
     const navItemKey = 'navItemKey'
-    const navItemsEls = navItems.map((x, index) =>
-      <Link
-        key={`${navItemKey}${index}`}
-        href={x.href}
-        as={x.as}>
-        <NavItem
-          key={`${navItemKey}b${index}`}
-          className={x.hideMobile ? 'hide-mobile' : ''}>
-          <NavLink
-            {...(x.href ? { href: x.href } : {})}
-            onClick={x.onClick}>
-            {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
-          </NavLink>
-        </NavItem>
-      </Link>
-    )
+    const navItemsEls = navItems.map((x, index) => {
+      if (x.href) {
+        return (
+          <Link
+            key={`${navItemKey}${index}`}
+            href={x.href}
+            as={x.as}>
+            <NavItem
+              key={`${navItemKey}b${index}`}
+              className={x.hideMobile ? 'hide-mobile' : ''}>
+              <NavLink
+                {...(x.href ? { href: x.href } : {})}
+                onClick={x.onClick}>
+                {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+              </NavLink>
+            </NavItem>
+          </Link>
+        )
+      } else {
+        return (
+          <NavItem
+            key={`${navItemKey}b${index}`}
+            className={x.hideMobile ? 'hide-mobile' : ''}>
+            <NavLink
+              onClick={x.onClick}>
+              {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
+            </NavLink>
+          </NavItem>
+        )
+      }
+    })
 
     const navbarDropdownItemKey = 'navbarDropdownItemKey'
     const dropdownItemsEls = dropdownItems.map((x, index) => {
@@ -72,7 +87,6 @@ export class Navbar extends React.Component<Props, State> {
         return (
           <DropdownItem
             key={`${navbarDropdownItemKey}${index}`}
-            {...(x.href ? { href: x.href } : {})}
             onClick={event => {
               x.onClick()
               this.setState({ dropdownIsOpen: false })
