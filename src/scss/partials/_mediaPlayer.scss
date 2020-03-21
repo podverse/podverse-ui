@@ -105,7 +105,7 @@
       text-align: left;
       position: absolute;
       top: 2px;
-      left: 5px;
+      left: 9px;
       color: #eee;
       z-index: 100;
       font-size: 12px;
@@ -114,7 +114,7 @@
   
     .mp-player__progress-bar-wrapper {
       flex: 1 1 auto;
-      margin: auto 4px;
+      margin: auto;
       position: relative;
       width: 100%;
   
@@ -134,7 +134,7 @@
       cursor: pointer;
       flex: 1 1 auto;
       height: 18px;
-      margin: 0;
+      margin: 0 4px;
       
       .progress-bar {
         transition: none;
@@ -146,7 +146,7 @@
       text-align: right;
       position: absolute;
       top: 2px;
-      right: 5px;
+      right: 9px;
       z-index: 100;
       font-size: 12px;
       pointer-events: none;

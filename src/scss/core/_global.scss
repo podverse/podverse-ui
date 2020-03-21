@@ -76,6 +76,7 @@ html body {
   }
 
   .progress-bar {
+    pointer-events: none;
     position: relative;
     transition: none;
   }
@@ -196,6 +197,24 @@ html body {
       padding: 0.75rem;
     }
   }
+
+  .tooltip {
+    font-weight: 500;
+    min-width: 72px;
+    opacity: 1 !important;
+
+    .tooltip-inner {
+      padding: 0.75rem 0.5rem;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .bs-tooltip-auto[x-placement^=top] .arrow, .bs-tooltip-top .arrow {
+    left: 31px !important;
+  }
 }
 
 html[data-theme=light] body {
@@ -291,6 +310,18 @@ html[data-theme=light] body {
       color: $gray-darkest;
     }
   }
+
+  .tooltip .tooltip-inner {
+    background-color: $gray;
+
+    p {
+      color: $white;
+    }
+  }
+
+  .bs-tooltip-auto[x-placement^=top] .arrow::before, .bs-tooltip-top .arrow::before {
+    border-top-color: $gray;
+  }
 }
 
 html[data-theme=dark] body {
@@ -385,5 +416,17 @@ html[data-theme=dark] body {
       border-color: $gray;
       color: $gray-lightest;
     }
+  }
+
+  .tooltip .tooltip-inner {
+    background-color: $black;
+
+    p {
+      color: $white;
+    }
+  }
+
+  .bs-tooltip-auto[x-placement^=top] .arrow::before, .bs-tooltip-top .arrow::before {
+    border-top-color: $black;
   }
 }

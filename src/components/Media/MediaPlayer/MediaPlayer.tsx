@@ -1,9 +1,8 @@
 import * as React from 'react'
 import FilePlayer from 'react-player/lib/players/FilePlayer'
-import { Progress } from 'reactstrap'
+import { Progress, Tooltip } from 'reactstrap'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as ReactTooltip from 'react-tooltip'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { NowPlayingItem } from 'lib/nowPlayingItem'
 import { convertSecToHHMMSS } from 'lib/utility'
@@ -70,6 +69,8 @@ type State = {
   playedSeconds: number
   progressPreviewTime: number
   seeking: boolean
+  tooltipIsOpen: boolean
+  tooltipOffsetX: number
 }
 
 type ClipFlagPositions = {
@@ -132,7 +133,9 @@ export class MediaPlayer extends React.Component<Props, State> {
       played: 0,
       playedSeconds: 0,
       progressPreviewTime: -1,
-      seeking: false
+      seeking: false,
+      tooltipIsOpen: false,
+      tooltipOffsetX: 0
     }
 
     this.durationNode = React.createRef()
@@ -196,10 +199,9 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   setCurrentTime = e => {
-    const offsetX = parseFloat(e.nativeEvent.offsetX)
-    const width = parseFloat(e.currentTarget.offsetWidth)
-    if (typeof window !== 'undefined' && window.player) {
-      window.player.seekTo((offsetX / width).toFixed(2))
+    const { progressPreviewTime } = this.state
+    if (typeof window !== 'undefined' && window.player && progressPreviewTime >= 0) {
+      window.player.seekTo(progressPreviewTime)
     }
   }
 
@@ -310,23 +312,31 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
+  onMouseOutProgress = e => {
+    this.setState({
+      progressPreviewTime: -1,
+      tooltipIsOpen: false
+    })
+  }
+
   onMouseOverProgress = e => {
     const offsetX = e.nativeEvent.offsetX
     const width = e.currentTarget.offsetWidth
     const { duration } = this.state
 
+    const handleToolTipToggleEvent = {
+      offsetX: e.nativeEvent.offsetX,
+      srcElement: e.nativeEvent.srcElement
+    }
+
     if (duration) {
       const previewTime = duration * (offsetX / width)
       this.setState({
         progressPreviewTime: previewTime
+      }, () => {
+        this.handleTooltipToggle(handleToolTipToggleEvent)
       })
     }
-  }
-
-  onMouseOutProgress = e => {
-    this.setState({
-      progressPreviewTime: -1
-    })
   }
 
   onSeekMouseDown = () => {
@@ -358,6 +368,23 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
+  handleTooltipToggle = (evt) => {
+    const { duration } = this.state
+
+    if (!duration) return
+
+    const { offsetX, srcElement } = evt
+    const { offsetWidth } = srcElement
+    const middleX = offsetWidth / 2
+    const startX = 0 - middleX
+    const tooltipOffsetX = startX + offsetX
+
+    this.setState({
+      tooltipIsOpen: true,
+      tooltipOffsetX
+    })
+  }
+
   render () {
     const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
       handleToggleAddToModal, handleToggleMakeClipModal, handleToggleQueueModal,
@@ -368,7 +395,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       showTimeJumpBackward } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
-      openQueueModal, openShareModal, progressPreviewTime } = this.state
+      openQueueModal, openShareModal, progressPreviewTime, tooltipIsOpen, tooltipOffsetX } = this.state
 
     const { clipEndTime, clipId, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       podcastImageUrl, podcastTitle } = nowPlayingItem
@@ -488,10 +515,17 @@ export class MediaPlayer extends React.Component<Props, State> {
                     <FontAwesomeIcon icon='play' />
                 }
               </button>
+              <Tooltip
+                isOpen={tooltipIsOpen}
+                offset={tooltipOffsetX + ', 4'}
+                target='progress-bar-wrapper'
+                toggle={this.handleTooltipToggle}
+                trigger='hover'>
+                <p>{convertSecToHHMMSS(progressPreviewTime)}</p>
+              </Tooltip>
               <div
                 className='mp-player__progress-bar-wrapper'
-                data-iscapture='true'
-                data-tip
+                id='progress-bar-wrapper'
                 ref={this.progressBarWidth}>
                 {
                   (!isLoadingOverride && duration) &&
@@ -516,14 +550,11 @@ export class MediaPlayer extends React.Component<Props, State> {
                         }} />
                     </React.Fragment>
                 }
-                <ReactTooltip
-                  className='mp-progress-bar__preview'>
-                  {convertSecToHHMMSS(progressPreviewTime)}
-                </ReactTooltip>
                 <Progress
                   className='mp-player__progress-bar'
                   onClick={this.setCurrentTime}
                   onMouseMove={this.onMouseOverProgress}
+                  onMouseOut={this.onMouseOutProgress}
                   value={duration && typeof window !== 'undefined' && window.player ? ((window.player.getCurrentTime() / duration) * 100).toFixed(5) : 0} />
                 <span
                   className={`mp-player__duration`}
