@@ -20,6 +20,9 @@ type Props = {
   isSaving?: boolean
   isOpen?: boolean
   player?: any
+  refInputEndTime: any
+  refInputStartTime: any
+  refInputTitle: any
   startTime: number
   title?: string
 }
@@ -27,14 +30,11 @@ type Props = {
 type State = {
   errorEndTime?: string
   errorStartTime?: string
+  initialEndTime?: number | null
+  initialStartTime?: number | null
+  initialTitle?: string
   isPublic?: boolean
   isPublicIsOpen: boolean
-}
-
-interface MakeClipModal {
-  inputEndTime: any
-  inputStartTime: any
-  inputTitle: any
 }
 
 const customStyles = {
@@ -64,30 +64,51 @@ These clips are not private, but they will not show up automatically in lists on
 
 A premium account is required to create Public clips.`
 
+const _inProgressMakeClipTitleKey = 'inProgressMakeClipTitle'
+const _inProgressMakeStartTimeKey = 'inProgressMakeStartTime'
+const _inProgressMakeEndTimeKey = 'inProgressMakeEndTime'
+
 class MakeClipModal extends React.Component<Props, State> {
 
   constructor (props) {
     super(props)
 
+    const initialStartTimeString = window.sessionStorage.getItem(_inProgressMakeStartTimeKey)
+    const initialEndTimeString = window.sessionStorage.getItem(_inProgressMakeEndTimeKey)
+    const initialTitle = window.sessionStorage.getItem(_inProgressMakeClipTitleKey) || ''
+
+    const initialStartTime = convertHHMMSSToSeconds(initialStartTimeString)
+    const initialEndTime = convertHHMMSSToSeconds(initialEndTimeString)
+
     this.state = {
       errorEndTime: undefined,
       errorStartTime: undefined,
+      initialEndTime,
+      initialStartTime,
+      initialTitle,
       isPublic: undefined,
       isPublicIsOpen: false
     }
-
-    this.inputStartTime = React.createRef()
-    this.inputEndTime = React.createRef()
-    this.inputTitle = React.createRef()
   }
 
   static getDerivedStateFromProps(props, currentState) {
+    const newState = {} as any
     if (typeof props.isEditing !== 'undefined' && typeof currentState.isPublic === 'undefined') {
-      return {
-        isPublic: props.initialIsPublic
-      }
+      newState.isPublic = props.initialIsPublic
     }
-    return {}
+
+    const initialStartTimeString = window.sessionStorage.getItem(_inProgressMakeStartTimeKey)
+    const initialEndTimeString = window.sessionStorage.getItem(_inProgressMakeEndTimeKey)
+    const initialTitle = window.sessionStorage.getItem(_inProgressMakeClipTitleKey)
+
+    const initialStartTime = convertHHMMSSToSeconds(initialStartTimeString)
+    const initialEndTime = convertHHMMSSToSeconds(initialEndTimeString)
+
+    newState.initialStartTime = initialStartTime
+    newState.initialEndTime = initialEndTime
+    newState.initialTitle = initialTitle
+
+    return newState
   }
 
   selectIsPublic = e => {
@@ -101,11 +122,11 @@ class MakeClipModal extends React.Component<Props, State> {
 
   handleSave = async event => {
     event.preventDefault()
-    const { isEditing } = this.props
+    const { isEditing, refInputEndTime, refInputStartTime, refInputTitle } = this.props
     const { isPublic } = this.state
-    const { value: startTime } = this.inputStartTime.current
-    const { value: endTime } = this.inputEndTime.current
-    const { value: title } = this.inputTitle.current
+    const { value: startTime } = refInputStartTime.current
+    const { value: endTime } = refInputEndTime.current
+    const { value: title } = refInputTitle.current
 
     const startTimeSeconds = convertHHMMSSToSeconds(startTime)
     const endTimeSeconds = convertHHMMSSToSeconds(endTime)
@@ -132,8 +153,8 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   endTimePreview = () => {
-    const { handleEndTimePreview, player } = this.props
-    const endTime = convertHHMMSSToSeconds(this.inputEndTime.current.value)
+    const { handleEndTimePreview, player, refInputEndTime } = this.props
+    const endTime = convertHHMMSSToSeconds(refInputEndTime.current.value)
 
     if (player && endTime && endTime > 0 && handleEndTimePreview) {
       player.seekTo(endTime < 3 ? 0 : endTime - 3)
@@ -142,8 +163,8 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   startTimePreview = () => {
-    const { handleStartTimePreview, player } = this.props
-    const startTime = convertHHMMSSToSeconds(this.inputStartTime.current.value)
+    const { handleStartTimePreview, player, refInputStartTime } = this.props
+    const startTime = convertHHMMSSToSeconds(refInputStartTime.current.value)
 
     if (player && startTime && startTime > 0 && handleStartTimePreview) {
       player.seekTo(startTime)
@@ -153,8 +174,9 @@ class MakeClipModal extends React.Component<Props, State> {
 
   render () {
     const { endTime, handleDelete, handleHideModal, isDeleting, isEditing, isLoggedIn, isOpen, isSaving,
-      startTime, title } = this.props
-    const { errorEndTime, errorStartTime, isPublic, isPublicIsOpen } = this.state
+      refInputEndTime, refInputStartTime, refInputTitle, startTime, title } = this.props
+    const { errorEndTime, errorStartTime, initialEndTime, initialStartTime, initialTitle,
+      isPublic, isPublicIsOpen } = this.state
 
     let appEl
     if (checkIfLoadingOnFrontEnd()) {
@@ -236,8 +258,8 @@ class MakeClipModal extends React.Component<Props, State> {
                   <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; Preview
                 </button>
                 <Input
-                  defaultValue={convertSecToHHMMSS(startTime)}
-                  innerRef={this.inputStartTime}
+                  defaultValue={initialStartTime ? convertSecToHHMMSS(initialStartTime) : convertSecToHHMMSS(startTime)}
+                  innerRef={refInputStartTime}
                   invalid={!!errorStartTime}
                   name='make-clip-modal__start-time'
                   placeholder='--:--:--'
@@ -260,8 +282,8 @@ class MakeClipModal extends React.Component<Props, State> {
                   <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; Preview
                 </button>
                 <Input
-                  defaultValue={endTime ? convertSecToHHMMSS(endTime) : ''}
-                  innerRef={this.inputEndTime}
+                  defaultValue={endTime ? convertSecToHHMMSS(endTime) : initialEndTime ? convertSecToHHMMSS(initialEndTime) : ''}
+                  innerRef={refInputEndTime}
                   invalid={!!errorEndTime}
                   name='make-clip-modal__end-time'
                   placeholder='hh:mm:ss'
@@ -278,8 +300,8 @@ class MakeClipModal extends React.Component<Props, State> {
           <FormGroup>
             <Label for='make-clip-modal__title'>Title</Label>
             <Input
-              defaultValue={title ? title : ''}
-              innerRef={this.inputTitle}
+              defaultValue={title ? title : initialTitle ? initialTitle : ''}
+              innerRef={refInputTitle}
               name='make-clip-modal__title'
               placeholder='optional'
               type='textarea' />
