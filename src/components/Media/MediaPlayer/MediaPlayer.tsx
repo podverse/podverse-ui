@@ -33,6 +33,7 @@ type Props = {
   handleToggleQueueModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasItemInQueue?: boolean
+  hideTimeJumpBackward?: boolean
   isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
   playbackRate: number
@@ -52,7 +53,6 @@ type Props = {
   queueSecondaryItems: NowPlayingItem[]
   showAutoplay?: boolean
   showPlaybackSpeed?: boolean
-  showTimeJumpBackward?: boolean
 }
 
 type State = {
@@ -388,11 +388,10 @@ export class MediaPlayer extends React.Component<Props, State> {
   render () {
     const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
       handleToggleAddToModal, handleToggleMakeClipModal, handleToggleQueueModal,
-      handleToggleShareModal, handleTogglePlay, hasItemInQueue, nowPlayingItem,
+      handleToggleShareModal, handleTogglePlay, hasItemInQueue, hideTimeJumpBackward, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
-      playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed,
-      showTimeJumpBackward } = this.props
+      playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
       openQueueModal, openShareModal, progressPreviewTime, tooltipIsOpen, tooltipOffsetX } = this.state
@@ -566,7 +565,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                 </span>
               </div>
               {
-                showTimeJumpBackward &&
+                !hideTimeJumpBackward &&
                   <button
                     className='mp-player__time-jump-backward'
                     onClick={this.timeJumpBackward}>
