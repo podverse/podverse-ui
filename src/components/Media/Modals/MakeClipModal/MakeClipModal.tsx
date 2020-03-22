@@ -304,6 +304,7 @@ class MakeClipModal extends React.Component<Props, State> {
               innerRef={refInputTitle}
               name='make-clip-modal__title'
               placeholder='optional'
+              rows='3'
               type='textarea' />
           </FormGroup>
           <div className='text-right'>
