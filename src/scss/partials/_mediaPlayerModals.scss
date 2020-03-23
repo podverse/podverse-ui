@@ -105,6 +105,16 @@
     margin: 0.5rem 0 0 1rem;
   }
 
+  .make-clip-modal__login-msg {
+    font-weight: bold;
+    padding: 0 0 1.5rem 0;
+    text-align: center;
+
+    a {
+      cursor: pointer;
+    }
+  }
+
   @media (max-height: 480px) {
     .ReactModal__Content {
       left: 0 !important;
@@ -201,7 +211,7 @@ html[data-theme=light] {
       }
     }
 
-    .mp-add-to-modal__playlist-msg {
+    .mp-add-to-modal__playlist-msg, .make-clip-modal__login-msg {
       color: $black;
     }
   }
@@ -229,7 +239,7 @@ html[data-theme=dark] {
       }
     }
 
-    .mp-add-to-modal__playlist-msg {
+    .mp-add-to-modal__playlist-msg, .make-clip-modal__login-msg {
       color: $white;
     }
   }
