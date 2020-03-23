@@ -239,7 +239,7 @@ class MakeClipModal extends React.Component<Props, State> {
             !isLoggedIn &&
             <div className='make-clip-modal__login-msg'>
               You must <a onClick={handleLoginClick}>login</a>
-                &nbsp;to create and share clips.
+                &nbsp;to make clips.
               </div>
           }
           <Row>
