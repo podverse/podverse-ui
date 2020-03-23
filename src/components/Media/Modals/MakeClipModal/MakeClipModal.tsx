@@ -11,6 +11,7 @@ type Props = {
   handleDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleEndTimePreview?: Function
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleLoginClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleSave: Function
   handleStartTimePreview?: Function
   initialIsPublic?: boolean
@@ -58,11 +59,9 @@ const startTimeErrors = {
   required: 'Start time is required'
 }
 
-const onlyWithClipAlertText = `Only with Link means only people who have your clip's link can play it.
+// const onlyWithClipAlertText = `Only with Link means only people who have your clip's link can play it.
 
-These clips are not private, but they will not show up automatically in lists on Podverse.
-
-A premium account is required to create Public clips.`
+// These clips are not private, but they will not show up automatically in lists on Podverse.`
 
 const _inProgressMakeClipTitleKey = 'inProgressMakeClipTitle'
 const _inProgressMakeStartTimeKey = 'inProgressMakeStartTime'
@@ -173,8 +172,8 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { endTime, handleDelete, handleHideModal, isDeleting, isEditing, isLoggedIn, isOpen, isSaving,
-      refInputEndTime, refInputStartTime, refInputTitle, startTime, title } = this.props
+    const { endTime, handleDelete, handleHideModal, handleLoginClick, isDeleting, isEditing, isLoggedIn,
+      isOpen, isSaving, refInputEndTime, refInputStartTime, refInputTitle, startTime, title } = this.props
     const { errorEndTime, errorStartTime, initialEndTime, initialStartTime, initialTitle,
       isPublic, isPublicIsOpen } = this.state
 
@@ -198,55 +197,51 @@ class MakeClipModal extends React.Component<Props, State> {
               <h3><FontAwesomeIcon icon='edit' /> &nbsp;Edit Clip</h3> :
               <h3><FontAwesomeIcon icon='cut' /> &nbsp;Make Clip</h3>
           }
+          <Dropdown
+            className='make-clip-modal__is-public transparent-btn'
+            isOpen={isPublicIsOpen}
+            toggle={this.toggleIsPublic}>
+            <DropdownToggle caret>
+              {
+                isPublic &&
+                  <React.Fragment>
+                    <FontAwesomeIcon icon='globe-americas' /> Public
+                  </React.Fragment>
+              }
+              {
+                !isPublic &&
+                  <React.Fragment>
+                    <FontAwesomeIcon icon='link' /> Only with link
+                  </React.Fragment>
+              }
+            </DropdownToggle>
+            <DropdownMenu>
+              {
+                !isPublic &&
+                  <DropdownItem
+                    data-value='public'
+                    onClick={this.selectIsPublic}>
+                    <FontAwesomeIcon icon='globe-americas' /> Public
+                  </DropdownItem>
+              }
+              {
+                isPublic &&
+                  <DropdownItem
+                    data-value='only-with-link'
+                    onClick={this.selectIsPublic}>
+                    <FontAwesomeIcon icon='link' /> Only with link
+                  </DropdownItem>
+              }
+            </DropdownMenu>
+          </Dropdown>
+          <div className='clearfix'></div>
           {
             !isLoggedIn &&
-              <div className='dropdown make-clip-modal__is-public'>
-                <div className='btn one-option-only' onClick={() => window.alert(onlyWithClipAlertText)}>
-                  <FontAwesomeIcon icon='link' /> Only with Link
-                </div>
+            <div className='make-clip-modal__login-msg'>
+              You must <a onClick={handleLoginClick}>login</a>
+                &nbsp;to create and share clips.
               </div>
           }
-          {
-            isLoggedIn &&
-              <Dropdown
-                className='make-clip-modal__is-public transparent-btn'
-                isOpen={isPublicIsOpen}
-                toggle={this.toggleIsPublic}>
-                <DropdownToggle caret>
-                  {
-                    isPublic &&
-                      <React.Fragment>
-                        <FontAwesomeIcon icon='globe-americas' /> Public
-                      </React.Fragment>
-                  }
-                  {
-                    !isPublic &&
-                      <React.Fragment>
-                        <FontAwesomeIcon icon='link' /> Only with link
-                      </React.Fragment>
-                  }
-                </DropdownToggle>
-                <DropdownMenu>
-                  {
-                    !isPublic &&
-                      <DropdownItem
-                        data-value='public'
-                        onClick={this.selectIsPublic}>
-                        <FontAwesomeIcon icon='globe-americas' /> Public
-                      </DropdownItem>
-                  }
-                  {
-                    isPublic &&
-                      <DropdownItem
-                        data-value='only-with-link'
-                        onClick={this.selectIsPublic}>
-                        <FontAwesomeIcon icon='link' /> Only with link
-                      </DropdownItem>
-                  }
-                </DropdownMenu>
-              </Dropdown>
-          }
-          <div className='clearfix'></div>
           <Row>
             <Col xs='6'>
               <FormGroup>
@@ -326,7 +321,7 @@ class MakeClipModal extends React.Component<Props, State> {
             <Button
               className='make-clip-modal__save'
               color='primary'
-              disabled={isDeleting || isSaving}
+              disabled={isDeleting || isSaving || !isLoggedIn}
               isLoading={isSaving}
               onClick={this.handleSave}
               text='Save' />
