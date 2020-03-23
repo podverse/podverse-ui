@@ -494,7 +494,7 @@ export class MediaPlayer extends React.Component<Props, State> {
               <button
                 className={`mp-header__add ${openAddToModal ? 'active' : ''}`}
                 onClick={handleToggleAddToModal}>
-                <FontAwesomeIcon icon='plus-circle' />
+                <FontAwesomeIcon icon='plus' />
               </button>
               <button
                 className={`mp-header__share ${openShareModal ? 'active' : ''}`}
