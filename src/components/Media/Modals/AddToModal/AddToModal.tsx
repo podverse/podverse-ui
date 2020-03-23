@@ -105,7 +105,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       portalClassName='mp-add-to-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
-      <h3><FontAwesomeIcon icon='plus-circle' /> &nbsp; Add To</h3>
+      <h3><FontAwesomeIcon icon='plus' /> &nbsp; Add To</h3>
       <CloseButton onClick={handleHideModal} />
       <div className='scrollable-area reduced-margin'>
         {
