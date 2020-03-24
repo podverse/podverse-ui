@@ -72,6 +72,15 @@ class MakeClipModal extends React.Component<Props, State> {
   constructor (props) {
     super(props)
 
+    this.state = {
+      errorEndTime: undefined,
+      errorStartTime: undefined,
+      isPublic: undefined,
+      isPublicIsOpen: false
+    }
+  }
+
+  componentDidMount() {
     const initialStartTimeString = window.sessionStorage.getItem(_inProgressMakeStartTimeKey)
     const initialEndTimeString = window.sessionStorage.getItem(_inProgressMakeEndTimeKey)
     const initialTitle = window.sessionStorage.getItem(_inProgressMakeClipTitleKey) || ''
@@ -79,15 +88,11 @@ class MakeClipModal extends React.Component<Props, State> {
     const initialStartTime = convertHHMMSSToSeconds(initialStartTimeString)
     const initialEndTime = convertHHMMSSToSeconds(initialEndTimeString)
 
-    this.state = {
-      errorEndTime: undefined,
-      errorStartTime: undefined,
+    this.setState({
       initialEndTime,
       initialStartTime,
-      initialTitle,
-      isPublic: undefined,
-      isPublicIsOpen: false
-    }
+      initialTitle
+    })
   }
 
   static getDerivedStateFromProps(props, currentState) {
@@ -96,16 +101,19 @@ class MakeClipModal extends React.Component<Props, State> {
       newState.isPublic = props.initialIsPublic
     }
 
-    const initialStartTimeString = window.sessionStorage.getItem(_inProgressMakeStartTimeKey)
-    const initialEndTimeString = window.sessionStorage.getItem(_inProgressMakeEndTimeKey)
-    const initialTitle = window.sessionStorage.getItem(_inProgressMakeClipTitleKey)
+    if (typeof window !== 'undefined') {
+      const initialStartTimeString = window.sessionStorage.getItem(_inProgressMakeStartTimeKey)
+      const initialEndTimeString = window.sessionStorage.getItem(_inProgressMakeEndTimeKey)
+      const initialTitle = window.sessionStorage.getItem(_inProgressMakeClipTitleKey)
+  
+      const initialStartTime = convertHHMMSSToSeconds(initialStartTimeString)
+      const initialEndTime = convertHHMMSSToSeconds(initialEndTimeString)
+  
+      newState.initialStartTime = initialStartTime
+      newState.initialEndTime = initialEndTime
+      newState.initialTitle = initialTitle
+    }
 
-    const initialStartTime = convertHHMMSSToSeconds(initialStartTimeString)
-    const initialEndTime = convertHHMMSSToSeconds(initialEndTimeString)
-
-    newState.initialStartTime = initialStartTime
-    newState.initialEndTime = initialEndTime
-    newState.initialTitle = initialTitle
 
     return newState
   }
