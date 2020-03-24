@@ -29,30 +29,37 @@ export const popNextFromQueueStorage = () => {
 }
 
 export const addItemToPriorityQueueStorage = (newItem, isLast) => {
-
-  if (!newItem) return
-
-  const jsonItems = localStorage.getItem(kPriorityQueue)
-
-  if (jsonItems) {
-    const items = JSON.parse(jsonItems)
-
-    if (isLast) {
-      items.push(newItem)
+  try {
+    if (!newItem) return
+  
+    const jsonItems = localStorage.getItem(kPriorityQueue)
+  
+    if (jsonItems) {
+      const items = JSON.parse(jsonItems)
+  
+      if (isLast) {
+        items.push(newItem)
+      } else {
+        items.unshift(newItem)
+      }
+  
+      localStorage.setItem(kPriorityQueue, JSON.stringify(items))
     } else {
-      items.unshift(newItem)
+      localStorage.setItem(kPriorityQueue, JSON.stringify([newItem]))
     }
-
-    localStorage.setItem(kPriorityQueue, JSON.stringify(items))
-  } else {
-    localStorage.setItem(kPriorityQueue, JSON.stringify([newItem]))
+  } catch (error) {
+    console.log('addItemToPriorityQueueStorage', error)
   }
 }
 
 export const getPriorityQueueItemsStorage = () => {
-  const jsonItems = localStorage.getItem(kPriorityQueue)
-  if (jsonItems) {
-    return JSON.parse(jsonItems)
+  try {
+    const jsonItems = localStorage.getItem(kPriorityQueue)
+    if (jsonItems) {
+      return JSON.parse(jsonItems)
+    }
+  } catch (error) {
+    console.log('getPriorityQueueItemsStorage', error)
   }
 }
 
@@ -67,18 +74,22 @@ export const popNextFromPriorityQueueStorage = () => {
 }
 
 export const removeItemFromPriorityQueueStorage = (clipId, episodeId) => {
-  const queueItems = localStorage.getItem(kPriorityQueue)
-
-  if (queueItems) {
-    const items = JSON.parse(queueItems)
-
-    if (clipId) {
-      const newItems = items.filter(obj => obj.clipId !== clipId)
-      localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
-    } else if (episodeId) {
-      const newItems = items.filter(obj => obj.episodeId !== episodeId)
-      localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
+  try {
+    const queueItems = localStorage.getItem(kPriorityQueue)
+  
+    if (queueItems) {
+      const items = JSON.parse(queueItems)
+  
+      if (clipId) {
+        const newItems = items.filter(obj => obj.clipId !== clipId)
+        localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
+      } else if (episodeId) {
+        const newItems = items.filter(obj => obj.episodeId !== episodeId)
+        localStorage.setItem(kPriorityQueue, JSON.stringify(newItems))
+      }
     }
+  } catch (error) {
+    console.log('removeItemFromPriorityQueueStorage', error)
   }
 }
 
@@ -91,28 +102,36 @@ export const updatePriorityQueueStorage = (newItems) => {
 }
 
 export const addItemsToSecondaryQueueStorage = (newItems) => {
-  const jsonItems = localStorage.getItem(kSecondaryQueue)
-
-  if (jsonItems) {
-    const oldItems = JSON.parse(jsonItems)
-    for (const item of newItems) {
-      oldItems.push(item)
+  try {
+    const jsonItems = localStorage.getItem(kSecondaryQueue)
+  
+    if (jsonItems) {
+      const oldItems = JSON.parse(jsonItems)
+      for (const item of newItems) {
+        oldItems.push(item)
+      }
+      localStorage.setItem(kSecondaryQueue, JSON.stringify(oldItems))
+    } else {
+      const items: any[] = []
+      for (const item of newItems) {
+        items.push(item)
+      }
+  
+      localStorage.setItem(kSecondaryQueue, JSON.stringify(items))
     }
-    localStorage.setItem(kSecondaryQueue, JSON.stringify(oldItems))
-  } else {
-    const items: any[] = []
-    for (const item of newItems) {
-      items.push(item)
-    }
-
-    localStorage.setItem(kSecondaryQueue, JSON.stringify(items))
+  } catch (error) {
+    console.log('addItemsToSecondaryQueueStorage', error)
   }
 }
 
 export const getSecondaryQueueItemsStorage = () => {
-  const jsonItems = localStorage.getItem(kSecondaryQueue)
-  if (jsonItems) {
-    return JSON.parse(jsonItems)
+  try {
+    const jsonItems = localStorage.getItem(kSecondaryQueue)
+    if (jsonItems) {
+      return JSON.parse(jsonItems)
+    }
+  } catch (error) {
+    console.log('getSecondaryQueueItemsStorage', error)
   }
 }
 
@@ -127,18 +146,22 @@ export const popNextFromSecondaryQueueStorage = () => {
 }
 
 export const removeItemFromSecondaryQueueStorage = (clipId, episodeId) => {
-  const queueItems = localStorage.getItem(kSecondaryQueue)
-
-  if (queueItems) {
-    const items = JSON.parse(queueItems)
-
-    if (clipId) {
-      const newItems = items.filter(obj => obj.clipId !== clipId)
-      localStorage.setItem(kSecondaryQueue, JSON.stringify(newItems))
-    } else if (episodeId) {
-      const newItems = items.filter(obj => obj.episodeId !== episodeId)
-      localStorage.setItem(kSecondaryQueue, JSON.stringify(newItems))
+  try {
+    const queueItems = localStorage.getItem(kSecondaryQueue)
+  
+    if (queueItems) {
+      const items = JSON.parse(queueItems)
+  
+      if (clipId) {
+        const newItems = items.filter(obj => obj.clipId !== clipId)
+        localStorage.setItem(kSecondaryQueue, JSON.stringify(newItems))
+      } else if (episodeId) {
+        const newItems = items.filter(obj => obj.episodeId !== episodeId)
+        localStorage.setItem(kSecondaryQueue, JSON.stringify(newItems))
+      }
     }
+  } catch (error) {
+    console.log('removeItemFromSecondaryQueueStorage', error)
   }
 }
 
@@ -147,9 +170,8 @@ export const clearItemsFromSecondaryQueueStorage = item => {
 }
 
 export const getNowPlayingItemFromStorage = () => {
-  const json = localStorage.getItem(kNowPlayingItem)
-
   try {
+    const json = localStorage.getItem(kNowPlayingItem)
     return json ? JSON.parse(json) : null
   } catch (error) {
     return
