@@ -200,3 +200,9 @@ export const clone = obj => {
 export const generateArrayWithRangeOfIntegers = (start, end) => Array.from(
   { length: (end - start) }, (v, k) => k + start
 )
+
+export const safeAlert = (text: string) => {
+  if (typeof window !== 'undefined') {
+    alert(text)
+  }
+}

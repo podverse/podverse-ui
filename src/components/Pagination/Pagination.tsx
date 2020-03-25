@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap'
-import { generateArrayWithRangeOfIntegers } from 'lib/utility'
+import { generateArrayWithRangeOfIntegers, safeAlert } from 'lib/utility'
 const uuidv4 = require('uuid/v4')
 
 type Props = {
@@ -86,9 +86,9 @@ export class PVPagination extends React.Component<Props, State> {
                       const pageNumber = prompt('Type a page number:')
                       const page = pageNumber && parseInt(pageNumber, 10)
                       if ((page && page <= 0) || page === 0) {
-                        alert('Must be a number larger than 1.')
+                        safeAlert('Must be a number larger than 1.')
                       } else if (page && page > totalPages) {
-                        alert(`Page out of range. Must be a number smaller than ${totalPages}.`)
+                        safeAlert(`Page out of range. Must be a number smaller than ${totalPages}.`)
                       } else if (page) {
                         handleQueryPage(page)
                       }
