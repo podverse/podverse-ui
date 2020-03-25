@@ -22,16 +22,18 @@ export const ComparisonTable: React.StatelessComponent<Props> = props => {
   ))
 
   return (
-    <div className='comparison-table'>
-      <div className='comparison-table__header'>
-        <div className='comparison-table-header__text'>{headerText}</div>
-        <div className='comparison-table-header__icon'>{headerIcon1}</div>
-        <div className='comparison-table-header__icon'>{headerIcon2}</div>
+    <div>
+      <div className='comparison-table'>
+        <div className='comparison-table__header'>
+          <div className='comparison-table-header__text'>{headerText}</div>
+          <div className='comparison-table-header__icon'>{headerIcon1}</div>
+          <div className='comparison-table-header__icon'>{headerIcon2}</div>
+        </div>
+        {
+          dataElements && dataElements.length > 0 &&
+            dataElements
+        }
       </div>
-      {
-        dataElements && dataElements.length > 0 &&
-          dataElements
-      }
     </div>
   )
 }
