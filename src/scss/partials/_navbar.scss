@@ -1,10 +1,13 @@
 // Navigation
 .navbar__bg {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+
   .navbar {
     justify-content: space-between;
     margin: auto;
     max-width: $body-max-width;
-    padding: 0.125rem 0rem;
+    padding: 0.25rem 0rem;
 
     a {
       cursor: pointer;
@@ -13,7 +16,7 @@
 
     .navbar-brand {
       background-size: cover;
-      margin: 5px 0 2px 0;
+      margin: 4px 0 2px 0;
       height: 26px;
       width: 133px;
     }
@@ -139,6 +142,7 @@ html[data-theme=light] {
 html[data-theme=dark] {
   .navbar__bg {
     background-color: $gray-darker;
+    border-bottom: 1px solid $gray-dark;
 
     .navbar {
       background-color: $gray-darker !important;
