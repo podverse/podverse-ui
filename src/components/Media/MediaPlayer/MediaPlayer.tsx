@@ -178,14 +178,16 @@ export class MediaPlayer extends React.Component<Props, State> {
   setKeyboardEventListeners () {
     document.body.addEventListener('keydown', (event) => {
       if (
-      typeof window !== 'undefined' && window.player
-      && document.activeElement && document.activeElement.nodeName !== 'INPUT') {
+        typeof window !== 'undefined' && window.player
+        && document.activeElement && document.activeElement.nodeName !== 'TEXTAREA' &&
+        document.activeElement.nodeName !== 'INPUT'
+      ) {
         if (event.keyCode === keyLeftArrow) {
           window.player.seekTo(Math.floor(window.player.getCurrentTime()) - 5)
-          this.forceUpdate() // Force update so the time updates immediately
+          this.forceUpdate()
         } else if (event.keyCode === keyRightArrow) {
           window.player.seekTo(Math.floor(window.player.getCurrentTime()) + 5)
-          this.forceUpdate() // Force update so the time updates immediately
+          this.forceUpdate()
         }
       }
     })
