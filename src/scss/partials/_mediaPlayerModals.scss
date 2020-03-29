@@ -105,8 +105,16 @@
     margin: 0.5rem 0 0 1rem;
   }
 
+  .make-clip-modal__dynamic-ads {
+    display: block;
+    float: left;
+    font-size: $text-xs-rem;
+    height: 38px;
+    line-height: 38px;
+    margin: 0.5em auto 0 auto;
+  }
+
   .make-clip-modal__login-msg {
-    font-weight: bold;
     padding: 0 0 1.5rem 0;
     text-align: center;
 
