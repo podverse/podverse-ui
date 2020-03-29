@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
@@ -10,7 +11,7 @@ type Props = {
   endTime?: number
   handleDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleEndTimePreview?: Function
-  handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleHideModal?: (event: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
   handleLoginClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleSave: Function
   handleStartTimePreview?: Function
@@ -246,9 +247,8 @@ class MakeClipModal extends React.Component<Props, State> {
           {
             !isLoggedIn &&
             <div className='make-clip-modal__login-msg'>
-              Please <a onClick={handleLoginClick}>login</a>
-                &nbsp;to create and share clips.
-              </div>
+              <a onClick={handleLoginClick}>Login</a>&nbsp;to create and share clips
+            </div>
           }
           <Row>
             <Col xs='6'>
@@ -320,6 +320,18 @@ class MakeClipModal extends React.Component<Props, State> {
                   isLoading={isDeleting}
                   onClick={handleDelete}
                   text='Delete' />
+            }
+            {
+              !isEditing &&
+                <Link
+                  as='/faq#dyanmic-ads'
+                  href='/faq#dyanmic-ads'>
+                  <a
+                    className='make-clip-modal__dynamic-ads'
+                    onClick={handleHideModal}>
+                    about dynamic ads
+                  </a>
+                </Link>
             }
             <Button
               className='make-clip-modal__cancel'
