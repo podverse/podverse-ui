@@ -329,7 +329,7 @@ class MakeClipModal extends React.Component<Props, State> {
                   <a
                     className='make-clip-modal__dynamic-ads'
                     onClick={handleHideModal}>
-                    about dynamic ads
+                    FAQ - Dynamic Ads
                   </a>
                 </Link>
             }
