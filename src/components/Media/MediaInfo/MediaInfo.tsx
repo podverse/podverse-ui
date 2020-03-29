@@ -197,20 +197,20 @@ export class MediaInfo extends React.Component<Props, State> {
                   }
                 </Button>
                 <Button
+                  className='media-info-controls__make-clip'
+                  onClick={handleToggleMakeClipModal}>
+                  <FontAwesomeIcon icon='cut' />
+                </Button>
+                <Button
                   className='media-info-controls__add-to'
                   onClick={handleToggleAddToModal}>
                   <FontAwesomeIcon icon='plus' />
                 </Button>
-              <Button
-                className='media-info-controls__make-clip'
-                onClick={handleToggleMakeClipModal}>
-                <FontAwesomeIcon icon='cut' />
-              </Button>
-              <Button
-                className='media-info-controls__share'
-                onClick={handleToggleShareModal}>
-                <FontAwesomeIcon icon='share' />
-              </Button>
+                <Button
+                  className='media-info-controls__share'
+                  onClick={handleToggleShareModal}>
+                  <FontAwesomeIcon icon='share' />
+                </Button>
                 {
                   (loggedInUserId
                     && currentItem.ownerId
