@@ -37,8 +37,10 @@ type Props = {
   showRemove?: boolean
 }
 
-// This is absolute chaos. Sorry :(
+const checkClipStartTimeExists = (startTime) => startTime || startTime === 0
 
+
+// This is absolute chaos. Sorry :(
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
@@ -59,10 +61,10 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     } else if (itemType === 'podcast' || itemType === 'podcast-search-result') {
       anchorHref = `/podcast?id=${dataPodcast.id}`
       anchorAs = `/podcast/${dataPodcast.id}`
-    } else if (itemType === 'now-playing-item' && (dataNowPlayingItem && dataNowPlayingItem.clipStartTime)) {
+    } else if (itemType === 'now-playing-item' && (dataNowPlayingItem && checkClipStartTimeExists(dataNowPlayingItem.clipStartTime))) {
       anchorHref = `/clip?id=${dataNowPlayingItem.clipId}`
       anchorAs = `/clip/${dataNowPlayingItem.clipId}`
-    } else if (itemType === 'now-playing-item' && (dataNowPlayingItem && !dataNowPlayingItem.clipStartTime)) {
+    } else if (itemType === 'now-playing-item' && (dataNowPlayingItem && !checkClipStartTimeExists(dataNowPlayingItem.clipStartTime))) {
       anchorHref = `/episode?id=${dataNowPlayingItem.episodeId}`
       anchorAs = `/episode/${dataNowPlayingItem.episodeId}`
     } else if (itemType === 'now-playing-item-clip-from-episode' || itemType === 'now-playing-item-clip-from-podcast') {
@@ -123,7 +125,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               onClick={handleLinkClick}
               tabIndex={0}>
               {
-                (itemType === 'now-playing-item' && (dataNowPlayingItem && (dataNowPlayingItem.clipStartTime || dataNowPlayingItem.clipStartTime === 0))) &&
+                (itemType === 'now-playing-item' && (dataNowPlayingItem && (checkClipStartTimeExists(dataNowPlayingItem.clipStartTime)))) &&
                   <MediaListItemA
                     imageUrl={dataNowPlayingItem.podcastImageUrl}
                     subTitleMiddle={dataNowPlayingItem.episodeTitle}
