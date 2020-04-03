@@ -321,18 +321,6 @@ class MakeClipModal extends React.Component<Props, State> {
                   onClick={handleDelete}
                   text='Delete' />
             }
-            {
-              !isEditing &&
-                <Link
-                  as='/faq#dyanmic-ads'
-                  href='/faq#dyanmic-ads'>
-                  <a
-                    className='make-clip-modal__dynamic-ads'
-                    onClick={handleHideModal}>
-                    FAQ - Dynamic Ads
-                  </a>
-                </Link>
-            }
             <Button
               className='make-clip-modal__cancel'
               disabled={isDeleting || isSaving}
