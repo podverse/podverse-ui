@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import * as React from 'react'
 import * as Modal from 'react-modal'
 import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
