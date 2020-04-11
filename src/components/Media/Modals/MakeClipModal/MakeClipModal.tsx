@@ -5,6 +5,7 @@ import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PVButton as Button } from 'components/Button/Button'
 import { checkIfLoadingOnFrontEnd, convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/utility'
+import Link from 'next/link'
 
 type Props = {
   endTime?: number
@@ -310,6 +311,30 @@ class MakeClipModal extends React.Component<Props, State> {
               type='textarea' />
           </FormGroup>
           <div className='text-right'>
+            {
+              !isEditing &&
+                <React.Fragment>
+                  <Link
+                    as='/faq#why-do-some-clips-start-at-the-wrong-time'
+                    href='/faq#why-do-some-clips-start-at-the-wrong-time'>
+                    <a
+                      className='make-clip-modal__dynamic-ads'
+                      onClick={handleHideModal}>
+                      Clips FAQ
+                    </a>
+                  </Link>
+                  <div className='make-clip-modal__divider'>/</div>
+                  <Link
+                    as='/my-profile?type=clips'
+                    href='/my-profile?type=clips'>
+                    <a
+                      className='make-clip-modal__my-clips'
+                      onClick={handleHideModal}>
+                      My Clips
+                    </a>
+                  </Link>
+                </React.Fragment>
+            }
             {
               isEditing &&
                 <Button

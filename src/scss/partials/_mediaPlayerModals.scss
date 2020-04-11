@@ -114,6 +114,24 @@
     }
   }
 
+  .make-clip-modal__dynamic-ads, .make-clip-modal__my-clips {
+    display: block;
+    float: left;
+    font-size: $text-sm-rem;
+    height: 38px;
+    line-height: 38px;
+    margin: 0.5em 0.5em 0 auto;
+  }
+
+  .make-clip-modal__divider {
+    display: block;
+    float: left;
+    font-size: $text-sm-rem;
+    height: 38px;
+    line-height: 38px;
+    margin: 0.5em 0.5em 0 auto;
+  }
+
   @media (max-height: 480px) {
     .ReactModal__Content {
       left: 0 !important;
