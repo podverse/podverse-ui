@@ -22,6 +22,7 @@ type Props = {
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleRemoveItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleToggleShare?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasLink?: boolean
   hideDescription?: boolean
@@ -44,7 +45,7 @@ const checkClipStartTimeExists = (startTime) => startTime || startTime === 0
 export const MediaListItem: React.StatelessComponent<Props> = props => {
   const { dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
-    handleRemoveItem, handleToggleAddToPlaylist, hasLink, hideDescription, hideDivider,
+    handleRemoveItem, handleToggleAddToPlaylist, handleToggleShare, hasLink, hideDescription, hideDivider,
     isActive, isSlim, itemType, loadingItemId, noWrap, showMoreMenu, showMove, showOwner,
     showRemove } = props
 
@@ -109,6 +110,12 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
       onClick: handleToggleAddToPlaylist,
       text: 'Add to Playlist',
       value: 'add-to-playlist'
+    },
+    {
+      icon: 'share',
+      onClick: handleToggleShare,
+      text: 'Share',
+      value: 'share'
     }
   ]
 

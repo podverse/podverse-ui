@@ -191,7 +191,7 @@ export class MediaInfo extends React.Component<Props, State> {
                 {
                   (!currentItem.podcastHideDynamicAdsWarning) &&
                     <div className='media-info__dynamic-ads-warning'>
-                      Note: If a podcast inserts {dynamicAdsWarningLink}, the clip start time will not stay accurate.
+                      Note: If a podcast uses {dynamicAdsWarningLink}, the clip start time will not stay accurate.
                     </div>
                 }
               </React.Fragment>
