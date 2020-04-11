@@ -97,6 +97,12 @@
     }
   }
 
+  .media-info__dynamic-ads-warning {
+    font-size: $text-sm-rem;
+    font-style: italic;
+    font-weight: 300;
+  }
+
   .media-info__description {
     font-size: $text-sm-rem;
     font-weight: 300;
@@ -152,7 +158,7 @@ html[data-theme=light] {
       color: $gray-dark;
     }
 
-    .media-info__clip-created-by {
+    .media-info__clip-created-by, .media-info__dynamic-ads-warning {
       color: $gray-dark;
     }
 
@@ -208,7 +214,7 @@ html[data-theme=dark] {
       color: $gray-light;
     }
 
-    .media-info__clip-created-by {
+    .media-info__clip-created-by, .media-info__dynamic-ads-warning {
       color: $gray-light;
     }
 
