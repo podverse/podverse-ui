@@ -126,6 +126,18 @@ export class MediaInfo extends React.Component<Props, State> {
       moreInfo = convertHHMMSSToAnchorTags(moreInfo)
     }
 
+    const dynamicAdsWarningLink = (
+      <Link
+        as='/faq#why-do-some-clips-start-at-the-wrong-time'
+        href='/faq#why-do-some-clips-start-at-the-wrong-time'>
+        <a
+          className='media-info__dynamic-ads-warning-link'
+          onClick={handleLinkClick}>
+          dynamic ads
+        </a>
+      </Link>
+    )
+
     return (
       <React.Fragment>
         <div className='media-info'>
@@ -164,17 +176,25 @@ export class MediaInfo extends React.Component<Props, State> {
           }
           {
             currentItem.clipId &&
-              <div className='media-info__clip-created-by'>
-                By:&nbsp;
+              <React.Fragment>
+                <div className='media-info__clip-created-by'>
+                  By:&nbsp;
+                  {
+                    createdByIsPublic ?
+                      <Link
+                        as={getLinkUserAs(createdById)}
+                        href={getLinkUserHref(createdById)}>
+                        <a onClick={handleLinkClick}>{createdByName}</a>
+                      </Link> : createdByName
+                  }
+                </div>
                 {
-                  createdByIsPublic ?
-                    <Link
-                      as={getLinkUserAs(createdById)}
-                      href={getLinkUserHref(createdById)}>
-                      <a onClick={handleLinkClick}>{createdByName}</a>
-                    </Link> : createdByName
+                  (!currentItem.podcastHideDynamicAdsWarning) &&
+                    <div className='media-info__dynamic-ads-warning'>
+                      Note: If a podcast inserts {dynamicAdsWarningLink}, the clip start time will not stay accurate.
+                    </div>
                 }
-              </div>
+              </React.Fragment>
           }
           {
             (episode || mediaRef || nowPlayingItem) &&
