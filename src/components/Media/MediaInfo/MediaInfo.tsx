@@ -176,25 +176,17 @@ export class MediaInfo extends React.Component<Props, State> {
           }
           {
             currentItem.clipId &&
-              <React.Fragment>
-                <div className='media-info__clip-created-by'>
-                  By:&nbsp;
-                  {
-                    createdByIsPublic ?
-                      <Link
-                        as={getLinkUserAs(createdById)}
-                        href={getLinkUserHref(createdById)}>
-                        <a onClick={handleLinkClick}>{createdByName}</a>
-                      </Link> : createdByName
-                  }
-                </div>
+              <div className='media-info__clip-created-by'>
+                By:&nbsp;
                 {
-                  (!currentItem.podcastHideDynamicAdsWarning) &&
-                    <div className='media-info__dynamic-ads-warning'>
-                      Note: If a podcast uses {dynamicAdsWarningLink}, the clip start time will not stay accurate.
-                    </div>
+                  createdByIsPublic ?
+                    <Link
+                      as={getLinkUserAs(createdById)}
+                      href={getLinkUserHref(createdById)}>
+                      <a onClick={handleLinkClick}>{createdByName}</a>
+                    </Link> : createdByName
                 }
-              </React.Fragment>
+              </div>
           }
           {
             (episode || mediaRef || nowPlayingItem) &&
@@ -241,6 +233,12 @@ export class MediaInfo extends React.Component<Props, State> {
                       <FontAwesomeIcon icon='edit' />
                     </Button>
                 }
+              </div>
+          }
+          {
+            (currentItem && currentItem.clipId && !currentItem.podcastHideDynamicAdsWarning) &&
+              <div className='media-info__dynamic-ads-warning'>
+                Note: If a podcast uses {dynamicAdsWarningLink}, the clip start time may not stay accurate.
               </div>
           }
           {

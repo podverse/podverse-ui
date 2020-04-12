@@ -89,7 +89,7 @@
 
 html[data-theme=light] {
   .navbar__bg {
-    background-color: $gray-lightest;
+    background-color: $brand-color;
     border-bottom: 1px solid $gray-lighter;
 
     .navbar {
@@ -141,7 +141,7 @@ html[data-theme=light] {
 
 html[data-theme=dark] {
   .navbar__bg {
-    background-color: $gray-darker;
+    background-color: $brand-color;
     border-bottom: 1px solid $gray-dark;
 
     .navbar {
