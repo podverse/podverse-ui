@@ -90,11 +90,13 @@
 
   .media-list-item-a__sub-bottom {
     @include ellipsis;
+    font-weight: 300;
     margin-top: 0.25em;
   }
 
   .media-list-item-a__sub-bottom-side {
     float: right;
+    font-weight: 300;
     margin-left: 1rem;
     margin-top: 0.25em;
     text-align: right;
@@ -102,11 +104,13 @@
 
   .media-list-item-a__sub-middle {
     @include ellipsis;
+    font-weight: 300;
     margin-top: 0.25em;
   }
 
   .media-list-item-a__sub-middle-side {
     float: right;
+    font-weight: 300;
     margin-left: 1rem;
     margin-top: 0.25em;
     text-align: right;
@@ -114,19 +118,20 @@
 
   .media-list-item-a__sub-top {
     @include ellipsis;
+    font-weight: 300;
   }
 
   .media-list-item-a__sub-top-side {
     float: right;
+    font-weight: 300;
     margin-left: 0.75em;
     text-align: right;
   }
 
   .media-list-item-a__title {
     font-size: $text-lg-rem;
-    font-weight: 300;
     margin-bottom: 0.5rem;
-    margin-top: 0.125rem;
+    margin-top: 3px;
   }
 
   @media(max-width: 520px) {
