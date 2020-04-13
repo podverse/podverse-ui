@@ -248,7 +248,7 @@ export class MediaInfo extends React.Component<Props, State> {
                 onClick={this.toggleDescription}>
                 <span>
                   <FontAwesomeIcon icon={showDescription ? 'caret-down' : 'caret-right'} />
-                  &nbsp;Episode Info
+                  &nbsp;Episode Notes
                 </span>
               </button>
           }

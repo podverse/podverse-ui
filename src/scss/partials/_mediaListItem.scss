@@ -75,7 +75,7 @@
 .media-list-item__a {
   .media-list-item-a__image {
     float: left;
-    margin-right: 1em;
+    margin-right: 1.125rem;
   }
 
   @media(max-width: 520px) {
@@ -95,7 +95,7 @@
 
   .media-list-item-a__sub-bottom-side {
     float: right;
-    margin-left: 1em;
+    margin-left: 1rem;
     margin-top: 0.25em;
     text-align: right;
   }
@@ -107,7 +107,7 @@
 
   .media-list-item-a__sub-middle-side {
     float: right;
-    margin-left: 1em;
+    margin-left: 1rem;
     margin-top: 0.25em;
     text-align: right;
   }
@@ -123,8 +123,10 @@
   }
 
   .media-list-item-a__title {
-    margin-bottom: 5px;
-    margin-top: 3px;
+    font-size: $text-lg-rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    margin-top: 0.125rem;
   }
 
   @media(max-width: 520px) {
@@ -137,31 +139,29 @@
 .media-list-item__b {
   .media-list-item-b__image {
     float: left;
-    margin-right: 1em;
+    margin-right: 1.125rem;
   }
 
   .media-list-item-b__sub {
     @include ellipsis;
-    font-size: $text-sm-rem;
   }
 
   .media-list-item-b__sub-side {
     float: right;
-    font-size: $text-sm-rem;
-    margin-left: 1em;
+    margin-left: 1rem;
     text-align: right;
   }
 
   .media-list-item-b__title {
-    font-weight: 500;
-    margin: 8px 0 10px 0;
+    font-size: $text-lg-rem;
+    margin: 7px 0 10px 0;
   }
 }
 
 .media-list-item__c {
   .media-list-item-c__date {
     float: right;
-    margin-left: 1em;
+    margin-left: 1rem;
     text-align: right;
     font-size: $text-sm-em;
   }
@@ -186,13 +186,15 @@
 }
 
 .media-list-item__d {
+  font-size: $text-lg-em;
   padding: 0.75em 0;
 
   .media-list-item-d__title-side {
     float: right;
     font-size: $text-sm-em;
+    font-weight: 300;
     line-height: 20px;
-    margin-left: 1em;
+    margin-left: 1rem;
     margin-right: 0.125rem;
     text-align: right;
   }
@@ -210,7 +212,7 @@
     float: right;
     font-size: $text-sm-em;
     line-height: 20px;
-    margin-left: 1em;
+    margin-left: 1rem;
     text-align: right;
   }
   

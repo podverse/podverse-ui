@@ -22,27 +22,27 @@ html body {
   }
 
   h3 {
-    font-size: $text-xl-rem;
+    font-size: $text-xxl-rem;
     font-weight: 500;
     margin-bottom: 1rem;
   }
 
   h4 {
-    font-size: $text-lg-rem;
+    font-size: $text-xl-rem;
     font-weight: 500;
     margin-bottom: 1.25rem;
   }
 
   h5 {
-    font-size: $text-md-rem;
+    font-size: $text-lg-rem;
     font-weight: 500;
     margin-bottom: 1rem;
   }
 
   h6 {
-    font-size: $text-lg-rem;
+    font-size: $text-md-rem;
     font-weight: 500;
-    line-height: $text-lg-rem;
+    line-height: $text-md-rem;
     margin: 1.25rem 0;
     padding: 0.25rem 0.5rem;
   }

@@ -7,7 +7,7 @@ export interface Props {
 }
 
 export const ImageSquare: React.StatelessComponent<Props> = props => {
-  const { imageUrl, size = '4.75rem' } = props
+  const { imageUrl, size = '5.75rem' } = props
 
   const sizeStyle = {
     height: size,
