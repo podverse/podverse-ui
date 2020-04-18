@@ -9,7 +9,7 @@
   }
 
   .media-info__episode-pub-date {
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     margin-top: 0.5rem;
   }
@@ -20,20 +20,20 @@
   }
 
   .media-info__clip-time {
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     margin-top: 0.5rem;
   }
 
   .media-info__clip-created-by {
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     margin-bottom: 1.25rem;
     margin-top: 0.5rem;
   }
 
   .media-info__clip-status {
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     margin-bottom: 1.25rem;
     margin-top: 0.5rem;
@@ -41,13 +41,13 @@
 
   .media-info__last-updated {
     float: right;
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     margin-top: 0.25rem;
   }
 
   .media-info__item-count {
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     margin-top: 0.25rem;
   }
@@ -105,23 +105,23 @@
   }
 
   .media-info__description {
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     line-height: 21px;
     margin-top: 1rem;
 
     h1, h2 {
-      font-size: $text-lg-rem;
+      font-size: $text-xl-rem;
       margin: 1rem 0 0.5rem 0;
     }
 
     h3, h4 {
-      font-size: $text-md-rem;
+      font-size: $text-lg-rem;
       margin: 1rem 0 0.5rem 0;
     }
 
     h5, h6, p {
-      font-size: $text-sm-rem;
+      font-size: $text-md-rem;
       margin: 0.5rem 0;
     }
 

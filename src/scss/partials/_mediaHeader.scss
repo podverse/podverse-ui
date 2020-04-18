@@ -93,7 +93,7 @@
     clear: both;
     display: block;
     float: left;
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     margin-bottom: 0.25rem;
     max-width: 100%;
@@ -117,7 +117,7 @@
     @include ellipsis;
     clear: left;
     display: block;
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
   }
 

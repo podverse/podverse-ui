@@ -57,7 +57,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     display: -webkit-box;
-    font-size: $text-sm-rem;
+    font-size: $text-md-rem;
     font-weight: 300;
     line-clamp: 4;
     line-height: 21px;
@@ -252,7 +252,7 @@ html[data-theme=light] {
       color: $black;
     }
     [class*=__sub], [class$=__date] {
-      color: $gray-darker;
+      color: $gray-dark;
     }
 
     &:hover {
@@ -296,7 +296,7 @@ html[data-theme=dark] {
 
     &:hover {
       [class*=__title], [class$=__description] {
-        color: $gray-lighter;
+        color: $gray;
       }
       [class*=__sub], [class$=__date] {
         color: $gray;
