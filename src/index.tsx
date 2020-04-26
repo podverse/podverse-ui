@@ -23,6 +23,7 @@ export { PVPagination as Pagination } from 'components/Pagination/Pagination'
 export { QueueModal } from 'components/Media/Modals/QueueModal/QueueModal'
 export { ShareModal } from 'components/Media/Modals/ShareModal/ShareModal'
 export { SignUpModal } from 'components/Auth/SignUpModal'
+export { KEYS } from 'lib/keys'
 export { addItemToPriorityQueueStorage, updatePriorityQueueStorage,
   addItemsToSecondaryQueueStorage, clearItemsFromSecondaryQueueStorage, getLastHistoryItemOrNowPlayingItemFromStorage,
   getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage, popNextFromPriorityQueueStorage,

@@ -4,6 +4,7 @@ import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
   Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PVButton as Button } from 'components/Button/Button'
+import { KEYS } from 'lib/keys'
 import { checkIfLoadingOnFrontEnd, convertSecToHHMMSS, convertHHMMSSToSeconds } from 'lib/utility'
 import Link from 'next/link'
 
@@ -64,10 +65,6 @@ const startTimeErrors = {
 
 // These clips are not private, but they will not show up automatically in lists on Podverse.`
 
-const _inProgressMakeClipTitleKey = 'inProgressMakeClipTitle'
-const _inProgressMakeStartTimeKey = 'inProgressMakeStartTime'
-const _inProgressMakeEndTimeKey = 'inProgressMakeEndTime'
-
 class MakeClipModal extends React.Component<Props, State> {
 
   constructor (props) {
@@ -82,9 +79,9 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const initialStartTimeString = window.sessionStorage.getItem(_inProgressMakeStartTimeKey)
-    const initialEndTimeString = window.sessionStorage.getItem(_inProgressMakeEndTimeKey)
-    const initialTitle = window.sessionStorage.getItem(_inProgressMakeClipTitleKey) || ''
+    const initialStartTimeString = window.sessionStorage.getItem(KEYS.inProgressMakeStartTimeKey)
+    const initialEndTimeString = window.sessionStorage.getItem(KEYS.inProgressMakeEndTimeKey)
+    const initialTitle = window.sessionStorage.getItem(KEYS.inProgressMakeClipTitleKey) || ''
 
     const initialStartTime = convertHHMMSSToSeconds(initialStartTimeString)
     const initialEndTime = convertHHMMSSToSeconds(initialEndTimeString)
@@ -103,9 +100,9 @@ class MakeClipModal extends React.Component<Props, State> {
     }
 
     if (typeof window !== 'undefined') {
-      const initialStartTimeString = window.sessionStorage.getItem(_inProgressMakeStartTimeKey)
-      const initialEndTimeString = window.sessionStorage.getItem(_inProgressMakeEndTimeKey)
-      const initialTitle = window.sessionStorage.getItem(_inProgressMakeClipTitleKey)
+      const initialStartTimeString = window.sessionStorage.getItem(KEYS.inProgressMakeStartTimeKey)
+      const initialEndTimeString = window.sessionStorage.getItem(KEYS.inProgressMakeEndTimeKey)
+      const initialTitle = window.sessionStorage.getItem(KEYS.inProgressMakeClipTitleKey)
   
       const initialStartTime = convertHHMMSSToSeconds(initialStartTimeString)
       const initialEndTime = convertHHMMSSToSeconds(initialEndTimeString)
@@ -114,7 +111,6 @@ class MakeClipModal extends React.Component<Props, State> {
       newState.initialEndTime = initialEndTime
       newState.initialTitle = initialTitle
     }
-
 
     return newState
   }
