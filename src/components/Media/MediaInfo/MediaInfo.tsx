@@ -13,6 +13,7 @@ type Props = {
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePauseItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleReplayClip?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleAddToModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleEditClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -69,7 +70,7 @@ export class MediaInfo extends React.Component<Props, State> {
   }
 
   render () {
-    const {episode, handleLinkClick, handlePauseItem, handlePlayItem, loggedInUserId,
+    const {episode, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip, loggedInUserId,
       mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
       handleToggleEditClipModal, handleToggleMakeClipModal, handleToggleShareModal } = this.props
     const { showDescription } = this.state
@@ -171,7 +172,11 @@ export class MediaInfo extends React.Component<Props, State> {
           {
             clipTime &&
               <div className='media-info__clip-time'>
-                {clipTime}
+                <a
+                  className='media-info__replay-clip'
+                  onClick={handleReplayClip}>
+                  {clipTime}
+                </a>
               </div>
           }
           {

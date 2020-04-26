@@ -155,8 +155,8 @@ html[data-theme=light] {
       color: $black;
     }
 
-    .media-info__clip-time {
-      color: $gray-dark;
+    .media-info__clip-time, .media-info__replay-clip {
+      color: $gray-dark !important;
     }
 
     .media-info__clip-created-by, .media-info__dynamic-ads-warning {
@@ -211,8 +211,8 @@ html[data-theme=dark] {
       color: $white;
     }
 
-    .media-info__clip-time {
-      color: $gray-light;
+    .media-info__clip-time, .media-info__replay-clip {
+      color: $gray-light !important;
     }
 
     .media-info__clip-created-by, .media-info__dynamic-ads-warning {
