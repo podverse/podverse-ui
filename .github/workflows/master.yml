@@ -35,7 +35,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: podverse/podverse_ui
-        tags: latest,${{ steps.version.outputs.text }}
+        tags: latest,${{ steps.package-node-version.outputs.version }}
 
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2.0.0
