@@ -1,6 +1,6 @@
 {
   "name": "podverse-ui",
-  "version": "2.6.16",
+  "version": "2.6.17",
   "description": "React / Typescript component library for Podverse web applications",
   "license": "MIT",
   "contributors": [
@@ -13,7 +13,8 @@
   "main": "build/bundle.min.js",
   "scripts": {
     "build": "npm run build-lib && build-storybook",
-    "build-lib": "nodemon --exec webpack --ext ts,tsx,scss --ignore ./build",
+    "build-lib": "webpack --ext ts,tsx,scss --ignore ./build",
+    "build-lib:nodemon": "nodemon --exec webpack --ext ts,tsx,scss --ignore ./build",
     "build-storybook": "build-storybook",
     "lint:scss": "stylelint src/scss/**/*.scss",
     "lint:ts": "eslint src/**/*.ts src/**/*.tsx src/**/*.js",
