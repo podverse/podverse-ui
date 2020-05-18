@@ -15,6 +15,14 @@
     }
   }
 
+  &.align-right-2 {
+    .dropdown-menu {
+      left: unset !important;
+      right: 0 !important;
+      transform: none !important;
+    }
+  }
+
   button {
     font-size: $text-md-rem;
   }
