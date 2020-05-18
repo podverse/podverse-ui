@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import * as React from 'react'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
@@ -43,14 +44,29 @@ export class MediaListSelect extends React.Component<Props, State> {
         return
       }
 
-      return (
-        <DropdownItem
-          href={x.href}
-          key={`${name}${index}`}
-          onClick={x.onClick}>
-          {x.label}
-        </DropdownItem>
-      )
+      if (x.href && x.as) {
+        return (
+          <Link
+            key={`media-list-select-link-${name}${index}`}
+            href={x.href}
+            as={x.as}>
+            <DropdownItem
+              href={x.href}
+              key={`${name}${index}`}
+              onClick={x.onClick}>
+              {x.label}
+            </DropdownItem>
+          </Link>
+        )
+      } else {
+        return (
+          <DropdownItem
+            key={`${name}${index}`}
+            onClick={x.onClick}>
+            {x.label}
+          </DropdownItem>
+        )
+      }
     })
 
     const selectClass = isSubSelect ? 'media-list__select' : 'media-list__sub-select'

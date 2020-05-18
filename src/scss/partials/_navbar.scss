@@ -1,7 +1,6 @@
 // Navigation
 .navbar__bg {
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+  border-bottom:  none;
 
   .navbar {
     justify-content: space-between;
@@ -17,7 +16,7 @@
     .navbar-brand {
       background-size: cover;
       margin: 4px 0 2px 0;
-      height: 34px;
+      height: 24px;
       width: 133px;
     }
 
@@ -90,7 +89,6 @@
 html[data-theme=light] {
   .navbar__bg {
     background-color: $gray-lightest;
-    border-bottom: 1px solid $gray-lighter;
 
     .navbar {
       background-color: $gray-lightest !important;
@@ -142,7 +140,6 @@ html[data-theme=light] {
 html[data-theme=dark] {
   .navbar__bg {
     background-color: $gray-darkest;
-    border-bottom: 1px solid $gray-dark;
 
     .navbar {
       background-color: $gray-darker !important;
