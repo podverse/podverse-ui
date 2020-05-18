@@ -88,10 +88,10 @@
 
 html[data-theme=light] {
   .navbar__bg {
-    background-color: $gray-lightest;
+    background-color: $gray-lighter2;
 
     .navbar {
-      background-color: $gray-lightest !important;
+      background-color: $gray-lighter2 !important;
   
       a, .nav-item a.nav-link {
         color: $black;
