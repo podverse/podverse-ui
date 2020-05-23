@@ -1,4 +1,4 @@
-.mp-add-to-modal {
+.add-to-modal {
   position: relative;
 
   a {
@@ -24,12 +24,12 @@
     padding: 0 1rem;
   }
 
-  .mp-add-to-modal__play-next {
+  .add-to-modal__play-next {
     border-right-style: solid;
     border-right-width: 1px;
   }
 
-  .mp-add-to-modal__play-next, .mp-add-to-modal__play-last {
+  .add-to-modal__play-next, .add-to-modal__play-last {
     display: inline-block;
     height: 51px;
     line-height: 49px;
@@ -40,10 +40,10 @@
     width: 50%;
   }
 
-  .mp-add-to-modal__create-playlist {
+  .add-to-modal__create-playlist {
     margin: 1rem 0;
 
-    .mp-add-to-modal-create-playlist__create {
+    .add-to-modal-create-playlist__create {
       display: block;
       height: 36px;
       line-height: 36px;
@@ -53,7 +53,7 @@
     }
   }
 
-  .mp-add-to-modal__playlist-msg {
+  .add-to-modal__playlist-msg {
     padding: 1rem 0;
     text-align: center;
 
@@ -141,13 +141,13 @@
   }
 }
 
-.mp-queue-modal {
+.queue-modal {
 
   h6:first-of-type {
     margin-top: 0;
   }
 
-  .mp-queue-modal__header {
+  .queue-modal__header {
     display: flex;
     margin-bottom: 1rem;
 
@@ -155,11 +155,11 @@
       flex: 0 0 33%;
     }
 
-    .mp-queue-modal-header__dropdown {
+    .queue-modal-header__dropdown {
       flex: 1;
     }
 
-    .mp-queue-modal-header__edit {
+    .queue-modal-header__edit {
       background-color: transparent;
       border-color: transparent;
       flex: 0 0 34%;
@@ -174,7 +174,7 @@
       }
     }
 
-    .mp-queue-modal-header__close {
+    .queue-modal-header__close {
       flex: 0 0 33%;
     }
   }
@@ -208,19 +208,19 @@
   }
 }
 
-.mp-share-modal {
+.share-modal {
   .form-group .input-group .btn {
     min-width: 80px;
   }
 }
 
 html[data-theme=light] {
-  .mp-add-to-modal {
+  .add-to-modal {
     a {
       border-color: $gray-light;
     }
 
-    .mp-add-to-modal__play-next, .mp-add-to-modal__play-last, .mp-add-to-modal__create-playlist {
+    .add-to-modal__play-next, .add-to-modal__play-last, .add-to-modal__create-playlist {
       color: $black !important;
         
       &:hover {
@@ -228,7 +228,7 @@ html[data-theme=light] {
       }
     }
 
-    .mp-add-to-modal__playlist-msg, .make-clip-modal__login-msg {
+    .add-to-modal__playlist-msg, .make-clip-modal__login-msg {
       color: $black;
     }
   }
@@ -243,12 +243,12 @@ html[data-theme=light] {
 }
 
 html[data-theme=dark] {
-  .mp-add-to-modal {
+  .add-to-modal {
     a {
       border-color: $gray-darker;
     }
 
-    .mp-add-to-modal__play-next, .mp-add-to-modal__play-last, .mp-add-to-modal__create-playlist {
+    .add-to-modal__play-next, .add-to-modal__play-last, .add-to-modal__create-playlist {
       color: $white !important;
 
       &:hover {
@@ -256,7 +256,7 @@ html[data-theme=dark] {
       }
     }
 
-    .mp-add-to-modal__playlist-msg, .make-clip-modal__login-msg {
+    .add-to-modal__playlist-msg, .make-clip-modal__login-msg {
       color: $white;
     }
   }

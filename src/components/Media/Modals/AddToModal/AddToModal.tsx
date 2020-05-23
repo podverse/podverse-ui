@@ -102,7 +102,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       contentLabel='Add To'
       isOpen={isOpen}
       onRequestClose={handleHideModal}
-      portalClassName='mp-add-to-modal over-media-player'
+      portalClassName='add-to-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
       <h3><FontAwesomeIcon icon='plus' /> &nbsp; Add To</h3>
@@ -124,7 +124,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                 Queue
               </h6>
               <a
-                className='mp-add-to-modal__play-next'
+                className='add-to-modal__play-next'
                 tabIndex={0}
                 onClick={handleAddToQueueNext}>
                 {
@@ -147,7 +147,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                 }
               </a>
               <a
-                className='mp-add-to-modal__play-last'
+                className='add-to-modal__play-last'
                 onClick={handleAddToQueueLast}
                 tabIndex={0}>
                 {
@@ -177,11 +177,11 @@ const AddToModal: React.StatelessComponent<Props> = props => {
               <h6>
                 Playlists
               </h6>
-              <div className='mp-add-to-modal__create-playlist'>
+              <div className='add-to-modal__create-playlist'>
                 {
                   !createPlaylistShow ?
                     <button
-                      className='mp-add-to-modal-create-playlist__create'
+                      className='add-to-modal-create-playlist__create'
                       onClick={handleToggleCreatePlaylist}>
                       <FontAwesomeIcon icon='plus' /> &nbsp;Create Playlist
                     </button> :
@@ -189,7 +189,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                       <InputGroup>
                         <Input
                           innerRef={el => inputTitle = el}
-                          name='mp-add-to-modal-create-playlist__title'
+                          name='add-to-modal-create-playlist__title'
                           onKeyPress={event => {
                             if (event.key === 'Enter' && handleCreatePlaylistSave) {
                               event.preventDefault()
@@ -200,7 +200,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                           type='text' />
                         <InputGroupAddon addonType='append'>
                           <Button
-                            className='mp-add-to-modal-create-playlist__cancel'
+                            className='add-to-modal-create-playlist__cancel'
                             color='secondary'
                             isOnlyIcon
                             onClick={handleCreatePlaylistHide}>
@@ -209,7 +209,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                         </InputGroupAddon>
                         <InputGroupAddon addonType='append'>
                           <Button
-                            className='mp-add-to-modal-create-playlist__save'
+                            className='add-to-modal-create-playlist__save'
                             color='primary'
                             disabled={createPlaylistIsSaving}
                             isLoading={createPlaylistIsSaving}
@@ -236,7 +236,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
               <h6>
                 Playlists
               </h6>
-              <div className='mp-add-to-modal__playlist-msg'>
+              <div className='add-to-modal__playlist-msg'>
                 <a onClick={handleLoginClick}>Login</a>
                 &nbsp;to add items to playlists
               </div>

@@ -103,12 +103,12 @@ export class QueueModal extends React.Component<Props, State> {
     const { dropdownMenuOpen, isEditing, showHistory } = this.state
 
     const header = (
-      <div className='mp-queue-modal__header'>
+      <div className='queue-modal__header'>
         {
           isLoggedIn &&
             <React.Fragment>
               <Dropdown
-                className='mp-queue-modal-header__dropdown'
+                className='queue-modal-header__dropdown'
                 direction='down'
                 isOpen={dropdownMenuOpen}
                 toggle={this.toggleDropdownMenu}>
@@ -153,7 +153,7 @@ export class QueueModal extends React.Component<Props, State> {
         }
         {
           !showHistory &&
-            <div className='mp-queue-modal-header__edit'>
+            <div className='queue-modal-header__edit'>
               <Button
                 onClick={this.toggleEditMode}>
                 {
@@ -164,7 +164,7 @@ export class QueueModal extends React.Component<Props, State> {
               </Button>
             </div>
         }
-        <div className='mp-queue-modal-header__close'>
+        <div className='queue-modal-header__close'>
           <CloseButton onClick={this.hideModal} />
         </div>
       </div>
@@ -262,7 +262,7 @@ export class QueueModal extends React.Component<Props, State> {
         contentLabel='Queue'
         isOpen={isOpen}
         onRequestClose={this.hideModal}
-        portalClassName='mp-queue-modal over-media-player'
+        portalClassName='queue-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         {header}

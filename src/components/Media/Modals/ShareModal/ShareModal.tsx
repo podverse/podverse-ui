@@ -43,7 +43,7 @@ export class ShareModal extends React.Component<Props, State> {
   }
 
   _onAfterOpen = () => {
-    new ClipboardJS('.mp-share-modal .btn-primary')
+    new ClipboardJS('.share-modal .btn-primary')
   }
 
   handleClipCopy = () => {
@@ -84,7 +84,7 @@ export class ShareModal extends React.Component<Props, State> {
         isOpen={isOpen}
         onAfterOpen={this._onAfterOpen}
         onRequestClose={handleHideModal}
-        portalClassName='mp-share-modal over-media-player'
+        portalClassName='share-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <h3><FontAwesomeIcon icon='share' /> &nbsp;Share</h3>
