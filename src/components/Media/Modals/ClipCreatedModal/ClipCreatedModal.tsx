@@ -62,10 +62,10 @@ class ClipCreatedModal extends React.Component<Props, State> {
     return (
       <Modal
         appElement={appEl}
-        contentLabel='Make clip'
+        contentLabel='Share Clip'
         isOpen={isOpen}
         onRequestClose={handleHideModal}
-        portalClassName='make-clip-modal'
+        portalClassName='make-clip-share-modal'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <h3><FontAwesomeIcon icon='share' /> &nbsp;Share Clip</h3>
