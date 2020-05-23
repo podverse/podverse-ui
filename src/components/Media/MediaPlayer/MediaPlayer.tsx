@@ -489,12 +489,12 @@ export class MediaPlayer extends React.Component<Props, State> {
                 <FontAwesomeIcon icon='list-ul' />
               </button>
               <button
-                className={`mp-header__clip ${openMakeClipModal ? 'active' : ''}`}
+                className={`mp-header__make-clip ${openMakeClipModal ? 'active' : ''}`}
                 onClick={handleToggleMakeClipModal}>
                 <FontAwesomeIcon icon='cut' />
               </button>
               <button
-                className={`mp-header__add ${openAddToModal ? 'active' : ''}`}
+                className={`mp-header__add-to ${openAddToModal ? 'active' : ''}`}
                 onClick={handleToggleAddToModal}>
                 <FontAwesomeIcon icon='plus' />
               </button>
