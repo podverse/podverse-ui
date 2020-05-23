@@ -29,7 +29,7 @@ setOptions({
 const styles = {
   backgroundColor: themeMode === 'dark' ? 'black' : 'white',
   fontFamily: '"Roboto", sans-serif'
-};
+}
 const ThemeDecorator = (storyFn) => (
   <div style={styles}>
     {storyFn()}
