@@ -198,7 +198,7 @@
     float: right;
     font-size: $text-sm-em;
     font-weight: 300;
-    line-height: 20px;
+    line-height: 22px;
     margin-left: 1rem;
     margin-right: 0.125rem;
     text-align: right;
@@ -215,14 +215,16 @@
 
   .media-list-item-d__sub-title-side {
     float: right;
-    font-size: $text-sm-em;
-    line-height: 20px;
+    font-size: $text-xs-em;
+    line-height: 22px;
     margin-left: 1rem;
+    margin-top: 0.25em;
     text-align: right;
   }
   
   .media-list-item-d__sub-title {
-    font-size: $text-sm-em;
+    font-size: $text-xs-em;
+    line-height: 22px;
     margin-top: 0.25em;
   }
 }
