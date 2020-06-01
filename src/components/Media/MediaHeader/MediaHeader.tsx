@@ -11,6 +11,7 @@ import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
 const uuidv4 = require('uuid/v4')
 
 type Props = {
+  censorNSFWText?: boolean
   episode?: any
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleSubscribe?: any
@@ -63,8 +64,8 @@ const generateCategoryNodes = (categories, handleLinkClick) => {
 }
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
-  const { episode, handleLinkClick, handleToggleSubscribe, hideNSFWLabels, isSubscribed,
-    isSubscribing, mediaRef, podcast } = props
+  const { censorNSFWText = false, episode, handleLinkClick, handleToggleSubscribe, hideNSFWLabels,
+    isSubscribed, isSubscribing, mediaRef, podcast } = props
 
   let bottomText
   let bottomTextSide
@@ -104,6 +105,8 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     title = podcast.title
     isExplicit = podcast.isExplicit
   }
+
+  title = title ? title.sanitize(censorNSFWText) : ''
 
   return (
     <div className='media-header'>

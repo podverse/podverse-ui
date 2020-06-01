@@ -9,6 +9,7 @@ const linkifyHtml = require('linkifyjs/html')
 const sanitizeHtml = require('sanitize-html')
 
 type Props = {
+  censorNSFWText?: boolean
   episode?: any
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePauseItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -70,8 +71,8 @@ export class MediaInfo extends React.Component<Props, State> {
   }
 
   render () {
-    const {episode, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip, loggedInUserId,
-      mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
+    const { censorNSFWText = false, episode, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip,
+      loggedInUserId, mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
       handleToggleEditClipModal, handleToggleMakeClipModal, handleToggleShareModal } = this.props
     const { showDescription } = this.state
 
@@ -126,6 +127,10 @@ export class MediaInfo extends React.Component<Props, State> {
       moreInfo = linkifyHtml(moreInfo)
       moreInfo = convertHHMMSSToAnchorTags(moreInfo)
     }
+
+    episodeTitle = episodeTitle ? episodeTitle.sanitize(censorNSFWText) : ''
+    clipTitle = clipTitle ? clipTitle.sanitize(censorNSFWText) : ''
+    createdByName = createdByName ? createdByName.sanitize(censorNSFWText) : ''
 
     const dynamicAdsWarningLink = (
       <Link

@@ -11,6 +11,7 @@ const sanitizeHtml = require('sanitize-html')
 const striptags = require('striptags')
 
 type Props = {
+  censorNSFWText?: boolean
   dataEpisode?: any
   dataNowPlayingItem?: any
   dataPlaylist?: any
@@ -40,10 +41,9 @@ type Props = {
 
 const checkClipStartTimeExists = (startTime) => startTime || startTime === 0
 
-
 // This is absolute chaos. Sorry :(
 export const MediaListItem: React.StatelessComponent<Props> = props => {
-  const { dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
+  const { censorNSFWText = false, dataEpisode, dataNowPlayingItem, dataPlaylist, dataPodcast, dataUser,
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
     handleRemoveItem, handleToggleAddToPlaylist, handleToggleShare, hasLink, hideDescription, hideDivider,
     isActive, isSlim, itemType, loadingItemId, noWrap, showMoreMenu, showMove, showOwner,
@@ -134,6 +134,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item' && (dataNowPlayingItem && (checkClipStartTimeExists(dataNowPlayingItem.clipStartTime)))) &&
                   <MediaListItemA
+                    censorNSFWText={censorNSFWText}
                     imageUrl={dataNowPlayingItem.podcastImageUrl}
                     subTitleMiddle={dataNowPlayingItem.episodeTitle}
                     subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
@@ -144,6 +145,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item' && (dataNowPlayingItem && (!dataNowPlayingItem.clipStartTime && dataNowPlayingItem.clipStartTime !== 0) && dataNowPlayingItem.episodeId)) &&
                   <MediaListItemA
+                    censorNSFWText={censorNSFWText}
                     imageUrl={dataNowPlayingItem.podcastImageUrl}
                     subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                     subTitleTop={dataNowPlayingItem.podcastTitle}
@@ -152,6 +154,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-clip-from-episode' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    censorNSFWText={censorNSFWText}
                     showImage={false}
                     subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
                     title={dataNowPlayingItem.clipTitle || 'untitled clip'} />
@@ -159,6 +162,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    censorNSFWText={censorNSFWText}
                     showImage={false}
                     subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
                     subTitleTop={dataNowPlayingItem.episodeTitle}
@@ -168,6 +172,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    censorNSFWText={censorNSFWText}
                     showImage={false}
                     subTitleTop={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                     title={dataNowPlayingItem.episodeTitle} />
@@ -175,6 +180,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-episode-from-all-podcasts' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    censorNSFWText={censorNSFWText}
                     imageUrl={dataNowPlayingItem.podcastImageUrl}
                     subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                     subTitleTop={dataNowPlayingItem.podcastTitle}
@@ -183,6 +189,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-queue-clip' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    censorNSFWText={censorNSFWText}
                     imageUrl={dataNowPlayingItem.podcastImageUrl}
                     subTitleMiddle={dataNowPlayingItem.episodeTitle}
                     subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime)}
@@ -193,6 +200,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'now-playing-item-queue-episode' && dataNowPlayingItem) &&
                   <MediaListItemA
+                    censorNSFWText={censorNSFWText}
                     imageUrl={dataNowPlayingItem.podcastImageUrl}
                     subTitleMiddle={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
                     subTitleTop={dataNowPlayingItem.podcastTitle}
@@ -201,6 +209,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'playlist' && dataPlaylist) &&
                   <MediaListItemD
+                    censorNSFWText={censorNSFWText}
                     itemId={dataPlaylist.id}
                     loadingItemId={loadingItemId}
                     subTitleSide={showOwner ? readableDate(dataPlaylist.updatedAt) : ''}
@@ -212,6 +221,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'podcast' && dataPodcast) &&
                   <MediaListItemB
+                    censorNSFWText={censorNSFWText}
                     imageUrl={dataPodcast.shrunkImageUrl || dataPodcast.imageUrl}
                     subTitle={dataPodcast.lastEpisodeTitle}
                     subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
@@ -220,6 +230,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'podcast-search-result' && dataPodcast) &&
                   <MediaListItemB
+                    censorNSFWText={censorNSFWText}
                     imageUrl={dataPodcast.shrunkImageUrl || dataPodcast.imageUrl}
                     subTitle={dataPodcast.categoriesString ||''}
                     subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
@@ -228,6 +239,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
               {
                 (itemType === 'user' && dataUser) &&
                   <MediaListItemD
+                    censorNSFWText={censorNSFWText}
                     itemId={dataUser.id}
                     title={dataUser.name || 'anonymous'} />
               }

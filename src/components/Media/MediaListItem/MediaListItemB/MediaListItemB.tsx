@@ -2,6 +2,7 @@ import * as React from 'react'
 import { ImageSquare } from 'components/Image/ImageSquare'
 
 export interface Props {
+  censorNSFWText?: boolean
   handleOnClick?: () => void
   /** the url of the left positioned image */
   imageUrl?: string
@@ -14,7 +15,7 @@ export interface Props {
 }
 
 export const MediaListItemB: React.StatelessComponent<Props> = props => {
-  const { imageUrl, subTitle, subTitleSide, title } = props
+  const { censorNSFWText = false, imageUrl, subTitle, subTitleSide, title } = props
 
   return (
     <div className='media-list-item__b'>
@@ -27,7 +28,7 @@ export const MediaListItemB: React.StatelessComponent<Props> = props => {
         {
           title &&
             <div className='media-list-item-b__title'>
-              {title}
+              {title.sanitize(censorNSFWText)}
             </div>
         }
         {
@@ -39,7 +40,7 @@ export const MediaListItemB: React.StatelessComponent<Props> = props => {
         {
           subTitle &&
             <div className='media-list-item-b__sub'>
-              {subTitle}
+              {subTitle.sanitize(censorNSFWText)}
             </div>
         }
       </div>

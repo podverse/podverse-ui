@@ -1,5 +1,6 @@
 import { addFontAwesomeIcons } from 'lib/fontAwesomeIcons'
 import 'scss/styles.scss'
+import 'lib/extensions/String'
 
 addFontAwesomeIcons()
 

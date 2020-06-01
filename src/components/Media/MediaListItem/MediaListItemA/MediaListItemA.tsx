@@ -2,6 +2,7 @@ import * as React from 'react'
 import { ImageSquare } from 'components/Image/ImageSquare'
 
 export interface Props {
+  censorNSFWText?: boolean
   imageUrl?: string
   moreMenuItems?: any
   showImage?: boolean
@@ -18,7 +19,7 @@ export interface Props {
 }
 
 export const MediaListItemA: React.StatelessComponent<Props> = props => {
-  const { imageUrl, showImage, subTitleBottom, subTitleBottomShouldTruncate,
+  const { censorNSFWText = false, imageUrl, showImage, subTitleBottom, subTitleBottomShouldTruncate,
     subTitleBottomSide, subTitleMiddle, subTitleMiddleShouldTruncate,
     subTitleMiddleSide, subTitleTop, subTitleTopShouldTruncate, subTitleTopSide,
     title } = props
@@ -37,7 +38,7 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
         {
           title &&
           <div className='media-list-item-a__title'>
-            {title}
+            {title.sanitize(censorNSFWText)}
           </div>
         }
         {
@@ -49,7 +50,7 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
         {
           subTitleTop &&
             <div className={`media-list-item-a__sub-top ${subTitleTopShouldTruncate ? 'truncate-lines' : ''}`}>
-              {subTitleTop}
+              {subTitleTop.sanitize(censorNSFWText)}
             </div>
         }
         {
@@ -61,7 +62,7 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
         {
           subTitleMiddle &&
             <div className={`media-list-item-a__sub-middle ${subTitleMiddleShouldTruncate ? 'truncate-lines' : ''}`}>
-              {subTitleMiddle}
+              {subTitleMiddle.sanitize(censorNSFWText)}
             </div>
         }
         {

@@ -2,6 +2,7 @@ import * as React from 'react'
 const sanitizeHtml = require('sanitize-html')
 
 export interface Props {
+  censorNSFWText?: boolean
   date?: string
   description?: string
   handleOnClick?: () => void
@@ -9,7 +10,7 @@ export interface Props {
 }
 
 export const MediaListItemC: React.StatelessComponent<Props> = props => {
-  const { date, description, title } = props
+  const { censorNSFWText = false, date, description, title } = props
 
   return (
     <div className='media-list-item__c'>
@@ -22,16 +23,16 @@ export const MediaListItemC: React.StatelessComponent<Props> = props => {
               </div>
           }
           <div className='media-list-item-c__title'>
-            {title}
+            {title ? title.sanitize(censorNSFWText) : ''}
           </div>
           {
             description &&
-            <div
-              className='media-list-item-c__description'
-              dangerouslySetInnerHTML={
-                {
-                  __html: sanitizeHtml(description)
-                }}
+              <div
+                className='media-list-item-c__description'
+                dangerouslySetInnerHTML={
+                  {
+                    __html: sanitizeHtml(description.sanitize(censorNSFWText))
+                  }}
               />
           }
         </div>

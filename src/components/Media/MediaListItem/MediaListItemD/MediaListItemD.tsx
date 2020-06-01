@@ -2,6 +2,7 @@ import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export interface Props {
+  censorNSFWText?: boolean
   handleOnClick?: () => void
   itemId: string
   loadingItemId?: string
@@ -12,7 +13,7 @@ export interface Props {
 }
 
 export const MediaListItemD: React.StatelessComponent<Props> = props => {
-  const { handleOnClick, itemId, loadingItemId, subTitle, subTitleSide, title,
+  const { censorNSFWText = false, handleOnClick, itemId, loadingItemId, subTitle, subTitleSide, title,
     titleSide } = props
 
   return (
@@ -26,7 +27,7 @@ export const MediaListItemD: React.StatelessComponent<Props> = props => {
           </div>
       }
       <div className='media-list-item-d__title'>
-        {title}
+        {title.sanitize(censorNSFWText)}
       </div>
       {
         subTitleSide &&
@@ -37,7 +38,7 @@ export const MediaListItemD: React.StatelessComponent<Props> = props => {
       {
         subTitle &&
           <div className='media-list-item-d__sub-title'>
-            {subTitle}
+            {subTitle.sanitize(censorNSFWText)}
           </div>
       }
     </div>
