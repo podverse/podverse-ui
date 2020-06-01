@@ -119,6 +119,10 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     }
   ]
 
+  if (dataNowPlayingItem && dataNowPlayingItem.episodeDescription) {
+    dataNowPlayingItem.episodeDescription = dataNowPlayingItem.episodeDescription.sanitize(censorNSFWText)
+  }
+
   return (
     <React.Fragment>
       <div className={`media-list__container ${isActive ? 'is-active' : ''} ${isSlim ? 'is-slim' : ''}`}>

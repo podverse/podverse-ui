@@ -126,6 +126,7 @@ export class MediaInfo extends React.Component<Props, State> {
     if (moreInfo) {
       moreInfo = linkifyHtml(moreInfo)
       moreInfo = convertHHMMSSToAnchorTags(moreInfo)
+      moreInfo = moreInfo.sanitize(censorNSFWText)
     }
 
     episodeTitle = episodeTitle ? episodeTitle.sanitize(censorNSFWText) : ''
