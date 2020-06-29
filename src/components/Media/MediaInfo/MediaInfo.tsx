@@ -59,13 +59,11 @@ export class MediaInfo extends React.Component<Props, State> {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('will it update', nextProps, nextState)
     if (
       (nextProps.episode && nextProps.episode.id) &&
       (this.props && this.props.episode && this.props.episode.id) &&
       nextProps.episode.id === this.props.episode.id
     ) {
-      console.log('it will')
       if (nextState.showDescription) {
         setTimeout(() => {
           setClipStartEventListeners()
@@ -301,7 +299,6 @@ const eventListenerElements = [] as any
 const removeClipStartEventListeners = () => {
   if (eventListenerElements.length > 0) {
     for (const eventListenerElement of eventListenerElements) {
-      console.log('wtfffff', eventListenerElement, eventListenerElements)
       eventListenerElement.removeEventListener('click', setClipStartEventListeners)
     }
   }
