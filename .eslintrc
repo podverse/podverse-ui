@@ -4,6 +4,9 @@
         "jsx": true,
         "useJSXTextNode": true
     },
+    "ignorePatterns": [
+        "**/storybook-static/"
+    ],
     "extends": [
         "plugin:@typescript-eslint/recommended",
         "react-app"
