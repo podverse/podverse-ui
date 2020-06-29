@@ -49,28 +49,23 @@ export class MediaInfo extends React.Component<Props, State> {
     }
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      setClipStartEventListeners()
+    }, 700)
+  }
+
   toggleDescription = () => {
     this.setState(prevState => ({
       showDescription: !prevState.showDescription
     }), () => {
       if (this.state.showDescription) {
-        const elements = document.querySelectorAll('[data-start-time]')
-        for (let i = 0; i < elements.length; i++) {
-          let startTime = elements[i].getAttribute('data-start-time') as any
-          elements[i].addEventListener('click', () => {
-            if (startTime) {
-              startTime = parseInt(startTime, 10)
-              if (startTime || startTime === 0) {
-                window.player.seekTo(startTime)
-              }
-            }
-          })
-        }
+        setClipStartEventListeners()
       }
     })
   }
 
-  render () {
+  render() {
     const { censorNSFWText = false, episode, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip,
       loggedInUserId, mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
       handleToggleEditClipModal, handleToggleMakeClipModal, handleToggleShareModal } = this.props
@@ -280,5 +275,20 @@ export class MediaInfo extends React.Component<Props, State> {
         </div>
       </React.Fragment>
     )
+  }
+}
+
+const setClipStartEventListeners = () => {
+  const elements = document.querySelectorAll('[data-start-time]')
+  for (let i = 0; i < elements.length; i++) {
+    let startTime = elements[i].getAttribute('data-start-time') as any
+    elements[i].addEventListener('click', () => {
+      if (startTime) {
+        startTime = parseInt(startTime, 10)
+        if (startTime || startTime === 0 && window && window.player) {
+          window.player.seekTo(startTime)
+        }
+      }
+    })
   }
 }
