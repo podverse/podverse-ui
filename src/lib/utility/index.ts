@@ -62,7 +62,7 @@ export const convertSecToHHMMSS = (sec: number) => {
 }
 
 export const getHHMMSSMatchesInString = (str: string) => {
-  const regex = /(?:2[0-3]|[01]?[0-9]):[0-5][0-9]:[0-5][0-9]/g
+  const regex = /([0-9]?[0-9]:[0-5]?[0-9]:[0-5][0-9])|([0-5]?[0-9]:[0-5][0-9])/g
   return str.match(regex)
 }
 
@@ -117,8 +117,7 @@ export function convertHHMMSSToSeconds (hhmmssString) {
       }
   
       hours = hours * 3600;
-      minutes = minutes * 60;
-  
+      minutes = minutes ? minutes * 60 : 0;
     } else if (hhmmssArray.length === 2) {
       minutes = parseInt(hhmmssArray[0]);
       seconds = parseInt(hhmmssArray[1]);
