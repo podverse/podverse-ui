@@ -11,6 +11,7 @@ type Props = {
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen?: boolean
   linkHref?: string
+  t: any
 }
 
 type State = {
@@ -51,7 +52,7 @@ class ClipCreatedModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { handleHideModal, isOpen, linkHref } = this.props
+    const { handleHideModal, isOpen, linkHref, t } = this.props
     const { wasCopied } = this.state
 
     let appEl
@@ -62,17 +63,17 @@ class ClipCreatedModal extends React.Component<Props, State> {
     return (
       <Modal
         appElement={appEl}
-        contentLabel='Share Clip'
+        contentLabel={t('Share Clip')}
         isOpen={isOpen}
         onRequestClose={handleHideModal}
         portalClassName='make-clip-share-modal'
         shouldCloseOnOverlayClick
         style={customStyles}>
-        <h3><FontAwesomeIcon icon='share' /> &nbsp;Share Clip</h3>
+        <h3><FontAwesomeIcon icon='share' /> &nbsp;{t('Share Clip')}</h3>
         <CloseButton onClick={handleHideModal} />
         <Form>
           <FormGroup>
-            <Label for='clip-created-copy-link'>Clip</Label>
+            <Label for='clip-created-copy-link'>{t('Clip')}</Label>
             <InputGroup id='clip-created-copy-link'>
               <Input
                 id='clip-created-copy-link-input'
@@ -84,11 +85,11 @@ class ClipCreatedModal extends React.Component<Props, State> {
                   color='primary'
                   dataclipboardtarget='#clip-created-copy-link-input'
                   onClick={this._copyLink}
-                  text={wasCopied ? 'Copied!' : 'Copy'} />
+                  text={wasCopied ? t('Copied') : t('Copy')} />
               </InputGroupAddon>
             </InputGroup>
             <FormText>
-              Copy this link to share your clip with anyone.
+              {t('Copy this link to share your clip with anyone')}
             </FormText>
           </FormGroup>
         </Form>

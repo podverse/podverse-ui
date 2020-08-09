@@ -13,6 +13,7 @@ type Props = {
   playerClipLinkHref?: string
   playerEpisodeLinkHref?: string
   playerPodcastLinkHref?: string
+  t: any
 }
 
 type State = {
@@ -69,7 +70,7 @@ export class ShareModal extends React.Component<Props, State> {
 
   render () {
     const { handleHideModal, isOpen, playerClipLinkHref, playerEpisodeLinkHref,
-      playerPodcastLinkHref } = this.props
+      playerPodcastLinkHref, t } = this.props
     const { lastCopied } = this.state
 
     let appEl
@@ -87,13 +88,13 @@ export class ShareModal extends React.Component<Props, State> {
         portalClassName='share-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
-        <h3><FontAwesomeIcon icon='share' /> &nbsp;Share</h3>
+        <h3><FontAwesomeIcon icon='share' /> &nbsp;{t('Share')}</h3>
         <CloseButton onClick={handleHideModal} />
         <Form>
           {
             playerClipLinkHref &&
               <FormGroup>
-                <Label for='share-copy-clip'>Clip</Label>
+                <Label for='share-copy-clip'>{t('Clip')}</Label>
                 <InputGroup id='share-copy-clip'>
                   <Input
                     id='share-copy-clip-input'
@@ -106,7 +107,7 @@ export class ShareModal extends React.Component<Props, State> {
                       dataclipboardtarget='#share-copy-clip-input'
                       onClick={this.handleClipCopy}>
                       {
-                        lastCopied === 'clip' ? 'Copied!' : 'Copy'
+                        lastCopied === 'clip' ? t('Copied') : t('Copy')
                       }
                     </Button>
                   </InputGroupAddon>
@@ -116,7 +117,7 @@ export class ShareModal extends React.Component<Props, State> {
           {
             playerEpisodeLinkHref &&
               <FormGroup>
-                <Label for='share-copy-episode'>Episode</Label>
+                <Label for='share-copy-episode'>{t('Episode')}</Label>
                 <InputGroup id='share-copy-episode'>
                   <Input
                     id='share-copy-episode-input'
@@ -139,7 +140,7 @@ export class ShareModal extends React.Component<Props, State> {
           {
             playerPodcastLinkHref &&
               <FormGroup>
-                <Label for='share-copy-podcast'>Podcast</Label>
+                <Label for='share-copy-podcast'>{t('Podcast')}</Label>
                 <InputGroup id='share-copy-podcast'>
                   <Input
                     id='share-copy-podcast-input'
@@ -152,7 +153,7 @@ export class ShareModal extends React.Component<Props, State> {
                       dataclipboardtarget='#share-copy-podcast-input'
                       onClick={this.handlePodcastCopy}>
                       {
-                        lastCopied === 'podcast' ? 'Copied!' : 'Copy'
+                        lastCopied === 'podcast' ? t('Copied') : t('Copy')
                       }
                     </Button>
                   </InputGroupAddon>

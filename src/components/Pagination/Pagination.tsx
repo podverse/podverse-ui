@@ -7,6 +7,7 @@ type Props = {
   currentPage: number
   handleQueryPage?: any
   pageRange: number
+  t?: any
   totalPages: number
 }
 
@@ -21,7 +22,7 @@ export class PVPagination extends React.Component<Props, State> {
   }
 
   render () {
-    const { currentPage, handleQueryPage, pageRange, totalPages } = this.props
+    const { currentPage, handleQueryPage, pageRange, t, totalPages } = this.props
 
     let range = []
     if (totalPages < pageRange * 2 + 1) {
@@ -83,12 +84,12 @@ export class PVPagination extends React.Component<Props, State> {
                   <a
                     className='pv-pagination__skip-to'
                     onClick={() => {
-                      const pageNumber = prompt('Type a page number:')
+                      const pageNumber = prompt(t('Type a page number'))
                       const page = pageNumber && parseInt(pageNumber, 10)
                       if ((page && page <= 0) || page === 0) {
-                        safeAlert('Must be a number larger than 1.')
+                        safeAlert(t('Must be a number larger than 1'))
                       } else if (page && page > totalPages) {
-                        safeAlert(`Page out of range. Must be a number smaller than ${totalPages}.`)
+                        safeAlert(t('Page out of range', { totalPages }))
                       } else if (page) {
                         handleQueryPage(page)
                       }

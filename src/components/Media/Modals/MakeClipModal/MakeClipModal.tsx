@@ -13,7 +13,6 @@ type Props = {
   handleDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleEndTimePreview?: Function
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
-  handleLoginClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleSave: Function
   handleStartTimePreview?: Function
   initialIsPublic?: boolean
@@ -28,6 +27,7 @@ type Props = {
   refInputTitle: any
   startTime: number
   title?: string
+  t: any
 }
 
 type State = {
@@ -51,19 +51,6 @@ const customStyles = {
     width: '100%'
   }
 }
-
-const endTimeErrors = {
-  invalidFormat: 'Time must be in hh:mm:ss format'
-}
-
-const startTimeErrors = {
-  invalidFormat: 'Time must be in hh:mm:ss format',
-  required: 'Start time is required'
-}
-
-// const onlyWithClipAlertText = `Only with Link means only people who have your clip's link can play it.
-
-// These clips are not private, but they will not show up automatically in lists on Podverse.`
 
 class MakeClipModal extends React.Component<Props, State> {
 
@@ -177,8 +164,8 @@ class MakeClipModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { endTime, handleDelete, handleHideModal, handleLoginClick, isDeleting, isEditing, isLoggedIn,
-      isOpen, isSaving, refInputEndTime, refInputStartTime, refInputTitle, startTime, title } = this.props
+    const { endTime, handleDelete, handleHideModal, isDeleting, isEditing, isLoggedIn,
+      isOpen, isSaving, refInputEndTime, refInputStartTime, refInputTitle, startTime, t, title } = this.props
     const { errorEndTime, errorStartTime, initialEndTime, initialStartTime, initialTitle,
       isPublic, isPublicIsOpen } = this.state
 
@@ -187,10 +174,19 @@ class MakeClipModal extends React.Component<Props, State> {
       appEl = document.querySelector('body')
     }
 
+    const endTimeErrors = {
+      invalidFormat: t('Time must be in hhmmss format')
+    }
+
+    const startTimeErrors = {
+      invalidFormat: t('Time must be in hhmmss format'),
+      required: t('Start time is required')
+    }
+
     return (
       <Modal
         appElement={appEl}
-        contentLabel='Make clip'
+        contentLabel={t('Make clip')}
         isOpen={isOpen}
         onRequestClose={handleHideModal}
         portalClassName='make-clip-modal'
@@ -199,8 +195,8 @@ class MakeClipModal extends React.Component<Props, State> {
         <Form>
           {
             isEditing ?
-              <h3><FontAwesomeIcon icon='edit' /> &nbsp;Edit Clip</h3> :
-              <h3><FontAwesomeIcon icon='cut' /> &nbsp;Make Clip</h3>
+              <h3><FontAwesomeIcon icon='edit' /> &nbsp;{t('Edit Clip')}</h3> :
+              <h3><FontAwesomeIcon icon='cut' /> &nbsp;{t('Make Clip')}</h3>
           }
           <Dropdown
             className='make-clip-modal__is-public transparent-btn'
@@ -210,13 +206,13 @@ class MakeClipModal extends React.Component<Props, State> {
               {
                 isPublic &&
                   <React.Fragment>
-                    <FontAwesomeIcon icon='globe-americas' /> Public
+                    <FontAwesomeIcon icon='globe-americas' /> {t('Public')}
                   </React.Fragment>
               }
               {
                 !isPublic &&
                   <React.Fragment>
-                    <FontAwesomeIcon icon='link' /> Only with link
+                    <FontAwesomeIcon icon='link' /> {t('Only with link')}
                   </React.Fragment>
               }
             </DropdownToggle>
@@ -226,7 +222,7 @@ class MakeClipModal extends React.Component<Props, State> {
                   <DropdownItem
                     data-value='public'
                     onClick={this.selectIsPublic}>
-                    <FontAwesomeIcon icon='globe-americas' /> Public
+                    <FontAwesomeIcon icon='globe-americas' /> {t('Public')}
                   </DropdownItem>
               }
               {
@@ -234,7 +230,7 @@ class MakeClipModal extends React.Component<Props, State> {
                   <DropdownItem
                     data-value='only-with-link'
                     onClick={this.selectIsPublic}>
-                    <FontAwesomeIcon icon='link' /> Only with link
+                  <FontAwesomeIcon icon='link' /> {t('Only with link')}
                   </DropdownItem>
               }
             </DropdownMenu>
@@ -243,18 +239,18 @@ class MakeClipModal extends React.Component<Props, State> {
           {
             !isLoggedIn &&
             <div className='make-clip-modal__login-msg'>
-              <a onClick={handleLoginClick}>Login</a>&nbsp;to create and share clips
+              {t('LoginToCreateAndShareClips')}
             </div>
           }
           <Row>
             <Col xs='6'>
               <FormGroup>
-                <Label for='make-clip-modal__start-time'>Start</Label>
+                <Label for='make-clip-modal__start-time'>{t('Start')}</Label>
                 <button
                   className='make-clip-modal__start-time-preview'
                   onClick={this.startTimePreview}
                   type='button'>
-                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; Preview
+                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; {t('Preview')}
                 </button>
                 <Input
                   defaultValue={initialStartTime ? convertSecToHHMMSS(initialStartTime) : convertSecToHHMMSS(startTime)}
@@ -273,19 +269,19 @@ class MakeClipModal extends React.Component<Props, State> {
             </Col>
             <Col xs='6'>
               <FormGroup>
-                <Label for='make-clip-modal__end-time'>End</Label>
+                <Label for='make-clip-modal__end-time'>{t('End')}</Label>
                 <button
                   className='make-clip-modal__end-time-preview'
                   onClick={this.endTimePreview}
                   type='button'>
-                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; Preview
+                  <FontAwesomeIcon icon='play'></FontAwesomeIcon> &nbsp; {t('Preview')}
                 </button>
                 <Input
                   defaultValue={endTime ? convertSecToHHMMSS(endTime) : initialEndTime ? convertSecToHHMMSS(initialEndTime) : ''}
                   innerRef={refInputEndTime}
                   invalid={!!errorEndTime}
                   name='make-clip-modal__end-time'
-                  placeholder='hh:mm:ss'
+                  placeholder={t('hhmmss')}
                   type='text' />
                 {
                   !!errorEndTime &&
@@ -297,12 +293,12 @@ class MakeClipModal extends React.Component<Props, State> {
             </Col>
           </Row>
           <FormGroup>
-            <Label for='make-clip-modal__title'>Title</Label>
+            <Label for='make-clip-modal__title'>{t('Title')}</Label>
             <Input
               defaultValue={title ? title : initialTitle ? initialTitle : ''}
               innerRef={refInputTitle}
               name='make-clip-modal__title'
-              placeholder='optional'
+              placeholder={t('optional')}
               rows='3'
               type='textarea' />
           </FormGroup>
@@ -316,7 +312,7 @@ class MakeClipModal extends React.Component<Props, State> {
                     <a
                       className='make-clip-modal__dynamic-ads'
                       onClick={handleHideModal}>
-                      Clips FAQ
+                      {t('Clips FAQ')}
                     </a>
                   </Link>
                   <div className='make-clip-modal__divider'>/</div>
@@ -326,7 +322,7 @@ class MakeClipModal extends React.Component<Props, State> {
                     <a
                       className='make-clip-modal__my-clips'
                       onClick={handleHideModal}>
-                      My Clips
+                      {t('My Clips')}
                     </a>
                   </Link>
                 </React.Fragment>
@@ -339,20 +335,20 @@ class MakeClipModal extends React.Component<Props, State> {
                   color='danger'
                   isLoading={isDeleting}
                   onClick={handleDelete}
-                  text='Delete' />
+                  text={t('Delete')} />
             }
             <Button
               className='make-clip-modal__cancel'
               disabled={isDeleting || isSaving}
               onClick={handleHideModal}
-              text='Cancel' />
+              text={t('Cancel')} />
             <Button
               className='make-clip-modal__save'
               color='primary'
               disabled={isDeleting || isSaving || !isLoggedIn}
               isLoading={isSaving}
               onClick={this.handleSave}
-              text='Save' />
+              text={t('Save')} />
           </div>
         </Form>
       </Modal>

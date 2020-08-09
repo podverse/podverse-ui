@@ -19,6 +19,7 @@ export interface Props {
   nowPlayingItem?: any
   priorityItems: any[]
   secondaryItems: any[]
+  t: any
 }
 
 type State = {
@@ -99,7 +100,7 @@ export class QueueModal extends React.Component<Props, State> {
 
   render () {
     const { handleLinkClick, handleRemoveItem, historyItems = [], isLoggedIn, isOpen,
-      nowPlayingItem = {}, priorityItems = [], secondaryItems = [] } = this.props
+      nowPlayingItem = {}, priorityItems = [], secondaryItems = [], t } = this.props
     const { dropdownMenuOpen, isEditing, showHistory } = this.state
 
     const header = (
@@ -118,11 +119,11 @@ export class QueueModal extends React.Component<Props, State> {
                   {
                     !showHistory ?
                       <React.Fragment>
-                        <FontAwesomeIcon icon='list-ul' /> &nbsp;Queue
+                        <FontAwesomeIcon icon='list-ul' /> &nbsp;{t('Queue')}
                       </React.Fragment>
                       :
                       <React.Fragment>
-                        <FontAwesomeIcon icon='history' /> &nbsp;History
+                        <FontAwesomeIcon icon='history' /> &nbsp;{t('History')}
                       </React.Fragment>
                   }
                 </DropdownToggle>
@@ -131,14 +132,14 @@ export class QueueModal extends React.Component<Props, State> {
                     !showHistory &&
                     <DropdownItem
                       onClick={() => this.setState({ showHistory: true })}>
-                      <FontAwesomeIcon icon='history' /> &nbsp;History
+                      <FontAwesomeIcon icon='history' /> &nbsp;{t('History')}
                     </DropdownItem>
                   }
                   {
                     showHistory &&
                     <DropdownItem
                       onClick={() => this.setState({ showHistory: false })}>
-                      <FontAwesomeIcon icon='list-ul' /> &nbsp;Queue
+                      <FontAwesomeIcon icon='list-ul' /> &nbsp;{t('Queue')}
                     </DropdownItem>
                   }
                 </DropdownMenu>
@@ -148,7 +149,7 @@ export class QueueModal extends React.Component<Props, State> {
         {
           !isLoggedIn &&
             <React.Fragment>
-              <h3><FontAwesomeIcon icon='list-ul' /> &nbsp;Queue</h3>
+              <h3><FontAwesomeIcon icon='list-ul' /> &nbsp;{t('Queue')}</h3>
             </React.Fragment>
         }
         {
@@ -158,8 +159,8 @@ export class QueueModal extends React.Component<Props, State> {
                 onClick={this.toggleEditMode}>
                 {
                   isEditing ?
-                    <React.Fragment><FontAwesomeIcon icon='check' /> Done</React.Fragment>
-                    : <React.Fragment><FontAwesomeIcon icon='edit' /> Edit</React.Fragment>
+                    <React.Fragment><FontAwesomeIcon icon='check' /> {t('Done')}</React.Fragment>
+                    : <React.Fragment><FontAwesomeIcon icon='edit' /> {t('Edit')}</React.Fragment>
                 }
               </Button>
             </div>
@@ -198,7 +199,8 @@ export class QueueModal extends React.Component<Props, State> {
                   itemType='now-playing-item'
                   key={`${queueModalPriorityItemKey}c${index}`}
                   showMove={!isEditing}
-                  showRemove={isEditing} />
+                  showRemove={isEditing}
+                  t={t} />
                 <hr className='pv-divider' />
               </div>
             </React.Fragment>
@@ -229,7 +231,8 @@ export class QueueModal extends React.Component<Props, State> {
                   itemType='now-playing-item'
                   key={`${queueModalSecondaryItemKey}c${index}`}
                   showMove={!isEditing}
-                  showRemove={isEditing} />
+                  showRemove={isEditing}
+                  t={t} />
                 <hr className='pv-divider' />
               </div>
             </React.Fragment>
@@ -244,7 +247,8 @@ export class QueueModal extends React.Component<Props, State> {
           hasLink
           hideDescription={true}
           key={`${queueModalHistoryItemKey}${index}`}
-          itemType='now-playing-item' />
+          itemType='now-playing-item'
+          t={t} />
       )) : []
     }
 
@@ -259,7 +263,7 @@ export class QueueModal extends React.Component<Props, State> {
     return (
       <Modal
         appElement={appEl}
-        contentLabel='Queue'
+        contentLabel={t('Queue')}
         isOpen={isOpen}
         onRequestClose={this.hideModal}
         portalClassName='queue-modal over-media-player'
@@ -273,13 +277,14 @@ export class QueueModal extends React.Component<Props, State> {
                 {
                   nowPlayingItem &&
                   <React.Fragment>
-                    <h6>Now Playing</h6>
+                    <h6>{t('Now Playing')}</h6>
                     <MediaListItem
                       dataNowPlayingItem={nowPlayingItem}
                       hasLink
                       hideDescription={true}
                       hideDivider={true}
-                      itemType={itemType} />
+                      itemType={itemType}
+                      t={t} />
                   </React.Fragment>
                 }
                 <DragDropContext
@@ -287,7 +292,7 @@ export class QueueModal extends React.Component<Props, State> {
                   {
                     priorityItemNodes.length > 0 &&
                     <React.Fragment>
-                      <h6>Next Up</h6>
+                      <h6>{t('Next Up')}</h6>
                       <Droppable droppableId='priority-items'>
                         {(provided, snapshot) => (
                           <div
@@ -303,7 +308,7 @@ export class QueueModal extends React.Component<Props, State> {
                   {
                     secondaryItemNodes.length > 0 &&
                     <React.Fragment>
-                      <h6>Auto Queue</h6>
+                      <h6>{t('Auto Queue')}</h6>
                       <Droppable droppableId='secondary-items'>
                         {(provided, snapshot) => (
                           <div

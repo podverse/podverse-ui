@@ -19,6 +19,7 @@ type Props = {
   showSignUpModal: (event: React.MouseEvent<HTMLButtonElement>) => void
   signUpFinished?: boolean
   submitIsDisabled?: boolean
+  t: any
   topText?: string
 }
 
@@ -73,12 +74,13 @@ export class SignUpModal extends React.Component<Props, State> {
   }
 
   handleEmailInputBlur = event => {
+    const { t } = this.props
     const { value: email } = event.target
     const newState: any = {}
     newState.email = email
 
     if (!validateEmail(email)) {
-      newState.errorEmail = 'Please provide a valid email address.'
+      newState.errorEmail = t('errorMessages:message.PleaseProvideValidEmail')
     }
 
     this.setState(newState, () => {
@@ -102,11 +104,12 @@ export class SignUpModal extends React.Component<Props, State> {
   }
 
   handlePasswordInputBlur = event => {
+    const { t } = this.props
     const { value: password } = event.target
     const newState: any = {}
 
     if (password && !validatePassword(password)) {
-      newState.errorPassword = 'Password must contain a number, uppercase, lowercase, and be at least 8 characters long.'
+      newState.errorPassword = t('errorMessages:message.passwordError')
     } else if (validatePassword(password)) {
       newState.errorPassword = null
     }
@@ -131,12 +134,13 @@ export class SignUpModal extends React.Component<Props, State> {
   }
 
   handlePasswordConfirmInputBlur = event => {
+    const { t } = this.props
     const { errorPassword, password } = this.state
     const { value: passwordConfirm } = event.target
     const newState: any = {}
 
     if (!errorPassword && passwordConfirm !== password) {
-      newState.errorPasswordConfirm = 'Passwords do not match.'
+      newState.errorPasswordConfirm = t('errorMessages:message.passwordMatchError')
     }
 
     this.setState(newState, () => {
@@ -199,7 +203,7 @@ export class SignUpModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { errorResponse, hideModal, isLoading, isOpen, signUpFinished, topText } = this.props
+    const { errorResponse, hideModal, isLoading, isOpen, signUpFinished, t, topText } = this.props
     const { email, errorEmail, errorPassword, errorPasswordConfirm, hasAtLeastXCharacters,
       hasLowercase, hasNumber, hasUppercase, password, passwordConfirm, submitIsDisabled } = this.state
 
@@ -211,14 +215,14 @@ export class SignUpModal extends React.Component<Props, State> {
     return (
       <Modal
         appElement={appEl}
-        contentLabel='Sign Up'
+        contentLabel={t('Sign Up')}
         isOpen={isOpen}
         onRequestClose={hideModal}
         portalClassName='sign-up-modal over-media-player'
         shouldCloseOnOverlayClick
         style={customStyles}>
         <Form>
-          <h3>{signUpFinished ? 'Verify Email' : 'Sign Up'}</h3>
+          <h3>{signUpFinished ? t('Verify Email') : t('Sign Up')}</h3>
           <CloseButton onClick={hideModal} />
           {
             (errorResponse && !isLoading) &&
@@ -230,8 +234,7 @@ export class SignUpModal extends React.Component<Props, State> {
             signUpFinished &&
               <>
                 <p style={{ marginTop: '32px', textAlign: 'center' }}>
-                  Please check your inbox and verify your email to login to your account.
-                  You may need to check your Spam folder.
+                  {t('PleaseCheckInbox')}
                 </p>
                 <ButtonGroup
                   childrenLeft
@@ -249,7 +252,7 @@ export class SignUpModal extends React.Component<Props, State> {
                 <div style={{ overflow: 'hidden' }}>
                   {topText}
                   <FormGroup>
-                    <Label for='sign-up-modal__email'>Email</Label>
+                    <Label for='sign-up-modal__email'>{t('Email')}</Label>
                     <Input
                       data-state-key='email'
                       invalid={errorEmail}
@@ -268,7 +271,7 @@ export class SignUpModal extends React.Component<Props, State> {
                     }
                   </FormGroup>
                   <FormGroup>
-                    <Label for='sign-up-modal__password'>Password</Label>
+                    <Label for='sign-up-modal__password'>{t('Password')}</Label>
                     <Input
                       data-state-key='password'
                       invalid={errorPassword}
@@ -287,7 +290,7 @@ export class SignUpModal extends React.Component<Props, State> {
                     }
                   </FormGroup>
                   <FormGroup>
-                    <Label for='sign-up-modal__password-confirm'>Confirm Password</Label>
+                    <Label for='sign-up-modal__password-confirm'>{t('Confirm Password')}</Label>
                     <Input
                       data-state-key='passwordConfirm'
                       invalid={errorPasswordConfirm}
@@ -309,20 +312,21 @@ export class SignUpModal extends React.Component<Props, State> {
                     hasAtLeastXCharacters={hasAtLeastXCharacters}
                     hasLowercase={hasLowercase}
                     hasNumber={hasNumber}
-                    hasUppercase={hasUppercase} />
+                    hasUppercase={hasUppercase}
+                    t={t} />
                   <ButtonGroup
                     childrenLeft
                     childrenRight={
                       <React.Fragment>
                         <Button
                           onClick={hideModal}
-                          text='Cancel' />
+                          text={t('Cancel')} />
                         <Button
                           color='primary'
                           disabled={submitIsDisabled}
                           isLoading={isLoading}
                           onClick={this.handleSignUp}
-                          text='Sign Up' />
+                          text={t('Sign Up')} />
                       </React.Fragment>
                     } />
                   </div>

@@ -19,7 +19,6 @@ export interface Props {
   handleCreatePlaylistHide?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleCreatePlaylistSave?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleLoginClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePlaylistItemAdd?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleCreatePlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isAddedToPlayLast?: boolean
@@ -33,6 +32,7 @@ export interface Props {
   playlists: any[]
   showPlaylists?: boolean
   showQueue?: boolean
+  t?: any
 }
 
 const defaultProps: Props = {
@@ -60,9 +60,9 @@ let inputTitle
 const AddToModal: React.StatelessComponent<Props> = props => {
   const { createPlaylistError, createPlaylistIsSaving, createPlaylistShow, episode, handleAddToQueueLast,
     handleAddToQueueNext, handleCreatePlaylistHide, handleCreatePlaylistSave, handleHideModal,
-    handleLoginClick, handlePlaylistItemAdd, handleToggleCreatePlaylist, isAddedToPlayLast,
+    handlePlaylistItemAdd, handleToggleCreatePlaylist, isAddedToPlayLast,
     isAddedToPlayNext, isAddingToPlayLast, isAddingToPlayNext, isOpen, loadingItemId,
-    mediaRef, nowPlayingItem, playlists, showPlaylists, showQueue } = props
+    mediaRef, nowPlayingItem, playlists, showPlaylists, showQueue, t } = props
 
   const playlistMediaListItems = playlists.map(x =>
     <MediaListItem
@@ -70,7 +70,8 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       handleLinkClick={handlePlaylistItemAdd}
       itemType='playlist'
       key={uuidv4()}
-      loadingItemId={loadingItemId} />
+      loadingItemId={loadingItemId}
+      t={t} />
   )
 
   if (!showPlaylists && showQueue) {
@@ -99,13 +100,13 @@ const AddToModal: React.StatelessComponent<Props> = props => {
   return (
     <Modal
       appElement={appEl}
-      contentLabel='Add To'
+      contentLabel={t('Add To')}
       isOpen={isOpen}
       onRequestClose={handleHideModal}
       portalClassName='add-to-modal over-media-player'
       shouldCloseOnOverlayClick
       style={customStyles}>
-      <h3><FontAwesomeIcon icon='plus' /> &nbsp; Add To</h3>
+      <h3><FontAwesomeIcon icon='plus' /> &nbsp; {t('Add To')}</h3>
       <CloseButton onClick={handleHideModal} />
       <div className='scrollable-area reduced-margin'>
         {
@@ -115,13 +116,14 @@ const AddToModal: React.StatelessComponent<Props> = props => {
               hasLink
               hideDescription={true}
               hideDivider={true}
-              itemType='now-playing-item' />
+              itemType='now-playing-item'
+              t={t} />
         }
         {
           showQueue &&
             <React.Fragment>
               <h6>
-                Queue
+                {t('Queue')}
               </h6>
               <a
                 className='add-to-modal__play-next'
@@ -136,13 +138,13 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                 {
                   isAddedToPlayNext &&
                     <React.Fragment>
-                      Added!
+                      {t('Added')}
                     </React.Fragment>
                 }
                 {
                   (!isAddedToPlayNext && !isAddingToPlayNext) &&
                     <React.Fragment>
-                      <FontAwesomeIcon icon='level-up-alt' /> Play Next
+                      <FontAwesomeIcon icon='level-up-alt' /> {t('Play Next')}
                     </React.Fragment>
                 }
               </a>
@@ -159,13 +161,13 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                 {
                   isAddedToPlayLast &&
                   <React.Fragment>
-                    Added!
+                    {t('Added')}
                   </React.Fragment>
                 }
                 {
                   (!isAddedToPlayLast && !isAddingToPlayLast) &&
                   <React.Fragment>
-                    <FontAwesomeIcon icon='level-down-alt' /> Play Last
+                    <FontAwesomeIcon icon='level-down-alt' /> {t('Play Last')}
                   </React.Fragment>
                 }
               </a>
@@ -175,7 +177,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
           showPlaylists ?
             <React.Fragment>
               <h6>
-                Playlists
+                {t('Playlists')}
               </h6>
               <div className='add-to-modal__create-playlist'>
                 {
@@ -183,7 +185,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
                     <button
                       className='add-to-modal-create-playlist__create'
                       onClick={handleToggleCreatePlaylist}>
-                      <FontAwesomeIcon icon='plus' /> &nbsp;Create Playlist
+                      <FontAwesomeIcon icon='plus' /> &nbsp;{t('Create Playlist')}
                     </button> :
                     <FormGroup>
                       <InputGroup>
@@ -234,11 +236,10 @@ const AddToModal: React.StatelessComponent<Props> = props => {
             :
             <React.Fragment>
               <h6>
-                Playlists
+                {t('Playlists')}
               </h6>
               <div className='add-to-modal__playlist-msg'>
-                <a onClick={handleLoginClick}>Login</a>
-                &nbsp;to add items to playlists
+                {t('LoginToAddItemsToPlaylists')}
               </div>
             </React.Fragment>
         }

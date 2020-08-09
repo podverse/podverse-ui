@@ -14,6 +14,7 @@ type Props = {
   isOpen: boolean
   showForgotPasswordModal: (event: React.MouseEvent<HTMLAnchorElement>) => void
   showSignUpModal: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  t: any
 }
 
 type State = {
@@ -73,7 +74,8 @@ export class LoginModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { errorResponse, isLoading, isOpen, showForgotPasswordModal, showSignUpModal } = this.props
+    const { errorResponse, isLoading, isOpen, showForgotPasswordModal, showSignUpModal,
+      t } = this.props
     const { email, password } = this.state
 
     let appEl
@@ -84,7 +86,7 @@ export class LoginModal extends React.Component<Props, State> {
     return (
       <Modal
         appElement={appEl}
-        contentLabel='Login'
+        contentLabel={t('Login')}
         isOpen={isOpen}
         onRequestClose={this.hideModal}
         portalClassName='login-modal over-media-player'
@@ -100,7 +102,7 @@ export class LoginModal extends React.Component<Props, State> {
               </Alert>
           }
           <FormGroup>
-            <Label for='login-modal__email'>Email</Label>
+            <Label for='login-modal__email'>{t('Email')}</Label>
             <Input
               data-state-key='email'
               name='login-modal__email'
@@ -111,7 +113,7 @@ export class LoginModal extends React.Component<Props, State> {
               value={email} />
           </FormGroup>
           <FormGroup>
-            <Label for='login-modal__password'>Password</Label>
+            <Label for='login-modal__password'>{t('Password')}</Label>
             <Input
               data-state-key='password'
               name='login-modal__password'
@@ -131,7 +133,7 @@ export class LoginModal extends React.Component<Props, State> {
                     event.preventDefault()
                     showForgotPasswordModal(event)
                   }}>
-                  Forgot?
+                  {t('Forgot?')}
                 </a>
                 <a
                   className='login-modal__sign-up'
@@ -140,7 +142,7 @@ export class LoginModal extends React.Component<Props, State> {
                     event.preventDefault()
                     showSignUpModal(event)
                   }}>
-                  Sign Up
+                  {t('Sign Up')}
                 </a>
               </React.Fragment>
             }
@@ -149,13 +151,13 @@ export class LoginModal extends React.Component<Props, State> {
                 <Button
                   className='login-modal-btns-right__cancel'
                   onClick={this.hideModal}
-                  text='Cancel' />
+                  text={t('Cancel')} />
                 <Button
                   className='login-modal-btns-right__login'
                   color='primary'
                   isLoading={isLoading}
                   onClick={this.handleLogin}
-                  text='Login' />
+                  text={t('Login')} />
               </React.Fragment>
             } />
         </Form>

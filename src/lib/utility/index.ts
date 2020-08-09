@@ -150,13 +150,13 @@ export function convertHHMMSSToSeconds (hhmmssString) {
 
 }
 
-export const readableClipTime = (startTime, endTime) => {
+export const readableClipTime = (startTime, endTime, t) => {
   const s = convertSecToHHMMSS(startTime)
   if ((startTime || startTime === 0) && endTime) {
     const e = convertSecToHHMMSS(endTime)
-    return `${s} to ${e}`
+    return `${s} - ${e}`
   } else {
-    return `Start: ${s}`
+    return `${t('Start')}: ${s}`
   }
 }
 

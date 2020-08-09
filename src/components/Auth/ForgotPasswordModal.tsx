@@ -15,6 +15,7 @@ type Props = {
   isOpen: boolean
   isResetPassword?: boolean
   isSendVerificationEmail?: boolean
+  t: any
 }
 
 type State = {
@@ -47,12 +48,13 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
   }
 
   handleEmailInputBlur = (event) => {
+    const { t } = this.props
     const { value: email } = event.target
     const newState: any = {}
     newState.email = email
 
     if (!validateEmail(email)) {
-      newState.errorEmail = 'Please provide a valid email address.'
+      newState.errorEmail = t('errorMessages:message.PleaseProvideValidEmail')
     }
 
     this.setState(newState, () => {
@@ -93,7 +95,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
   }
 
   render () {
-    const { errorResponse, hideModal, isLoading, isOpen, isResetPassword, isSendVerificationEmail } = this.props
+    const { errorResponse, hideModal, isLoading, isOpen, isResetPassword, isSendVerificationEmail, t } = this.props
     const { email, errorEmail, submitIsDisabled } = this.state
 
     let appEl
@@ -101,11 +103,11 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
       appEl = document.querySelector('body')
     }
 
-    let label = 'Forgot Password'
+    let label = t('Forgot Password')
     if (isResetPassword) {
-      label = 'Reset Password'
+      label = t('Reset Password')
     } else if (isSendVerificationEmail) {
-      label = 'Send Verification Email'
+      label = t('Send Verification Email')
     }
 
     return (
@@ -127,7 +129,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
             </Alert>
           }
           <FormGroup>
-            <Label for='forgot-password-modal__email'>Email</Label>
+            <Label for='forgot-password-modal__email'>{t('Email')}</Label>
             <Input
               data-state-key='email'
               invalid={errorEmail}
@@ -148,7 +150,7 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
             {
               !errorEmail &&
                 <FormText>
-                  Check your email after pressing Submit. The email may go to your Spam folder.
+                  {t('Check your email after pressing submit')}
                 </FormText>
             }
           </FormGroup>
@@ -158,13 +160,13 @@ export class ForgotPasswordModal extends React.Component<Props, State> {
               <React.Fragment>
                 <Button
                   onClick={hideModal}
-                  text='Cancel' />
+                  text={t('Cancel')} />
                 <Button
                   color='primary'
                   disabled={submitIsDisabled}
                   isLoading={isLoading}
                   onClick={this.handleSubmit}
-                  text='Submit' />
+                  text={t('Submit')} />
               </React.Fragment>
             } />
         </Form>

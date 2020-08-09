@@ -19,6 +19,7 @@ type Props = {
   handleToggleEditClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  i18n?: any
   initialShowDescription?: boolean
   isLoggedIn?: boolean
   loggedInUserId?: string
@@ -27,6 +28,8 @@ type Props = {
   playing?: boolean
   playlists: any[]
   podcast?: any
+  t?: any
+  Trans?: any
 }
 
 type State = {
@@ -84,8 +87,8 @@ export class MediaInfo extends React.Component<Props, State> {
 
   render() {
     const { censorNSFWText = false, episode, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip,
-      loggedInUserId, mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
-      handleToggleEditClipModal, handleToggleMakeClipModal, handleToggleShareModal } = this.props
+      i18n, loggedInUserId, mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
+      handleToggleEditClipModal, handleToggleMakeClipModal, handleToggleShareModal, t, Trans } = this.props
     const { showDescription } = this.state
 
     let episodeTitle
@@ -108,15 +111,15 @@ export class MediaInfo extends React.Component<Props, State> {
       moreInfo = episode.description
       currentItem = convertToNowPlayingItem(episode, null, null)
     } else if (mediaRef) {
-      episodeTitle = mediaRef.episode.title || 'untitled episode'
+      episodeTitle = mediaRef.episode.title || t('untitledEpisode')
       episodeAs = getLinkEpisodeAs(mediaRef.episode.id)
       episodeHref = getLinkEpisodeHref(mediaRef.episode.id)
       episodePubDate = readableDate(mediaRef.episode.pubDate)
-      clipTitle = mediaRef.title || 'untitled clip'
-      clipTime = readableClipTime(mediaRef.startTime, mediaRef.endTime)
+      clipTitle = mediaRef.title || t('untitledClip')
+      clipTime = readableClipTime(mediaRef.startTime, mediaRef.endTime, t)
       createdById = mediaRef.owner ? mediaRef.owner.id : ''
       createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false
-      createdByName = mediaRef.owner && mediaRef.owner.name ? mediaRef.owner.name : 'anonymous'
+      createdByName = mediaRef.owner && mediaRef.owner.name ? mediaRef.owner.name : t('Anonymous')
       moreInfo = mediaRef.episode.description
       currentItem = convertToNowPlayingItem(mediaRef, null, null)
     } else if (nowPlayingItem) {
@@ -125,10 +128,10 @@ export class MediaInfo extends React.Component<Props, State> {
       episodeHref = getLinkEpisodeHref(nowPlayingItem.episodeId)
       episodePubDate = readableDate(episodePubDate)
       clipTitle = nowPlayingItem.clipTitle
-      clipTime = readableClipTime(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime)
+      clipTime = readableClipTime(nowPlayingItem.clipStartTime, nowPlayingItem.clipEndTime, t)
       createdById = nowPlayingItem.ownerId
       createdByIsPublic = nowPlayingItem.ownerIsPublic
-      createdByName = (mediaRef.owner && mediaRef.owner.name) || 'anonymous'
+      createdByName = (mediaRef.owner && mediaRef.owner.name) || t('Anonymous')
       moreInfo = nowPlayingItem.episodeDescription
       currentItem = nowPlayingItem
     } else if (podcast) {
@@ -145,14 +148,14 @@ export class MediaInfo extends React.Component<Props, State> {
     clipTitle = clipTitle ? clipTitle.sanitize(censorNSFWText) : ''
     createdByName = createdByName ? createdByName.sanitize(censorNSFWText) : ''
 
-    const dynamicAdsWarningLink = (
+    const DynamicAdsWarningLink = ({ children }) => (
       <Link
         as='/faq#why-do-some-clips-start-at-the-wrong-time'
         href='/faq#why-do-some-clips-start-at-the-wrong-time'>
         <a
           className='media-info__dynamic-ads-warning-link'
           onClick={handleLinkClick}>
-          dynamic ads
+          {children}
         </a>
       </Link>
     )
@@ -200,7 +203,7 @@ export class MediaInfo extends React.Component<Props, State> {
           {
             currentItem.clipId &&
               <div className='media-info__clip-created-by'>
-                By:&nbsp;
+                {t('By')}:&nbsp;
                 {
                   createdByIsPublic ?
                     <Link
@@ -261,7 +264,9 @@ export class MediaInfo extends React.Component<Props, State> {
           {
             (currentItem && currentItem.clipId && !currentItem.podcastHideDynamicAdsWarning) &&
               <div className='media-info__dynamic-ads-warning'>
-                Note: If a podcast uses {dynamicAdsWarningLink}, the clip start time may not stay accurate.
+                <Trans i18n={i18n} i18nKey='NoteDynamicAds'>
+                  Note: If a podcast uses <DynamicAdsWarningLink>{t('dynamic ads')}</DynamicAdsWarningLink>, the clip start time may not stay accurate.
+                </Trans>
               </div>
           }
           {
@@ -271,7 +276,7 @@ export class MediaInfo extends React.Component<Props, State> {
                 onClick={this.toggleDescription}>
                 <span>
                   <FontAwesomeIcon icon={showDescription ? 'caret-down' : 'caret-right'} />
-                  &nbsp;Episode Notes
+                  &nbsp;{t('Episode Notes')}
                 </span>
               </button>
           }

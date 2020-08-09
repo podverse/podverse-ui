@@ -21,6 +21,7 @@ type Props = {
   mediaRef?: any
   nowPlayingItem?: any
   podcast?: any
+  t: any
 }
 
 const generateAuthorText = authors => {
@@ -65,7 +66,7 @@ const generateCategoryNodes = (categories, handleLinkClick) => {
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
   const { censorNSFWText = false, episode, handleLinkClick, handleToggleSubscribe, hideNSFWLabels,
-    isSubscribed, isSubscribing, mediaRef, podcast } = props
+    isSubscribed, isSubscribing, mediaRef, podcast, t } = props
 
   let bottomText
   let bottomTextSide
@@ -126,7 +127,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                   <a
                     className='media-header__title'
                     onClick={handleLinkClick}>{title}</a>
-                </Link> : <span className='media-header__title'>{title || 'untitled podcast'}</span>
+                </Link> : <span className='media-header__title'>{title || t('untitledPodcast')}</span>
             }
           </React.Fragment>
           <button
@@ -156,7 +157,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
           {
             isExplicit && !hideNSFWLabels &&
               <div className='media-header__is-explicit'>
-                <Badge pill>NSFW</Badge>
+                <Badge pill>{t('NSFW')}</Badge>
               </div>
           }
         </div>
