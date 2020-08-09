@@ -1,11 +1,11 @@
 import * as React from 'react'
 import * as Modal from 'react-modal'
+import { convertToNowPlayingItem } from 'podverse-shared'
 import { FormFeedback, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PVButton as Button } from 'components/Button/Button'
 import { CloseButton } from 'components/CloseButton/CloseButton'
 import { MediaListItem } from 'components/Media/MediaListItem/MediaListItem'
-import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 const uuidv4 = require('uuid/v4')
 

@@ -1,5 +1,3 @@
-// import { convertToNowPlayingItem } from "./nowPlayingItem";
-
 const kPriorityQueue = 'mediaPlayerPriorityQueue'
 const kSecondaryQueue = 'mediaPlayerSecondaryQueue'
 const kNowPlayingItem = 'nowPlayingItem'

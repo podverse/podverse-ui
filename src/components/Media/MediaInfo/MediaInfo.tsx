@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Button } from 'reactstrap'
 import Link from 'next/link'
+import { convertToNowPlayingItem } from 'podverse-shared'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { convertHHMMSSToAnchorTags, readableClipTime, readableDate } from 'lib/utility'
-import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 import { getLinkUserAs, getLinkUserHref, getLinkEpisodeAs, getLinkEpisodeHref } from 'lib/constants'
 const linkifyHtml = require('linkifyjs/html')
 const sanitizeHtml = require('sanitize-html')

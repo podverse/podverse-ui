@@ -31,4 +31,3 @@ export { addItemToPriorityQueueStorage, updatePriorityQueueStorage,
   popNextFromQueueStorage, popNextFromSecondaryQueueStorage, removeItemFromPriorityQueueStorage,
   removeItemFromSecondaryQueueStorage, getNowPlayingItemFromStorage,
   setNowPlayingItemInStorage } from 'lib/mediaPlayerStorage'
-export { convertToNowPlayingItem } from 'lib/nowPlayingItem'

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Badge } from 'reactstrap'
+import { convertToNowPlayingItem } from 'podverse-shared'
 import { ImageSquare } from 'components/Image/ImageSquare'
 import { getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref,
   getLinkCategoryAs } from 'lib/constants'
-import { convertToNowPlayingItem } from 'lib/nowPlayingItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
