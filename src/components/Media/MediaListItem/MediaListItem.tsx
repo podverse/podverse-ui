@@ -97,13 +97,13 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     {
       icon: 'level-up-alt',
       onClick: handleAddToQueueNext,
-      text: t('Queue: Next'),
+      text: t('Queue Next'),
       value: 'queue-next'
     },
     {
       icon: 'level-down-alt',
       onClick: handleAddToQueueLast,
-      text: t('Queue: Last'),
+      text: t('Queue Last'),
       value: 'queue-last'
     },
     {
