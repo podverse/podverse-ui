@@ -312,7 +312,7 @@ class MakeClipModal extends React.Component<Props, State> {
                     <a
                       className='make-clip-modal__dynamic-ads'
                       onClick={handleHideModal}>
-                      {t('Clips FAQ')}
+                      FAQ
                     </a>
                   </Link>
                   <div className='make-clip-modal__divider'>/</div>
