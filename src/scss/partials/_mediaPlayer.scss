@@ -17,13 +17,11 @@
   }
   
   .mp-header__inner, .mp-player__inner {
-    max-width: $player-max-width;
     margin: auto;
-  }
+    padding: 0 4px;
 
-  @media(max-width: ($player-max-width + 16px)) {
-    .mp-header__image {
-      margin-left: 0.5rem;
+    @media(min-width: $body-max-width + 32) {
+      max-width: $body-max-width;
     }
   }
   
@@ -78,10 +76,6 @@
 
     @media(max-width: 400px) {
       font-size: 14px;
-    }
-  
-    .mp-header__share {
-      margin-right: -0.625rem;
     }
   }
   
@@ -149,10 +143,6 @@
       z-index: 100;
       font-size: 12px;
       pointer-events: none;
-    }
-  
-    .mp-player__skip {
-      margin-right: -0.625rem;
     }
   }
 }

@@ -114,7 +114,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       <div className='media-header__image-wrapper'>
         <ImageSquare
           imageUrl={imgUrl}
-          size='5.75rem' />
+          size='6.75rem' />
       </div>
       <div className='text-wrapper'>
         <div className='media-header__top'>
