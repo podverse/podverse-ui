@@ -31,7 +31,7 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
           <div className='media-list-item-a__image'>
             <ImageSquare
               imageUrl={imageUrl}
-              size='4.75rem' />
+              size='5.25rem' />
           </div>
       }
       <div className='text-wrapper'>

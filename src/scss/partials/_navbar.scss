@@ -1,12 +1,16 @@
 // Navigation
 .navbar__bg {
-  border-bottom:  none;
+  border-bottom: 1px solid;
 
   .navbar {
     justify-content: space-between;
     margin: auto;
-    max-width: $body-max-width;
-    padding: 0.25rem 0rem;
+    padding: 0.25rem 1rem;
+
+    @media(min-width: $body-max-width + 32) {
+      max-width: $body-max-width;
+      padding: 0.25rem 4px;
+    }
 
     a {
       cursor: pointer;
@@ -54,12 +58,6 @@
     width: 1.25em;
     height: 1.5em;
   }
-
-  @media(max-width: ($player-max-width + 16px)) {
-    .navbar {
-      padding: 0.25rem 1rem;
-    }
-  }
   
   @media(min-width: 576px) {    
     .mobile-nav-item {
@@ -98,10 +96,11 @@
 
 html[data-theme=light] {
   .navbar__bg {
-    background-color: $gray-lighter2;
+    background-color: $gray-lightest;
+    border-bottom-color: $gray-lighter;
 
     .navbar {
-      background-color: $gray-lighter2 !important;
+      background-color: $gray-lightest !important;
   
       a, .nav-item a.nav-link {
         color: $black;
@@ -150,6 +149,7 @@ html[data-theme=light] {
 html[data-theme=dark] {
   .navbar__bg {
     background-color: $gray-darkest;
+    border-bottom-color: $gray-dark;
 
     .navbar {
       background-color: $gray-darker !important;

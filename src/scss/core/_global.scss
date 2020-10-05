@@ -222,12 +222,16 @@ html body {
 }
 
 html[data-theme=light] body {
-  background-color: $white;
+  background-color: $white-darker;
   color: $black;
 
   // Next.js puts contents in div.view and has a #fff bg by default
   body, .view {
-    background-color: $white;
+    background-color: $white-darker;
+
+    @media(max-width: 860px) {
+      background-color: $white;
+    }
   }
 
   h1, h2, h3, h4, h5 {
@@ -329,12 +333,16 @@ html[data-theme=light] body {
 }
 
 html[data-theme=dark] body {
-  background-color: $black;
+  background-color: $black-lighter;
   color: $white;
 
   // Next.js puts contents in div.view and has a #fff bg by default
   body, .view {
-    background-color: $black;
+    background-color: $black-lighter;
+
+    @media(max-width: 860px) {
+      background-color: $black;
+    }
   }
 
   h1, h2, h3, h4, h5 {
