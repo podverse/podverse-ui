@@ -30,7 +30,7 @@
   .mp__header {
     border-bottom-style: solid;
     border-top-style: solid;
-    border-top-width: 2px;
+    border-top-width: 1px;
     height: 51px;
   
     .mp-header__inner {
@@ -170,11 +170,11 @@ html[data-theme=light] {
   .mp {
 
     .mp__header {
-      border-color: $gray-lighter2;
+      border-color: $gray-lighter;
     }
 
     .mp__headline, .mp__header, .mp__player {
-      background-color: $gray-lighter2;
+      background-color: $gray-lightest;
       color: $black;
   
       a {
@@ -221,7 +221,7 @@ html[data-theme=dark] {
   .mp {
 
     .mp__header {
-      border-color: $gray-darkest;
+      border-color: $gray-dark;
     }
 
     .mp__headline, .mp__header, .mp__player {

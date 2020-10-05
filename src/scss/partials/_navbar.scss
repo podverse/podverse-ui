@@ -1,12 +1,16 @@
 // Navigation
 .navbar__bg {
-  border-bottom:  none;
+  border-bottom: 1px solid;
 
   .navbar {
     justify-content: space-between;
     margin: auto;
-    max-width: $body-max-width;
-    padding: 0.25rem 0rem;
+    padding: 0.25rem 1rem;
+
+    @media(min-width: $body-max-width-lg + 32) {
+      max-width: $body-max-width-lg;
+      padding: 0.25rem 4px;
+    }
 
     a {
       cursor: pointer;
@@ -98,10 +102,11 @@
 
 html[data-theme=light] {
   .navbar__bg {
-    background-color: $gray-lighter2;
+    background-color: $gray-lightest;
+    border-bottom-color: $gray-lighter;
 
     .navbar {
-      background-color: $gray-lighter2 !important;
+      background-color: $gray-lightest !important;
   
       a, .nav-item a.nav-link {
         color: $black;
@@ -150,6 +155,7 @@ html[data-theme=light] {
 html[data-theme=dark] {
   .navbar__bg {
     background-color: $gray-darkest;
+    border-bottom-color: $gray-dark;
 
     .navbar {
       background-color: $gray-darker !important;
