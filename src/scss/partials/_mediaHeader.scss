@@ -27,8 +27,7 @@
     flex: 0 0 auto;
     height: 22px;
     line-height: 22px;
-    margin-left: 0.75rem;
-    margin-right: 4px;
+    margin-left: 1rem;
     margin-top: 3px;
     padding: 0;
     text-align: center;
@@ -41,11 +40,15 @@
     }
   }
 
+  .media-header__subscribe {
+    margin-right: 0.25rem;
+  }
+
   .media-header__edit {
     flex: 0 0 auto;
     height: 22px;
     line-height: 22px;
-    margin-left: 0.75rem;
+    margin-left: 1rem;
     margin-top: 3px;
     padding: 0;
     width: 22px;
@@ -61,8 +64,7 @@
     flex: 0 0 auto;
     height: 22px;
     line-height: 23px;
-    margin-left: 1.5rem;
-    margin-right: 4px;
+    margin-left: 1rem;
     margin-top: 3px;
     padding: 0;
     text-align: center;
