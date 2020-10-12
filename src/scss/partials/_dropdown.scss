@@ -2,13 +2,16 @@ body {
   .one-option-only {
     background-color: transparent;
     border: none;
+    cursor: auto;
+    font-size: $text-lg-rem;
     padding: 6px 0;
   }
 
   .btn-secondary.dropdown-toggle {
-    margin: 0 -0.75rem;
     background-color: transparent !important;
     border: none !important;
+    font-size: $text-lg-rem;
+    margin: 0 -0.75rem;
     transition: none !important;
 
     &.transparent {
