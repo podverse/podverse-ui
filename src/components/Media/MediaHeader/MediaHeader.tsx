@@ -5,6 +5,7 @@ import { convertToNowPlayingItem } from 'podverse-shared'
 import { ImageSquare } from 'components/Image/ImageSquare'
 import { getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref,
   getLinkCategoryAs } from 'lib/constants'
+import { getIsAuthorityFeedUrl } from 'lib/utility'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
@@ -76,8 +77,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let titleAs
   let titleHref
   let isExplicit
+  let feedUrl
 
-  if (episode) {
+  if (episode && episode.podcast) {
     imgUrl = episode.podcast.shrunkImageUrl || episode.podcast.imageUrl
     title = episode.podcast.title
     titleAs = getLinkPodcastAs(episode.podcast.id)
@@ -85,10 +87,8 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     subTitle = generateAuthorText(episode.podcast.authors)
     bottomText = generateCategoryNodes(episode.podcast.categories, handleLinkClick)
     isExplicit = episode.podcast.isExplicit
+    feedUrl = getIsAuthorityFeedUrl(episode.podcast.feedUrls)
   } else if (mediaRef) {
-    if (mediaRef && mediaRef.episode && mediaRef.episode.podcast && mediaRef.episode.podcast.shrunkImageUrl) {
-      mediaRef.episode.podcast.imageUrl = mediaRef.episode.podcast.shrunkImageUrl
-    }
     const item = convertToNowPlayingItem(mediaRef, null, null)
     const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId,
       podcastIsExplicit, podcastTitle } = item
@@ -99,12 +99,23 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     subTitle = generateAuthorText(podcastAuthors)
     bottomText = generateCategoryNodes(podcastCategories, handleLinkClick)
     isExplicit = podcastIsExplicit
+    if (mediaRef && mediaRef.episode && mediaRef.episode.podcast) {
+      if (mediaRef.episode.podcast.shrunkImageUrl) {
+        mediaRef.episode.podcast.imageUrl = mediaRef.episode.podcast.shrunkImageUrl
+      }
+      if (mediaRef.episode.podcast.feedUrls) {
+        feedUrl = getIsAuthorityFeedUrl(mediaRef.episode.podcast.feedUrls)
+      }
+    }
   } else if (podcast) {
     subTitle = generateAuthorText(podcast.authors)
     bottomText = generateCategoryNodes(podcast.categories, handleLinkClick)
     imgUrl = podcast.shrunkImageUrl || podcast.imageUrl
     title = podcast.title
     isExplicit = podcast.isExplicit
+    if (podcast.feedUrls) {
+      feedUrl = getIsAuthorityFeedUrl(podcast.feedUrls)
+    }
   }
 
   title = title ? title.sanitize(censorNSFWText) : ''
@@ -130,9 +141,21 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                 </Link> : <span className='media-header__title'>{title || t('untitledPodcast')}</span>
             }
           </React.Fragment>
+          {
+            feedUrl &&
+              <a
+                className='media-header__link'
+                href={feedUrl}
+                rel='noreferrer'
+                target='_blank'
+                title={t('RSS Feed Link')}>
+                <FontAwesomeIcon icon='rss' />
+              </a>
+          }
           <button
             className='media-header__subscribe'
-            onClick={handleToggleSubscribe}>
+            onClick={handleToggleSubscribe}
+            title={isSubscribed ? t('Unsubscribe') : t('Subscribe')}>
             {
               isSubscribing ?
                 <FontAwesomeIcon icon='spinner' spin />

@@ -205,3 +205,8 @@ export const safeAlert = (text: string) => {
     alert(text)
   }
 }
+
+export const getIsAuthorityFeedUrl = (feedUrls: any[]) => {
+  const feedUrl = (feedUrls && Array.isArray(feedUrls)) ? feedUrls.find((x: any) => x.isAuthority === true) : {}
+  return feedUrl.url ? feedUrl.url : ''
+}
