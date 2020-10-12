@@ -20,6 +20,7 @@ type Props = {
   mobileMenuIsOpen?: boolean
   mobileNavItems?: any
   navItems?: any
+  pageKey?: string
 }
 
 type State = {}
@@ -30,7 +31,7 @@ export class Navbar extends React.Component<Props, State> {
     const { brandAs, brandHideText, brandText, brandHref, dropdownItems,
       dropdownMenuIsOpen, dropdownText, handleLinkClick, handleToggleDropdownMenu,
       handleToggleMobileMenu, isDarkMode, mobileMenuIsOpen,
-      mobileNavItems, navItems } = this.props
+      mobileNavItems, navItems, pageKey } = this.props
 
     const navItemKey = 'navItemKey'
     const navItemsEls = navItems.map((x, index) => {
@@ -42,6 +43,7 @@ export class Navbar extends React.Component<Props, State> {
             as={x.as}>
             <NavItem
               key={`${navItemKey}b${index}`}
+              active={pageKey ? x.pageKey === pageKey : false}
               className={x.hideMobile ? 'hide-mobile' : ''}>
               <NavLink
                 {...(x.href ? { href: x.href } : {})}
@@ -55,6 +57,7 @@ export class Navbar extends React.Component<Props, State> {
         return (
           <NavItem
             key={`${navItemKey}b${index}`}
+            active={pageKey ? x.pageKey === pageKey : false}
             className={x.hideMobile ? 'hide-mobile' : ''}>
             <NavLink
               onClick={x.onClick}>
