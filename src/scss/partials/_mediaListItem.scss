@@ -130,7 +130,7 @@
   .media-list-item-a__title {
     font-size: $text-lg-rem;
     margin-bottom: 0.625rem;
-    margin-top: 0.25rem;
+    margin-top: 0.375rem;
   }
 
   @media(max-width: 520px) {
@@ -157,8 +157,8 @@
   }
 
   .media-list-item-b__title {
-    font-size: $text-lg-rem;
-    margin: 7px 0 10px 0;
+    font-size: $text-xl-rem;
+    margin: 0.75rem 0;
   }
 }
 
