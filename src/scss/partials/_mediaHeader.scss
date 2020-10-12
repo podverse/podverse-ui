@@ -78,8 +78,7 @@
   }
 
   .media-header__title {
-    @include ellipsis;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
     font-size: $text-xxl-rem;
     margin-bottom: 0.25rem;
     max-width: calc(100% - 44px); // 100% minus the width of the subscribe button area
