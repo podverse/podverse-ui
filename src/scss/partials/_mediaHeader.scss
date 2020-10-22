@@ -23,27 +23,6 @@
     margin-right: 1.125rem;
   }
 
-  .media-header__subscribe, .media-header__link {
-    flex: 0 0 auto;
-    height: 22px;
-    line-height: 22px;
-    margin-left: 1rem;
-    margin-top: 3px;
-    padding: 0;
-    text-align: center;
-    width: 22px;
-
-    svg {
-      height: 18px;
-      vertical-align: -0.125rem;
-      width: 21px;
-    }
-  }
-
-  .media-header__subscribe {
-    margin-right: 0.25rem;
-  }
-
   .media-header__edit {
     flex: 0 0 auto;
     height: 22px;
@@ -87,6 +66,12 @@
       outline: none;
       text-decoration: underline;
     }
+  }
+
+  .media-header__buttons {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
   }
 
   .media-header__sub-title {
@@ -139,15 +124,6 @@ html[data-theme=light] {
     .media-header__bottom-text-side {
       color: $gray-dark;
     }
-  
-    .media-header__top {
-      > .media-header__subscribe, > .media-header__edit, > .media-header__link {
-        color: $gray-dark;
-        &:hover {
-          color: $gray-dark;
-        }
-      }
-    }
 
     .media-header__is-explicit .badge {
       background-color: $red;
@@ -168,15 +144,6 @@ html[data-theme=dark] {
       color: $gray-light;
     }
   
-    .media-header__top {
-      > .media-header__subscribe, > .media-header__edit, > .media-header__link {
-        color: $gray-light;
-        &:hover {
-          color: $gray-light;
-        }
-      }
-    }
-
     .media-header__is-explicit .badge {
       background-color: $red;
       color: $white;

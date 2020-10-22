@@ -3,12 +3,10 @@ import Link from 'next/link'
 import { Badge } from 'reactstrap'
 import { convertToNowPlayingItem } from 'podverse-shared'
 import { ImageSquare } from 'components/Image/ImageSquare'
+import { Pill } from 'components/Pill/Pill'
 import { getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref,
   getLinkCategoryAs } from 'lib/constants'
 import { getIsAuthorityFeedUrl } from 'lib/utility'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
 const uuidv4 = require('uuid/v4')
 
 type Props = {
@@ -141,34 +139,24 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                 </Link> : <span className='media-header__title'>{title || t('untitledPodcast')}</span>
             }
           </React.Fragment>
-          {
-            feedUrl &&
-              <a
-                className='media-header__link'
-                href={feedUrl}
-                rel='noreferrer'
-                target='_blank'
-                title={t('RSS Feed Link')}>
-                <FontAwesomeIcon icon='rss' />
-              </a>
-          }
-          <button
-            className='media-header__subscribe'
-            onClick={handleToggleSubscribe}
-            title={isSubscribed ? t('Unsubscribe') : t('Subscribe')}>
+          <div className='media-header__buttons'>
             {
-              isSubscribing ?
-                <FontAwesomeIcon icon='spinner' spin />
-                :
-                <React.Fragment>
-                  {
-                    isSubscribed ?
-                      <FontAwesomeIcon icon={fasStar} />
-                      : <FontAwesomeIcon icon={farStar} />
-                  }
-                </React.Fragment>
+              feedUrl &&
+                <Pill
+                  href={feedUrl}
+                  noBorder={true}
+                  rel='noreferer'
+                  target='_blank'
+                  text={t('RSS')}
+                  title={t('RSS Feed Link')} />
             }
-          </button>
+            <Pill
+              isActive={isSubscribed}
+              isLoading={isSubscribing}
+              onClick={handleToggleSubscribe}
+              text={isSubscribed ? t('Subscribed') : t('Subscribe')}
+              title={isSubscribed ? t('Subscribed') : t('Subscribe')} />
+          </div>
         </div>
         <div className='media-header__middle'>
           {

@@ -57,7 +57,7 @@ html body {
     font-weight: 300;
   }
 
-  a, a:not([href]):not([tabindex]) {
+  a {
     cursor: pointer;
   }
 
@@ -247,7 +247,7 @@ html[data-theme=light] body {
     color: $black;
   }
 
-  a, a:not([href]):not([tabindex]) {
+  a {
     color: $blue-darker;
     
     &:hover {
@@ -358,7 +358,7 @@ html[data-theme=dark] body {
     color: $white;
   }
 
-  a, a:not([href]):not([tabindex]) {
+  a {
     color: $blue-lighter;
 
     &:hover {
