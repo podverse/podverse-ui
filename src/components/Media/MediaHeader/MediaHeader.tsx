@@ -68,7 +68,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     isSubscribed, isSubscribing, mediaRef, podcast, t } = props
 
   let bottomText
-  let bottomTextSide
   let imgUrl
   let subTitle
   let title
@@ -118,6 +117,27 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
 
   title = title ? title.sanitize(censorNSFWText) : ''
 
+  const mediaHeaderTopButton = (
+    <Pill
+      isActive={isSubscribed}
+      isLoading={isSubscribing}
+      onClick={handleToggleSubscribe}
+      text={isSubscribed ? t('Subscribed') : t('Subscribe')}
+      title={isSubscribed ? t('Subscribed') : t('Subscribe')} />
+  )
+
+  const mediaHeaderBottomButton = (
+    <Pill
+      fontWeight={300}
+      href={feedUrl}
+      icon='rss'
+      noBorder={true}
+      rel='noreferer'
+      target='_blank'
+      text={t('RSS')}
+      title={t('RSS Feed Link')} />
+  )
+
   return (
     <div className='media-header'>
       <div className='media-header__image-wrapper'>
@@ -139,23 +159,8 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                 </Link> : <span className='media-header__title'>{title || t('untitledPodcast')}</span>
             }
           </React.Fragment>
-          <div className='media-header__buttons'>
-            {
-              feedUrl &&
-                <Pill
-                  href={feedUrl}
-                  noBorder={true}
-                  rel='noreferer'
-                  target='_blank'
-                  text={t('RSS')}
-                  title={t('RSS Feed Link')} />
-            }
-            <Pill
-              isActive={isSubscribed}
-              isLoading={isSubscribing}
-              onClick={handleToggleSubscribe}
-              text={isSubscribed ? t('Subscribed') : t('Subscribe')}
-              title={isSubscribed ? t('Subscribed') : t('Subscribe')} />
+          <div className='media-header-top__buttons'>
+            {mediaHeaderTopButton}
           </div>
         </div>
         <div className='media-header__middle'>
@@ -174,15 +179,19 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
         </div>
         <div className='media-header__bottom'>
           {
-            bottomTextSide &&
-              <div className='media-header__bottom-text-side'>{bottomTextSide}</div>
-          }
-          {
             bottomText &&
               <div className='media-header__bottom-text'>{bottomText}</div>
           }
+          <div className='media-header-bottom__buttons'>
+            { feedUrl && mediaHeaderBottomButton }
+          </div>
         </div>
       </div>
+      <div className='media-header__mobile-buttons'>
+        {mediaHeaderTopButton}
+        {mediaHeaderBottomButton}
+      </div>
+      <hr className='d-block d-sm-none' />
     </div>
   )
 }

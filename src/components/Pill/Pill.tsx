@@ -1,9 +1,12 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 export interface Props {
+  fontWeight?: number
   href?: string
+  icon?: IconProp
   isActive?: boolean
   isLoading?: boolean
   noBorder?: boolean
@@ -22,13 +25,14 @@ const getPillClassName = (props) => {
     {
       'is-active': props.isActive,
       'is-loading': props.isLoading,
-      'no-border': props.noBorder
+      'no-border': props.noBorder,
+      'font-thin': props.fontWeight === 300
     }
   )
 }
 
 export const Pill: React.StatelessComponent<Props> = props => {
-  const { href, isLoading, onClick, rel, target, text, title } = props
+  const { href, icon, isLoading, onClick, rel, target, text, title } = props
   const pillClass = getPillClassName(props)
 
   return (
@@ -46,7 +50,18 @@ export const Pill: React.StatelessComponent<Props> = props => {
             icon='spinner'
             spin />
       }
-      <span>{text}</span>
+      <span>
+        { icon && 
+          <>
+            <FontAwesomeIcon
+              className='pill-icon'
+              icon={icon}
+              size='sm' /> 
+            &nbsp;
+          </>
+        }
+        {text}
+      </span>
     </a>
   )
 }

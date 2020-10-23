@@ -5,7 +5,6 @@ html {
     border-width: 1px;
     font-size: $text-xs-rem;
     font-weight: 500;
-    margin: -0.25rem 0.25rem 0 0.625rem;
     padding: 0.25rem 0.5rem;
     position: relative;
     text-align: center;
@@ -27,17 +26,21 @@ html {
     &.no-border {
       border-color: transparent !important;
     }
+
+    &.font-thin {
+      font-weight: 300;
+    }
   }
 }
 
 html[data-theme=light] {
   a.pill {
     border-color: $gray-darker;
-    color: $gray-darkest;
+    color: $black;
 
     &.is-active {
-      background-color: $blue;
-      border-color: $blue;
+      background-color: $gray;
+      border-color: $gray;
       color: $black;
 
       &:hover {
@@ -55,11 +58,11 @@ html[data-theme=light] {
 html[data-theme=dark] {
   a.pill {
     border-color: $gray-lighter;
-    color: $gray-lightest;
+    color: $white;
 
     &.is-active {
-      background-color: $blue;
-      border-color: $blue;
+      background-color: $gray;
+      border-color: $gray;
       color: $white;
 
       &:hover {
