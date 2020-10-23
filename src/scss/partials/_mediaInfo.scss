@@ -54,7 +54,7 @@
 
   .media-info__controls {
     display: flex;
-    margin: 1.375rem 0;
+    margin: 1.5rem 0;
     
     button {
       background-color: transparent;
@@ -79,6 +79,10 @@
 
     .media-info-controls__play.playing svg {
       margin-left: 0;
+    }
+
+    .media-info-controls__make-clip, .media-info-controls__share {
+      display: none;
     }
   }
 

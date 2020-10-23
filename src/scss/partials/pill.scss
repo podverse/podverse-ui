@@ -39,9 +39,9 @@ html[data-theme=light] {
     color: $black;
 
     &.is-active {
-      background-color: $gray;
-      border-color: $gray;
-      color: $black;
+      background-color: $blue;
+      border-color: $blue;
+      color: $white;
 
       &:hover {
         background-color: $blue;
@@ -61,8 +61,8 @@ html[data-theme=dark] {
     color: $white;
 
     &.is-active {
-      background-color: $gray;
-      border-color: $gray;
+      background-color: $blue;
+      border-color: $blue;
       color: $white;
 
       &:hover {
