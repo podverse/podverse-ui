@@ -191,7 +191,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
         {mediaHeaderTopButton}
         {mediaHeaderBottomButton}
       </div>
-      <hr className='d-block d-sm-none' />
     </div>
   )
 }

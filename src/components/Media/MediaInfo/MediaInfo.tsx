@@ -162,6 +162,7 @@ export class MediaInfo extends React.Component<Props, State> {
 
     return (
       <React.Fragment>
+        <hr />
         <div className='media-info'>
           {
             episodeTitle &&
@@ -184,7 +185,6 @@ export class MediaInfo extends React.Component<Props, State> {
           {
             clipTitle &&
               <React.Fragment>
-                <hr />
                 <div className='media-info__clip-title'>
                   {clipTitle}
                 </div>
@@ -196,7 +196,7 @@ export class MediaInfo extends React.Component<Props, State> {
                 <a
                   className='media-info__replay-clip'
                   onClick={handleReplayClip}>
-                  {clipTime}
+                  Clip from {clipTime}
                 </a>
               </div>
           }

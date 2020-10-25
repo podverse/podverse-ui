@@ -2,14 +2,14 @@
   border-bottom-style: solid;
   border-bottom-width: 1px;
   clear: both;
-  padding: 1.25rem 0 1.5rem 0;
+  padding: 0 0 1.5rem 0;
 
   .media-info__episode-title {
-    font-size: $text-xl-rem;
+    font-size: $text-lg-rem;
   }
 
   .media-info__episode-pub-date {
-    font-size: $text-md-rem;
+    font-size: $text-sm-rem;
     font-weight: 300;
     margin-top: 0.5rem;
   }
@@ -20,13 +20,13 @@
   }
 
   .media-info__clip-time {
-    font-size: $text-md-rem;
+    font-size: $text-sm-rem;
     font-weight: 300;
     margin-top: 0.5rem;
   }
 
   .media-info__clip-created-by {
-    font-size: $text-md-rem;
+    font-size: $text-sm-rem;
     font-weight: 300;
     margin-bottom: 1.25rem;
     margin-top: 0.5rem;
@@ -65,7 +65,7 @@
       border-width: 1px;
       flex: 0 0 auto;
       height: 44px;
-      margin-right: 1.125rem;
+      margin-right: 1rem;
       width: 44px;
 
       svg {
@@ -73,8 +73,12 @@
       }
     }
 
-    .media-info-controls__play svg {
-      margin-left: 2px;
+    .media-info-controls__play {
+      width: 80px;
+
+      svg {
+        margin-left: 2px;
+      }
     }
 
     .media-info-controls__play.playing svg {
