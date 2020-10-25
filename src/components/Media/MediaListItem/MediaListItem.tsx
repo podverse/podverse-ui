@@ -87,38 +87,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     }
   }
 
-  const moreMenuItems = () => [
-    {
-      icon: 'play',
-      onClick: handlePlayItem,
-      text: t('Play'),
-      value: 'play'
-    },
-    {
-      icon: 'level-up-alt',
-      onClick: handleAddToQueueNext,
-      text: t('Queue Next'),
-      value: 'queue-next'
-    },
-    {
-      icon: 'level-down-alt',
-      onClick: handleAddToQueueLast,
-      text: t('Queue Last'),
-      value: 'queue-last'
-    },
-    {
-      icon: 'list-ul',
-      onClick: handleToggleAddToPlaylist,
-      text: t('Add to Playlist'),
-      value: 'add-to-playlist'
-    },
-    {
-      icon: 'share',
-      onClick: handleToggleShare,
-      text: t('Share'),
-      value: 'share'
-    }
-  ]
+
 
   if (dataNowPlayingItem && dataNowPlayingItem.episodeDescription) {
     dataNowPlayingItem.episodeDescription = dataNowPlayingItem.episodeDescription.sanitize(censorNSFWText)
@@ -255,8 +224,15 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
           (showMoreMenu || showRemove || showMove) &&
             <div className='media-list__right'>
               {
-                showMoreMenu &&
-                  <MoreDropdown items={moreMenuItems()} />
+                showMoreMenu && (
+                  <MoreDropdown
+                    handleAddToQueueLast={handleAddToQueueLast}
+                    handleAddToQueueNext={handleAddToQueueNext}
+                    handlePlayItem={handlePlayItem}
+                    handleToggleAddToPlaylist={handleToggleAddToPlaylist}
+                    handleToggleShare={handleToggleShare}
+                    t={t} />
+                )
               }
               {
                 showRemove &&

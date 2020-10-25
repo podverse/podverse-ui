@@ -6,27 +6,87 @@ const uuidv4 = require('uuid/v4')
 type Props = {
   className?: string
   direction?: string
-  items: any
+  handleAddToQueueLast?: any
+  handleAddToQueueNext?: any
+  handlePlayItem?: any
+  handleToggleAddToPlaylist?: any
+  handleToggleShare?: any
+  t?: any
   uniqueItemKey: string
 }
 
 type State = {
   isOpen?: boolean
+  items?: any
+}
+
+const getMenuItems = (props) => {
+  const { handleAddToQueueLast, handleAddToQueueNext, handlePlayItem, handleToggleAddToPlaylist,
+    handleToggleShare, t } = props
+  const menuItems = [] as any
+
+  if (handlePlayItem) {
+    menuItems.push({
+      icon: 'play',
+      onClick: handlePlayItem,
+      text: t('Play'),
+      value: 'play'
+    })
+  }
+
+  if (handleAddToQueueNext) {
+    menuItems.push({
+      icon: 'level-up-alt',
+      onClick: handleAddToQueueNext,
+      text: t('Queue Next'),
+      value: 'queue-next'
+    })
+  }
+
+  if (handleAddToQueueLast) {
+    menuItems.push({
+      icon: 'level-down-alt',
+      onClick: handleAddToQueueLast,
+      text: t('Queue Last'),
+      value: 'queue-last'
+    })
+  }
+
+  if (handleToggleAddToPlaylist) {
+    menuItems.push({
+      icon: 'list-ul',
+      onClick: handleToggleAddToPlaylist,
+      text: t('Add to Playlist'),
+      value: 'add-to-playlist'
+    })
+  }
+
+  if (handleToggleShare) {
+    menuItems.push({
+      icon: 'share',
+      onClick: handleToggleShare,
+      text: t('Share'),
+      value: 'share'
+    })
+  }
+
+  return menuItems
 }
 
 export class MoreDropdown extends React.Component<Props, State> {
 
   static defaultProps: Props = {
     direction: 'left',
-    items: [],
     uniqueItemKey: uuidv4()
   }
 
   constructor (props) {
     super(props)
+    const items = getMenuItems(props)
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      items
     }
   }
 
@@ -35,8 +95,8 @@ export class MoreDropdown extends React.Component<Props, State> {
   }
 
   render () {
-    const { className, direction, items, uniqueItemKey } = this.props
-    const { isOpen } = this.state
+    const { className, direction, uniqueItemKey } = this.props
+    const { isOpen, items } = this.state
 
     const dropdownItemNodes = items.map((x, index) =>
       <DropdownItem

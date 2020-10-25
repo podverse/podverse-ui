@@ -26,7 +26,7 @@ type Props = {
   handlePause?: Function
   handlePlaybackRateClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleSetPlayedAfterClipFinished?: Function
-  handleToggleAddToModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handletoggleAddToPlaylistModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -389,7 +389,7 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   render () {
     const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
-      handleToggleAddToModal, handleToggleMakeClipModal, handleToggleQueueModal,
+      handletoggleAddToPlaylistModal, handleToggleMakeClipModal, handleToggleQueueModal,
       handleToggleShareModal, handleTogglePlay, hasItemInQueue, hideTimeJumpBackward, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
@@ -495,7 +495,7 @@ export class MediaPlayer extends React.Component<Props, State> {
               </button>
               <button
                 className={`mp-header__add-to ${openAddToModal ? 'active' : ''}`}
-                onClick={handleToggleAddToModal}>
+                onClick={handletoggleAddToPlaylistModal}>
                 <FontAwesomeIcon icon='plus' />
               </button>
               <button

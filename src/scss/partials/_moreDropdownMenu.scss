@@ -14,10 +14,16 @@
     }
   }
 
-  // Default menu to left position
   .dropdown-menu {
     // force left, vertical-center position
-    transform: translate3d(-175px, -51px, 0px) !important; 
+    transform: translate3d(-175px, -67px, 0px) !important; 
+  }
+
+  &.dropright {
+    .dropdown-menu {
+      // force right, vertical-center position
+      transform: translate3d(44px, -51px, 0px) !important; 
+    }
   }
 }
 

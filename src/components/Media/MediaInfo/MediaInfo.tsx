@@ -5,20 +5,22 @@ import { convertToNowPlayingItem } from 'podverse-shared'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { convertHHMMSSToAnchorTags, readableClipTime, readableDate } from 'lib/utility'
 import { getLinkUserAs, getLinkUserHref, getLinkEpisodeAs, getLinkEpisodeHref } from 'lib/constants'
+import { MoreDropdown } from 'components/MoreDropdown/MoreDropdown'
 const linkifyHtml = require('linkifyjs/html')
 const sanitizeHtml = require('sanitize-html')
 
 type Props = {
   censorNSFWText?: boolean
   episode?: any
+  handleAddToQueueLast?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleAddToQueueNext?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handlePauseItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handlePlayItem?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleReplayClip?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  handleToggleAddToModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleEditClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleToggleShare?: (event: React.MouseEvent<HTMLButtonElement>) => void
   i18n?: any
   initialShowDescription?: boolean
   isLoggedIn?: boolean
@@ -86,9 +88,10 @@ export class MediaInfo extends React.Component<Props, State> {
   }
 
   render() {
-    const { censorNSFWText = false, episode, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip,
-      i18n, loggedInUserId, mediaRef, nowPlayingItem, playing, podcast, handleToggleAddToModal,
-      handleToggleEditClipModal, handleToggleMakeClipModal, handleToggleShareModal, t, Trans } = this.props
+    const { censorNSFWText = false, episode, handleAddToQueueLast, handleAddToQueueNext,
+      handleAddToPlaylist, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip,
+      handleToggleEditClipModal, handleToggleShare, i18n, loggedInUserId, mediaRef, nowPlayingItem,
+      playing, podcast, t, Trans } = this.props
     const { showDescription } = this.state
 
     let episodeTitle
@@ -234,21 +237,13 @@ export class MediaInfo extends React.Component<Props, State> {
                       : <FontAwesomeIcon icon={'play'} />
                   }
                 </Button>
-                <Button
-                  className='media-info-controls__make-clip'
-                  onClick={handleToggleMakeClipModal}>
-                  <FontAwesomeIcon icon='cut' />
-                </Button>
-                <Button
-                  className='media-info-controls__add-to'
-                  onClick={handleToggleAddToModal}>
-                  <FontAwesomeIcon icon='plus' />
-                </Button>
-                <Button
-                  className='media-info-controls__share'
-                  onClick={handleToggleShareModal}>
-                  <FontAwesomeIcon icon='share' />
-                </Button>
+                <MoreDropdown
+                  direction='right'
+                  handleAddToQueueLast={handleAddToQueueLast}
+                  handleAddToQueueNext={handleAddToQueueNext}
+                  handleToggleAddToPlaylist={handleAddToPlaylist}
+                  handleToggleShare={handleToggleShare}
+                  t={t} />
                 {
                   (loggedInUserId
                     && currentItem.ownerId
