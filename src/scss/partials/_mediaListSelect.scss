@@ -3,6 +3,8 @@
 }
 
 .media-list__sub-select {
+  margin-bottom: 0.25rem;
+
   // The Reactstrap Dropdown direction='down' appears to be buggy,
   // so manually force the dropdown-menu to load below the dropdown.
   .dropdown-menu {
