@@ -3,7 +3,9 @@
     transition: none;
 
     svg {
-      @include preventFontAwesomeSizeFOUC;
+      height: 0.95rem;
+      vertical-align: -2px;
+      width: 0.95rem;
     }
   }
 }

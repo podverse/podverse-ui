@@ -4,3 +4,93 @@
     width: 50px;
   }
 }
+
+html[data-theme=light] {
+  .close-btn {
+    color: $black;
+  }
+
+  .btn-primary {
+    background-color: $blue;
+    color: $white;
+
+    &:active, &:focus {
+      background-color: $blue-darker;
+    }
+  }
+
+  .btn-secondary {
+    background-color: $gray;
+    border-color: $gray-dark;
+    color: $gray-lightest;
+
+    &:active, &:focus {
+      background-color: $gray-dark;
+    }
+  }
+
+  .btn-text {
+    color: $black;
+  }
+
+  .btn-outline-secondary {
+    color: $black;
+
+    &:hover {
+      background-color: $gray-lightest;
+    }
+    
+    &:not(:disabled):not(.disabled).active {
+      background-color: $gray;
+    }
+  }
+
+  .transparent-btn, .transparent-btn button.btn {
+    color: $black;
+  }
+}
+
+html[data-theme=dark] {
+  .close-btn {
+    color: $white;
+  }
+
+  .btn-primary {
+    background-color: $blue;
+    color: $white;
+
+    &:active, &:focus {
+      background-color: $blue-darker;
+    }
+  }
+
+  .btn-secondary {
+    background-color: $gray;
+    border-color: $gray-dark;
+    color: $gray-lightest;
+
+    &:active, &:focus {
+      background-color: $gray-dark;
+    }
+  }
+
+  .btn-text {
+    color: $white;
+  }
+
+  .btn-outline-secondary {
+    color: $white;
+
+    &:hover {
+      background-color: $gray-darker;
+    }
+    
+    &:not(:disabled):not(.disabled).active {
+      background-color: $gray;
+    }
+  }
+
+  .transparent-btn, .transparent-btn button.btn {
+    color: $white;
+  }
+}

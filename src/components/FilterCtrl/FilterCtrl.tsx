@@ -21,34 +21,34 @@ export const FilterCtrl: React.StatelessComponent<Props> = props => {
     <div>
       {
         filterButtonHide !== 'true' &&
-        <div className='media-list__filter'>
-          <InputGroup>
-            <InputGroupAddon
-              addonType='prepend'
-              className='media-list-filter__filter-icon'>
-              <Button
-                className={filterIsShowing ? '' : 'not-showing'}
-                onClick={toggleFilter}>
-                <FontAwesomeIcon icon='filter' /> {t('filter')}
-              </Button>
-            </InputGroupAddon>
-            {
-              filterIsShowing &&
-              <React.Fragment>
-                <Input
-                  onChange={handleFilterTextChange}
-                  value={filterText || ''} />
-                <InputGroupAddon
-                  addonType='append'
-                  className='media-list-filter__clear-icon'>
-                  <Button onClick={clearFilterText}>
-                    <FontAwesomeIcon icon='times' />
-                  </Button>
-                </InputGroupAddon>
-              </React.Fragment>
-            }
-          </InputGroup>
-        </div>
+          <div className='media-list__filter'>
+            <InputGroup>
+              <InputGroupAddon
+                addonType='prepend'
+                className='media-list-filter__filter-icon'>
+                <Button
+                  className={filterIsShowing ? '' : 'not-showing'}
+                  onClick={toggleFilter}>
+                  <FontAwesomeIcon icon='filter' /> {t('filter')}
+                </Button>
+              </InputGroupAddon>
+              {
+                filterIsShowing &&
+                <React.Fragment>
+                  <Input
+                    onChange={handleFilterTextChange}
+                    value={filterText || ''} />
+                  <InputGroupAddon
+                    addonType='append'
+                    className='media-list-filter__clear-icon'>
+                    <Button onClick={clearFilterText}>
+                      <FontAwesomeIcon icon='times' />
+                    </Button>
+                  </InputGroupAddon>
+                </React.Fragment>
+              }
+            </InputGroup>
+          </div>
       }
     </div>
   )

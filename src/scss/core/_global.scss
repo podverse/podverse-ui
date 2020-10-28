@@ -267,34 +267,6 @@ html[data-theme=light] body {
     border-color: $gray-lighter;
   }
 
-  .close-btn {
-    color: $black;
-  }
-
-  .btn-secondary, .btn-secondary.btn-text {
-    color: $white;
-  }
-
-  .btn-text {
-    color: $black;
-  }
-
-  .btn-outline-secondary {
-    color: $black;
-
-    &:hover {
-      background-color: $gray-lightest;
-    }
-    
-    &:not(:disabled):not(.disabled).active {
-      background-color: $gray;
-    }
-  }
-
-  .transparent-btn, .transparent-btn button.btn {
-    color: $black;
-  }
-
   .ReactModal__Overlay {
     background-color: rgba(255, 255, 255, 0.75) !important;
 
@@ -376,34 +348,6 @@ html[data-theme=dark] body {
 
   hr {
     border-color: $gray-dark;
-  }
-
-  .close-btn {
-    color: $white;
-  }
-
-  .btn-secondary, .btn-secondary.btn-text {
-    color: $white;
-  }
-
-  .btn-text {
-    color: $white;
-  }
-
-  .btn-outline-secondary {
-    color: $white;
-
-    &:hover {
-      background-color: $gray-darker;
-    }
-    
-    &:not(:disabled):not(.disabled).active {
-      background-color: $gray;
-    }
-  }
-
-  .transparent-btn, .transparent-btn button.btn {
-    color: $white;
   }
 
   .ReactModal__Overlay {
