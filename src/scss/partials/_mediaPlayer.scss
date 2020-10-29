@@ -147,15 +147,6 @@
   }
 }
 
-@media(max-width: ($player-max-width + 16px)) {
-  .mp-header__share {
-    margin-right: auto !important;
-  }
-  .mp-player__skip {
-    margin-right: auto !important;
-  }
-}
-
 html[data-theme=light] {
   .mp {
 

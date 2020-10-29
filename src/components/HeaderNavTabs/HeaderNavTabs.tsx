@@ -1,10 +1,13 @@
 import * as React from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const uuidv4 = require('uuid/v4')
 
 export interface Props {
   handleLinkClick?: any
+  handleToggleAdvancedFilter?: any
+  isAdvancedFilterShowing?: boolean
   items: any[]
 }
 
@@ -16,7 +19,7 @@ const getHeaderNavTabsClassName = (props) => {
 }
 
 export const HeaderNavTabs: React.StatelessComponent<Props> = props => {
-  const { handleLinkClick, items } = props
+  const { handleToggleAdvancedFilter, handleLinkClick, isAdvancedFilterShowing, items } = props
 
   const buttons = items.map((x) => {
     const headerNavTabsClassName = classNames(
@@ -42,7 +45,15 @@ export const HeaderNavTabs: React.StatelessComponent<Props> = props => {
 
   return (
     <div className={getHeaderNavTabsClassName(props)}>
-      {buttons}
+      <div className='header-nav-tabs__tab-wrapper'>
+        {buttons}
+      </div>
+      <button
+        className={`header-nav-tabs__advanced-btn ${isAdvancedFilterShowing ? 'active' : ''}`}
+        onClick={handleToggleAdvancedFilter}>
+          advanced&nbsp;
+          <FontAwesomeIcon icon='cog' size='xs' />
+      </button>
     </div>
   )
 }

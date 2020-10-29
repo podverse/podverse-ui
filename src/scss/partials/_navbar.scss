@@ -8,7 +8,7 @@
     padding: 0.25rem 1rem;
 
     @media(min-width: $body-max-width + 32) {
-      max-width: $body-max-width;
+      max-width: $body-max-width - 20px;
       padding: 0.25rem 4px;
     }
 

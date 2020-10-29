@@ -1,7 +1,7 @@
 body {
   .one-option-only {
     background-color: transparent;
-    border-color: transparent;
+    border-color: transparent !important;
     border-radius: $button-border-radius;
     cursor: auto;
     font-size: $text-md-rem;
@@ -10,7 +10,7 @@ body {
 
   .btn-secondary.dropdown-toggle {
     background-color: transparent !important;
-    border-color: transparent;
+    border-color: transparent !important;
     border-radius: $button-border-radius;
     font-size: $text-md-rem;
     padding: $button-padding-sm;
@@ -42,7 +42,7 @@ body {
 html[data-theme=light] {
   body {
     .btn.one-option-only, .btn-secondary.dropdown-toggle {
-      color: $gray-darkest;
+      color: $black;
     }
 
     .dropdown-menu {
@@ -64,7 +64,7 @@ html[data-theme=light] {
 html[data-theme=dark] {
   body {
     .btn.one-option-only, .btn-secondary.dropdown-toggle {
-      color: $gray-lightest;
+      color: $white;
     }
 
     .dropdown-menu {

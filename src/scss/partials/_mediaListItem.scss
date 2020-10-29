@@ -7,7 +7,11 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  margin: 1.25rem 0;
+  margin: 0.5rem 0 1.25rem 0;
+
+  &:first-child {
+    margin-top: 0.25rem;
+  }
 
   &.is-slim {
     margin: 0.75rem 0;
@@ -261,7 +265,7 @@ html[data-theme=light] {
         color: $gray;
       }
       [class*=__sub], [class$=__date] {
-        color: $gray;
+        color: $gray-dark;
       }
     }
   }
@@ -297,10 +301,10 @@ html[data-theme=dark] {
 
     &:hover {
       [class*=__title], [class$=__description] {
-        color: $gray;
+        color: $gray-light;
       }
       [class*=__sub], [class$=__date] {
-        color: $gray;
+        color: $gray-light;
       }
     }
   }

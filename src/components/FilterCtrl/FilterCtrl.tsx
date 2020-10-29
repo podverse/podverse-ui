@@ -5,51 +5,53 @@ import { InputGroup, InputGroupAddon, Input } from 'reactstrap'
 
 type Props = {
   clearFilterText?: any
-  filterButtonHide?: string
-  filterIsShowing?: boolean
   filterText?: string
   handleFilterTextChange?: any
+  hide?: boolean
+  inputRef?: any
+  placeholder: string
   t?: any
-  toggleFilter?: any
 }
 
-export const FilterCtrl: React.StatelessComponent<Props> = props => {
-  const { clearFilterText, filterButtonHide, filterIsShowing, filterText,
-    handleFilterTextChange, t, toggleFilter } = props
+type State = {}
 
-  return (
-    <div>
-      {
-        filterButtonHide !== 'true' &&
-          <div className='media-list__filter'>
-            <InputGroup>
-              <InputGroupAddon
-                addonType='prepend'
-                className='media-list-filter__filter-icon'>
-                <Button
-                  className={filterIsShowing ? '' : 'not-showing'}
-                  onClick={toggleFilter}>
-                  <FontAwesomeIcon icon='filter' /> {t('filter')}
-                </Button>
-              </InputGroupAddon>
-              {
-                filterIsShowing &&
-                <React.Fragment>
-                  <Input
-                    onChange={handleFilterTextChange}
-                    value={filterText || ''} />
-                  <InputGroupAddon
-                    addonType='append'
-                    className='media-list-filter__clear-icon'>
-                    <Button onClick={clearFilterText}>
-                      <FontAwesomeIcon icon='times' />
-                    </Button>
-                  </InputGroupAddon>
-                </React.Fragment>
-              }
-            </InputGroup>
-          </div>
-      }
-    </div>
-  )
+export class FilterCtrl extends React.Component<Props, State> {
+
+  inputRef = null as any
+
+  render() {
+    const { clearFilterText, filterText, handleFilterTextChange, hide, placeholder, t } = this.props
+    const className = `media-list__filter ${hide ? 'hide' : ''}`
+  
+    return (
+      <div className={className}>
+        <InputGroup>
+          <InputGroupAddon
+            addonType='prepend'
+            className='media-list-filter__filter-icon'>
+            <Button>
+              <FontAwesomeIcon icon='filter' /> {t('filter')}
+            </Button>
+          </InputGroupAddon>
+          <React.Fragment>
+            <Input
+              defaultValue={filterText}
+              innerRef={el => this.inputRef = el}
+              onChange={handleFilterTextChange}
+              {...(placeholder ? { placeholder } : {})} />
+            <InputGroupAddon
+              addonType='append'
+              className='media-list-filter__clear-icon'>
+              <Button onClick={() => {
+                this.inputRef.value = ''
+                clearFilterText()
+              }}>
+                <FontAwesomeIcon icon='times' />
+              </Button>
+            </InputGroupAddon>
+          </React.Fragment>
+        </InputGroup>
+      </div>
+    )
+  }
 }
