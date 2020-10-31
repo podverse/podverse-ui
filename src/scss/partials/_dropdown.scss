@@ -26,6 +26,10 @@ body {
     &:hover, &:focus, &:active, &.header-dropdown {
       background-color: transparent;
     }
+
+    &::after {
+      margin-left: 6px;
+    }
   }
 
   .dropdown-item {

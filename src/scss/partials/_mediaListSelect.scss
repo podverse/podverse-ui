@@ -3,10 +3,8 @@
 }
 
 .media-list__sub-select {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 
-  // The Reactstrap Dropdown direction='down' appears to be buggy,
-  // so manually force the dropdown-menu to load below the dropdown.
   .dropdown-menu {
     transform: translate3d(-4px, 36px, 0px) !important;
   }
@@ -16,14 +14,6 @@
       transform: translate3d(-26px, 36px, 0px) !important;
     }
   }
-
-  // &.align-right-2 {
-  //   .dropdown-menu {
-  //     left: unset !important;
-  //     right: 0 !important;
-  //     transform: none !important;
-  //   }
-  // }
 
   button {
     font-size: $text-md-rem;

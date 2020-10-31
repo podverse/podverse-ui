@@ -31,7 +31,7 @@ type State = {
 const customStyles = {
   content: {
     bottom: 'unset',
-    height: '100%',
+    height: '90%',
     left: '50%',
     maxWidth: '480px',
     padding: '20px 20px 0 20px',
