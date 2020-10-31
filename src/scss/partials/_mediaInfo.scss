@@ -1,8 +1,5 @@
 .media-info {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
   clear: both;
-  padding: 0 0 1.5rem 0;
 
   .media-info__episode-title {
     font-size: $text-lg-rem;
@@ -144,6 +141,10 @@
     i {
       font-style: italic;
     }
+  }
+
+  .media-info__bottom-divider {
+    margin: 1.5rem 0;
   }
 }
 
