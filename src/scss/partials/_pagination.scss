@@ -6,6 +6,27 @@ html body {
       justify-content: center;
 
       li.page-item {
+        button {
+          border-radius: 0;
+        }
+
+        &:first-child {
+          button {
+            border-bottom-left-radius: 0.25rem;
+            border-top-left-radius: 0.25rem;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+
+        &:last-child {
+          button {
+            border-bottom-right-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+          }
+        }
         button.page-link {
           min-width: 42px;
         }

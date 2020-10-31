@@ -58,6 +58,7 @@ html body {
   }
 
   a {
+    @include borderFocusStyles;
     cursor: pointer;
   }
 
@@ -66,6 +67,8 @@ html body {
   }
 
   button {
+    @include borderFocusStyles;
+
     &:disabled {
       cursor: not-allowed;
     }
