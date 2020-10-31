@@ -23,7 +23,7 @@
     margin-right: 1.125rem;
   }
 
-  .media-header__edit {
+  .media-header__edit, .media-header__privacy  {
     flex: 0 0 auto;
     height: 22px;
     line-height: 22px;
@@ -37,6 +37,10 @@
       vertical-align: -0.125rem;
       width: 21px;
     }
+  }
+
+  .media-header__privacy {
+    margin-left: 0.75rem;
   }
 
   .media-header__link {
