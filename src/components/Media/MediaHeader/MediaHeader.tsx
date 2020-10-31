@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Badge } from 'reactstrap'
 import { convertToNowPlayingItem } from 'podverse-shared'
 import { ImageSquare } from 'components/Image/ImageSquare'
 import { Pill } from 'components/Pill/Pill'
@@ -14,7 +13,6 @@ type Props = {
   episode?: any
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleSubscribe?: any
-  hideNSFWLabels?: boolean
   isSubscribed?: boolean
   isSubscribing?: boolean
   mediaRef?: any
@@ -64,7 +62,7 @@ const generateCategoryNodes = (categories, handleLinkClick) => {
 }
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
-  const { censorNSFWText = false, episode, handleLinkClick, handleToggleSubscribe, hideNSFWLabels,
+  const { censorNSFWText = false, episode, handleLinkClick, handleToggleSubscribe,
     isSubscribed, isSubscribing, mediaRef, podcast, t } = props
 
   let bottomText
@@ -73,7 +71,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let title
   let titleAs
   let titleHref
-  let isExplicit
   let feedUrl
 
   if (episode && episode.podcast) {
@@ -83,19 +80,17 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     titleHref = getLinkPodcastHref(episode.podcast.id)
     subTitle = generateAuthorText(episode.podcast.authors)
     bottomText = generateCategoryNodes(episode.podcast.categories, handleLinkClick)
-    isExplicit = episode.podcast.isExplicit
     feedUrl = getIsAuthorityFeedUrl(episode.podcast.feedUrls)
   } else if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef, null, null)
     const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId,
-      podcastIsExplicit, podcastTitle } = item
+      podcastTitle } = item
     imgUrl = podcastImageUrl
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
     subTitle = generateAuthorText(podcastAuthors)
     bottomText = generateCategoryNodes(podcastCategories, handleLinkClick)
-    isExplicit = podcastIsExplicit
     if (mediaRef && mediaRef.episode && mediaRef.episode.podcast) {
       if (mediaRef.episode.podcast.shrunkImageUrl) {
         mediaRef.episode.podcast.imageUrl = mediaRef.episode.podcast.shrunkImageUrl
@@ -109,7 +104,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     bottomText = generateCategoryNodes(podcast.categories, handleLinkClick)
     imgUrl = podcast.shrunkImageUrl || podcast.imageUrl
     title = podcast.title
-    isExplicit = podcast.isExplicit
     if (podcast.feedUrls) {
       feedUrl = getIsAuthorityFeedUrl(podcast.feedUrls)
     }
@@ -168,12 +162,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
             subTitle &&
               <div className='media-header__sub-title'>
                 {subTitle}
-              </div>
-          }
-          {
-            isExplicit && !hideNSFWLabels &&
-              <div className='media-header__is-explicit'>
-                <Badge pill>{t('NSFW')}</Badge>
               </div>
           }
         </div>
