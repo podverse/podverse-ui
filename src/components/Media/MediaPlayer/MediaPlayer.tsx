@@ -32,7 +32,6 @@ type Props = {
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleQueueModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  hasItemInQueue?: boolean
   isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
   playbackRate: number
@@ -389,7 +388,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   render () {
     const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
       handletoggleAddToPlaylistModal, handleToggleMakeClipModal, handleToggleQueueModal,
-      handleToggleShareModal, handleTogglePlay, hasItemInQueue, nowPlayingItem,
+      handleToggleShareModal, handleTogglePlay, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
       playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed } = this.props
@@ -591,12 +590,6 @@ export class MediaPlayer extends React.Component<Props, State> {
                     <FontAwesomeIcon icon='infinity' />
                   </button>
               }
-              <button
-                className='mp-player__skip'
-                disabled={!hasItemInQueue}
-                onClick={this.itemSkip}>
-                <FontAwesomeIcon icon='step-forward' />
-              </button>
             </div>
           </div>
         </div> : <React.Fragment></React.Fragment>

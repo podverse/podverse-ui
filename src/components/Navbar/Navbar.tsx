@@ -1,39 +1,39 @@
 import * as React from 'react'
-import { Collapse, Navbar as BSNavbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Dropdown,
+import { Navbar as BSNavbar, NavbarBrand, Nav, NavItem, NavLink, Dropdown,
   DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { clone } from 'lib/utility'
 
 type Props = {
   brandAs?: string
   brandHideText?: boolean
   brandText?: string
   brandHref?: string
-  dropdownItems?: any
-  dropdownMenuIsOpen?: boolean
-  dropdownText?: any
+  dropdowns?: any
   handleLinkClick: any
   handleToggleDropdownMenu: any
-  handleToggleMobileMenu: any
   isDarkMode?: boolean
-  mobileMenuIsOpen?: boolean
-  mobileNavItems?: any
   navItems?: any
   pageKey?: string
 }
 
-type State = {}
+type State = {
+  dropdownEls?: any[]
+  navItemsEls?: any[]
+}
 
 export class Navbar extends React.Component<Props, State> {
 
-  render () {
-    const { brandAs, brandHideText, brandText, brandHref, dropdownItems,
-      dropdownMenuIsOpen, dropdownText, handleLinkClick, handleToggleDropdownMenu,
-      handleToggleMobileMenu, isDarkMode, mobileMenuIsOpen,
-      mobileNavItems, navItems, pageKey } = this.props
+  constructor(props) {
+    super(props)
 
+    this.state = {}
+  }
+
+  generateNavItems = () => {
+    const { navItems, pageKey } = this.props
     const navItemKey = 'navItemKey'
+
     const navItemsEls = navItems.map((x, index) => {
       if (x.href) {
         return (
@@ -43,8 +43,7 @@ export class Navbar extends React.Component<Props, State> {
             as={x.as}>
             <NavItem
               key={`${navItemKey}b${index}`}
-              active={pageKey ? x.pageKey === pageKey : false}
-              className={x.hideMobile ? 'hide-mobile' : ''}>
+              active={pageKey ? x.pageKey === pageKey : false}>
               <NavLink
                 {...(x.href ? { href: x.href } : {})}
                 onClick={x.onClick}>
@@ -57,8 +56,7 @@ export class Navbar extends React.Component<Props, State> {
         return (
           <NavItem
             key={`${navItemKey}b${index}`}
-            active={pageKey ? x.pageKey === pageKey : false}
-            className={x.hideMobile ? 'hide-mobile' : ''}>
+            active={pageKey ? x.pageKey === pageKey : false}>
             <NavLink
               onClick={x.onClick}>
               {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
@@ -68,111 +66,85 @@ export class Navbar extends React.Component<Props, State> {
       }
     })
 
-    const navbarDropdownItemKey = 'navbarDropdownItemKey'
-    const dropdownItemsEls = dropdownItems.map((x, index) => {
-      if (x.href) {
-        return (
-          <Link
-            key={`${navbarDropdownItemKey}${index}`}
-            href={x.href}
-            as={x.as}>
+    return navItemsEls
+  }
+
+  generateDropdowns = () => {
+    const { dropdowns } = this.props
+    const dropdownEls = dropdowns.map((dropdown, dropdownIndex) => {
+      const dropdownKey = `dropdown${dropdownIndex}`
+      const dropdownMenuIsOpenKey = `${dropdownKey}MenuIsOpen`
+      const dropdownMenuIsOpen = this.state[dropdownMenuIsOpenKey]
+
+      const dropdownItemsEls = dropdown.items.map((dropdownItem, dropdownItemIndex) => {
+        const dropdownItemKey = `${dropdownKey}DropdownItem${dropdownItemIndex}`
+        if (dropdownItem.href) {
+          return (
+            <Link
+              key={dropdownItemKey}
+              href={dropdownItem.href}
+              as={dropdownItem.as}>
+              <DropdownItem
+                {...(dropdownItem.href ? { href: dropdownItem.href } : {})}
+                onClick={event => {
+                  dropdownItem.onClick()
+                  this.setState({ [dropdownMenuIsOpenKey]: false })
+                }}>
+                {dropdownItem.label}
+              </DropdownItem>
+            </Link>
+          )
+        } else {
+          return (
             <DropdownItem
-              {...(x.href ? { href: x.href } : {})}
+              key={dropdownItemKey}
               onClick={event => {
-                x.onClick()
-                this.setState({ dropdownIsOpen: false })
+                dropdownItem.onClick()
+                this.setState({ [dropdownMenuIsOpenKey]: false })
               }}>
-              {x.label}
+              {dropdownItem.label}
             </DropdownItem>
-          </Link>
-        )
-      } else {
-        return (
-          <DropdownItem
-            key={`${navbarDropdownItemKey}${index}`}
-            onClick={event => {
-              x.onClick()
-              this.setState({ dropdownIsOpen: false })
-            }}>
-            {x.label}
-          </DropdownItem>
-        )
-      }
-    })
+          )
+        }
+      })
 
-    const mobileNavItemKey = 'mobileNavItemKey'
-    const mobileNavItemEls = mobileNavItems.map((x, index) => {
-      if (x.href) {
-        return (
-          <Link
-            key={`${mobileNavItemKey}${index}`}
-            href={x.href}
-            as={x.as}>
-            <NavItem
-              className='mobile-nav-item'
-              key={`${mobileNavItemKey}b${index}`}>
-              <NavLink
-                {...(x.href ? { href: x.href } : {})}
-                onClick={x.onClick}>
-                {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
-              </NavLink>
-            </NavItem>
-          </Link>
-        )
-      } else {
-        return (
-          <NavItem
-            className='mobile-nav-item'
-            key={`${mobileNavItemKey}b${index}`}>
-            <NavLink
-              onClick={x.onClick}>
-              {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
-            </NavLink>
-          </NavItem>
-        )
-      }
+      return (
+        <Dropdown
+          inNavbar
+          isOpen={dropdownMenuIsOpen}
+          nav
+          toggle={() => this.toggleDropdown(dropdownIndex)}>
+          <DropdownToggle caret>
+            {dropdown.icon && <FontAwesomeIcon icon={dropdown.icon} />}
+            {dropdown.label && dropdown.label}
+          </DropdownToggle>
+          <DropdownMenu right>
+            {dropdownItemsEls}
+          </DropdownMenu>
+        </Dropdown>
+      )
     })
+    
+    return dropdownEls
+  }
 
-    const mobileDropdownItemKey = 'mobileDropdownItemKey'
-    const mobileDropdownItems = clone(dropdownItems)
-    const mobileDropdownItemsEls = mobileDropdownItems.map((x, index) => {
-      if (x.href) {
-        return (
-          <Link
-            key={`${mobileDropdownItemKey}${index}`}
-            href={x.href}
-            as={x.as}>
-            <NavItem
-              key={`${mobileDropdownItemKey}b${index}`}
-              className='mobile-nav-item'>
-              <NavLink
-                {...(x.href ? { href: x.href } : {})}
-                onClick={x.onClick}>
-                {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
-              </NavLink>
-            </NavItem>
-          </Link>
-        )
-      } else {
-        return (
-          <NavItem
-            key={`${mobileDropdownItemKey}b${index}`}
-            className='mobile-nav-item'>
-            <NavLink
-              onClick={x.onClick}>
-              {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
-            </NavLink>
-          </NavItem>
-        )
-      }
-    })
+  toggleDropdown = (dropdownIndex) => {
+    const dropdownKey = `dropdown${dropdownIndex}`
+    const dropdownMenuIsOpenKey = `${dropdownKey}MenuIsOpen`
+    const dropdownIsShowing = this.state[dropdownMenuIsOpenKey]
+    this.setState({ [dropdownMenuIsOpenKey]: !dropdownIsShowing })
+  }
+
+  render () {
+    const { brandAs, brandHideText, brandText, brandHref, handleLinkClick, isDarkMode } = this.props
+    const navItemsEls = this.generateNavItems()
+    const dropdownEls = this.generateDropdowns()
 
     return (
       <div className='navbar__bg'>
         <BSNavbar
           color={isDarkMode ? 'dark' : 'light'}
-          {...(isDarkMode ? { dark: true } : { light: true })}
-          expand='sm'>
+          {...(isDarkMode ? { dark: true } : { light: true })}>
           <Link
             as={brandAs || ''}
             href={brandHref || ''}>
@@ -182,28 +154,10 @@ export class Navbar extends React.Component<Props, State> {
               brandHideText ? null : brandText
             }</NavbarBrand>
           </Link>
-          <div className='navbar__mobile-nav-items'>
-            {mobileNavItemEls}
-          </div>
-          <NavbarToggler onClick={handleToggleMobileMenu} />
-          <Collapse isOpen={mobileMenuIsOpen} navbar>
-            <Nav className='ml-auto' navbar>
-              {navItemsEls}
-              {mobileDropdownItemsEls}
-              <Dropdown
-                inNavbar
-                isOpen={dropdownMenuIsOpen}
-                nav
-                toggle={handleToggleDropdownMenu}>
-                <DropdownToggle caret>
-                  {dropdownText}
-                </DropdownToggle>
-                <DropdownMenu right>
-                  {dropdownItemsEls}
-                </DropdownMenu>
-              </Dropdown>
-            </Nav>
-          </Collapse>
+          <Nav className='ml-auto' navbar>
+            {navItemsEls}
+            {dropdownEls}
+          </Nav>
         </BSNavbar>
       </div>
     )
