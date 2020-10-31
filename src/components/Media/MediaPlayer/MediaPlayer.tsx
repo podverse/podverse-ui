@@ -33,7 +33,6 @@ type Props = {
   handleToggleQueueModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasItemInQueue?: boolean
-  hideTimeJumpBackward?: boolean
   isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
   playbackRate: number
@@ -390,7 +389,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   render () {
     const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
       handletoggleAddToPlaylistModal, handleToggleMakeClipModal, handleToggleQueueModal,
-      handleToggleShareModal, handleTogglePlay, hasItemInQueue, hideTimeJumpBackward, nowPlayingItem,
+      handleToggleShareModal, handleTogglePlay, hasItemInQueue, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
       playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed } = this.props
@@ -566,14 +565,11 @@ export class MediaPlayer extends React.Component<Props, State> {
                   }
                 </span>
               </div>
-              {
-                !hideTimeJumpBackward &&
-                  <button
-                    className='mp-player__time-jump-backward'
-                    onClick={this.timeJumpBackward}>
-                    <FontAwesomeIcon icon='undo-alt' />
-                  </button>
-              }
+              <button
+                className='mp-player__time-jump-backward'
+                onClick={this.timeJumpBackward}>
+                <FontAwesomeIcon icon='undo-alt' />
+              </button>
               <button
                 className='mp-player__time-jump-forward'
                 onClick={this.timeJumpForward}>
