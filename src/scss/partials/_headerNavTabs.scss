@@ -30,11 +30,22 @@
       }
     }
 
+    @media(max-width: 375px) {
+      .header-nav-tab {
+        padding: 0.5rem;
+      }
+    }
   }
 
   .header-nav-tabs__advanced-btn {
     font-size: $text-sm-rem;
     padding: 0 0.75rem;
+  }
+
+  @media(max-width: 375px) {
+    .header-nav-tabs-advanced-btn__text {
+      display: none;
+    }
   }
 }
 

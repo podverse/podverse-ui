@@ -9,6 +9,7 @@ export interface Props {
   handleToggleAdvancedFilter?: any
   isAdvancedFilterShowing?: boolean
   items: any[]
+  t?: any
 }
 
 const getHeaderNavTabsClassName = (props) => {
@@ -19,7 +20,7 @@ const getHeaderNavTabsClassName = (props) => {
 }
 
 export const HeaderNavTabs: React.StatelessComponent<Props> = props => {
-  const { handleToggleAdvancedFilter, handleLinkClick, isAdvancedFilterShowing, items } = props
+  const { handleToggleAdvancedFilter, handleLinkClick, isAdvancedFilterShowing, items, t } = props
 
   const buttons = items.map((x) => {
     const headerNavTabsClassName = classNames(
@@ -51,7 +52,7 @@ export const HeaderNavTabs: React.StatelessComponent<Props> = props => {
       <button
         className={`header-nav-tabs__advanced-btn ${isAdvancedFilterShowing ? 'active' : ''}`}
         onClick={handleToggleAdvancedFilter}>
-          advanced&nbsp;
+          <span className='header-nav-tabs-advanced-btn__text'>{t('advanced')}&nbsp;</span>
           <FontAwesomeIcon icon='cog' size='xs' />
       </button>
     </div>
