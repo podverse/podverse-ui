@@ -58,6 +58,8 @@ export const getPriorityQueueItemsStorage = () => {
     }
   } catch (error) {
     console.log('getPriorityQueueItemsStorage', error)
+    // Invalid content might be in the queue. Clear storage if an error.
+    clearItemsFromPriorityQueueStorage()
   }
 }
 
@@ -91,7 +93,7 @@ export const removeItemFromPriorityQueueStorage = (clipId, episodeId) => {
   }
 }
 
-export const clearItemsFromPriorityQueueStorage = (item) => {
+export const clearItemsFromPriorityQueueStorage = () => {
   localStorage.setItem(kPriorityQueue, JSON.stringify([]))
 }
 
@@ -130,6 +132,8 @@ export const getSecondaryQueueItemsStorage = () => {
     }
   } catch (error) {
     console.log('getSecondaryQueueItemsStorage', error)
+    // Invalid content might be in the queue. Clear storage if an error.
+    clearItemsFromSecondaryQueueStorage()
   }
 }
 
@@ -163,7 +167,7 @@ export const removeItemFromSecondaryQueueStorage = (clipId, episodeId) => {
   }
 }
 
-export const clearItemsFromSecondaryQueueStorage = item => {
+export const clearItemsFromSecondaryQueueStorage = () => {
   localStorage.setItem(kSecondaryQueue, JSON.stringify([]))
 }
 
