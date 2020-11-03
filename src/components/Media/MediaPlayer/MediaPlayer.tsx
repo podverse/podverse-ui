@@ -30,7 +30,6 @@ type Props = {
   handleToggleAutoplay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleToggleQueueModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
@@ -387,14 +386,14 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   render () {
     const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
-      handletoggleAddToPlaylistModal, handleToggleMakeClipModal, handleToggleQueueModal,
+      handletoggleAddToPlaylistModal, handleToggleMakeClipModal,
       handleToggleShareModal, handleTogglePlay, nowPlayingItem,
       playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
       playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
       playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed } = this.props
 
     const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
-      openQueueModal, openShareModal, progressPreviewTime, tooltipIsOpen, tooltipOffsetX } = this.state
+      openShareModal, progressPreviewTime, tooltipIsOpen, tooltipOffsetX } = this.state
 
     const { clipEndTime, clipId, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       podcastImageUrl, podcastTitle } = nowPlayingItem
@@ -481,11 +480,6 @@ export class MediaPlayer extends React.Component<Props, State> {
           <div className='mp__header'>
             <div className='mp-header__inner'>
               {headerLink}
-              <button
-                className={`mp-header__queue ${openQueueModal ? 'active' : ''}`}
-                onClick={handleToggleQueueModal}>
-                <FontAwesomeIcon icon='list-ul' />
-              </button>
               <button
                 className={`mp-header__make-clip ${openMakeClipModal ? 'active' : ''}`}
                 onClick={handleToggleMakeClipModal}>

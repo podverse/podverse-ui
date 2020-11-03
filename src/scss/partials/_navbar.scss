@@ -180,6 +180,16 @@ html[data-theme=dark] {
       .navbar-toggler {
         border-color: $gray;
       }
+
+      .nav-item {
+        .dropdown-toggle {
+          color: $white;
+
+          &:hover {
+            color: $gray-lighter;
+          }
+        }
+      }
     }
   }
 }

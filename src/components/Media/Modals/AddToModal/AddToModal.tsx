@@ -74,12 +74,6 @@ const AddToModal: React.StatelessComponent<Props> = props => {
       t={t} />
   )
 
-  if (!showPlaylists && showQueue) {
-    customStyles.content.maxHeight = '370px'
-  } else if (!showPlaylists) {
-    customStyles.content.maxHeight = '304px'
-  }
-
   let playingItem
 
   if (episode) {

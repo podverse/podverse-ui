@@ -36,6 +36,10 @@ body {
     padding: 0.375rem 1.5rem;
   }
 
+  .dropdown-menu {
+    min-width: 8rem;
+  }
+
   .dropdown-menu-right {
     right: -4px;
     text-align: right;
@@ -47,6 +51,10 @@ html[data-theme=light] {
     .btn.one-option-only, .btn-secondary.dropdown-toggle {
       border-color: $gray-lightest;
       color: $black;
+    }
+
+    .btn-secondary.dropdown-toggle:hover {
+      color: $gray-darkest;
     }
 
     .dropdown-menu {
@@ -70,6 +78,10 @@ html[data-theme=dark] {
     .btn.one-option-only, .btn-secondary.dropdown-toggle {
       border-color: $gray-darkest;
       color: $white;
+    }
+
+    .btn-secondary.dropdown-toggle:hover {
+      color: $gray-lighter;
     }
 
     .dropdown-menu {
