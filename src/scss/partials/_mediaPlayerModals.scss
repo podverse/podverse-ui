@@ -189,22 +189,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
-    [data-react-beautiful-dnd-draggable][style*="fixed"] hr {
-      display: none;
-    }
-
-    [data-react-beautiful-dnd-draggable]:last-of-type {
-      margin-bottom: 1.25rem;
-
-      hr {
-        display: none;
-      }
-    }
-
-    [data-react-beautiful-dnd-draggable] {
-      left: 20px !important;
-    }
   }
 }
 

@@ -64,7 +64,6 @@
     "podverse-shared": "^1.0.3",
     "post-loader": "^2.0.0",
     "react": "16.12.0",
-    "react-beautiful-dnd": "12.1.1",
     "react-dom": "16.12.0",
     "react-modal": "3.11.1",
     "react-player": "1.14.2",
