@@ -156,7 +156,7 @@ export const readableClipTime = (startTime, endTime, t) => {
     const e = convertSecToHHMMSS(endTime)
     return `${s} to ${e}`
   } else {
-    return `${t('Start')}: ${s}`
+    return s
   }
 }
 

@@ -24,6 +24,7 @@ type Props = {
   i18n?: any
   initialShowDescription?: boolean
   isLoggedIn?: boolean
+  isOfficialChapter?: boolean
   loggedInUserId?: string
   mediaRef?: any
   nowPlayingItem?: any
@@ -90,8 +91,8 @@ export class MediaInfo extends React.Component<Props, State> {
   render() {
     const { censorNSFWText = false, episode, handleAddToQueueLast, handleAddToQueueNext,
       handleAddToPlaylist, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip,
-      handleToggleEditClipModal, handleToggleShare, i18n, loggedInUserId, mediaRef, nowPlayingItem,
-      playing, podcast, t, Trans } = this.props
+      handleToggleEditClipModal, handleToggleShare, i18n, isOfficialChapter, loggedInUserId,
+      mediaRef, nowPlayingItem, playing, podcast, t, Trans } = this.props
     const { showDescription } = this.state
 
     let episodeTitle
@@ -199,12 +200,16 @@ export class MediaInfo extends React.Component<Props, State> {
                 <a
                   className='media-info__replay-clip'
                   onClick={handleReplayClip}>
-                  Clip from {clipTime}
+                  {
+                    isOfficialChapter
+                      ? `Chapter from ${clipTime}`
+                      : `Clip from ${clipTime}`
+                  }
                 </a>
               </div>
           }
           {
-            currentItem.clipId &&
+            (currentItem.clipId && !isOfficialChapter) &&
               <div className='media-info__clip-created-by'>
                 {t('By')}:&nbsp;
                 {
