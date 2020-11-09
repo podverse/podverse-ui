@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 export interface Props {
+  colorWarning?: boolean
   fontWeight?: number
   href?: string
   icon?: IconProp
@@ -26,7 +27,8 @@ const getPillClassName = (props) => {
       'is-active': props.isActive,
       'is-loading': props.isLoading,
       'no-border': props.noBorder,
-      'font-thin': props.fontWeight === 300
+      'font-thin': props.fontWeight === 300,
+      'color-warning': props.colorWarning
     }
   )
 }

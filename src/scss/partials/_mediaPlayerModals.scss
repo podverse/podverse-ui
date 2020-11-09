@@ -198,6 +198,60 @@
   }
 }
 
+.support-modal {
+  .support-modal__header {
+    display: flex;
+    margin-bottom: 1.125rem;
+
+    h3 {
+      flex: 0 0 33%;
+      margin-bottom: 0;
+    }
+  }
+
+  .support-modal__info {
+    display: flex;
+    margin-bottom: 1.25rem;
+
+    .support-modal-info__podcast-image {
+      flex: 0;
+      margin-right: 1rem;
+    }
+    .support-modal-info__podcast-title {
+      align-items: center;
+      display: flex;
+      flex: 1;
+      font-size: $text-xl-rem;
+    }
+  }
+
+  .scrollable-area {
+    overflow: auto;
+    max-height: calc(100% - 2.75rem);
+    margin: 0 -1rem;
+    padding: 0 1rem;
+
+    .support-modal__group {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h4 {
+        font-size: $text-lg-rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+      }
+
+      a {
+        display: inline-block;
+        padding: 0.5rem 0;
+      }
+    }
+  }
+}
+
 html[data-theme=light] {
   .add-to-modal {
     a {

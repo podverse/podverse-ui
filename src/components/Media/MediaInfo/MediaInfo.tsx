@@ -107,14 +107,7 @@ export class MediaInfo extends React.Component<Props, State> {
     let moreInfo
     let currentItem: any = {}
 
-    if (episode) {
-      episodeTitle = episode.title
-      episodeAs = getLinkEpisodeAs(episode.id)
-      episodeHref = getLinkEpisodeHref(episode.id)
-      episodePubDate = readableDate(episode.pubDate)
-      moreInfo = episode.description
-      currentItem = convertToNowPlayingItem(episode, null, null)
-    } else if (mediaRef) {
+    if (mediaRef) {
       episodeTitle = mediaRef.episode.title || t('untitledEpisode')
       episodeAs = getLinkEpisodeAs(mediaRef.episode.id)
       episodeHref = getLinkEpisodeHref(mediaRef.episode.id)
@@ -126,6 +119,13 @@ export class MediaInfo extends React.Component<Props, State> {
       createdByName = mediaRef.owner && mediaRef.owner.name ? mediaRef.owner.name : t('Anonymous')
       moreInfo = mediaRef.episode.description
       currentItem = convertToNowPlayingItem(mediaRef, null, null)
+    } else if (episode) {
+      episodeTitle = episode.title
+      episodeAs = getLinkEpisodeAs(episode.id)
+      episodeHref = getLinkEpisodeHref(episode.id)
+      episodePubDate = readableDate(episode.pubDate)
+      moreInfo = episode.description
+      currentItem = convertToNowPlayingItem(episode, null, null)
     } else if (nowPlayingItem) {
       episodeTitle = nowPlayingItem.episodeTitle
       episodeAs = getLinkEpisodeAs(nowPlayingItem.episodeId)

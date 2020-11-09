@@ -13,9 +13,11 @@ type Props = {
   episode?: any
   handleLinkClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   handleToggleSubscribe?: any
+  handleToggleSupport?: any 
   isSubscribed?: boolean
   isSubscribing?: boolean
   mediaRef?: any
+  modalsSupportShow?: any
   nowPlayingItem?: any
   podcast?: any
   t: any
@@ -23,9 +25,11 @@ type Props = {
 
 const generateAuthorText = authors => {
   let authorText = ''
-  for (let i = 0; i < authors.length; i++) {
-    const author = authors[i]
-    authorText += `${author.name}${i < authors.length - 1 ? ', ' : ''}`
+  if (authors && authors.length > 0) {
+    for (let i = 0; i < authors.length; i++) {
+      const author = authors[i]
+      authorText += `${author.name}${i < authors.length - 1 ? ', ' : ''}`
+    }
   }
 
   return authorText
@@ -33,29 +37,31 @@ const generateAuthorText = authors => {
 
 const generateCategoryNodes = (categories, handleLinkClick) => {
   const categoryNodes: any[] = []
-
-  for (let i = 0; i < categories.length; i++) {
-    const category = categories[i]
-    const categoryText = category.title
-    const categoryAs = getLinkCategoryAs(category.id)
-    const categoryHref = getLinkCategoryHref(category.id)
-
-    categoryNodes.push(
-      <React.Fragment key={uuidv4()}>
-        <Link
-          href={categoryHref}
-          as={categoryAs}
-          key={uuidv4()}>
-          <a
-            key={uuidv4()}
-            onClick={handleLinkClick}>{categoryText}</a>
-        </Link>
-        {
-          i < categories.length - 1 &&
-          <React.Fragment key={uuidv4()}>,&nbsp;</React.Fragment>
-        }
-      </React.Fragment>
-    )
+  
+  if (categories && categories.length > 0) {
+    for (let i = 0; i < categories.length; i++) {
+      const category = categories[i]
+      const categoryText = category.title
+      const categoryAs = getLinkCategoryAs(category.id)
+      const categoryHref = getLinkCategoryHref(category.id)
+  
+      categoryNodes.push(
+        <React.Fragment key={uuidv4()}>
+          <Link
+            href={categoryHref}
+            as={categoryAs}
+            key={uuidv4()}>
+            <a
+              key={uuidv4()}
+              onClick={handleLinkClick}>{categoryText}</a>
+          </Link>
+          {
+            i < categories.length - 1 &&
+            <React.Fragment key={uuidv4()}>,&nbsp;</React.Fragment>
+          }
+        </React.Fragment>
+      )
+    }
   }
 
   return categoryNodes
@@ -63,7 +69,7 @@ const generateCategoryNodes = (categories, handleLinkClick) => {
 
 export const MediaHeader: React.StatelessComponent<Props> = props => {
   const { censorNSFWText = false, episode, handleLinkClick, handleToggleSubscribe,
-    isSubscribed, isSubscribing, mediaRef, podcast, t } = props
+    handleToggleSupport, isSubscribed, isSubscribing, mediaRef, podcast, t } = props
 
   let bottomText
   let imgUrl
@@ -72,6 +78,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let titleAs
   let titleHref
   let feedUrl
+  let episodeFunding
+  let podcastFunding
+  // let podcastValue
 
   if (episode && episode.podcast) {
     imgUrl = episode.podcast.shrunkImageUrl || episode.podcast.imageUrl
@@ -81,6 +90,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     subTitle = generateAuthorText(episode.podcast.authors)
     bottomText = generateCategoryNodes(episode.podcast.categories, handleLinkClick)
     feedUrl = getIsAuthorityFeedUrl(episode.podcast.feedUrls)
+    episodeFunding = episode.funding
+    podcastFunding = episode.podcast.funding
+    // podcastValue = episode.podcast.value
   } else if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef, null, null)
     const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId,
@@ -98,6 +110,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       if (mediaRef.episode.podcast.feedUrls) {
         feedUrl = getIsAuthorityFeedUrl(mediaRef.episode.podcast.feedUrls)
       }
+      episodeFunding = mediaRef.episode.funding
+      podcastFunding = mediaRef.episode.podcast.funding
+      // podcastValue = mediaRef.episode.podcast.value
     }
   } else if (podcast) {
     subTitle = generateAuthorText(podcast.authors)
@@ -107,6 +122,8 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     if (podcast.feedUrls) {
       feedUrl = getIsAuthorityFeedUrl(podcast.feedUrls)
     }
+    podcastFunding = podcast.funding
+    // podcastValue = podcast.value
   }
 
   title = title ? title.sanitize(censorNSFWText) : ''
@@ -119,6 +136,19 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       text={isSubscribed ? t('Subscribed') : t('Subscribe')}
       title={isSubscribed ? t('Subscribed') : t('Subscribe')} />
   )
+
+  const showSupport = (episodeFunding && episodeFunding.length > 0) ||
+    (podcastFunding && podcastFunding.length > 0)
+  const mediaHeaderMiddleButton = showSupport ? (
+    <Pill
+      colorWarning={true}
+      fontWeight={300}
+      icon='donate'
+      noBorder={true}
+      onClick={handleToggleSupport}
+      text={t('Support')}
+      title={t('Support')} />
+  ) : null
 
   const mediaHeaderBottomButton = (
     <Pill
@@ -164,6 +194,12 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                 {subTitle}
               </div>
           }
+          { 
+            showSupport &&
+              <div className='media-header-middle__buttons'>
+                {mediaHeaderMiddleButton}
+              </div>
+          }
         </div>
         <div className='media-header__bottom'>
           {
@@ -177,6 +213,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       </div>
       <div className='media-header__mobile-buttons'>
         {mediaHeaderTopButton}
+        {showSupport && mediaHeaderMiddleButton}
         {mediaHeaderBottomButton}
       </div>
     </div>

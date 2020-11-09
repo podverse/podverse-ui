@@ -23,6 +23,10 @@
     margin-right: 1.125rem;
   }
 
+  .media-header__text-wrapper {
+    min-height: 6.75rem;
+  }
+
   .media-header__edit, .media-header__privacy  {
     flex: 0 0 auto;
     height: 22px;
@@ -76,16 +80,16 @@
     margin: -0.25rem 0 0 0.625rem;
   }
 
-  .media-header-top__buttons {
+  .media-header-top__buttons,
+  .media-header-middle__buttons,
+  .media-header-bottom__buttons {
     align-items: center;
     display: flex;
     flex: 0 0 auto;
   }
 
-  .media-header-bottom__buttons {
-    align-items: center;
-    display: flex;
-    flex: 0 0 auto;
+  .media-header-middle__buttons {
+    margin-top: -0.25rem;
   }
 
   .media-header__mobile-buttons {
@@ -98,6 +102,7 @@
 
   @media(max-width: 575px) {
     .media-header-top__buttons,
+    .media-header-middle__buttons,
     .media-header-bottom__buttons {
       display: none;
     }
@@ -109,6 +114,10 @@
 
       .pill {
         margin: 0 0.75rem 0 0;
+
+        &.no-border {
+          margin-right: 0.5rem;
+        }
       }
     }
 
@@ -157,39 +166,35 @@
 }
 
 html[data-theme=light] {
-  .media-header {
-    .media-header__title {
-      color: $black;
-    }
-  
-    .media-header__sub-title,
-    .media-header__bottom-text, .media-header__bottom-text a,
-    .media-header-bottom__buttons, .media-header-bottom__buttons a {
-      color: $gray-dark;
-    }
+  .media-header__title {
+    color: $black;
+  }
 
-    .media-header__is-explicit .badge {
-      background-color: $red;
-      color: $white;
-    }
+  .media-header__sub-title,
+  .media-header__bottom-text, .media-header__bottom-text a.pill,
+  .media-header-bottom__buttons, .media-header-bottom__buttons a.pill {
+    color: $gray-dark;
+  }
+
+  .media-header__is-explicit .badge {
+    background-color: $red;
+    color: $white;
   }
 }
 
 html[data-theme=dark] {
-  .media-header {
-    .media-header__title {
-      color: $white;
-    }
-  
-    .media-header__sub-title,
-    .media-header__bottom-text, .media-header__bottom-text a,
-    .media-header-bottom__buttons, .media-header-bottom__buttons a {
-      color: $gray-light;
-    }
-  
-    .media-header__is-explicit .badge {
-      background-color: $red;
-      color: $white;
-    }
+  .media-header__title {
+    color: $white;
+  }
+
+  .media-header__sub-title,
+  .media-header__bottom-text, .media-header__bottom-text a.pill,
+  .media-header-bottom__buttons, .media-header-bottom__buttons a.pill {
+    color: $gray-light;
+  }
+
+  .media-header__is-explicit .badge {
+    background-color: $red;
+    color: $white;
   }
 }

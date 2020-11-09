@@ -53,6 +53,14 @@ html[data-theme=light] {
       color: $gray-darkest;
     }
   }
+
+  a.pill.color-warning {
+    color: $orange;
+
+    &:hover {
+      color: $orange-darker;
+    }
+  }
 }
 
 html[data-theme=dark] {
@@ -73,6 +81,14 @@ html[data-theme=dark] {
     &:hover {
       background-color: $gray-darkest;
       color: $gray-lightest;
+    }
+  }
+
+  a.pill.color-warning {
+    color: $orange;
+
+    &:hover {
+      color: $orange-lighter
     }
   }
 }

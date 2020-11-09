@@ -31,6 +31,7 @@ type Props = {
   handleToggleMakeClipModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleTogglePlay?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleShareModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleToggleSupportModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isLoggedIn?: boolean
   nowPlayingItem: NowPlayingItem
   playbackRate: number
@@ -50,6 +51,7 @@ type Props = {
   queueSecondaryItems: NowPlayingItem[]
   showAutoplay?: boolean
   showPlaybackSpeed?: boolean
+  showSupport?: boolean
 }
 
 type State = {
@@ -58,10 +60,6 @@ type State = {
   duration: number | null
   isClientSide: boolean
   isLoading: boolean
-  openAddToModal: boolean
-  openMakeClipModal: boolean
-  openQueueModal: boolean
-  openShareModal: boolean
   played: number
   playedSeconds: number
   progressPreviewTime: number
@@ -123,10 +121,6 @@ export class MediaPlayer extends React.Component<Props, State> {
       duration: null,
       isClientSide: false,
       isLoading: true,
-      openAddToModal: false,
-      openMakeClipModal: false,
-      openQueueModal: false,
-      openShareModal: false,
       played: 0,
       playedSeconds: 0,
       progressPreviewTime: -1,
@@ -386,14 +380,14 @@ export class MediaPlayer extends React.Component<Props, State> {
 
   render () {
     const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
-      handletoggleAddToPlaylistModal, handleToggleMakeClipModal,
-      handleToggleShareModal, handleTogglePlay, nowPlayingItem,
-      playbackRate, playbackRateText, playedAfterClipFinished, playerClipLinkAs,
-      playerClipLinkHref, playerClipLinkOnClick, playerEpisodeLinkAs, playerEpisodeLinkHref,
-      playerEpisodeLinkOnClick, playing, showAutoplay, showPlaybackSpeed } = this.props
+      handletoggleAddToPlaylistModal, handleToggleMakeClipModal, handleToggleShareModal,
+      handleToggleSupportModal, handleTogglePlay, nowPlayingItem, playbackRate, playbackRateText,
+      playedAfterClipFinished, playerClipLinkAs, playerClipLinkHref, playerClipLinkOnClick,
+      playerEpisodeLinkAs, playerEpisodeLinkHref, playerEpisodeLinkOnClick, playing, showAutoplay,
+      showPlaybackSpeed, showSupport } = this.props
 
-    const { duration, isClientSide, isLoading, openAddToModal, openMakeClipModal,
-      openShareModal, progressPreviewTime, tooltipIsOpen, tooltipOffsetX } = this.state
+    const { duration, isClientSide, isLoading, progressPreviewTime, tooltipIsOpen,
+      tooltipOffsetX } = this.state
 
     const { clipEndTime, clipId, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
       podcastImageUrl, podcastTitle } = nowPlayingItem
@@ -480,18 +474,26 @@ export class MediaPlayer extends React.Component<Props, State> {
           <div className='mp__header'>
             <div className='mp-header__inner'>
               {headerLink}
+              {
+                showSupport &&
+                  <button
+                    className='mp-header__funding'
+                    onClick={handleToggleSupportModal}>
+                    <FontAwesomeIcon icon='donate' />
+                  </button>
+              }
               <button
-                className={`mp-header__make-clip ${openMakeClipModal ? 'active' : ''}`}
+                className='mp-header__make-clip'
                 onClick={handleToggleMakeClipModal}>
                 <FontAwesomeIcon icon='cut' />
               </button>
               <button
-                className={`mp-header__add-to ${openAddToModal ? 'active' : ''}`}
+                className='mp-header__add-to'
                 onClick={handletoggleAddToPlaylistModal}>
                 <FontAwesomeIcon icon='plus' />
               </button>
               <button
-                className={`mp-header__share ${openShareModal ? 'active' : ''}`}
+                className='mp-header__share'
                 onClick={handleToggleShareModal}>
                 <FontAwesomeIcon icon='share' />
               </button>
