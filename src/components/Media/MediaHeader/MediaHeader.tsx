@@ -82,18 +82,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   let podcastFunding
   // let podcastValue
 
-  if (episode && episode.podcast) {
-    imgUrl = episode.podcast.shrunkImageUrl || episode.podcast.imageUrl
-    title = episode.podcast.title
-    titleAs = getLinkPodcastAs(episode.podcast.id)
-    titleHref = getLinkPodcastHref(episode.podcast.id)
-    subTitle = generateAuthorText(episode.podcast.authors)
-    bottomText = generateCategoryNodes(episode.podcast.categories, handleLinkClick)
-    feedUrl = getIsAuthorityFeedUrl(episode.podcast.feedUrls)
-    episodeFunding = episode.funding
-    podcastFunding = episode.podcast.funding
-    // podcastValue = episode.podcast.value
-  } else if (mediaRef) {
+  if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef, null, null)
     const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId,
       podcastTitle } = item
@@ -114,6 +103,17 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       podcastFunding = mediaRef.episode.podcast.funding
       // podcastValue = mediaRef.episode.podcast.value
     }
+  } else if (episode && episode.podcast) {
+    imgUrl = episode.podcast.shrunkImageUrl || episode.podcast.imageUrl
+    title = episode.podcast.title
+    titleAs = getLinkPodcastAs(episode.podcast.id)
+    titleHref = getLinkPodcastHref(episode.podcast.id)
+    subTitle = generateAuthorText(episode.podcast.authors)
+    bottomText = generateCategoryNodes(episode.podcast.categories, handleLinkClick)
+    feedUrl = getIsAuthorityFeedUrl(episode.podcast.feedUrls)
+    episodeFunding = episode.funding
+    podcastFunding = episode.podcast.funding
+    // podcastValue = episode.podcast.value
   } else if (podcast) {
     subTitle = generateAuthorText(podcast.authors)
     bottomText = generateCategoryNodes(podcast.categories, handleLinkClick)
