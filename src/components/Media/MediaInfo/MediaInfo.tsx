@@ -25,6 +25,7 @@ type Props = {
   initialShowDescription?: boolean
   isLoggedIn?: boolean
   isOfficialChapter?: boolean
+  isOfficialSoundBite?: boolean
   loggedInUserId?: string
   mediaRef?: any
   nowPlayingItem?: any
@@ -91,8 +92,8 @@ export class MediaInfo extends React.Component<Props, State> {
   render() {
     const { censorNSFWText = false, episode, handleAddToQueueLast, handleAddToQueueNext,
       handleAddToPlaylist, handleLinkClick, handlePauseItem, handlePlayItem, handleReplayClip,
-      handleToggleEditClipModal, handleToggleShare, i18n, isOfficialChapter, loggedInUserId,
-      mediaRef, nowPlayingItem, playing, podcast, t, Trans } = this.props
+      handleToggleEditClipModal, handleToggleShare, i18n, isOfficialChapter, isOfficialSoundBite,
+      loggedInUserId, mediaRef, nowPlayingItem, playing, podcast, t, Trans } = this.props
     const { showDescription } = this.state
 
     let episodeTitle
@@ -152,6 +153,25 @@ export class MediaInfo extends React.Component<Props, State> {
     clipTitle = clipTitle ? clipTitle.sanitize(censorNSFWText) : ''
     createdByName = createdByName ? createdByName.sanitize(censorNSFWText) : ''
 
+    const createdByNode = (
+      <React.Fragment>
+        {
+          (!isOfficialChapter && !isOfficialSoundBite) &&
+            <React.Fragment>
+              {t('By')}:&nbsp;
+              {
+                createdByIsPublic ?
+                  <Link
+                    as={getLinkUserAs(createdById)}
+                    href={getLinkUserHref(createdById)}>
+                    <a onClick={handleLinkClick}>{createdByName}</a>
+                  </Link> : createdByName
+              }
+            </React.Fragment>
+        }
+      </React.Fragment>
+    )
+
     const DynamicAdsWarningLink = ({ children }) => (
       <Link
         as='/faq#why-do-some-clips-start-at-the-wrong-time'
@@ -209,18 +229,8 @@ export class MediaInfo extends React.Component<Props, State> {
               </div>
           }
           {
-            (currentItem.clipId && !isOfficialChapter) &&
-              <div className='media-info__clip-created-by'>
-                {t('By')}:&nbsp;
-                {
-                  createdByIsPublic ?
-                    <Link
-                      as={getLinkUserAs(createdById)}
-                      href={getLinkUserHref(createdById)}>
-                      <a onClick={handleLinkClick}>{createdByName}</a>
-                    </Link> : createdByName
-                }
-              </div>
+            currentItem.clipId &&
+              <div className='media-info__clip-created-by'> {createdByNode}</div>
           }
           {
             (episode || mediaRef || nowPlayingItem) &&
