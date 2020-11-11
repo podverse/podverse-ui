@@ -171,7 +171,7 @@ html[data-theme=light] {
   }
 
   .media-header__sub-title,
-  .media-header__bottom-text, .media-header__bottom-text a.pill,
+  .media-header__bottom-text a, .media-header__bottom-text a.pill,
   .media-header-bottom__buttons, .media-header-bottom__buttons a.pill {
     color: $gray-dark;
   }
@@ -188,7 +188,7 @@ html[data-theme=dark] {
   }
 
   .media-header__sub-title,
-  .media-header__bottom-text, .media-header__bottom-text a.pill,
+  .media-header__bottom-text a, .media-header__bottom-text a.pill,
   .media-header-bottom__buttons, .media-header-bottom__buttons a.pill {
     color: $gray-light;
   }
