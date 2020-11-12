@@ -291,7 +291,7 @@ export class MediaInfo extends React.Component<Props, State> {
               </button>
           }
           {
-            (podcast || (moreInfo && showDescription)) &&
+            (moreInfo && showDescription) &&
               <div
                 className='media-info__description'
                 dangerouslySetInnerHTML={
