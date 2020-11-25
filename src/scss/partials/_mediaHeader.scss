@@ -11,11 +11,8 @@
   }
 
   .media-header__middle {
-    margin-top: 0.5rem;
-  }
-
-  .media-header__bottom {
-    margin-top: 0.125rem;
+    margin-left: $border-focus-margin;
+    margin-top: $border-focus-margin;
   }
 
   .media-header__image-wrapper {
@@ -67,7 +64,8 @@
   .media-header__title {
     flex: 1 1 auto;
     font-size: $text-xxl-rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: $border-focus-margin;
+    margin-left: $border-focus-margin;
     max-width: calc(100% - 44px); // 100% minus the width of the subscribe button area
 
     &:focus {
@@ -77,19 +75,17 @@
   }
 
   .pill {
-    margin: -0.25rem 0 0 0.625rem;
+    margin-bottom: $border-focus-margin;
+    margin-left: 0.625rem;
+    margin-right: $border-focus-margin;
+    margin-top: $border-focus-margin;
   }
 
   .media-header-top__buttons,
-  .media-header-middle__buttons,
   .media-header-bottom__buttons {
     align-items: center;
     display: flex;
     flex: 0 0 auto;
-  }
-
-  .media-header-middle__buttons {
-    margin-top: -0.25rem;
   }
 
   .media-header__mobile-buttons {
@@ -102,7 +98,6 @@
 
   @media(max-width: 575px) {
     .media-header-top__buttons,
-    .media-header-middle__buttons,
     .media-header-bottom__buttons {
       display: none;
     }
@@ -133,7 +128,7 @@
     float: left;
     font-size: $text-md-rem;
     font-weight: 300;
-    margin-bottom: 0.25rem;
+    margin-top: 0.5rem;
     max-width: 100%;
 
     &:focus {
@@ -157,6 +152,12 @@
     display: block;
     font-size: $text-md-rem;
     font-weight: 300;
+
+    a {
+      display: inline-block;
+      margin: $border-focus-margin;
+      padding: 0.25rem 0;
+    }
   }
 
   .media-header__bottom-text-side {
