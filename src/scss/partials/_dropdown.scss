@@ -61,7 +61,7 @@ html[data-theme=light] {
       background-color: $white;
       
       .dropdown-item {
-        background-color: $white;
+        background-color: transparent;
         border-color: $gray-light;
         color: $black;
   
@@ -88,7 +88,7 @@ html[data-theme=dark] {
       background-color: $gray-darker;
 
       .dropdown-item {
-        background-color: $gray-darker;
+        background-color: transparent;
         border-color: $gray-dark;
         color: $white;
   
