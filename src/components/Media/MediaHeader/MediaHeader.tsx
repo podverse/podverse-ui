@@ -139,7 +139,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
 
   const showSupport = (episodeFunding && episodeFunding.length > 0) ||
     (podcastFunding && podcastFunding.length > 0)
-  const mediaHeaderMiddleButton = showSupport ? (
+  const mediaHeaderSupportButton = showSupport ? (
     <Pill
       colorWarning={true}
       fontWeight={300}
@@ -194,12 +194,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
                 {subTitle}
               </div>
           }
-          { 
-            showSupport &&
-              <div className='media-header-middle__buttons'>
-                {mediaHeaderMiddleButton}
-              </div>
-          }
         </div>
         <div className='media-header__bottom'>
           {
@@ -207,14 +201,15 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
               <div className='media-header__bottom-text'>{bottomText}</div>
           }
           <div className='media-header-bottom__buttons'>
+            { showSupport && mediaHeaderSupportButton }
             { feedUrl && mediaHeaderBottomButton }
           </div>
         </div>
       </div>
       <div className='media-header__mobile-buttons'>
         {mediaHeaderTopButton}
-        {showSupport && mediaHeaderMiddleButton}
         {mediaHeaderBottomButton}
+        {showSupport && mediaHeaderSupportButton}
       </div>
     </div>
   )
