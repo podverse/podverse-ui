@@ -37,7 +37,10 @@ export const HeaderNavTabs: React.StatelessComponent<Props> = props => {
         key={uuidv4()}>
         <a
           className={headerNavTabsClassName}
-          onClick={handleLinkClick}>
+          onClick={() => {
+            handleLinkClick()
+            x.onClick()
+          }}>
           {x.label}
         </a>
       </Link>
