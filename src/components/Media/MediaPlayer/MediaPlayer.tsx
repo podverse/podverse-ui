@@ -390,7 +390,7 @@ export class MediaPlayer extends React.Component<Props, State> {
       tooltipOffsetX } = this.state
 
     const { clipEndTime, clipId, clipStartTime, clipTitle, episodeMediaUrl, episodeTitle,
-      podcastImageUrl, podcastTitle } = nowPlayingItem
+      podcastShrunkImageUrl, podcastTitle } = nowPlayingItem
 
     let isLoadingOverride = isLoading
     // If the new NowPlayingItem is the same episode as the last one, but it is a
@@ -437,7 +437,7 @@ export class MediaPlayer extends React.Component<Props, State> {
           }>
           <div className='mp-header__image'>
             <ImageSquare
-              imageUrl={podcastImageUrl}
+              imageUrl={podcastShrunkImageUrl}
               size='48px' />
           </div>
           <div className='mp-header__wrap'>

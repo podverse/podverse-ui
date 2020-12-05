@@ -10,7 +10,7 @@ type Props = {
   handleHideModal?: (event: React.MouseEvent<HTMLButtonElement>) => void
   isOpen: boolean
   podcastFunding: any[]
-  podcastImageUrl?: string
+  podcastShrunkImageUrl?: string
   podcastTitle?: string
   podcastValue: any
   t: any
@@ -40,7 +40,7 @@ export class SupportModal extends React.Component<Props, State> {
   }
 
   render() {
-    const { episodeFunding, handleHideModal, isOpen, podcastFunding, podcastImageUrl, 
+    const { episodeFunding, handleHideModal, isOpen, podcastFunding, podcastShrunkImageUrl, 
       podcastTitle, t } = this.props
 
     let appEl
@@ -94,7 +94,7 @@ export class SupportModal extends React.Component<Props, State> {
         <div className='support-modal__info'>
           <div className='support-modal-info__podcast-image'>
             <ImageSquare
-              imageUrl={podcastImageUrl}
+              imageUrl={podcastShrunkImageUrl}
               size='3.75rem' />
           </div>
           <div className='support-modal-info__podcast-title'>

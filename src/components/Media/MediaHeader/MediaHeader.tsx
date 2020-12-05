@@ -84,9 +84,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
 
   if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef, null, null)
-    const { podcastAuthors, podcastCategories, podcastImageUrl, podcastId,
+    const { podcastAuthors, podcastCategories, podcastShrunkImageUrl, podcastId,
       podcastTitle } = item
-    imgUrl = podcastImageUrl
+    imgUrl = podcastShrunkImageUrl
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
