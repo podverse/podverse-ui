@@ -196,7 +196,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                 (itemType === 'podcast' && dataPodcast) &&
                   <MediaListItemB
                     censorNSFWText={censorNSFWText}
-                    imageUrl={dataPodcast.shrunkImageUrl || dataPodcast.imageUrl}
+                    imageUrl={dataPodcast.shrunkImageUrl}
                     subTitle={dataPodcast.lastEpisodeTitle}
                     subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
                     title={dataPodcast.title} />
@@ -205,7 +205,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                 (itemType === 'podcast-search-result' && dataPodcast) &&
                   <MediaListItemB
                     censorNSFWText={censorNSFWText}
-                    imageUrl={dataPodcast.shrunkImageUrl || dataPodcast.imageUrl}
+                    imageUrl={dataPodcast.shrunkImageUrl}
                     subTitle={dataPodcast.categoriesString ||''}
                     subTitleSide={dataPodcast.lastEpisodePubDate ? readableDate(dataPodcast.lastEpisodePubDate) : ''}
                     title={dataPodcast.title} />
