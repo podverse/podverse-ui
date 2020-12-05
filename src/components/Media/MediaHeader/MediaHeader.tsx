@@ -93,9 +93,6 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     subTitle = generateAuthorText(podcastAuthors)
     bottomText = generateCategoryNodes(podcastCategories, handleLinkClick)
     if (mediaRef && mediaRef.episode && mediaRef.episode.podcast) {
-      if (mediaRef.episode.podcast.shrunkImageUrl) {
-        mediaRef.episode.podcast.imageUrl = mediaRef.episode.podcast.shrunkImageUrl
-      }
       if (mediaRef.episode.podcast.feedUrls) {
         feedUrl = getIsAuthorityFeedUrl(mediaRef.episode.podcast.feedUrls)
       }
@@ -104,7 +101,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       // podcastValue = mediaRef.episode.podcast.value
     }
   } else if (episode && episode.podcast) {
-    imgUrl = episode.podcast.shrunkImageUrl || episode.podcast.imageUrl
+    imgUrl = episode.podcast.shrunkImageUrl
     title = episode.podcast.title
     titleAs = getLinkPodcastAs(episode.podcast.id)
     titleHref = getLinkPodcastHref(episode.podcast.id)
@@ -117,7 +114,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   } else if (podcast) {
     subTitle = generateAuthorText(podcast.authors)
     bottomText = generateCategoryNodes(podcast.categories, handleLinkClick)
-    imgUrl = podcast.shrunkImageUrl || podcast.imageUrl
+    imgUrl = podcast.shrunkImageUrl
     title = podcast.title
     if (podcast.feedUrls) {
       feedUrl = getIsAuthorityFeedUrl(podcast.feedUrls)
