@@ -84,14 +84,13 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
 
   if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef, null, null)
-    const { podcastAuthors, podcastCategories, podcastShrunkImageUrl, podcastId,
-      podcastTitle } = item
+    const { podcastShrunkImageUrl, podcastId, podcastTitle } = item
     imgUrl = podcastShrunkImageUrl
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
-    subTitle = generateAuthorText(podcastAuthors)
-    bottomText = generateCategoryNodes(podcastCategories, handleLinkClick)
+    subTitle = ''
+    bottomText = ''
     if (mediaRef && mediaRef.episode && mediaRef.episode.podcast) {
       if (mediaRef.episode.podcast.feedUrls) {
         feedUrl = getIsAuthorityFeedUrl(mediaRef.episode.podcast.feedUrls)
