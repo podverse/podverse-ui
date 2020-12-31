@@ -4,14 +4,11 @@ import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import { State, Store } from '@sambego/storybook-state'
 import { MediaPlayer } from './MediaPlayer'
-import { sampleMediaRef1, sampleNowPlayingItem1, sampleNowPlayingItem2, sampleNowPlayingItem3,
-  sampleNowPlayingItem3b, sampleNowPlayingItem4, sampleNowPlayingItem5, 
-  sampleNowPlayingItem6, samplePlaylist1, samplePlaylist2, samplePlaylist3,
+import { sampleMediaRef1, sampleNowPlayingItem1, sampleNowPlayingItem3,
+  sampleNowPlayingItem3b, samplePlaylist1, samplePlaylist2, samplePlaylist3,
   samplePlaylist4, samplePlaylist5, samplePlaylist6, sampleText, stubFunction } from 'storybook/constants'
-import { addItemToPriorityQueueStorage, addItemsToSecondaryQueueStorage,
-  clearItemsFromPriorityQueueStorage, clearItemsFromSecondaryQueueStorage,
-  getPriorityQueueItemsStorage, getSecondaryQueueItemsStorage,
-  popNextFromQueueStorage } from 'lib/mediaPlayerStorage'
+import { addItemToPriorityQueueStorage, clearItemsFromPriorityQueueStorage,
+  getPriorityQueueItemsStorage, popNextFromQueueStorage } from 'lib/mediaPlayerStorage'
 
 const { endTime, episodeMediaUrl, episodePubDate, episodeTitle, podcastImageUrl, 
   podcastTitle, startTime, title } = sampleMediaRef1
@@ -90,8 +87,7 @@ const handleItemSkip = () => {
   store.set({
     nowPlayingItem: result.nextItem,
     playing: store.get('autoplay'),
-    queuePriorityItems: result.priorityItems,
-    queueSecondaryItems: result.secondaryItems,
+    queuePriorityItems: result.priorityItems
   })
 }
 
@@ -174,18 +170,14 @@ const store = new Store({
   playing: false,
   playlists: playlists,
   queuePriorityItems: getPriorityQueueItemsStorage(),
-  queueSecondaryItems: getSecondaryQueueItemsStorage(),
   showAddToPlaylists: true,
   showAddToQueue: true
 })
 
 clearItemsFromPriorityQueueStorage()
-clearItemsFromSecondaryQueueStorage()
 addItemToPriorityQueueStorage(sampleNowPlayingItem1)
 addItemToPriorityQueueStorage(sampleNowPlayingItem3b, true)
 addItemToPriorityQueueStorage(sampleNowPlayingItem3)
-addItemsToSecondaryQueueStorage([sampleNowPlayingItem4, sampleNowPlayingItem6,
-  sampleNowPlayingItem5, sampleNowPlayingItem2])
 
 storiesOf('Media', module)
   .addWithJSX(

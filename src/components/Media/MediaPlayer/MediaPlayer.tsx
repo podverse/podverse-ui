@@ -18,7 +18,6 @@ type Props = {
   didWaitToLoad: boolean
   duration: number | null
   handleClipRestart?: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  handleGetPlaybackPositionFromHistory?: Function
   handleItemSkip?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleOnEpisodeEnd?: Function
   handleOnPastClipTime?: Function
@@ -48,7 +47,6 @@ type Props = {
   playing?: boolean
   playlists: any[]
   queuePriorityItems: NowPlayingItem[]
-  queueSecondaryItems: NowPlayingItem[]
   showAutoplay?: boolean
   showPlaybackSpeed?: boolean
   showSupport?: boolean
@@ -104,7 +102,6 @@ export class MediaPlayer extends React.Component<Props, State> {
     duration: null,
     nowPlayingItem: {},
     queuePriorityItems: [],
-    queueSecondaryItems: [],
     playbackRate: 1,
     playbackRateText: '1x',
     playing: false,
@@ -263,7 +260,7 @@ export class MediaPlayer extends React.Component<Props, State> {
   }
 
   onDuration = duration => {
-    const { handleGetPlaybackPositionFromHistory, nowPlayingItem } = this.props
+    const { nowPlayingItem } = this.props
     const { clipStartTime } = nowPlayingItem
 
     this.setState({
@@ -271,14 +268,9 @@ export class MediaPlayer extends React.Component<Props, State> {
       isLoading: false
     })
 
-    const shouldCheckHistoryForPlaybackPosition =
-      (typeof window !== 'undefined' && window.player) &&
-      !(clipStartTime && clipStartTime > 0)
     let playbackPosition = 0
 
-    if (shouldCheckHistoryForPlaybackPosition && handleGetPlaybackPositionFromHistory) {
-      playbackPosition = handleGetPlaybackPositionFromHistory()
-    } else if (nowPlayingItem && nowPlayingItem.userPlaybackPosition && nowPlayingItem.userPlaybackPosition > 0) {
+    if (nowPlayingItem && nowPlayingItem.userPlaybackPosition && nowPlayingItem.userPlaybackPosition > 0) {
       playbackPosition = nowPlayingItem.userPlaybackPosition || 0
     }
 
