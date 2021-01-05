@@ -578,6 +578,11 @@ export class MediaPlayer extends React.Component<Props, State> {
                     <FontAwesomeIcon icon='infinity' />
                   </button>
               }
+              <button
+                className='mp-player__skip-track'
+                onClick={this.itemSkip}>
+                <FontAwesomeIcon icon='step-forward' />
+              </button>
             </div>
           </div>
         </div> : <React.Fragment></React.Fragment>
