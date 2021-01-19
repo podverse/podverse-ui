@@ -30,5 +30,5 @@ export { SignUpModal } from 'components/Auth/SignUpModal'
 export { KEYS } from 'lib/keys'
 export { addItemToPriorityQueueStorage, updatePriorityQueueStorage,
   getPriorityQueueItemsStorage, popNextFromPriorityQueueStorage,
-  popNextFromQueueStorage, removeItemFromPriorityQueueStorage, getNowPlayingItemFromStorage,
-  setNowPlayingItemInStorage } from 'lib/mediaPlayerStorage'
+  popNextFromQueueStorage, removeItemFromPriorityQueueStorage, getLastHistoryItemOrNowPlayingItemFromStorage,
+  getNowPlayingItemFromStorage, setNowPlayingItemInStorage } from 'lib/mediaPlayerStorage'

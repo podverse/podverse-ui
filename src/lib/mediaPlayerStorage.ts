@@ -102,3 +102,25 @@ export const setNowPlayingItemInStorage = nowPlayingItem => {
     localStorage.setItem(kNowPlayingItem, JSON.stringify(''))
   }
 }
+
+export const getLastHistoryItemOrNowPlayingItemFromStorage = (historyItems: any) => {
+  if (historyItems && historyItems.length > 0) {
+    return historyItems[0]
+  } else {
+    const nowPlayingItem = getNowPlayingItemFromStorage()
+
+    if (nowPlayingItem) {
+      return nowPlayingItem
+    } else {
+      const result = popNextFromQueueStorage()
+
+      if (result.nextItem) {
+        localStorage.setItem(kNowPlayingItem, JSON.stringify(result.nextItem))
+        return result.nextItem
+      } else {
+        localStorage.setItem(kNowPlayingItem, '')
+        return
+      }
+    }
+  }
+}
