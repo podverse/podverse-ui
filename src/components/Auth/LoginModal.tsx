@@ -48,7 +48,7 @@ export class LoginModal extends React.Component<Props, State> {
   handleInputChange = event => {
     const { stateKey } = event.target.dataset
     const newState = {}
-    newState[stateKey] = event.target.value.trim()
+    newState[stateKey] = event.target.value
     this.setState(newState)
   }
 
