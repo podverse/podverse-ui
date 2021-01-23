@@ -28,7 +28,7 @@ export { PVButton as Button } from 'components/Button/Button'
 export { PVPagination as Pagination } from 'components/Pagination/Pagination'
 export { SignUpModal } from 'components/Auth/SignUpModal'
 export { KEYS } from 'lib/keys'
-export { addItemToPriorityQueueStorage, updatePriorityQueueStorage,
-  getPriorityQueueItemsStorage, popNextFromPriorityQueueStorage,
-  popNextFromQueueStorage, removeItemFromPriorityQueueStorage, getLastHistoryItemOrNowPlayingItemFromStorage,
-  getNowPlayingItemFromStorage, setNowPlayingItemInStorage } from 'lib/mediaPlayerStorage'
+export { addItemToPriorityQueueStorage, getLastHistoryItemOrNowPlayingItemFromStorage,
+  getNowPlayingItemFromStorage, getPriorityQueueItemsStorage, popNextFromPriorityQueueStorage,
+  popNextFromQueueStorage,removeItemFromPriorityQueueStorage, setNowPlayingItemInStorage,
+  updatePriorityQueueStorage } from 'lib/mediaPlayerStorage'
