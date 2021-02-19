@@ -187,7 +187,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
           {
             subTitle &&
               <div className='media-header__sub-title'>
-                {subTitle}
+                {subTitle ? subTitle : <div>&nbsp;</div> }
               </div>
           }
         </div>

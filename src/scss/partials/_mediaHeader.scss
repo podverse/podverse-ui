@@ -85,7 +85,8 @@
   .media-header-bottom__buttons {
     align-items: center;
     display: flex;
-    flex: 0 0 auto;
+    flex: 1 0 auto;
+    justify-content: flex-end;
   }
 
   .media-header__mobile-buttons {
