@@ -11174,10 +11174,10 @@ pnp-webpack-plugin@1.5.0:
   dependencies:
     ts-pnp "^1.1.2"
 
-podverse-shared@1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/podverse-shared/-/podverse-shared-1.0.10.tgz#528fcd293c00a18acfcc1077a46fa4ea028cda59"
-  integrity sha512-7RxWPoeHJsgOR8f6A9Uscto8/lyWSjnzhT9SivhoLLCBJKjZfX/GVKSGgzT3FQw53fIjN8UbhC9YNBgYZ7nBNQ==
+podverse-shared@^1.0.11:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/podverse-shared/-/podverse-shared-1.0.13.tgz#c17ebf1d14cf73e8596da50a59f7bc57bf163273"
+  integrity sha512-aZZA5/Uv/r3b8xEj6f28YyHWNA1qCsUU7ybMiDWcDoLLIL6NiipuqpjDdE+6M6C6yv0UXm78AgBASH9C2+7ZLg==
   dependencies:
     typescript "3.7.2"
 
