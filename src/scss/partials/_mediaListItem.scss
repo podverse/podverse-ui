@@ -135,6 +135,10 @@
     font-size: $text-lg-rem;
     margin-bottom: 0.625rem;
     margin-top: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   @media(max-width: 520px) {
