@@ -89,8 +89,8 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
-    subTitle = ''
-    bottomText = ''
+    subTitle = generateAuthorText(mediaRef.episode.podcast.authors)
+    bottomText = generateCategoryNodes(mediaRef.episode.podcast.categories, handleLinkClick)
     if (mediaRef && mediaRef.episode && mediaRef.episode.podcast) {
       if (mediaRef.episode.podcast.feedUrls) {
         feedUrl = getIsAuthorityFeedUrl(mediaRef.episode.podcast.feedUrls)
@@ -184,12 +184,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
           </div>
         </div>
         <div className='media-header__middle'>
-          {
-            subTitle &&
-              <div className='media-header__sub-title'>
-                {subTitle ? subTitle : <div>&nbsp;</div> }
-              </div>
-          }
+          <div className='media-header__sub-title'>
+            {subTitle ? subTitle : <div>&nbsp;</div> }
+          </div>
         </div>
         <div className='media-header__bottom'>
           {
