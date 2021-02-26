@@ -187,7 +187,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     itemId={dataPlaylist.id}
                     loadingItemId={loadingItemId}
                     subTitleSide={showOwner ? readableDate(dataPlaylist.updatedAt) : ''}
-                    subTitle={showOwner && dataPlaylist.owner ? `${t('By')}: ${dataPlaylist.owner.name || t('Anonymous')}` : ''}
+                    subTitle={showOwner ? `${t('By')}: ${dataPlaylist && dataPlaylist.owner && dataPlaylist.owner.name || t('Anonymous')}` : ''}
                     title={dataPlaylist.title}
                     titleSide={`${dataPlaylist.itemCount || dataPlaylist.itemCount === 0
                       ? `${('items')}: ${dataPlaylist.itemCount}` : ''}`} />
