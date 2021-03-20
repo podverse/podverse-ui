@@ -142,12 +142,24 @@ export class MediaInfo extends React.Component<Props, State> {
     } else if (podcast) {
       moreInfo = podcast.description
     }
-
     if (moreInfo) {
       moreInfo = linkifyHtml(moreInfo)
       moreInfo = convertHHMMSSToAnchorTags(moreInfo)
       moreInfo = moreInfo.sanitize(censorNSFWText)
     }
+
+    const sanitizedDescription = sanitizeHtml(moreInfo, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+      allowedAttributes: {
+        'a': ['data-start-time', 'href', 'rel', 'target']
+      },
+      transformTags: {
+        'a': sanitizeHtml.simpleTransform('a', {
+          target: '_blank',
+          rel: 'noopener noreferrer'
+        })
+      }
+    })
 
     episodeTitle = episodeTitle ? episodeTitle.sanitize(censorNSFWText) : ''
     clipTitle = clipTitle ? clipTitle.sanitize(censorNSFWText) : ''
@@ -292,16 +304,11 @@ export class MediaInfo extends React.Component<Props, State> {
           }
           {
             (moreInfo && showDescription) &&
-              <div
+              <article
                 className='media-info__description'
                 dangerouslySetInnerHTML={
                   {
-                    __html: sanitizeHtml(moreInfo, {
-                      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
-                      allowedAttributes: {
-                        'a': ['data-start-time', 'href']
-                      }
-                    })
+                    __html: sanitizedDescription
                   }} />
           }
         </div>
