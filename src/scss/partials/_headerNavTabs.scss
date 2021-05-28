@@ -30,7 +30,7 @@
       }
     }
 
-    @media(max-width: 375px) {
+    @media(max-width: 400px) {
       .header-nav-tab {
         padding: 0.5rem;
       }
@@ -42,7 +42,7 @@
     padding: 0 0.75rem;
   }
 
-  @media(max-width: 375px) {
+  @media(max-width: 400px) {
     .header-nav-tabs-advanced-btn__text {
       display: none;
     }
