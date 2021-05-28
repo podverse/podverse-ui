@@ -98,7 +98,7 @@
   }
 
   @media(max-width: 575px) {
-    .media-header-top__buttons,
+    .media-header-top__buttons &.hide-on-mobile,
     .media-header-bottom__buttons {
       display: none;
     }
