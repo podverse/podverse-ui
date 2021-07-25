@@ -153,10 +153,12 @@
     display: block;
     font-size: $text-md-rem;
     font-weight: 300;
+    padding-right: 0.25rem;
 
     a {
       display: inline-block;
       margin: $border-focus-margin;
+      margin-right: 0;
       padding: 0.25rem 0;
     }
   }
@@ -174,6 +176,7 @@ html[data-theme=light] {
 
   .media-header__sub-title,
   .media-header__bottom-text a, .media-header__bottom-text a.pill,
+  .media-header__bottom-text span,
   .media-header-bottom__buttons, .media-header-bottom__buttons a.pill {
     color: $gray-dark;
   }
@@ -191,6 +194,7 @@ html[data-theme=dark] {
 
   .media-header__sub-title,
   .media-header__bottom-text a, .media-header__bottom-text a.pill,
+  .media-header__bottom-text span,
   .media-header-bottom__buttons, .media-header-bottom__buttons a.pill {
     color: $gray-light;
   }

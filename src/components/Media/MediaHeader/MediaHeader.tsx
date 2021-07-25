@@ -55,10 +55,7 @@ const generateCategoryNodes = (categories, handleLinkClick) => {
               key={uuidv4()}
               onClick={handleLinkClick}>{categoryText}</a>
           </Link>
-          {
-            i < categories.length - 1 &&
-            <React.Fragment key={uuidv4()}>,&nbsp;</React.Fragment>
-          }
+          {i < categories.length - 1 && (<span>,</span>)}
         </React.Fragment>
       )
     }
