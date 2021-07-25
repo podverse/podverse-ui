@@ -95,7 +95,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
   const imageUrl = dataNowPlayingItem &&
     ((useEpisodeImageUrl && dataNowPlayingItem.episodeImageUrl)
     || dataNowPlayingItem.podcastShrunkImageUrl)
-console.log('medialistitem', dataNowPlayingItem, useEpisodeImageUrl)
+
   return (
     <React.Fragment>
       <div className={`media-list__container ${isActive ? 'is-active' : ''} ${isSlim ? 'is-slim' : ''}`}>
