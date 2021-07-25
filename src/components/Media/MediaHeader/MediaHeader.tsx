@@ -85,7 +85,9 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   if (mediaRef) {
     const item = convertToNowPlayingItem(mediaRef, null, null)
     const { podcastShrunkImageUrl, podcastId, podcastTitle } = item
-    imgUrl = podcastShrunkImageUrl
+    imgUrl = (mediaRef.episode && mediaRef.episode.shrunkImageUrl)
+      || (mediaRef.episode && mediaRef.episode.imageUrl)
+      || podcastShrunkImageUrl
     title = podcastTitle
     titleAs = getLinkPodcastAs(podcastId)
     titleHref = getLinkPodcastHref(podcastId)
@@ -100,7 +102,10 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
       // podcastValue = mediaRef.episode.podcast.value
     }
   } else if (episode && episode.podcast) {
-    imgUrl = episode.podcast.shrunkImageUrl
+    imgUrl = episode.shrunkImageUrl
+      || episode.imageUrl
+      || episode.podcast.shrunkImageUrl
+      || episode.podcast.imageUrl
     title = episode.podcast.title
     titleAs = getLinkPodcastAs(episode.podcast.id)
     titleHref = getLinkPodcastHref(episode.podcast.id)
@@ -113,7 +118,7 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   } else if (podcast) {
     subTitle = generateAuthorText(podcast.authors)
     bottomText = generateCategoryNodes(podcast.categories, handleLinkClick)
-    imgUrl = podcast.shrunkImageUrl
+    imgUrl = podcast.shrunkImageUrl || podcast.imageUrl
     title = podcast.title
     if (podcast.feedUrls) {
       feedUrl = getIsAuthorityFeedUrl(podcast.feedUrls)

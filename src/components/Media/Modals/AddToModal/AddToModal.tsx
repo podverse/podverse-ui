@@ -109,6 +109,7 @@ const AddToModal: React.StatelessComponent<Props> = props => {
               hideDescription={true}
               hideDivider={true}
               itemType='now-playing-item'
+              useEpisodeImageUrl={true}
               t={t} />
         }
         {
