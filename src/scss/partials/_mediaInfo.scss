@@ -22,6 +22,19 @@
     margin-top: 0.5rem;
   }
 
+  .media-info__replay-clip-button {
+    background-color: transparent;
+    padding-top: 8px;
+    transition: none;
+    border-radius: 44px;
+    border-style: solid;
+    border-width: 1px;
+    flex: 0 0 auto;
+    height: 44px;
+    margin-left: 1rem;
+    width: 44px;
+  }
+
   .media-info__clip-created-by {
     font-size: $text-sm-rem;
     font-weight: 300;
@@ -52,8 +65,10 @@
   .media-info__controls {
     display: flex;
     margin: 1.5rem 0;
-    
-    .media-info-controls__play, .more-dropdown-menu .btn, .media-info-controls__edit {
+
+    .media-info-controls__play,
+    .more-dropdown-menu .btn,
+    .media-info-controls__edit {
       background-color: transparent;
       padding-top: 8px;
       transition: none;
@@ -82,7 +97,8 @@
       margin-left: 0;
     }
 
-    .media-info-controls__make-clip, .media-info-controls__share {
+    .media-info-controls__make-clip,
+    .media-info-controls__share {
       display: none;
     }
   }
@@ -115,22 +131,28 @@
     margin-top: 1rem;
     word-break: break-word;
 
-    h1, h2 {
+    h1,
+    h2 {
       font-size: $text-xl-rem;
       margin: 1rem 0 0.5rem 0;
     }
 
-    h3, h4 {
+    h3,
+    h4 {
       font-size: $text-lg-rem;
       margin: 1rem 0 0.5rem 0;
     }
 
-    h5, h6, p {
+    h5,
+    h6,
+    p {
       font-size: $text-md-rem;
       margin: 0.5rem 0;
     }
 
-    ul, ol, li {
+    ul,
+    ol,
+    li {
       margin: 0.5rem 0;
     }
 
@@ -148,7 +170,7 @@
   }
 }
 
-html[data-theme=light] {
+html[data-theme="light"] {
   .media-info {
     border-color: $gray-lighter;
 
@@ -164,25 +186,40 @@ html[data-theme=light] {
       color: $black;
     }
 
-    .media-info__clip-time, .media-info__replay-clip {
+    .media-info__clip-time,
+    .media-info__replay-clip {
       color: $gray-dark !important;
     }
 
-    .media-info__clip-created-by, .media-info__dynamic-ads-warning {
-      color: $gray-dark;
+    .media-info__replay-clip-button {
+      background-color: $white !important;
+      border-color: $black !important;
+      color: $black !important;
+
+      &:hover {
+        border-color: $gray-darker;
+        color: $gray-darker;
+      }
     }
 
+    .media-info__clip-created-by,
+    .media-info__dynamic-ads-warning {
+      color: $gray-dark;
+    }
 
     .media-info__clip-status {
       color: $gray-dark;
     }
 
-    .media-info__item-count, .media-info__last-updated {
+    .media-info__item-count,
+    .media-info__last-updated {
       color: $gray-dark;
     }
 
     .media-info__controls {
-      .media-info-controls__play, .more-dropdown-menu .btn, .media-info-controls__edit {
+      .media-info-controls__play,
+      .more-dropdown-menu .btn,
+      .media-info-controls__edit {
         background-color: $white;
         border-color: $black;
         color: $black;
@@ -204,7 +241,7 @@ html[data-theme=light] {
   }
 }
 
-html[data-theme=dark] {
+html[data-theme="dark"] {
   .media-info {
     border-color: $gray-darker;
 
@@ -220,11 +257,24 @@ html[data-theme=dark] {
       color: $white;
     }
 
-    .media-info__clip-time, .media-info__replay-clip {
+    .media-info__clip-time,
+    .media-info__replay-clip {
       color: $gray-light !important;
     }
 
-    .media-info__clip-created-by, .media-info__dynamic-ads-warning {
+    .media-info__replay-clip-button {
+      background-color: $black !important;
+      border-color: $white !important;
+      color: $white !important;
+
+      &:hover {
+        border-color: $gray-lighter;
+        color: $gray-lighter;
+      }
+    }
+
+    .media-info__clip-created-by,
+    .media-info__dynamic-ads-warning {
       color: $gray-light;
     }
 
@@ -232,12 +282,15 @@ html[data-theme=dark] {
       color: $gray-light;
     }
 
-    .media-info__item-count, .media-info__last-updated {
+    .media-info__item-count,
+    .media-info__last-updated {
       color: $gray-light;
     }
 
     .media-info__controls {
-      .media-info-controls__play, .more-dropdown-menu .btn, .media-info-controls__edit {
+      .media-info-controls__play,
+      .more-dropdown-menu .btn,
+      .media-info-controls__edit {
         background-color: $black;
         border-color: $white;
         color: $white;
