@@ -232,11 +232,17 @@ export class MediaInfo extends React.Component<Props, State> {
                 <a
                   className='media-info__replay-clip'
                   onClick={handleReplayClip}>
+                  {clipTime}
+                </a>
+                <a 
+                  className='media-info__replay-clip-button'
+                  onClick={handleReplayClip}>
                   {
                     isOfficialChapter
-                      ? `Chapter from ${clipTime}`
-                      : `Clip from ${clipTime}`
+                      ? "Replay Chapter"
+                      : "Replay Clip"
                   }
+                  <FontAwesomeIcon icon='redo' />
                 </a>
               </div>
           }

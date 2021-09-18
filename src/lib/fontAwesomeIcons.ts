@@ -4,7 +4,7 @@ import {
   faArrowsAltV, faBars, faCaretDown, faCaretRight, faCheck, faCog, faCut, faDonate, faDownload, faEdit,
   faEllipsisH, faFilter, faGlobeAmericas, faHeadphones, faHistory, faInfinity,
   faLevelDownAlt, faLevelUpAlt, faLink, faListUl, faLock, faMobileAlt, faMoon, faPause, faPlay,
-  faPlayCircle, faPlus, faPlusCircle, faPodcast, faRedoAlt, faRss, faSearch, faShare, faShoppingCart,
+  faPlayCircle, faPlus, faPlusCircle, faPodcast, faRedo, faRedoAlt, faRss, faSearch, faShare, faShoppingCart,
   faSmile, faSpinner, faStepBackward, faStepForward, faSun, faTimes, faTools, faTrash, faUndoAlt,
   faUserCircle, faUserSecret, faVolumeOff, faVolumeUp
 } from '@fortawesome/free-solid-svg-icons'
@@ -45,6 +45,7 @@ export const addFontAwesomeIcons = () => {
     faPlusCircle,
     faPodcast,
     faReddit,
+    faRedo,
     faRedoAlt,
     faRss,
     faSearch,
