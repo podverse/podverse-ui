@@ -239,8 +239,8 @@ export class MediaInfo extends React.Component<Props, State> {
                   onClick={handleReplayClip}>
                   {
                     isOfficialChapter
-                      ? "Replay Chapter"
-                      : "Replay Clip"
+                      ? 'Replay Chapter'
+                      : 'Replay Clip'
                   }
                   <FontAwesomeIcon icon='redo' />
                 </a>
