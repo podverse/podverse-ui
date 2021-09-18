@@ -22,6 +22,13 @@
     margin-top: 0.5rem;
   }
 
+  .media-info__replay-clip-button {
+    margin-left: 0.5rem;
+    svg {
+      margin-left: 0.5rem;
+    }
+  }
+
   .media-info__clip-created-by {
     font-size: $text-sm-rem;
     font-weight: 300;
