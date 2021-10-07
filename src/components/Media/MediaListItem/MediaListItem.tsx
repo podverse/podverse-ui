@@ -26,6 +26,7 @@ type Props = {
   handleToggleShare?: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleToggleAddToPlaylist?: (event: React.MouseEvent<HTMLButtonElement>) => void
   hasLink?: boolean
+  isRemoving?: boolean
   hideDescription?: boolean
   hideDivider?: boolean
   isActive?: boolean
@@ -49,7 +50,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
     handleLinkClick, handleAddToQueueLast, handleAddToQueueNext, handlePlayItem,
     handleRemoveItem, handleToggleAddToPlaylist, handleToggleShare, hasLink, hideDescription, hideDivider,
     isActive, isSlim, itemType, loadingItemId, noWrap, showMoreMenu, showMove, showOwner,
-    showRemove, t, useEpisodeImageUrl } = props
+    showRemove, t, useEpisodeImageUrl, isRemoving } = props
 
   let anchorHref = ''
   let anchorAs = ''
@@ -241,6 +242,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                 showRemove &&
                   <Button
                     className='media-list-right__remove'
+                    isLoading={isRemoving}
                     onClick={handleRemoveItem}>
                     <FontAwesomeIcon icon='times' />
                   </Button>
