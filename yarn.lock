@@ -11224,12 +11224,12 @@ pnp-webpack-plugin@1.5.0:
   dependencies:
     ts-pnp "^1.1.2"
 
-podverse-shared@^1.0.11:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/podverse-shared/-/podverse-shared-1.0.13.tgz#c17ebf1d14cf73e8596da50a59f7bc57bf163273"
-  integrity sha512-aZZA5/Uv/r3b8xEj6f28YyHWNA1qCsUU7ybMiDWcDoLLIL6NiipuqpjDdE+6M6C6yv0UXm78AgBASH9C2+7ZLg==
+podverse-shared@^3.0.0:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/podverse-shared/-/podverse-shared-3.2.2.tgz#3ec3ec0cc27e4df4edbbd707a5da75992ba49b15"
+  integrity sha512-zOTh+5l2XVbrUKjkbR+LZfWau3ChV+KNKXyJnUql19nnGKaGYPD5KVSLk5N9N+DGIPe1iIPqqdnFjV9HqLe6fw==
   dependencies:
-    typescript "3.7.2"
+    typescript "3.9.7"
 
 polished@^3.3.1:
   version "3.6.7"
@@ -13906,10 +13906,10 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
-striptags@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/striptags/-/striptags-3.1.1.tgz#c8c3e7fdd6fb4bb3a32a3b752e5b5e3e38093ebd"
-  integrity sha1-yMPn/db7S7OjKjt1LltePjgJPr0=
+striptags@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/striptags/-/striptags-3.2.0.tgz#cc74a137db2de8b0b9a370006334161f7dd67052"
+  integrity sha512-g45ZOGzHDMe2bdYMdIvdAfCQkCTDMGBazSw1ypMowwGIee7ZQ5dU0rBJ8Jqgl+jAKIv4dbeE1jscZq9wid1Tkw==
 
 style-loader@1.0.0:
   version "1.0.0"
@@ -14554,10 +14554,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.7.2:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
-  integrity sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
+typescript@3.9.7:
+  version "3.9.7"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
+  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
 
 ua-parser-js@^0.7.18, ua-parser-js@^0.7.9:
   version "0.7.23"
