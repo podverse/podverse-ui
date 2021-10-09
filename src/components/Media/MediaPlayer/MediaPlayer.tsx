@@ -6,7 +6,7 @@ import { NowPlayingItem } from 'podverse-shared'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { convertSecToHHMMSS } from 'lib/utility'
-import { ImageSquare } from 'components/Image/ImageSquare'
+import { PVImage } from 'components/PVImage/PVImage'
 
 declare global {
   interface Window { player: any }
@@ -428,9 +428,10 @@ export class MediaPlayer extends React.Component<Props, State> {
             { ...(isClip ? { onClick: playerClipLinkOnClick } : {}) }
           }>
           <div className='mp-header__image'>
-            <ImageSquare
+            <PVImage
+              height='48px'
               imageUrl={episodeImageUrl || podcastShrunkImageUrl}
-              size='48px' />
+              width='48px' />
           </div>
           <div className='mp-header__wrap'>
             <div className='mp-header-wrap__top'>

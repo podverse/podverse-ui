@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as Modal from 'react-modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CloseButton } from 'components/CloseButton/CloseButton'
-import { ImageSquare } from 'components/Image/ImageSquare'
+import { PVImage } from 'components/PVImage/PVImage'
 import { checkIfLoadingOnFrontEnd } from 'lib/utility'
 
 type Props = {
@@ -93,9 +93,10 @@ export class SupportModal extends React.Component<Props, State> {
         {header}
         <div className='support-modal__info'>
           <div className='support-modal-info__podcast-image'>
-            <ImageSquare
+            <PVImage
+              height='3.75rem'
               imageUrl={podcastShrunkImageUrl}
-              size='3.75rem' />
+              width='3.75rem' />
           </div>
           <div className='support-modal-info__podcast-title'>
             <span>{podcastTitle}</span>

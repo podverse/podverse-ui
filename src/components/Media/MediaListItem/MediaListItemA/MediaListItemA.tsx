@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ImageSquare } from 'components/Image/ImageSquare'
+import { PVImage } from 'components/PVImage/PVImage'
 
 export interface Props {
   censorNSFWText?: boolean
@@ -29,9 +29,10 @@ export const MediaListItemA: React.StatelessComponent<Props> = props => {
       {
         showImage &&
           <div className='media-list-item-a__image'>
-            <ImageSquare
+            <PVImage
+              height='5.25rem'
               imageUrl={imageUrl}
-              size='5.25rem' />
+              width='5.25rem' />
           </div>
       }
       <div className='text-wrapper'>

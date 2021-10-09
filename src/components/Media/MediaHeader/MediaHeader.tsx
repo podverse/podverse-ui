@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { convertToNowPlayingItem } from 'podverse-shared'
-import { ImageSquare } from 'components/Image/ImageSquare'
 import { Pill } from 'components/Pill/Pill'
+import { PVImage } from 'components/PVImage/PVImage'
 import { getLinkPodcastHref, getLinkPodcastAs, getLinkCategoryHref,
   getLinkCategoryAs } from 'lib/constants'
 import { getIsAuthorityFeedUrl } from 'lib/utility'
@@ -163,9 +163,10 @@ export const MediaHeader: React.StatelessComponent<Props> = props => {
   return (
     <div className='media-header'>
       <div className='media-header__image-wrapper'>
-        <ImageSquare
+        <PVImage
+          height='6.75rem'
           imageUrl={imgUrl}
-          size='6.75rem' />
+          width='6.75rem' />
       </div>
       <div className='text-wrapper'>
         <div className='media-header__top'>

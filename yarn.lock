@@ -11174,12 +11174,12 @@ pnp-webpack-plugin@1.5.0:
   dependencies:
     ts-pnp "^1.1.2"
 
-podverse-shared@^1.0.11:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/podverse-shared/-/podverse-shared-1.0.13.tgz#c17ebf1d14cf73e8596da50a59f7bc57bf163273"
-  integrity sha512-aZZA5/Uv/r3b8xEj6f28YyHWNA1qCsUU7ybMiDWcDoLLIL6NiipuqpjDdE+6M6C6yv0UXm78AgBASH9C2+7ZLg==
+podverse-shared@^3.0.0:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/podverse-shared/-/podverse-shared-3.2.2.tgz#3ec3ec0cc27e4df4edbbd707a5da75992ba49b15"
+  integrity sha512-zOTh+5l2XVbrUKjkbR+LZfWau3ChV+KNKXyJnUql19nnGKaGYPD5KVSLk5N9N+DGIPe1iIPqqdnFjV9HqLe6fw==
   dependencies:
-    typescript "3.7.2"
+    typescript "3.9.7"
 
 polished@^3.3.1:
   version "3.6.7"
@@ -14506,10 +14506,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.7.2:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
-  integrity sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
+typescript@3.9.7:
+  version "3.9.7"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
+  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
 
 ua-parser-js@^0.7.18, ua-parser-js@^0.7.9:
   version "0.7.23"
