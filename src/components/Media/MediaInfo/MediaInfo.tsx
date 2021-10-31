@@ -113,7 +113,7 @@ export class MediaInfo extends React.Component<Props, State> {
       episodeAs = getLinkEpisodeAs(mediaRef.episode.id)
       episodeHref = getLinkEpisodeHref(mediaRef.episode.id)
       episodePubDate = readableDate(mediaRef.episode.pubDate)
-      clipTitle = mediaRef.title || t('untitledClip')
+      clipTitle = mediaRef.title || mediaRef.episode.title || t('untitledClip')
       clipTime = readableClipTime(mediaRef.startTime, mediaRef.endTime, t)
       createdById = mediaRef.owner ? mediaRef.owner.id : ''
       createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false

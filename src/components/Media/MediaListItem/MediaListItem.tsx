@@ -118,7 +118,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime, t)}
                     subTitleTop={dataNowPlayingItem.podcastTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                    title={dataNowPlayingItem.clipTitle || t('untitledClip') } />
+                    title={dataNowPlayingItem.clipTitle || dataNowPlayingItem.episodeTitle || t('untitledClip') } />
               }
               {
                 (itemType === 'now-playing-item' && (dataNowPlayingItem && (!dataNowPlayingItem.clipStartTime && dataNowPlayingItem.clipStartTime !== 0) && dataNowPlayingItem.episodeId)) &&
@@ -135,7 +135,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     censorNSFWText={censorNSFWText}
                     showImage={false}
                     subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime, t)}
-                    title={dataNowPlayingItem.clipTitle || t('untitledClip')} />
+                    title={dataNowPlayingItem.clipTitle || dataNowPlayingItem.episodeTitle || t('untitledClip')} />
               }
               {
                 (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
@@ -145,7 +145,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime, t)}
                     subTitleTop={dataNowPlayingItem.episodeTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                    title={dataNowPlayingItem.clipTitle || t('untitledClip')} />
+                    title={dataNowPlayingItem.clipTitle || dataNowPlayingItem.episodeTitle || t('untitledClip')} />
               }
               {
                 (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
@@ -173,7 +173,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime, t)}
                     subTitleTop={dataNowPlayingItem.podcastTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                    title={dataNowPlayingItem.clipTitle || t('untitledClip')} />
+                    title={dataNowPlayingItem.clipTitle || dataNowPlayingItem.episodeTitle || t('untitledClip')} />
               }
               {
                 (itemType === 'now-playing-item-queue-episode' && dataNowPlayingItem) &&
