@@ -40,7 +40,7 @@ export const Pill: React.StatelessComponent<Props> = props => {
   return (
     <a
       className={pillClass}
-      href={href ? href : 'javascript:;'}
+      href={href}
       onClick={onClick}
       rel={rel}
       target={target}

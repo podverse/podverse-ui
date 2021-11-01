@@ -45,6 +45,7 @@ export class Navbar extends React.Component<Props, State> {
               key={`${navItemKey}b${index}`}
               active={pageKey ? x.pageKey === pageKey : false}>
               <NavLink
+                key={`${navItemKey}c${index}`}
                 {...(x.href ? { href: x.href } : {})}
                 onClick={x.onClick}>
                 {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
@@ -58,6 +59,7 @@ export class Navbar extends React.Component<Props, State> {
             key={`${navItemKey}b${index}`}
             active={pageKey ? x.pageKey === pageKey : false}>
             <NavLink
+              key={`${navItemKey}c${index}`}
               onClick={x.onClick}>
               {x.icon ? <FontAwesomeIcon icon={x.icon} /> : x.label}
             </NavLink>
