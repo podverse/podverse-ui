@@ -1,11 +1,12 @@
 import * as React from 'react'
-import FilePlayer from 'react-player/lib/players/FilePlayer'
+
 import { Progress, Tooltip } from 'reactstrap'
 import Link from 'next/link'
 import { NowPlayingItem } from 'podverse-shared'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { keyLeftArrow, keyRightArrow } from 'lib/constants'
 import { convertSecToHHMMSS } from 'lib/utility'
+import { AudioPlayer } from 'components/Media/AudioPlayer/AudioPlayer'
 import { PVImage } from 'components/PVImage/PVImage'
 
 declare global {
@@ -79,22 +80,6 @@ export interface MediaPlayer {
 
 let lastNowPlayingItem: NowPlayingItem = {}
 
-// Force ReactPlayer to refresh every time the mediaUrl changes, to ensure
-// playback behavior handles properly.
-let mediaUrl
-let reactPlayerKey = 0
-const incrementReactPlayerKey = () => reactPlayerKey++
-const hasMediaUrlChanged = (newUrl) => {
-  if (!mediaUrl) {
-    mediaUrl = newUrl
-    return false
-  } else {
-    const hasChanged = mediaUrl !== newUrl
-    mediaUrl = newUrl
-    return hasChanged
-  }
-}
-
 export class MediaPlayer extends React.Component<Props, State> {
 
   static defaultProps: Props = {
@@ -109,7 +94,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     showAutoplay: true
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -130,12 +115,12 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.progressBarWidth = React.createRef()
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setKeyboardEventListeners()
     this.setState({ isClientSide: true })
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     const lastItem = this.props.nowPlayingItem || {}
     const nextItem = nextProps.nowPlayingItem || {}
 
@@ -147,13 +132,13 @@ export class MediaPlayer extends React.Component<Props, State> {
     // If the same clip is played back-to-back after an item skip,
     // force refresh of the player to the clipStartTime
     if (typeof window !== 'undefined'
-        && window.player
-        && lastItem !== nextItem
-        && lastItem.clipId
-        && lastItem.clipId === nextItem.clipId) {
+      && window.player
+      && lastItem !== nextItem
+      && lastItem.clipId
+      && lastItem.clipId === nextItem.clipId) {
       window.player.seekTo(nextItem && nextItem.clipStartTime && Math.floor(nextItem.clipStartTime))
-    // If the same episode is played back-to-back after an item skip,
-    // force refresh of the player to the beginning.
+      // If the same episode is played back-to-back after an item skip,
+      // force refresh of the player to the beginning.
     } else if (typeof window !== 'undefined'
       && window.player
       && lastItem !== nextItem
@@ -163,7 +148,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
-  setKeyboardEventListeners () {
+  setKeyboardEventListeners() {
     document.body.addEventListener('keydown', (event) => {
       if (
         typeof window !== 'undefined' && window.player
@@ -179,13 +164,6 @@ export class MediaPlayer extends React.Component<Props, State> {
         }
       }
     })
-  }
-
-  playerRef = player => {
-    if (typeof window !== 'undefined') {
-      window.player = player
-      return player
-    }
   }
 
   setCurrentTime = e => {
@@ -259,7 +237,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     }
   }
 
-  onDuration = duration => {
+  audioOnDuration = duration => {
     const { nowPlayingItem } = this.props
     const { clipStartTime } = nowPlayingItem
 
@@ -283,7 +261,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.forceUpdate()
   }
 
-  onPlay = () => {
+  audioOnPlay = () => {
     const { clipFinished, handleOnPastClipTime, handleSetPlayedAfterClipFinished,
       nowPlayingItem } = this.props
     const { clipEndTime } = nowPlayingItem
@@ -332,7 +310,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     this.setState({ seeking: false })
   }
 
-  onProgress = state => {
+  audioOnProgress = state => {
     const { autoplay, handleOnPastClipTime, handlePause, nowPlayingItem,
       playedAfterClipFinished, playing } = this.props
     const { clipEndTime } = nowPlayingItem
@@ -370,7 +348,7 @@ export class MediaPlayer extends React.Component<Props, State> {
     })
   }
 
-  render () {
+  render() {
     const { autoplay, didWaitToLoad, handleOnEpisodeEnd, handlePlaybackRateClick, handleToggleAutoplay,
       handletoggleAddToPlaylistModal, handleToggleMakeClipModal, handleToggleShareModal,
       handleToggleSupportModal, handleTogglePlay, nowPlayingItem, playbackRate, playbackRateText,
@@ -388,21 +366,15 @@ export class MediaPlayer extends React.Component<Props, State> {
     // If the new NowPlayingItem is the same episode as the last one, but it is a
     // different clip, then make the player seek to the new clipStartTime
     if (clipStartTime &&
-        lastNowPlayingItem.episodeMediaUrl === episodeMediaUrl &&
-        (lastNowPlayingItem.clipEndTime !== clipEndTime ||
+      lastNowPlayingItem.episodeMediaUrl === episodeMediaUrl &&
+      (lastNowPlayingItem.clipEndTime !== clipEndTime ||
         lastNowPlayingItem.clipStartTime !== clipStartTime ||
         lastNowPlayingItem.clipTitle !== clipTitle ||
         lastNowPlayingItem.clipId !== clipId) &&
-        typeof window !== 'undefined' && window.player) {
+      typeof window !== 'undefined' && window.player) {
       window.player.seekTo(Math.floor(clipStartTime))
     } else if (lastNowPlayingItem === nowPlayingItem) {
       isLoadingOverride = false
-    }
-
-    // Force ReactPlayer to reload if it receives a new mediaUrl, set loading state,
-    // and clear clip flags.
-    if (hasMediaUrlChanged(episodeMediaUrl)) {
-      incrementReactPlayerKey()
     }
 
     const { clipEndFlagPositionX, clipStartFlagPositionX } = this.getClipFlagPositions()
@@ -420,12 +392,12 @@ export class MediaPlayer extends React.Component<Props, State> {
         <a
           className='mp-header__link'
           {
-            ...playerEpisodeLinkOnClick &&
-            { ...(!isClip ? { onClick: playerEpisodeLinkOnClick } : {}) }
+          ...playerEpisodeLinkOnClick &&
+          { ...(!isClip ? { onClick: playerEpisodeLinkOnClick } : {}) }
           }
           {
-            ...playerClipLinkOnClick &&
-            { ...(isClip ? { onClick: playerClipLinkOnClick } : {}) }
+          ...playerClipLinkOnClick &&
+          { ...(isClip ? { onClick: playerClipLinkOnClick } : {}) }
           }>
           <div className='mp-header__image'>
             <PVImage
@@ -450,30 +422,25 @@ export class MediaPlayer extends React.Component<Props, State> {
         <div className='mp'>
           {
             isClientSide && didWaitToLoad &&
-              <FilePlayer
-                key={reactPlayerKey}
-                muted={false}
-                onDuration={this.onDuration}
-                onEnded={handleOnEpisodeEnd}
-                onPlay={this.onPlay}
-                onProgress={this.onProgress}
+              <AudioPlayer
+                handleOnEpisodeEnd={handleOnEpisodeEnd}
+                nowPlayingItem={nowPlayingItem}
+                onDuration={this.audioOnDuration}
+                onPlay={this.audioOnPlay}
+                onProgress={this.audioOnProgress}
                 playbackRate={playbackRate}
-                playing={playing}
-                ref={this.playerRef}
-                style={{ display: 'none' }}
-                url={episodeMediaUrl}
-                volume={1} />
+                playing={playing} />
           }
           <div className='mp__header'>
             <div className='mp-header__inner'>
               {headerLink}
               {
                 showSupport &&
-                  <button
-                    className='mp-header__funding'
-                    onClick={handleToggleSupportModal}>
-                    <FontAwesomeIcon icon='donate' />
-                  </button>
+                <button
+                  className='mp-header__funding'
+                  onClick={handleToggleSupportModal}>
+                  <FontAwesomeIcon icon='donate' />
+                </button>
               }
               <button
                 className='mp-header__make-clip'
@@ -517,26 +484,26 @@ export class MediaPlayer extends React.Component<Props, State> {
                 ref={this.progressBarWidth}>
                 {
                   (!isLoadingOverride && duration) &&
-                    <span className={`mp-player__current-time`}>
-                      {convertSecToHHMMSS(typeof window !== 'undefined' && window.player.getCurrentTime())}
-                    </span>
+                  <span className={`mp-player__current-time`}>
+                    {convertSecToHHMMSS(typeof window !== 'undefined' && window.player.getCurrentTime())}
+                  </span>
                 }
                 {
                   !playedAfterClipFinished &&
-                    <React.Fragment>
-                      <div
-                        className='mp-progress-bar__clip-start'
-                        style={{
-                          display: `${clipStartFlagPositionX > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
-                          left: `${clipStartFlagPositionX}px`
-                        }} />
-                      <div
-                        className='mp-progress-bar__clip-end'
-                        style={{
-                          display: `${clipEndFlagPositionX > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
-                          left: `${clipEndFlagPositionX}px`
-                        }} />
-                    </React.Fragment>
+                  <React.Fragment>
+                    <div
+                      className='mp-progress-bar__clip-start'
+                      style={{
+                        display: `${clipStartFlagPositionX > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
+                        left: `${clipStartFlagPositionX}px`
+                      }} />
+                    <div
+                      className='mp-progress-bar__clip-end'
+                      style={{
+                        display: `${clipEndFlagPositionX > -1 && duration && !isLoadingOverride ? 'block' : 'none'}`,
+                        left: `${clipEndFlagPositionX}px`
+                      }} />
+                  </React.Fragment>
                 }
                 <Progress
                   className='mp-player__progress-bar'
@@ -549,7 +516,7 @@ export class MediaPlayer extends React.Component<Props, State> {
                   ref={this.durationNode}>
                   {
                     (!isLoadingOverride && duration) &&
-                      convertSecToHHMMSS(duration)
+                    convertSecToHHMMSS(duration)
                   }
                 </span>
               </div>
@@ -565,19 +532,19 @@ export class MediaPlayer extends React.Component<Props, State> {
               </button>
               {
                 showPlaybackSpeed &&
-                  <button
-                    className='mp-player__playback-rate'
-                    onClick={handlePlaybackRateClick}>
-                    {playbackRateText}
-                  </button>
+                <button
+                  className='mp-player__playback-rate'
+                  onClick={handlePlaybackRateClick}>
+                  {playbackRateText}
+                </button>
               }
               {
                 showAutoplay &&
                 <button
-                className={`mp-player__autoplay ${autoplay ? 'active' : ''}`}
-                onClick={handleToggleAutoplay}>
-                    <FontAwesomeIcon icon='infinity' />
-                  </button>
+                  className={`mp-player__autoplay ${autoplay ? 'active' : ''}`}
+                  onClick={handleToggleAutoplay}>
+                  <FontAwesomeIcon icon='infinity' />
+                </button>
               }
               <button
                 className='mp-player__skip-track'

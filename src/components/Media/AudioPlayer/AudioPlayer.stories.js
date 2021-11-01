@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import { State, Store } from '@sambego/storybook-state'
-import { MediaPlayer } from './MediaPlayer'
+import { AudioPlayer } from './AudioPlayer'
 import { sampleMediaRef1, sampleNowPlayingItem1, sampleNowPlayingItem3,
   sampleNowPlayingItem3b, samplePlaylist1, samplePlaylist2, samplePlaylist3,
   samplePlaylist4, samplePlaylist5, samplePlaylist6, sampleText, stubFunction } from 'storybook/constants'
@@ -181,11 +181,11 @@ addItemToPriorityQueueStorage(sampleNowPlayingItem3)
 
 storiesOf('Media', module)
   .addWithJSX(
-    'MediaPlayer',
+    'AudioPlayer',
     () => (
       <React.Fragment>
         <State store={store}>
-          <MediaPlayer />
+          <AudioPlayer />
         </State>
         { JSON.stringify(store.get('nowPlayingItem')) }
         { sampleText }
