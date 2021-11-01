@@ -5,6 +5,7 @@ import 'lib/extensions/String'
 addFontAwesomeIcons()
 
 export { AddToModal } from 'components/Media/Modals/AddToModal/AddToModal'
+export { AudioPlayer } from 'components/Media/AudioPlayer/AudioPlayer'
 export { ButtonGroup } from 'components/Form/ButtonGroup/ButtonGroup'
 export { ClipCreatedModal } from 'components/Media/Modals/ClipCreatedModal/ClipCreatedModal'
 export { CloseButton } from 'components/CloseButton/CloseButton'
