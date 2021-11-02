@@ -3,7 +3,7 @@ import { Button } from 'reactstrap'
 import Link from 'next/link'
 import { convertToNowPlayingItem } from 'podverse-shared'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { convertHHMMSSToAnchorTags, readableClipTime, readableDate } from 'lib/utility'
+import { convertHHMMSSToAnchorTags, prefixClipLabel, readableClipTime, readableDate } from 'lib/utility'
 import { getLinkUserAs, getLinkUserHref, getLinkEpisodeAs, getLinkEpisodeHref } from 'lib/constants'
 import { MoreDropdown } from 'components/MoreDropdown/MoreDropdown'
 const linkifyHtml = require('linkifyjs/html')
@@ -113,7 +113,7 @@ export class MediaInfo extends React.Component<Props, State> {
       episodeAs = getLinkEpisodeAs(mediaRef.episode.id)
       episodeHref = getLinkEpisodeHref(mediaRef.episode.id)
       episodePubDate = readableDate(mediaRef.episode.pubDate)
-      clipTitle = mediaRef.title || mediaRef.episode.title || t('untitledClip')
+      clipTitle = mediaRef.title || prefixClipLabel(t, mediaRef.episode.title)
       clipTime = readableClipTime(mediaRef.startTime, mediaRef.endTime, t)
       createdById = mediaRef.owner ? mediaRef.owner.id : ''
       createdByIsPublic = mediaRef.owner ? mediaRef.owner.isPublic : false

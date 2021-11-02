@@ -210,3 +210,13 @@ export const getIsAuthorityFeedUrl = (feedUrls: any[]) => {
   const feedUrl = (feedUrls && Array.isArray(feedUrls)) ? feedUrls.find((x: any) => x.isAuthority === true) : {}
   return feedUrl.url ? feedUrl.url : ''
 }
+
+export const prefixClipLabel = (t: any, episodeTitle?: string) => {
+  let title = ''
+  if (episodeTitle) {
+    title = `(${t('Clip')}) ${episodeTitle}`.trim()
+  } else {
+    title = t('untitledClip')
+  }
+  return title
+}

@@ -6,7 +6,7 @@ import { MoreDropdown } from 'components/MoreDropdown/MoreDropdown'
 import { MediaListItemA } from 'components/Media/MediaListItem/MediaListItemA/MediaListItemA'
 import { MediaListItemB } from 'components/Media/MediaListItem/MediaListItemB/MediaListItemB'
 import { MediaListItemD } from 'components/Media/MediaListItem/MediaListItemD/MediaListItemD'
-import { readableDate, readableClipTime } from 'lib/utility'
+import { readableDate, readableClipTime, prefixClipLabel } from 'lib/utility'
 const sanitizeHtml = require('sanitize-html')
 const striptags = require('striptags')
 
@@ -118,7 +118,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime, t)}
                     subTitleTop={dataNowPlayingItem.podcastTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                    title={dataNowPlayingItem.clipTitle || dataNowPlayingItem.episodeTitle || t('untitledClip') } />
+                    title={dataNowPlayingItem.clipTitle || prefixClipLabel(t, dataNowPlayingItem.episodeTitle) } />
               }
               {
                 (itemType === 'now-playing-item' && (dataNowPlayingItem && (!dataNowPlayingItem.clipStartTime && dataNowPlayingItem.clipStartTime !== 0) && dataNowPlayingItem.episodeId)) &&
@@ -135,7 +135,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     censorNSFWText={censorNSFWText}
                     showImage={false}
                     subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime, t)}
-                    title={dataNowPlayingItem.clipTitle || dataNowPlayingItem.episodeTitle || t('untitledClip')} />
+                    title={dataNowPlayingItem.clipTitle || prefixClipLabel(t, dataNowPlayingItem.episodeTitle)} />
               }
               {
                 (itemType === 'now-playing-item-clip-from-podcast' && dataNowPlayingItem) &&
@@ -145,7 +145,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     subTitleBottom={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime, t)}
                     subTitleTop={dataNowPlayingItem.episodeTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                    title={dataNowPlayingItem.clipTitle || dataNowPlayingItem.episodeTitle || t('untitledClip')} />
+                    title={dataNowPlayingItem.clipTitle || prefixClipLabel(dataNowPlayingItem.episodeTitle)} />
               }
               {
                 (itemType === 'now-playing-item-episode-from-podcast' && dataNowPlayingItem) &&
@@ -173,7 +173,7 @@ export const MediaListItem: React.StatelessComponent<Props> = props => {
                     subTitleMiddleSide={readableClipTime(dataNowPlayingItem.clipStartTime, dataNowPlayingItem.clipEndTime, t)}
                     subTitleTop={dataNowPlayingItem.podcastTitle}
                     subTitleTopSide={dataNowPlayingItem.episodePubDate ? readableDate(dataNowPlayingItem.episodePubDate) : ''}
-                    title={dataNowPlayingItem.clipTitle || dataNowPlayingItem.episodeTitle || t('untitledClip')} />
+                    title={dataNowPlayingItem.clipTitle || prefixClipLabel(t, dataNowPlayingItem.episodeTitle)} />
               }
               {
                 (itemType === 'now-playing-item-queue-episode' && dataNowPlayingItem) &&
